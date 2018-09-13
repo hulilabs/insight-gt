@@ -1,0 +1,27 @@
+version: '2'
+services:
+    compass_components:
+        image: stevevega/compass:latest
+        command: watch -c /compass-config/web-components-config.rb --poll
+        volumes:
+            - ./src/web-components:/web-components
+            - ./src/resource/scss/web-components:/web-components-library
+            - ./src/resource/compass-config/web-components-config.rb:/compass-config/web-components-config.rb:ro
+
+    compass_site:
+            image: stevevega/compass:latest
+            command: watch -c /compass-config/site-config.rb --poll
+            volumes:
+                - ./src/resource/scss/site:/input
+                - ./src/site/css:/output
+                - ./src/resource/compass-config/site-config.rb:/compass-config/site-config.rb:ro
+
+    web_components:
+        build: .
+        image: huli/web-components
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx/vhost:/etc/nginx/conf.d:ro
+            - ./src:/srv/web-components:ro
+        working_dir: /srv

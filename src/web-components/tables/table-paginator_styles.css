@@ -1,0 +1,55 @@
+/**
+* TablePaginator styles
+*
+* More details: https://zpl.io/Z1Cryqv
+*
+* .wc-TablePaginator - main table paginator block
+* .wc-TablePaginator__pageControl - arrow buttons used to control de number of the page
+* .wc-TablePaginator__rowsSelector - dropdown used to set the number of rows that are displayed on the table
+* .wc-TablePaginator__rowsSelectorLabel - description of the rows per page dropdown
+* .wc-TablePaginator__currentRowsLabel - description of the selected configuration
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/* line 22, table-paginator_styles.scss */
+.wc-TablePaginator {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-left: auto;
+}
+/* line 31, table-paginator_styles.scss */
+.wc-TablePaginator__pageControl {
+  color: rgba(0, 0, 0, 0.54);
+}
+/* line 37, table-paginator_styles.scss */
+.wc-TablePaginator__rowsSelector {
+  display: inline-block;
+  padding-right: 32px;
+  width: 80px;
+}
+/* line 45, table-paginator_styles.scss */
+.wc-TablePaginator__rowsSelectorLabel {
+  padding-right: 24px;
+}
+/* line 51, table-paginator_styles.scss */
+.wc-TablePaginator__currentRowsLabel {
+  padding-right: 36px;
+}

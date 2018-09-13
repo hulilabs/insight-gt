@@ -1,0 +1,156 @@
+/**
+* Saver styles
+*
+* More details: https://zpl.io/Z1PkpC0
+*
+* wc-Saver - main saver block
+* wc-Saver__circleWrapper - wrapper of the circle svg
+* wc-Saver__circle - circle svg
+* wc-Saver__checkIcon - check icon
+* wc-Saver__checkWrapper - wrapper of the path svg that draw the check
+* wc-Saver__checkSvg - check svg
+*
+* wc-Saver
+*/
+
+@import "compass/css3/animation";
+@import "compass/css3/transform";
+@import "settings/_animations";
+@import "settings/_components";
+
+$wc-saver-size: 24px;
+$wc-saver-margin-left: 16px;
+$wc-saver-circle-center-x: 12px;
+$wc-saver-circle-center-y: 12px;
+$wc-saver-circle-radius: 10px;
+$wc-saver-circle-circumference: round(6.28 * $wc-saver-circle-radius);
+$wc-saver-circle-stroke-width: 2px;
+$wc-saver-check-icon-size: 16px;
+$wc-saver-check-icon-left: 4px;
+$wc-saver-check-icon-top: 3px;
+$wc-saver-check-svg-stroke-width: 1px;
+$wc-saver-animations-iteration-count: 1;
+$wc-saver-circle-animation-duration: 0.3s;
+$wc-saver-check-maker-animation-duration: 0.2s;
+
+//---------- #wc-Saver  ---------- /
+
+.wc-Saver {
+
+    background-color: transparent;
+    display: inline-block;
+    height: $wc-saver-size;
+    margin-left: $wc-saver-margin-left;
+    position: relative;
+    width: $wc-saver-size;
+
+    &:not(.wc-Saver--keep-visible) {
+        animation:  fadeOut
+                    $wc-saver-fade-animation-duration
+                    linear
+                    ($wc-saver-circle-animation-duration + $wc-saver-check-maker-animation-duration + $wc-saver-time-on-screen)
+                    $wc-saver-animations-iteration-count
+                    forwards;
+    }
+
+    //---------- #wc-Saver__circleWrapper  ---------- /
+
+    &__circleWrapper {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    //---------- #wc-Saver__circle  ---------- /
+
+
+    &__circle {
+        cx: $wc-saver-circle-center-x;
+        cy: $wc-saver-circle-center-y;
+        fill: none;
+        r: $wc-saver-circle-radius;
+        stroke-dasharray: $wc-saver-circle-circumference;
+        stroke-dashoffset: 0;
+        stroke-width: $wc-saver-circle-stroke-width;
+        stroke: $wc-saver-color;
+        @include transform-origin(50%, 50%);
+        @include transform(rotate(-90deg));
+    }
+
+    &:not(.wc-Saver--keep-visible) &__circle {
+        animation: saverCircle $wc-saver-circle-animation-duration linear $wc-saver-animations-iteration-count forwards;
+    }
+
+    //---------- #wc-Saver__checkIcon  ---------- /
+
+    &__checkIcon {
+        background-color: transparent;
+        height: $wc-saver-check-icon-size;
+        left: $wc-saver-check-icon-left;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: $wc-saver-check-icon-top;
+        width: $wc-saver-check-icon-size;
+    }
+
+    //---------- #wc-Saver__checkWrapper  ---------- /
+
+    &__checkWrapper {
+        height: 100%;
+        visibility: visible;
+        width: 100%;
+    }
+
+    &:not(.wc-Saver--keep-visible) &__checkWrapper {
+        animation: checkMaker $wc-saver-check-maker-animation-duration linear $wc-saver-circle-animation-duration $wc-saver-animations-iteration-count forwards;
+        visibility: hidden;
+    }
+
+    //---------- #wc-Saver__checkSvg  ---------- /
+
+    &__checkSvg {
+        fill: $wc-saver-color;
+        stroke-miterlimit: 0;
+        stroke-width: $wc-saver-check-svg-stroke-width;
+        stroke: $wc-saver-color;
+    }
+}
+
+// saver circle complete animation
+@include keyframes(saverCircle) {
+    0% {
+        stroke-dashoffset: $wc-saver-circle-circumference;
+    }
+    50% {
+        stroke-dashoffset: ($wc-saver-circle-circumference / 2);
+    }
+}
+
+// check maker animation
+@include keyframes(checkMaker) {
+    0% {
+        height: 0;
+        visibility: visible;
+        width: 0;
+    }
+
+    25%{
+        height: 4px;
+        visibility: visible;
+        width: 2px;
+    }
+
+    50% {
+        height: 16px;
+        visibility: visible;
+        width: 8px;
+    }
+
+    100%{
+        height: 16px;
+        visibility: visible;
+        width: 16px;
+    }
+}

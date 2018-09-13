@@ -1,0 +1,49 @@
+<div class="wc-TextArea" v-show="!isHidden">
+
+    <wc-input-container
+        ref="inputContainer"
+        v-bind:char-counter="charCounter"
+        v-bind:disabled="disabled"
+        v-bind:error-message="errorMessage"
+        v-bind:floating-label="floatingLabel"
+        v-bind:hide-input-highlighter="hideInputHighlighter"
+        v-bind:hint-text="getHintText"
+        v-bind:has-error="hasError"
+        v-bind:label="label"
+        v-bind:label-for="pseudoId"
+        v-bind:max-length="maxLength"
+        v-bind:min-length="minLength"
+        v-bind:placeholder="placeholder"
+        v-bind:required="required"
+        v-bind:value="state.value"
+        v-on:blur="_onBlur"
+        v-on:focus="_onFocus">
+
+        <template slot-scope="inputContainerScope">
+            <div v-bind:class="['wc-TextArea__container', classObject.inputContainerClass]">
+
+                <div class="wc-TextArea__mirror" v-html="getValueForMirror"></div>
+                <div class="wc-TextArea__input">
+                    <textarea ref="input"
+                        class="wc-TextArea__textarea"
+                        v-bind:class="[inputContainerScope.inputClass, classObject.inputClass]"
+                        v-bind:name="name"
+                        v-bind:id="pseudoId"
+                        v-bind:disabled="disabled"
+                        v-bind:required="required"
+                        v-bind:maxlength="maxLength"
+                        v-bind:minlength="minLength"
+                        v-bind:readonly="readonly"
+                        v-bind:min="min"
+                        v-bind:max="max"
+                        v-bind:step="step"
+                        v-bind:autocomplete="autocomplete"
+                        v-bind:value="state.value"
+                        v-on:input="_onChange"
+                        v-on:focus="inputContainerScope.onFocus"
+                        v-on:blur="inputContainerScope.onBlur"></textarea>
+                </div>
+            </div>
+        </template>
+    </wc-input-container>
+</div>

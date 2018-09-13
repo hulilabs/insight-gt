@@ -1,0 +1,49 @@
+/**
+ * Table page styles
+ */
+/* line 8, ../../../input/components/pages/table-page.scss */
+html.is-tablePage,
+html.is-tablePage body,
+html.is-tablePage #app,
+html.is-tablePage .TablePage,
+html.is-tablePage .TablePage__spacer {
+  height: 100vh;
+  width: 100vw;
+}
+/* line 17, ../../../input/components/pages/table-page.scss */
+html.is-tablePage body {
+  padding: 0;
+}
+/* line 21, ../../../input/components/pages/table-page.scss */
+html.is-tablePage table tr {
+  border: none;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 31, ../../../input/components/pages/table-page.scss */
+.SampleTable.is-scrollable .SampleTable__body {
+  height: 100px;
+}
+
+/* line 39, ../../../input/components/pages/table-page.scss */
+.wc-TableCell.SampleTable__date {
+  flex-grow: 1;
+}
+/* line 45, ../../../input/components/pages/table-page.scss */
+.wc-TableCell.SampleTable__age {
+  flex-grow: 1;
+}
+/* line 51, ../../../input/components/pages/table-page.scss */
+.wc-TableCell.SampleTable__height {
+  flex-grow: 0.5;
+}
+/* line 57, ../../../input/components/pages/table-page.scss */
+.wc-TableCell.SampleTable__weight {
+  flex-grow: 0.5;
+}
+/* line 63, ../../../input/components/pages/table-page.scss */
+.wc-TableCell.SampleTable__action {
+  flex-grow: 0;
+}

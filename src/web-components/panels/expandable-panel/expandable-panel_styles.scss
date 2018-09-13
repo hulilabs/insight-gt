@@ -1,0 +1,97 @@
+/**
+* Expandable panel styles
+*
+* More details: https://zpl.io/Z1D3sON
+*
+* .wc-ExpandablePanel - main component block
+*     .wc-ExpandablePanel.is-opened - control opened state
+* .wc-ExpandablePanel__actions - button panel actions
+* .wc-ExpandablePanel__body - content wrapper, controls visibility when toggle
+* .wc-ExpandablePanel__content - main content slot
+* .wc-ExpandablePanel__header - header block containing title and actions
+* .wc-ExpandablePanel__title - title text positioning
+*
+* @todo https://hulihealth.atlassian.net/browse/HULI-2502
+*/
+
+@import "settings/_breakpoints";
+@import "settings/_components";
+@import "settings/_elevations";
+@import "tools/mixins/_responsive";
+@import "tools/mixins/_utilities";
+
+//---------- #wc-ExpandablePanel  ---------- /
+
+.wc-ExpandablePanel {
+    @include component-elevation($wc-elevations-expandable-panel);
+    border-radius: $wc-expandable-panel-border-radius;
+    display: block;
+    overflow: hidden;
+    width: $wc-expandable-panel-width;
+
+    //---------- #wc-ExpandablePanel.is-opened  ---------- /
+
+    &.is-opened &__body {
+        height: auto;
+    }
+
+    //---------- #wc-ExpandablePanel__actions  ---------- /
+
+    &__actions {
+        float: right;
+        font-size: 0;
+    }
+
+    //---------- #wc-ExpandablePanel__body  ---------- /
+
+    &__body {
+        height: 0;
+    }
+
+    //---------- #wc-ExpandablePanel__content  ---------- /
+
+    &__content {
+        max-height: $wc-expandable-panel-max-height;
+        overflow-x: hidden;
+        // Overlay is a webkit solution for positiong the scrollbars over the content
+        // rather than pushing layout width. Both properties are kept as fallback
+        // scss-lint:disable DuplicateProperty
+        overflow-y: auto;
+        overflow-y: overlay;
+        width: 100%;
+    }
+
+    //---------- #wc-ExpandablePanel__header  ---------- /
+
+    &__header {
+        background: $wc-expandable-panel-header-background;
+        box-sizing: border-box;
+        color: $wc-expandable-panel-header-color;
+        display: block;
+        height: $wc-expandable-panel-header-height;
+        padding: $wc-expandable-panel-header-padding-mobile;
+    }
+
+    //---------- #wc-ExpandablePanel__title  ---------- /
+
+    &__title {
+        float: left;
+        overflow: hidden;
+        padding: $wc-expandable-panel-title-padding-mobile;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: $wc-expandable-panel-title-width;
+    }
+
+    //---------- #Desktop  ---------- //
+
+    @include respond-min($wc-media-desktop-lower-boundary) {
+        &__header {
+            padding: $wc-expandable-panel-header-padding-desktop;
+        }
+
+        &__title {
+            padding: $wc-expandable-panel-title-padding-desktop;
+        }
+    }
+}

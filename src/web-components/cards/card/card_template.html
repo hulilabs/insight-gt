@@ -1,0 +1,50 @@
+<div class="wc-Card" v-bind:class="classObject"
+    v-bind:tabindex="tabindex" v-on:click="_onOpenAttempt" v-on:mousedown="_setOpenAttempt" v-bind:style="styles.card">
+    <div ref="header" class="wc-Card__header" v-if="shouldRenderHeader" v-on:click="_onHeaderClick" v-show="hasHeader">
+        <slot name="header">
+            <wc-app-bar
+                active
+                class="wc-Card__appBar"
+                v-bind:title="title"
+                v-bind:show-navigation="showNavigation"
+                v-bind:no-shadow="!hasHeaderShadow"
+                v-bind:show-actions="showActions"
+                v-bind:title-class="titleTextClass"
+                v-bind:hint-text="titleHintText"
+                v-bind:hint-class="titleHintClass"
+                v-bind:compact="compact">
+                <div slot="navigation" v-on:click.stop="_onCloseAttempt">
+                    <slot name="navigation">
+                        <wc-icon-button icon-class="icon-arrow-left"></wc-icon-button>
+                    </slot>
+                </div>
+                <div slot="actions" v-on:click="_onHeaderActionsClick">
+                    <slot name="actions"></slot>
+                </div>
+            </wc-app-bar>
+            <div class="wc-Divider" v-if="showDivider"></div>
+            <wc-linear-loader class="wc-Card__loader" indeterminate v-if="loading"></wc-linear-loader>
+        </slot>
+    </div>
+    <div class="wc-Card__focusLine"></div>
+    <div ref="wrapper" class="wc-Card__contentWrapper" v-bind:style="styles.contentWrapper">
+        <div ref="content" class="wc-Card__content">
+            <slot></slot>
+        </div>
+        <div ref="restingContent" class="wc-Card__restingContent" v-if="$slots.resting" v-show="state.restingContentVisible">
+            <slot name="resting"></slot>
+        </div>
+        <div ref="activeContent" class="wc-Card__activeContent" v-if="$slots.active" v-show="state.activeContentVisible">
+            <slot name="active"></slot>
+        </div>
+    </div>
+    <wc-overlay
+        v-if="fullscreenActive && state.isActive"
+        class="wc-Overlay--transparent wc-Card__overlay"
+        ref="overlay"
+        block-scroll
+        v-bind:active="state.isActive"
+        v-bind:close-on-click="false"
+        v-bind:close-on-esc-key="false">
+    </wc-overlay>
+</div>

@@ -1,0 +1,9 @@
+<div tabindex="0" v-on:keyup.delete="close" class="wc-Chip" v-bind:class="classObject">
+    <div class="wc-Chip__wrapper">
+        <wc-avatar v-if="imagePath || avatarText" v-bind:image-path="imagePath" v-bind:text="avatarText" class="wc-Chip__avatar wc-Avatar--size-4x" ref="avatar"></wc-avatar>
+        <span>{{text}}</span>
+        <a v-if="closeButtonVisible" v-on:click.prevent="close" class="wc-Chip__closeButton">
+            <wc-icon  icon-class="icon-close" class="wc-Icon--size-3x"></wc-icon>
+        </a>
+    </div>
+</div>

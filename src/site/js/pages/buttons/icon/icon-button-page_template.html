@@ -1,0 +1,452 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Icon Button
+
+## Demo
+
+The following are the all the available configurations for `wc-icon-button` component. You can open the browser's console to see that there are actions triggered using either click, enter or space bar.
+
+For example purposes only, you can click on them to toggle the `notification state`. This can also be achieved by adding the `notification` as an attribute to the `wc-icon-button` component tag.
+    </wc-markdown>
+
+    <div class="DemoTable">
+
+        <table>
+            <tr>
+                <th>Theme</th>
+                <th>State</th>
+                <th>Primary</th>
+                <th>Secondary</th>
+                <th>Action</th>
+                <th>Raised</th>
+            </tr>
+            <!--
+            ///////////////////////////////////////
+            //
+            //   theme: DARK
+            //
+            ///////////////////////////////////////
+            -->
+            <tr>
+                <th rowspan="4">Dark</th>
+                <th>Normal</th>
+                <td>
+                    <wc-icon-button
+                        icon-class="icon-chat"
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wc-IconButton--secondaryDark"
+                        icon-class="icon-chat"
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wc-IconButton--action"
+                        icon-class="icon-language"
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        icon-class="icon-language"
+                        raised
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+            </tr>
+            <tr>
+                <th>Hover</th>
+                <td>
+                    <wc-icon-button
+                        hover
+                        icon-class="icon-chat"
+                        v-bind:notification="hasNotification">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wc-IconButton--secondaryDark"
+                        hover
+                        icon-class="icon-chat"
+                        v-bind:notification="hasNotification">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wc-IconButton--action"
+                        hover
+                        icon-class="icon-language"
+                        v-bind:notification="hasNotification">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        hover
+                        icon-class="icon-language"
+                        raised
+                        v-bind:notification="hasNotification">
+                    </wc-icon-button>
+                </td>
+            </tr>
+            <tr>
+                <th>Active / Focus / Selected</th>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedDark"
+                        icon-class="icon-chat"
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedDark wc-IconButton--secondaryDark"
+                        icon-class="icon-chat"
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedDark wc-IconButton--action"
+                        icon-class="icon-language"
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedDark"
+                        icon-class="icon-language"
+                        raised
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-dark>
+                    </wc-icon-button>
+                </td>
+            </tr>
+            <tr>
+                <th>Disabled</th>
+                <td>
+                    <wc-icon-button
+                        disabled
+                        icon-class="icon-chat">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wc-IconButton--secondaryDark"
+                        disabled
+                        icon-class="icon-chat">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wc-IconButton--action"
+                        disabled
+                        icon-class="icon-language">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        disabled
+                        icon-class="icon-language"
+                        raised>
+                    </wc-icon-button>
+                </td>
+            </tr>
+            <!--
+            ///////////////////////////////////////
+            //
+            //   theme: LIGHT
+            //
+            ///////////////////////////////////////
+            -->
+            <tr style="background-color:skyblue; color:white;">
+                <th rowspan="4">Light</th>
+                <th>Normal</th>
+                <td>
+                    <wc-icon-button
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wcIconButton--secondaryLight"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="wcIconButton--action"
+                        icon-class="icon-upgrade"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button raised
+                        icon-class="icon-upgrade"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+            </tr>
+            <tr style="background-color:skyblue; color:white;">
+                <th>Hover</th>
+                <td>
+                    <wc-icon-button hover
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button hover
+                        class="wcIconButton--secondaryLight"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button hover
+                        class="wcIconButton--action"
+                        icon-class="icon-upgrade"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button hover raised
+                        icon-class="icon-upgrade"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                </td>
+            </tr>
+            <tr style="background-color:skyblue; color:white;">
+                <th>Active / Focus / Selected</th>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedLight"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                    <wc-icon-button
+                        class="is-selectedDark"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                     <wc-icon-button
+                        class="is-selectedPrimaryDark"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedLight"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                    <wc-icon-button
+                        class="is-selectedDark"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                    <wc-icon-button
+                        class="is-selectedPrimaryDark"
+                        icon-class="icon-heart-solid"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedLight wc-IconButton--action"
+                        icon-class="icon-upgrade"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                    <wc-icon-button
+                        class="is-selectedDark wc-IconButton--action"
+                        icon-class="icon-upgrade"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                    <wc-icon-button
+                        class="is-selectedPrimaryDark wc-IconButton--action"
+                        icon-class="icon-upgrade"
+                        light
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick">
+                    </wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button
+                        class="is-selectedLight"
+                        icon-class="icon-upgrade"
+                        light
+                        raised
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                    <wc-icon-button
+                        class="is-selectedDark"
+                        icon-class="icon-upgrade"
+                        light
+                        raised
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick"
+                        v-wc-ripple:is-light>
+                    </wc-icon-button>
+                    <wc-icon-button
+                        class="is-selectedPrimaryDark"
+                        icon-class="icon-upgrade"
+                        light
+                        raised
+                        v-bind:notification="hasNotification"
+                        v-on:click.native="_onClick">
+                    </wc-icon-button>
+                </td>
+            </tr>
+            <tr style="background-color:skyblue; color:white;">
+                <th>Disabled</th>
+                <td>
+                    <wc-icon-button disabled icon-class="icon-heart-solid" light></wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button disabled hover icon-class="icon-heart-solid" light></wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button disabled icon-class="icon-upgrade" light></wc-icon-button>
+                </td>
+                <td>
+                    <wc-icon-button disabled icon-class="icon-upgrade" light raised></wc-icon-button>
+                </td>
+            </tr>
+        </table>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Theme toggle</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button
+                    hover
+                    icon-class="icon-edit"
+                    raised
+                    smart-focus
+                    v-bind:class="{ 'is-selectedPrimaryDark' : isLightThemeSelected, 'is-selectedWhite' : !isLightThemeSelected }"
+                    v-bind:light="isLightThemeSelected"
+                    v-on:click.native="_toggleTheme">
+                </wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Avatar</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button v-wc-ripple:is-dark avatar-path="/site/img/doctor-male.svg" v-on:click.native="_onClick" smart-focus></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Text avatar</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button v-wc-ripple:is-dark avatar-text="Doctor" v-on:click.native="_onClick" smart-focus></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Disabled avatar</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button  disabled avatar-path="/site/img/doctor-male.svg"  v-on:click.native="_onClick"></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Avatar button with size modifier</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button  avatar-path="/site/img/doctor-male.svg" avatar-class="wc-Avatar--size-6x"  v-on:click.native="_onClick" smart-focus></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Bigger icon button: 4x grid size</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button v-on:click.native="_onClick" v-wc-ripple:is-dark icon-class="icon-upgrade" icon-modifier="wc-Icon--size-4x" v-bind:notification="hasNotification"></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Bigger icon button: 5x grid size</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button v-on:click.native="_onClick" v-wc-ripple:is-dark icon-class="icon-upgrade" icon-modifier="wc-Icon--size-5x" v-bind:notification="hasNotification"></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Bigger icon button: 6x grid size</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button v-on:click.native="_onClick" v-wc-ripple:is-dark icon-class="icon-upgrade" icon-modifier="wc-Icon--size-6x" v-bind:notification="hasNotification"></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">Using smart focus behavior (try TAB/click)</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button v-wc-ripple:is-dark icon-class="icon-laboratory" smart-focus></wc-icon-button>
+                <wc-icon-button v-wc-ripple:is-dark icon-class="icon-refresh" smart-focus></wc-icon-button>
+                <wc-icon-button v-wc-ripple:is-dark icon-class="icon-tag" smart-focus></wc-icon-button>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

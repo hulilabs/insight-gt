@@ -1,0 +1,126 @@
+/**
+ * Table layout that can be used for demo pages.
+ *
+ * .DemoTable - main container block
+ * .DemoTable__row - each of the container rows
+ * .DemoTable__columnLeft - column that contains the demo field title/description
+ * .DemoTable__columnRight - column that contains the demo options or components
+ * .DemoTable__main - inner component container
+ * .DemoTable__options - demo configuration options in a column layout
+ * .DemoTable__option - single demo configuration option
+ * .DemoTable__label - options label
+ * .DemoTable__note - additional note to be added in a column
+ */
+@import '../../../settings/colors';
+@import '../../../settings/typography';
+@import "../../../settings/_breakpoints";
+@import "../../../tools/mixins/_responsive";
+@import "../../../tools/mixins/_utilities";
+
+//---------- #DemoTable ---------- /
+
+$wc-demo-table-background-color: $wc-background-color;
+
+.DemoTable {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 10px;
+    width: 100%;
+
+    &--solid {
+        @include component-elevation(2);
+        background-color: $wc-demo-table-background-color;
+        border-radius: 4px;
+        padding: 20px;
+    }
+
+    //---------- #DemoTable__columnLeft ---------- /
+
+    &__columnLeft {
+        font-weight: bold;
+        padding: 5px 0;
+    }
+
+    //---------- #DemoTable__columnRight ---------- /
+
+    &__columnRight {
+        padding-bottom: 20px;
+    }
+
+    //---------- #DemoTable__main ---------- /
+
+    &__main {
+        min-height: 100px;
+    }
+
+    //---------- #DemoTable__options ---------- /
+
+    &__options {
+        display: flex;
+        flex-flow: column wrap;
+        max-height: 500px;
+
+        //---------- #DemoTable__options--row ---------- /
+
+        &--row {
+            flex-flow: row wrap;
+        }
+    }
+
+    //---------- #DemoTable__option ---------- /
+
+    &__option {
+        padding-right: 10px;
+        min-height: 75px;
+        align-items: center;
+        display: flex;
+    }
+
+    //---------- #DemoTable__label ---------- /
+
+    &__label {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    //---------- #DemoTable__note ---------- /
+
+    &__note {
+        background-color: $wc-background-color;
+        display: block;
+        padding: 5px;
+    }
+
+    @include respond-min($wc-media-desktop-lower-boundary) {
+        display: table;
+
+        //---------- #DemoTable__row ---------- /
+
+        &__row {
+            display: table-row;
+        }
+
+        &__columnLeft {
+            display: table-cell;
+            vertical-align: top;
+            width: 150px;
+
+            &--large {
+                width: 350px;
+            }
+        }
+
+        &__columnRight {
+            display: table-cell;
+        }
+
+        &__label {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        &__options {
+            max-height: 300px;
+        }
+    }
+}

@@ -1,0 +1,74 @@
+/**
+* Deleter styles
+*
+* More details: https://zpl.io/pxAqD
+*
+* .wc-Deleter - main block filling all wide space
+*     .wc-Deleter__trash - delete action element
+*     .wc-Deleter__left - content at left side
+*     .wc-Deleter__right - actions at right side
+*         .wc-Deleter__right.has-multiple-inputs - show a divider line when the content has multiple inputs
+*         .wc-Deleter__right.has-padding-adjusted - remove the action button padding when only one input is used without label
+* .wc-Deleter.has-content-adjustment - main block adjusting to content width
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/* line 24, deleter_styles.scss */
+.wc-Deleter {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+/* line 30, deleter_styles.scss */
+.wc-Deleter.has-content-adjustment {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+/* line 36, deleter_styles.scss */
+.wc-Deleter__trash {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 39, deleter_styles.scss */
+.wc-Deleter__trash:disabled {
+  color: rgba(0, 0, 0, 0.15);
+}
+/* line 46, deleter_styles.scss */
+.wc-Deleter__left {
+  flex: 1;
+}
+/* line 52, deleter_styles.scss */
+.wc-Deleter__right {
+  border-left: 1px solid transparent;
+  flex-basis: 40px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-bottom: 8px;
+  margin-left: 8px;
+  margin-top: 8px;
+  padding-top: 16px;
+}
+/* line 65, deleter_styles.scss */
+.wc-Deleter__right.has-multiple-inputs {
+  border-left-color: rgba(0, 0, 0, 0.15);
+}
+/* line 71, deleter_styles.scss */
+.wc-Deleter__right.has-padding-adjusted {
+  padding-top: 0;
+}

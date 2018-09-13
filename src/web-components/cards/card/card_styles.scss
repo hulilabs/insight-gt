@@ -1,0 +1,480 @@
+/**
+* Card styles
+*
+* More details: zpl.io/1iACdJ
+*
+* wc-Card - main card block
+*     wc-Card.is-active - the card is active
+*     wc-Card.is-raisedOnActive - the card becomes raised on active state
+*     wc-Card.is-resting - the card is resting
+*     wc-Card.is-restingCompact - the card is resting but without margins
+*     wc-Card.is-focused - the card has focus
+*     wc-Card.is-fullscreen - the card is fullscreen
+*     wc-Card.has-header - the card has a header
+*     wc-Card.has-fixedHeader - the card's header is currently with fixed position
+*     wc-Card.has-fastHeightTransition - the height transition is faster than usual
+*     wc-Card.has-noContent - removes top and bottom padding (commonly for cards that only display a header)
+*     wc-Card.is-scrollable - modifies the card to make it vertically scrollable
+*     wc-Card.has-error - the card provides feedback regardless of its resting/active state to let the user know that there's an error
+*     wc-Card.is-compact - styles for a more compact version
+* wc-Card__focusLine - line added to a side when the card is focused
+* wc-Card__activeContent - content to be displayed only when the card is active
+* wc-Card__contentWrapper - wrapper for card's content
+* wc-Card__header - card's header container
+* wc-Card__appBar - card's appBar
+* wc-Card__title - title inside appBar
+* wc-Card__loader - card's linear loader that appears below the appBar
+* wc-Card__overlay - an overlay used to be able to show the card fullscreen
+* wc-Card__tile - a tile that can contain actions (mix it with wc-Card__iconsTile and wc-Card__buttonsTile)
+* wc-Card__tile--bottom - tile placed at the bottom of card
+* wc-Card__tile--noMargin - tile without all margins
+* wc-Card__tile--noMarginBottom - tile without bottom margin
+* wc-Card__tile--noMarginTop - tile without top margin
+* wc-Card__tile--top - tile placed at the top of card
+* wc-Card__iconsTile - a tile that has icons
+* wc-Card__iconsTile--bottomRight - pulls an icon tile to bottom right
+* wc-Card__iconsTile--right - pulls an icon tile right
+* wc-Card__buttonsTile - a tile that has buttons
+* wc-Card__button - a button that's commonly inside of a buttons tile
+* wc-Card__iconButton - an icon button that's commonly inside of an icons tile
+* wc-Card__tile--bottom - modifies a tile to stick to the bottom
+* wc-Card__tile--top - modifies a tile to stick to the top
+* wc-Card--focusLine - modifies the card to use focusLine when focused
+* wc-Card--focusRaise - modifies the card to raise when focused
+* wc-Card--smaller - adds different border radius for smaller card
+* wc-Card--raisesOnActive - adds transitions for cards that will raise
+*/
+
+@import "compass/css3/animation";
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+@import "tools/mixins/_responsive";
+@import "tools/mixins/_utilities";
+@import "settings/_breakpoints";
+@import "settings/_components";
+@import "settings/_elevations";
+@import "_card-error_animation";
+
+$wc-card-padding: 16px;
+$wc-card-desktop-sides-padding: 24px;
+$wc-card-desktop-padding: 16px $wc-card-desktop-sides-padding;
+// how much will the card grow in total when active?
+$wc-card-active-width-increase: 16px;
+$wc-card-active-margin: 8px;
+$wc-card-focus-line-width: 4px;
+// tiles (like button tile, icon tile)
+$wc-card-tile-margin: 8px;
+// linear loader placed for showing the card's content loading
+$wc-card-linear-loader-height : 4px;
+
+//---------- #wc-Card  ---------- /
+
+.wc-Card {
+    @include component-elevation($wc-card-resting-elevation);
+    -webkit-tap-highlight-color: transparent;
+    background-color: $wc-card-background-color;
+    box-sizing: border-box;
+    min-width: $wc-card-min-width;
+    overflow: visible;
+    padding: $wc-card-padding;
+    position: relative;
+    width: 100%;
+
+    //- -------- #wc-Card__focusLine  ---------- /
+
+    &__focusLine {
+        @include transform(scale(0));
+        @include transition(transform .2s ease-in-out .2s);
+        background-color: $wc-secondary-color;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: $wc-card-focus-line-width;
+        z-index: $wc-card-focused-elevation;
+    }
+
+    //- -------- #wc-Card__activeContent  ---------- /
+
+    &__activeContent {
+        @include transition(opacity .2s ease-in-out .2s);
+        opacity: 0;
+        position: absolute;
+    }
+
+    //- -------- #wc-Card__contentWrapper  ---------- /
+
+    &__contentWrapper {
+        @include transition(height .2s ease-in-out .2s);
+    }
+
+    //- -------- #wc-Card__header  ---------- /
+
+    &__header {
+        background-color: $wc-card-background-color;
+        border-radius: $wc-card-border-radius $wc-card-border-radius 0 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &__header,
+    &__contentWrapper {
+        z-index: $wc-card-resting-elevation;
+    }
+
+    //- -------- #wc-Card__appBar  ---------- /
+
+    &__appBar {
+        border-radius: $wc-card-border-radius $wc-card-border-radius 0 0;
+        padding: 0;
+    }
+
+    //- -------- #wc-Card__title  ---------- /
+
+    &__title {
+        margin-left: 16px;
+    }
+
+    //- -------- #wc-Card__iconsTile  ---------- /
+
+    &__iconsTile {
+        clear: both;
+        padding-right: 8px;
+
+
+        //- -------- #wc-Card__iconsTile--bottomRight  ---------- /
+        &--bottomRight {
+            bottom: 0;
+            position: absolute;
+            right: 0;
+        }
+
+        //- -------- #wc-Card__iconsTile--right  ---------- /
+        &--right {
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    //- -------- #wc-Card__buttonsTile  ---------- /
+
+    &__buttonsTile {
+        & + & {
+            margin-top: 4px;
+        }
+    }
+
+    //- -------- #wc-Card__button  ---------- /
+
+    &__button + &__button {
+        margin-left: 8px;
+    }
+
+    //- -------- #wc-Card__iconButton  ---------- /
+
+    &__iconButton {
+        & + & {
+            margin-left: 8px;
+        }
+    }
+
+    //- -------- #wc-Card__tile  ---------- /
+
+    &__tile {
+        clear: both;
+        left: -$wc-card-padding;
+        margin-bottom: $wc-card-tile-margin;
+        margin-top: $wc-card-tile-margin;
+        position: relative;
+        right: -$wc-card-padding;
+        width: calc(100% + #{2 * $wc-card-padding});
+
+        //- -------- #wc-Card__tile--bottom  ---------- /
+
+        &--bottom {
+            position: relative;
+            bottom: -$wc-card-padding + $wc-card-tile-margin;
+        }
+
+        //- -------- #wc-Card__tile--noMargin  ---------- /
+
+        &--noMargin {
+           margin: 0;
+        }
+
+        //- -------- #wc-Card__tile--noMarginBottom  ---------- /
+
+        &--noMarginBottom {
+           margin-bottom: 0;
+        }
+
+        //- -------- #wc-Card__tile--noMarginTop  ---------- /
+
+        &--noMarginTop {
+           margin-top: 0;
+        }
+
+        //- -------- #wc-Card__tile--top  ---------- /
+
+        &--top {
+            top: -$wc-card-padding;
+        }
+    }
+
+    //- -------- #wc-Card__overlay  ---------- /
+
+    &__overlay {
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    //- -------- #wc-Card--focusLine  ---------- /
+
+    // this focus will add a line in the side
+    &--focusLine.is-focused &__focusLine {
+        @include transform(scale(1));
+    }
+
+
+    //- -------- #wc-Card--smaller  ---------- /
+
+    // smaller cards (mostly for mobile usage) have different border radius
+    &--smaller {
+        border-radius: $wc-card-border-radius;
+    }
+
+    //- -------- #is-scrollable state  ---------- /
+
+    &.is-scrollable {
+        @include transition(max-height .2s ease-in-out .2s);
+        overflow-y: auto;
+    }
+
+    //- -------- #has-noContent states ---------- /
+
+    &.has-noContent {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    //- -------- #is-resting state  ---------- /
+
+    &.is-resting {
+        cursor: pointer;
+    }
+
+    //- -------- #is-restingCompact state  ---------- /
+
+    &.is-restingCompact {
+        border-radius: $wc-card-border-radius $wc-card-border-radius 0 0;
+        border-bottom: 1px solid $wc-card-resting-compact-divider-color;
+        margin-bottom: 0;
+        margin-top: 0;
+
+        & + & {
+            border-radius: 0;
+            margin-top: 0;
+
+            &:last-child {
+                border-radius: 0 0 $wc-card-border-radius $wc-card-border-radius;
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    //- -------- #:focus state  ---------- /
+
+    &:focus {
+        outline: none;
+    }
+
+    //- -------- #wc-Card--focusRaise  ---------- /
+
+    // this focus causes the card to raise when it's active
+    &--focusRaise.is-focused {
+        @include component-elevation($wc-card-focused-elevation);
+    }
+
+    //- -------- #is-active state  ---------- /
+
+    &.is-active {
+        z-index: $wc-card-active-elevation;
+    }
+
+    &.is-active &__activeContent {
+        opacity: 1;
+        position: static;
+    }
+
+    &.is-active &__focusLine {
+        display: none;
+    }
+
+    &.is-active &__header {
+        min-height: $wc-card-header-min-height;
+    }
+
+    //- -------- #is-raisedOnActive state  ---------- /
+
+    &.is-raisedOnActive {
+        @include component-elevation($wc-card-active-elevation);
+        height: auto;
+        margin-bottom: $wc-card-active-margin;
+        margin-left: -($wc-card-active-width-increase / 2); // adds negative margin to fix width growth
+        margin-top: $wc-card-active-margin;
+        max-width: $wc-card-max-width + $wc-card-active-width-increase;
+        position: relative;
+        width: calc(100% + #{$wc-card-active-width-increase});
+    }
+
+    &.is-raisedOnActive &__header {
+        position: absolute;
+    }
+
+    //- -------- #is-fullscreen state  ---------- /
+
+    &.is-fullscreen {
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+        max-width: 100%;
+        overflow-y: auto;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    &.is-fullscreen &__header {
+        position: fixed;
+    }
+
+    &.is-fullscreen &__loader {
+        bottom: 0;
+        position: absolute;
+        z-index: $wc-card-active-elevation;
+    }
+
+    //- -------- #has-header state  ---------- /
+
+    &.has-header {
+        padding-top: $wc-card-header-min-height;
+    }
+
+    //- -------- #has-fixedHeader state  ---------- /
+
+    &.has-fixedHeader &__header {
+        @include component-elevation($wc-card-resting-elevation);
+        z-index: $wc-card-active-elevation;
+    }
+
+    //- -------- #has-error state  ---------- /
+
+    &.has-error {
+        @include animation(shake 0.7s cubic-bezier(.36, .07, .19, .97) both);
+        border: 2px solid $wc-error-color;
+    }
+
+    //- -------- #has-fastHeightTransition state  ---------- /
+
+    &.has-fastHeightTransition &__contentWrapper {
+        @include transition(height .2s ease-in-out);
+    }
+
+    //- -------- #wc-Card.is-compact ---------- /
+
+    &.is-compact &__header {
+        height: $wc-card-header-min-height-compact;
+        min-height: $wc-card-header-min-height-compact;
+    }
+
+    //- -------- #wc-Card.is-compact.has-header  ---------- /
+
+    &.is-compact.has-header {
+        padding-top: $wc-card-header-min-height-compact;
+        padding-bottom: 8px;
+    }
+
+    //- -------- #wc-Card.is-compact.has-noContent  ---------- /
+
+    &.is-compact.has-noContent {
+        padding-bottom: 0;
+    }
+
+    //- -------- #wc-Card.is-compact.is-active ---------- /
+
+    // This specificity rule is required for properly displaying the linear
+    // loader used for giving feedback of a card's content loading
+    &.is-compact.is-active &__header {
+        height: $wc-card-header-min-height-compact + $wc-card-linear-loader-height;
+        min-height: $wc-card-header-min-height-compact + $wc-card-linear-loader-height;
+    }
+
+    //- -------- #wc-Card--raisesOnActive  ---------- /
+
+    &--raisesOnActive {
+        @include transition(width .2s ease-in-out .2s,
+                            margin .2s ease-in-out .2s,
+                            max-width .2s ease-in-out .2s,
+                            box-shadow .2s ease-in-out .2s);
+    }
+
+    //- -------- #desktop & ipad landscape ---------- /
+
+    @media screen and (min-width: $wc-media-tablet-lower-boundary)
+    and (orientation: landscape) {
+        max-width: $wc-card-max-width;
+        border-radius: $wc-card-border-radius;
+        padding: $wc-card-desktop-padding;
+
+        //- -------- #wc-Card__tile  ---------- /
+
+        &__tile {
+            left: -$wc-card-desktop-sides-padding;
+            right: -$wc-card-desktop-sides-padding;
+            width: calc(100% + #{2 * $wc-card-desktop-sides-padding});
+        }
+
+        //- -------- #wc-Card__iconsTile  ---------- /
+
+        &__iconsTile {
+            padding-right: 16px;
+        }
+
+        //- -------- #wc-Card__buttonsTile  ---------- /
+
+        &__buttonsTile {
+            // Must be 4px to align buttons and copy
+            padding-left: 8px;
+        }
+
+        //- -------- #wc-Card--noPadding  ---------- /
+
+        &--noPadding {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        //- -------- #wc-Card__title  ---------- /
+
+        &__title {
+            margin-left: 24px;
+        }
+    }
+
+    //- -------- #desktop only  ---------- /
+
+    @include respond-min($wc-media-desktop-lower-boundary) {
+        max-width: $wc-card-max-width;
+
+        &.is-raisedOnActive {
+            max-width: $wc-card-max-width + $wc-card-active-width-increase;
+        }
+    }
+}
+

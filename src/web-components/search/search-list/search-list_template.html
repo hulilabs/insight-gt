@@ -1,0 +1,95 @@
+<div class="wc-SearchList">
+
+        <div class="wc-Divider"></div>
+
+        <div class="wc-SearchList__inputWrapper">
+            <wc-avatar v-if="state.avatar"
+                class="wc-SearchList__inputAvatar wc-Avatar--size-4x"
+                v-bind:imagePath="state.avatar">
+            </wc-avatar>
+
+            <wc-text-field
+                v-bind:class="['wc-SearchList__inputField', {'wc-SearchList__inputField--focused' : state.focused}]"
+                hide-input-highlighter
+                v-bind:clear="true"
+                v-model="state.text"
+                v-on:textfield-action="_clear"
+                v-on:focus="_onInputFocus"
+                v-on:blur="_onInputBlur"
+                v-on:input="_onInputHandler"></wc-text-field>
+
+            <wc-icon
+                v-if="!state.value"
+                icon-class="icon-search"
+                class="wc-SearchList__action--icon">
+            </wc-icon>
+
+            <wc-icon
+                v-if="state.value"
+                icon-class="icon-close"
+                v-on:click.native="_clear"
+                class="wc-SearchList__action--icon">
+            </wc-icon>
+        </div>
+
+        <div class="wc-Divider"></div>
+
+        <div class="wc-SearchList__results" v-on:scroll="_onScroll">
+
+            <div v-if="searching || state.isTyping" class="wc-SearchList__searching">
+                {{ searchingLabel }}
+            </div>
+
+            <div v-else-if="options.length > 0"
+                ref="searchList"">
+
+                <wc-list-item
+                    v-for="(option, index) in options"
+                    v-bind:key="index"
+                    class="wc-SearchList__result"
+                    v-bind:role="option.disabled ? null : 'menuitem'"
+                    v-bind:class="{
+                        'is-disabled' : option.disabled
+                    }"
+                    v-bind:value="option.value"
+                    v-on:click.native="_onItemSelected(option)">
+                    <wc-avatar v-if="option.avatar"
+                        slot="avatar"
+                        class="wc-SearchList__resultAvatar wc-Avatar--size-4x"
+                        v-bind:class="{
+                            'is-disabled' : option.disabled
+                        }"
+                        v-bind:imagePath="option.avatar">
+                    </wc-avatar>
+
+                    <span slot="primaryText"
+                        class="wc-SearchList__resultText"
+                        v-bind:class="{
+                            'is-disabled' : option.disabled
+                        }"
+                        v-html="option.match || option.text">
+                    </span>
+
+                    <wc-icon slot="action"
+                        class="wc-SearchList__resultAction"
+                        v-bind:class="{
+                            'is-disabled' : option.disabled
+                        }"
+                        v-show="_showItemIcon(option.value, option.icon)"
+                        v-bind:icon-class="_getItemIcon(option.value, option.disabled, option.icon)"
+                        v-wc-tooltip.alignment:left="option.iconTooltip">
+                    </wc-icon>
+                </wc-list-item>
+
+                <div v-if="loading" class="wc-SearchList__loading">
+                    {{ loadingLabel }}
+                </div>
+            </div>
+
+            <div v-else class="wc-SearchList__no-results">
+                {{ notFoundLabel }}
+            </div>
+        </div>
+        <div class="wc-Divider"></div>
+    </template>
+</div>

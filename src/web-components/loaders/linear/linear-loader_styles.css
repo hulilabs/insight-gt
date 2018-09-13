@@ -1,0 +1,121 @@
+/**
+* Linear Loader styles
+*
+* More details: https://zpl.io/Z1qEEix
+*
+* wc-LinearLoader - main linear loader block
+* wc-LinearLoader--determinate - modifier for the determinate linear loader
+* wc-LinearLoader__progress - progress bar for the determinate linear loader
+* wc-LinearLoader--indeterminate - modifier for the indeterminate linear loader
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/* line 27, linear-loader_styles.scss */
+.wc-LinearLoader--determinate {
+  background-color: rgba(38, 198, 218, 0.3);
+  height: 4px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+/* line 37, linear-loader_styles.scss */
+.wc-LinearLoader__progress {
+  -moz-transition: width 0.5s ease-out;
+  -o-transition: width 0.5s ease-out;
+  -webkit-transition: width 0.5s ease-out;
+  transition: width 0.5s ease-out;
+  background-color: #26C6DA;
+  height: 100%;
+  max-width: 100%;
+  position: relative;
+}
+/* line 47, linear-loader_styles.scss */
+.wc-LinearLoader--indeterminate {
+  background-color: rgba(38, 198, 218, 0.3);
+  height: 4px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+/* line 55, linear-loader_styles.scss */
+.wc-LinearLoader--indeterminate:before {
+  animation: indeterminateLinearLoading 1s linear infinite;
+  background-color: #26C6DA;
+  content: "";
+  display: block;
+  height: 4px;
+  left: -200px;
+  position: absolute;
+  width: 200px;
+}
+
+@-moz-keyframes indeterminateLinearLoading {
+  0% {
+    left: -200px;
+    width: 15%;
+  }
+  30% {
+    width: 50%;
+  }
+  50% {
+    left: 33%;
+  }
+  75% {
+    left: 66%;
+  }
+  100% {
+    left: 130%;
+  }
+}
+@-webkit-keyframes indeterminateLinearLoading {
+  0% {
+    left: -200px;
+    width: 15%;
+  }
+  30% {
+    width: 50%;
+  }
+  50% {
+    left: 33%;
+  }
+  75% {
+    left: 66%;
+  }
+  100% {
+    left: 130%;
+  }
+}
+@keyframes indeterminateLinearLoading {
+  0% {
+    left: -200px;
+    width: 15%;
+  }
+  30% {
+    width: 50%;
+  }
+  50% {
+    left: 33%;
+  }
+  75% {
+    left: 66%;
+  }
+  100% {
+    left: 130%;
+  }
+}

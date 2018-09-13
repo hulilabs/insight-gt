@@ -1,0 +1,111 @@
+/**
+* AppBar, styles for the dialog component based on material desgin
+*
+* Check the app-bar_template.html to see its structure
+*
+* wc-AppBar - root class, this is the component container
+*     wc-AppBar--compact - reduces a little bit the height
+*     wc-AppBar--noShadow - removes shadow
+*     wc-AppBar.is-active - indicate that the element is active(visible)
+* wc-AppBar__navigation - space for the required action
+* wc-AppBar__title - title in the app bar
+*     wc-AppBar__title--subheader - adds subheader styles to app bar title
+*     wc-AppBar__title.is-overflowing - activates the gradient over the title when it is overflowing.
+* wc-AppBar__actions - actions (buttons) in the right side of the app bar
+*/
+
+@import "settings/_colors";
+@import "settings/_components";
+@import "settings/_elevations";
+@import "tools/mixins/_utilities";
+@import "tools/mixins/_typography";
+
+//---------- #wc-AppBar  ---------- /
+
+.wc-AppBar {
+    @include component-elevation($wc-elevations-app-bar);
+    align-content: center;
+    align-items: center;
+    background-color: $wc-app-bar-background-color;
+    box-sizing: border-box;
+    display: none;
+    flex-flow: row nowrap;
+    height: $wc-app-bar-height;
+    justify-content: flex-start;
+    padding: 0 2px 0 2px;
+    position: relative;
+    width: $wc-app-bar-width;
+
+//---------- #wc-AppBar__navigation  ---------- /
+
+    &__navigation {
+        align-items: center;
+        display: flex;
+        height: 48px;
+        justify-content: center;
+        overflow: hidden;
+        width: 48px;
+    }
+
+//---------- #wc-AppBar__title  ---------- /
+
+    &__title {
+        color: $wc-typoicon-primary-dark;
+        flex-grow: 2;
+        margin: 0 0 0 22px;
+        overflow: hidden;
+        position: relative;
+        white-space: nowrap;
+
+    //---------- #wc-AppBar__title--subheader  ---------- /
+
+        &--subheader {
+            @include generate-text-styles("subheading");
+        }
+
+    //---------- #wc-AppBar__title.is-overflowing  ---------- /
+
+        &.is-overflowing {
+
+            &:before {
+                //makes font color(content) transparent
+                background-image: linear-gradient(to right, rgba($wc-app-bar-background-color, 0.0), $wc-app-bar-background-color);
+                color: transparent;
+                content: '----';
+                display : block;
+                overflow: hidden;
+                position: absolute;
+                right: -1px;
+                top: 0;
+                width: 33px;
+            }
+        }
+    }
+
+//---------- #wc-Appbar__actions  ---------- /
+
+    &__actions {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+    }
+
+//---------- #wc-AppBar--compact  ---------- /
+
+    &--compact {
+        height: $wc-app-bar-height-compact;
+    }
+
+//---------- #wc-AppBar--noShadow  ---------- /
+
+    &--noShadow {
+        box-shadow: none;
+    }
+
+//---------- #wc-AppBar.is-active  ---------- /
+
+    &.is-active {
+        display: flex;
+    }
+}

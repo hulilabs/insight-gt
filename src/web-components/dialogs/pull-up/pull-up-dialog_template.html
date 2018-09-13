@@ -1,0 +1,29 @@
+<div class="wc-PullUpDialog__wrapper" v-bind:style="styles.wrapper">
+    <wc-overlay ref="overlay" v-bind:active="true" v-bind:style="styles.overlay"></wc-overlay>
+    <div class="wc-PullUpDialog" v-bind:class="{'is-collapsed' : state.isCollapsed}" v-bind:style="styles.dialog">
+        <div ref="headerContainer" class="wc-PullUpDialog__headerContainer">
+            <div class="wc-PullUpDialog__cover" v-bind:style="styles.cover" v-wc-gesture:tap="close">
+                <slot name="cover"></slot>
+            </div>
+            <div ref="header" class="wc-PullUpDialog__header" v-bind:style="styles.header">
+                <div ref="avatar" class="wc-PullUpDialog__avatar" v-bind:style="styles.headerExpandedContent">
+                    <slot name="avatar"></slot>
+                </div>
+                <div ref="actions" class="wc-PullUpDialog__actions" v-bind:style="styles.headerExpandedContent">
+                    <slot name="actions"></slot>
+                </div>
+                <div ref="headerExpandedContent" class="wc-PullUpDialog__headerExpandedContent" v-bind:style="styles.headerExpandedContent">
+                    <slot name="header"></slot>
+                </div>
+                <div ref="headerCollapsedContent" class="wc-PullUpDialog__headerCollapsedContent" v-bind:style="styles.headerCollapsedContent">
+                    <wc-app-bar v-bind:title="title" v-bind:active="true" v-bind:class="{'wc-AppBar--noShadow' : !state.isCollapsed}">
+                        <wc-icon-button slot="navigation" icon-class="icon-close" smart-focus v-wc-gesture:tap="close"></wc-icon-button>
+                    </wc-app-bar>
+                </div>
+            </div>
+        </div>
+        <div ref="content" class="wc-PullUpDialog__content" v-bind:style="styles.content">
+            <slot name="body"></slot>
+        </div>
+    </div>
+</div>

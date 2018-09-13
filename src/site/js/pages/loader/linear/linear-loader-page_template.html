@@ -1,0 +1,38 @@
+<div  style="position: relative">
+
+    <wc-markdown>
+# Linear Loaders
+
+## Demo
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">
+                Indeterminate
+            </div>
+            <div class="DemoTable__columnRight">
+                <wc-linear-loader v-bind:indeterminate="true"></wc-linear-loader>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">
+                Determinate
+            </div>
+            <div class="DemoTable__columnRight">
+                <wc-textfield
+                    floating-label
+                    label="Progress percentage"
+                    hint-text="Write a number between 0 and 100"
+                    type="number"
+                    max="100"
+                    min="0"
+                    v-model.number="progress">
+                </wc-textfield>
+                <wc-linear-loader v-bind:progress="progress"></wc-linear-loader>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

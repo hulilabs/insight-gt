@@ -1,0 +1,137 @@
+/**
+* AddPhoto styles
+*
+* More details: https://zpl.io/oQOXY
+*
+* .wc-AddPhoto - main container
+*     .wc-AddPhoto.is-clickable - determines if the the add photo has an action for displaying the pointer cursor
+*     .wc-AddPhoto.is-focus-disabled - fix for smart focus behavior
+* .wc-AddPhoto__overlay - acts as the add photo background color
+* .wc-AddPhoto__upload - icon representing the upload action
+* .wc-AddPhoto__delete - icon representing the delete action
+* .wc-AddPhoto__deleteIcon - icon container
+*/
+
+@import "settings/_colors";
+@import "settings/_components";
+@import "tools/mixins/_typography";
+@import "tools/mixins/image";
+
+//---------- #wc-AddPhoto  ---------- /
+
+$wc-add-photo-delete-size : 24px;
+$wc-add-photo-size : 100px;
+$wc-add-photo-avatar-size : 72px;
+/* This the ratio where a 72px avatar requires a displacement of 5px in
+order to display the loader in the right position */
+$wc-add-photo-loader-displacement : calc(100% * (-5/72));
+$wc-add-photo-upload-size : 40px;
+$wc-add-photo-animation-duration : 0.3s;
+
+.wc-AddPhoto {
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    position: relative;
+
+//---------- #wc-AddPhoto.is-clickable  ---------- /
+
+    &.is-clickable {
+        cursor: pointer;
+    }
+
+//---------- #wc-AddPhoto.is-focus-disabled  ---------- /
+
+    // Fix for handling the smart focus behavior
+    &.is-focus-disabled:not(:hover):not(:active):focus & {
+        &__overlay {
+            background-color: $wc-add-photo-background-color;
+        }
+    }
+
+    &:active &,
+    &:focus &,
+    &:hover & {
+        &__overlay {
+            background-color: $wc-add-photo-background-color-pressed;
+        }
+    }
+
+//---------- #wc-AddPhoto__avatar  ---------- /
+
+    &__avatar {
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+//---------- #wc-AddPhoto__overlay  ---------- /
+
+    &__overlay {
+        background-color: $wc-add-photo-background-color;
+        border-radius: 50%;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: background-color $wc-add-photo-animation-duration ease;
+    }
+
+//---------- #wc-AddPhoto__loader  ---------- /
+
+    &__loader {
+        bottom : $wc-add-photo-loader-displacement;
+        left : $wc-add-photo-loader-displacement;
+        position: absolute;
+        right : $wc-add-photo-loader-displacement;
+        top : $wc-add-photo-loader-displacement;
+    }
+
+//---------- #wc-AddPhoto__upload  ---------- /
+
+    &__upload {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+    }
+
+//---------- #wc-AddPhoto_error ------------ /
+
+    &__error {
+        @include generate-text-styles("caption2");
+        color: $wc-error-color;
+        margin: 4px 0;
+        word-wrap: break-word;
+    }
+
+//---------- #wc-AddPhoto__delete  ---------- /
+
+    &__delete {
+        -webkit-tap-highlight-color: transparent;
+        background-color: $wc-add-photo-delete-background-color;
+        border-radius: 50%;
+        cursor: pointer;
+        height: $wc-add-photo-delete-size;
+        position: absolute;
+        right: -7px;
+        top: 0;
+        width: $wc-add-photo-delete-size;
+    }
+
+//---------- #wc-AddPhoto__deleteIcon  ---------- /
+    &__deleteIcon {
+        display: block;
+    }
+
+    &__upload,
+    &__delete {
+        color: $wc-add-photo-color;
+    }
+
+    //---------- #modifiers  ---------- /
+    @include generate-size-modifiers($wc-add-photo-sizes, $wc-add-photo-size);
+}

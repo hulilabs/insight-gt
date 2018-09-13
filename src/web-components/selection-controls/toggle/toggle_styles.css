@@ -1,0 +1,88 @@
+/**
+* Toggle styles
+*
+* More details: zpl.io/1fmokb
+*
+* .wc-Toggle: main component wrapper
+*     .wc-Toggle.is-disabled - styles for the disabled state
+* .wc-Toggle__container: used to position the buttons container in the correct alignment
+*     .wc-Toggle__container--noTopSpacing - removes the spacing between the label and the toggle buttons
+* .wc-Toggle__buttons: container for all the toggle buttons.
+* .wc-Toggle__label: main label for the component
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/* line 19, toggle_styles.scss */
+.wc-Toggle {
+  padding: 14px 0 5px;
+}
+/* line 25, toggle_styles.scss */
+.wc-Toggle.is-disabled .wc-Toggle__label {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 32, toggle_styles.scss */
+.wc-Toggle__buttons {
+  display: flex;
+  flex-flow: row wrap;
+  margin: -8px 0 0 -8px;
+}
+/* line 40, toggle_styles.scss */
+.wc-Toggle__container {
+  padding: 8px 0 5px;
+  overflow: hidden;
+}
+/* line 46, toggle_styles.scss */
+.wc-Toggle__container--noTopSpacing {
+  padding-top: 0px;
+  overflow: visible;
+}
+/* line 54, toggle_styles.scss */
+.wc-Toggle__label {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  font-weight: bold;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.54);
+}
+/* line 61, toggle_styles.scss */
+.wc-Toggle__error {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #D32F2F;
+}

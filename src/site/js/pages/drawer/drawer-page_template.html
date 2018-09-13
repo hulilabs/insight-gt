@@ -1,0 +1,24 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Drawer
+
+## Demo
+
+Click in the next button to see how it works:
+    </wc-markdown>
+
+    <button v-on:click="toggleDrawer">Show/Close Drawer</button>
+
+    <wc-drawer ref="drawer" v-bind:active="state.showNav" v-on:change="drawerChanged" v-bind:disable-swipe="false" class="wc-Drawer--appBar">
+        <div slot="content">
+            <button v-on:click="toggleDrawer">Close Drawer</button>
+            <p>Vivamus nisl aliquam eu sem donec lorem augue fusce. Pede eros nec class ultricies et porttitor egestas sapien interdum consectetuer placerat aptent. Hendrerit, quam ad consectetuer eros et class ullamcorper purus dapibus. Dictum aptent purus venenatis dictumst vulputate consequat suspendisse ante dictumst rhoncus feugiat rhoncus nisi. Praesent aptent etiam eu nisi hendrerit lorem convallis eget blandit, ante scelerisque natoque nullam orci quisque viverra purus molestie volutpat laoreet leo rutrum. Elementum fermentum nec augue justo taciti pede condimentum pellentesque orci. Vitae, nulla laoreet consequat viverra dis vestibulum facilisi pede cursus. Ligula bibendum ultrices posuere suspendisse pellentesque, dis dolor molestie donec condimentum ultricies rutrum, sem suspendisse. Quisque facilisi nunc arcu fames, nostra pulvinar pulvinar ut felis mauris facilisis pede euismod rhoncus ante scelerisque. Cras rutrum cras penatibus quis dolor. Velit hymenaeos turpis nascetur quam blandit maecenas hendrerit fermentum magna. Tincidunt amet quisque nisi posuere pharetra diam mattis aptent fames lectus turpis inceptos nulla euismod. Conubia proin consectetuer dictum leo potenti orci felis cum nullam sapien interdum egestas duis dis Elit euismod rhoncus. Per quis nascetur pharetra sapien platea lectus ante, sodales. In phasellus nam tempor sagittis integer justo dictumst suspendisse libero etiam enim vel eleifend mollis porta. Condimentum fusce hymenaeos nascetur enim lacus per tristique lobortis diam. Faucibus mus condimentum dictumst aliquet nulla non.
+
+                Nam quisque neque. Ridiculus cubilia ac et nisi dignissim lobortis parturient. Hendrerit elementum. Nonummy viverra enim, ante dui Placerat lacinia bibendum tortor ultrices commodo vitae. Accumsan blandit inceptos auctor. Amet venenatis, odio sit tristique Congue phasellus sociis porta sapien interdum euismod auctor bibendum parturient urna nostra. Magna vel tortor semper sodales. Fusce litora libero vel elit velit duis gravida nonummy habitasse ornare iaculis conubia. Faucibus tristique placerat consectetuer sodales justo proin. Natoque, nulla, primis cum est congue turpis Hendrerit, non pretium amet convallis a phasellus est dictum primis posuere tellus tellus ad mattis, morbi lorem a. Adipiscing suspendisse magnis tempor. Purus nullam. Pulvinar senectus potenti nibh euismod viverra ultrices. Vehicula, orci Euismod nam habitant. Per augue iaculis quis metus diam interdum curabitur.
+
+                Commodo praesent ullamcorper lorem litora habitasse pharetra sollicitudin. Felis inceptos ut. Massa primis consectetuer habitant ligula lacus est euismod parturient vulputate vulputate interdum ligula rutrum lorem nisl euismod pharetra elementum hac elementum pharetra per, suspendisse consectetuer. Dis libero quam, massa nec rutrum tortor ornare posuere, senectus laoreet euismod sociis inceptos ac. Ad ad orci lectus sit justo egestas primis. Justo. Egestas, eget lacus eros. Dui placerat odio platea nunc cum accumsan nibh. Libero hendrerit. Aliquet placerat conubia vulputate hymenaeos primis justo, fermentum consectetuer egestas donec bibendum nascetur hymenaeos eu semper duis dolor dolor condimentum tempus euismod porta rhoncus fringilla nec rutrum semper. Magnis est nec aptent sit cum risus Venenatis non posuere magna tempor condimentum tempus cubilia venenatis arcu. Venenatis ad duis venenatis habitasse suscipit velit suspendisse venenatis suscipit. Vel. Praesent in rhoncus odio ligula nisi conubia praesent mollis dictumst commodo augue. Fusce dui commodo. Ultricies mollis ligula, sociosqu fusce ridiculus volutpat pulvinar viverra facilisis et penatibus sapien viverra. Facilisi senectus felis habitant mollis scelerisque parturient.</p>
+        </div>
+    </wc-drawer>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

@@ -1,0 +1,131 @@
+<div class="TabsPage" style="position: relative;">
+    <wc-markdown>
+# Tabs
+
+## Demo
+
+For example's sake, the following tabs have been set with relative position.
+
+### Using default indexes
+Tabs will display only their label in desktop and an icon (if given one) and the text in mobile.
+Try resizing the window and refreshing the page or looking this page in a mobile device.
+
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <wc-tabs v-bind:selected="state.currentSelected" v-on:tabs-change="_changeCurrentSelected">
+                    <wc-tab>
+                        <wc-icon slot="icon" icon-class="icon-age-baby"></wc-icon>
+                        <span>Foo</span>
+                    </wc-tab>
+                    <wc-tab>
+                        <wc-icon slot="icon" icon-class="icon-age-kid"></wc-icon>
+                        <span>Bar</span>
+                    </wc-tab>
+                    <wc-tab>
+                        <wc-icon slot="icon" icon-class="icon-age-adult"></wc-icon>
+                        <span>Lorem ipsum dolor sit amet</span>
+                    </wc-tab>
+                    <wc-tab disabled>
+                        <wc-icon slot="icon" icon-class="icon-age-kid"></wc-icon>
+                        <span>Disabled</span>
+                    </wc-tab>
+                    <wc-tab>
+                        <wc-icon slot="icon" icon-class="icon-age-elder"></wc-icon>
+                        Qux<i class="icon-angle-down" style="vertical-align: middle;"></i>
+                    </wc-tab>
+                    <wc-tab v-if="state.generateMoreTabs">
+                        <wc-icon slot="icon" icon-class="icon-credit-card"></wc-icon>
+                        v-if generated
+                    </wc-tab>
+                </wc-tabs>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Selected index</div>
+            <div class="DemoTable__columnRight"><code>{{state.currentSelected}}</code></div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Generate another tab?</div>
+            <div class="DemoTable__columnRight"><wc-checkbox v-model="state.generateMoreTabs"></wc-checkbox></div>
+        </div>
+    </div>
+
+    <wc-markdown>
+### Using custom indexes
+They can have automatically generated indexes (starting at 0, like the ones from above) or custom indexes, like the following example.
+Change the selected tab to see the different indexes.
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <wc-tabs v-bind:selected="state.currentCustomSelected" v-on:tabs-change="_changeCurrentCustomSelected">
+                    <wc-tab index="foo">Foo</wc-tab>
+                    <wc-tab index="bar">Bar</wc-tab>
+                    <wc-tab index="baz">Baz</wc-tab>
+                    <wc-tab index="qux">Qux</wc-tab>
+                </wc-tabs>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Selected index</div>
+            <div class="DemoTable__columnRight"><code>{{state.currentCustomSelected}}</code></div>
+        </div>
+    </div>
+
+    <wc-markdown>
+### Generating tabs dynamically
+The tabs may also be dynamically generated, by using the `v-for` directive on a `wc-tab` element. In mobile,
+the tabs' width will be the same. Only four tabs will be displayed at the time and if there are more than four,
+the tabs will be scrollable and on tab the scroll position will change to fully visualize the selected option.
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <wc-tabs v-bind:selected="state.currentDynamicSelected" v-on:tabs-change="_changeCurrentDynamicSelected">
+                    <wc-tab v-for="tab in customTabs" v-bind:key="tab.index" v-bind:index="tab.index">{{tab.label}}</wc-tab>
+                </wc-tabs>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Selected index</div>
+            <div class="DemoTable__columnRight"><code>{{state.currentDynamicSelected}}</code></div>
+        </div>
+    </div>
+
+    <wc-markdown>
+### No default tab
+There is no need to set a default tab.
+
+Tabs fill its parent container, this also enables adding responsive adjustments.
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <div class="TabsPage__bar">
+                    <button class="TabsPage__barButton">X</button>
+                    <div class="TabsPage__barTabs">
+                        <wc-tabs>
+                            <wc-tab index="foo">Foo</wc-tab>
+                            <wc-tab index="bar">Bar</wc-tab>
+                        </wc-tabs>
+                    </div>
+                    <button class="TabsPage__barButton">X</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

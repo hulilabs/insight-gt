@@ -1,0 +1,85 @@
+/**
+ * Tabs page styles
+ *
+ * Note: bar is probably going to be reused as an application block
+ *
+ * .TabsPage
+ * .TabsPage__bar
+ * .TabsPage__barButton
+ * .TabsPage__barTabs
+ */
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/* line 28, ../../../input/components/pages/tabs-page.scss */
+.TabsPage__bar {
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.12), 0 4px 4px 0 rgba(0, 0, 0, 0.24);
+  z-index: 4;
+  background-color: #FFF;
+  display: flex;
+}
+/* line 35, ../../../input/components/pages/tabs-page.scss */
+.TabsPage__barButton {
+  display: none;
+  height: 48px;
+  margin: 4px;
+  width: 48px;
+}
+/* line 44, ../../../input/components/pages/tabs-page.scss */
+.TabsPage__barTabs {
+  display: block;
+  width: 100%;
+}
+@media screen and (min-width: 1025px) {
+  /* line 54, ../../../input/components/pages/tabs-page.scss */
+  .TabsPage__barButton {
+    display: inline-block;
+  }
+  /* line 57, ../../../input/components/pages/tabs-page.scss */
+  .TabsPage__barTabs {
+    display: inline-block;
+    width: calc(100% - 96px);
+  }
+}

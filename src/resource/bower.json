@@ -1,0 +1,26 @@
+{
+  "name": "web-components",
+  "description": "Huli base web components library",
+  "private": true,
+  "dependencies": {
+    "requirejs": "2.3.1",
+    "text": "2.0.15",
+    "vue": "2.5.13",
+    "vuex": "2.5.0",
+    "vue-router": "2.8.1",
+    "marked": "0.3.6",
+    "require-css": "0.1.8",
+    "Waves": "waves#~0.7.5",
+    "jump.js": "hulilabs/jump.js#1.1.0"
+  },
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,75 @@
+/**
+* Deleter styles
+*
+* More details: https://zpl.io/pxAqD
+*
+* .wc-Deleter - main block filling all wide space
+*     .wc-Deleter__trash - delete action element
+*     .wc-Deleter__left - content at left side
+*     .wc-Deleter__right - actions at right side
+*         .wc-Deleter__right.has-multiple-inputs - show a divider line when the content has multiple inputs
+*         .wc-Deleter__right.has-padding-adjusted - remove the action button padding when only one input is used without label
+* .wc-Deleter.has-content-adjustment - main block adjusting to content width
+*/
+
+@import "compass/css3/flexbox";
+@import "settings/_components";
+
+$wc-deleter-right-side-margin : 8px;
+$wc-deleter-right-side-padding : 16px;
+$wc-deleter-right-side-width : 40px;
+
+//---------- #wc-Deleter  ---------- /
+
+.wc-Deleter {
+    @include display-flex;
+    @include flex-direction(row);
+
+    //---------- #wc-Deleter.has-content-adjustment  ---------- /
+
+    &.has-content-adjustment {
+        @include display-flex(inline-flex);
+    }
+
+    //---------- #wc-Deleter__trash  ---------- /
+
+    &__trash {
+        color: $wc-deleter-trash-color;
+
+        &:disabled {
+            color: $wc-deleter-trash-disabled-color;
+        }
+    }
+
+    //---------- #wc-Deleter__left  ---------- /
+
+    &__left {
+        flex: 1;
+    }
+
+    //---------- #wc-Deleter__right  ---------- /
+
+    &__right {
+        border-left: 1px solid transparent;
+        flex-basis: $wc-deleter-right-side-width;
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-bottom: $wc-deleter-right-side-margin;
+        margin-left: $wc-deleter-right-side-margin;
+        margin-top: $wc-deleter-right-side-margin;
+        padding-top: $wc-deleter-right-side-padding;
+        // do not add width : $wc-deleter-right-side-width
+
+        //---------- #wc-Deleter__right.has-multiple-inputs  ---------- /
+
+        &.has-multiple-inputs {
+            border-left-color: $wc-deleter-divider-color;
+        }
+
+        //---------- #wc-Deleter__right.has-padding-adjusted  ---------- /
+
+        &.has-padding-adjusted {
+            padding-top: 0;
+        }
+    }
+}

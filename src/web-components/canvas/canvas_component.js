@@ -1,4 +1,3 @@
-
 /**                   _
  *  _             _ _| |_
  * | |           | |_   _|
@@ -24,18 +23,16 @@
  * @see {@link https://web-components.hulilabs.xyz/components/canvas} for demos and documentation
  */
 define([
-    'vue',
-    'segmentation',
-    'utilities',
-    'floodfill',
-    'web-components/utils/dom',
-    'text!web-components/canvas/canvas_template.html',
-    'css-loader!web-components/canvas/canvas_styles.css'
-],
+        'vue',
+        'segmentation',
+        'floodfill',
+        'web-components/utils/dom',
+        'text!web-components/canvas/canvas_template.html',
+        'css-loader!web-components/canvas/canvas_styles.css'
+    ],
     function (
         Vue,
         Segmentation,
-        Utilities,
         Floodfill,
         DOMUtil,
         Template
@@ -76,7 +73,8 @@ define([
          */
         var DEFAULT = {
             BACKGROUND_COLOR: '#FFFFFF',
-            LINE_COLOR: '#000000'
+            LINE_COLOR: '#000000',
+            STROKE_COLOR: '#DB0404'
         };
 
         /**
@@ -157,23 +155,22 @@ define([
             template: Template,
             props: {
                 /**
-                 * Active layer on the canvas
-                 * 
+                 * Alpha level of the canvas
                  */
                 alpha: {
                     type: Number,
                     default: 0.4
 
                 },
-
-
+                /**
+                 * Current layer on which operations are performed
+                 */
                 activeLayer: {
                     type: Number,
                     default: 0
                 },
                 /**
                  * Canvas main background color
-                 * Also used for simulating erasing behavior
                  */
                 backgroundColor: {
                     type: String,
@@ -182,23 +179,12 @@ define([
                 /**
                  * Background image
                  * Used for loading initial image state
+                 * If a canvas is for drawing operations, the base image acts as the canvas pixels state
                  */
                 baseImage: {
                     type: String,
                     default: ''
                 },
-
-                bucket: {
-                    type: Boolean,
-                    default: false
-                },
-
-                bucketBack: {
-                    type: Boolean,
-                    default: false
-                },
-
-
                 /**
                  * Define a cross origin for images loading
                  * Values: anonymous, use-credentials
@@ -223,14 +209,16 @@ define([
                     type: [Number, String],
                     default: 0
                 },
-
+                /**
+                 * An array that keep track of the existing layers
+                 */
                 layers: {
                     type: Array,
                     default: 0
                 },
                 /**
-                 * Overlay image
-                 * As an outline, it acts as a painting guide
+                 * Flag that indicates if a canvas has an outline image
+                 * If a canvas has an outline image, drawing operations can be performed on the canvas
                  */
                 outlineImage: {
                     type: Boolean,
@@ -244,31 +232,25 @@ define([
                     type: Boolean,
                     default: false
                 },
-
                 /**
-                 * 
-                 * 
-                 */
-                rect: {
-                    type: Boolean,
-                    default: false
-
-                },
-
-
-                /**
-                 * Stroke color
+                 * Current stroke color
                  * Accepts any web color naming like 'red' or '#F00'
                  */
                 strokeColor: {
                     type: String,
-                    default: '#DB0404'
+                    default: DEFAULT.STROKE_COLOR
                 },
-                strokeColors:
-                {
+                /**
+                 * Store the colors corresponding to each layer
+                 */
+                strokeColors: {
                     type: Array,
-                    default: ['#DB0404']
+                    default: [DEFAULT.STROKE_COLOR]
                 },
+                /**
+                 * Store the colors corresponding to each layer.
+                 * Each color is enconded as an RGB int array.
+                 */
                 strokeArray: {
                     type: Array,
                     default: [[219, 4, 4]]
@@ -298,7 +280,9 @@ define([
                     type: [Number, String],
                     default: 0
                 },
-
+                /**
+                 * Zoom level
+                 */
                 zoom: {
                     type: Number,
                     default: 1
@@ -336,18 +320,22 @@ define([
                         loaded: false,
                         instance: null
                     },
+                    /**
+                     * The superpixels outline image
+                     */
                     outlineImageData: null,
                     /**
-                     * canvas state
+                     *State of the canvas
                      */
-                    previousLayer: 0,
                     state: {
                         lastBufferedPoint: null,
                         painting: false,
                         tainted: false
                     },
+                    /**
+                     * Buffer that contains images that are popped from the drawStack
+                     */
                     lastPoppedImage: ['']
-
                 };
             },
             computed: {
@@ -356,14 +344,14 @@ define([
                  * @return {string}
                  */
                 currentStrokeColor: function () {
-                    return this._getColorByTool(this.tool);
+                    return this._getColorByTool();
                 },
                 /**
                  * Get current stroke thickness based on selected tool
                  * @return {string}
                  */
                 currentStrokeThickness: function () {
-                    return this._getThicknessByTool(this.tool);
+                    return this._getThicknessByTool();
                 },
                 /**
                  * Get draw area height
@@ -392,24 +380,59 @@ define([
                  */
                 hasOutlineImage: function () {
                     return this.outlineImage;
-                }
+                },
+                /**
+                 * Detects if the eraser tool is selected
+                 * @return {boolean}
+                 */
+                isEraser: function () {
+                    return this.tool === TOOL.ERASER;
+                },
+                /**
+                 * Detects if the rectangle tool is selected
+                 * @return {boolean}
+                 */
+                isRectangle: function () {
+
+                    return this.tool === TOOL.RECT;
+                },
+                /**
+                 * Detects if the bucket fill tool is selected
+                 * @return {boolean}
+                 */
+                isBucket: function () {
+                    return this.tool === TOOL.BUCKET;
+                },
+                /**
+                 * Detects if the background bucket tool is selected
+                 * @return {boolean}
+                 */
+                isBackgroundBucket: function () {
+                    return this.tool === TOOL.BUCKETB;
+                },
             },
             mounted: function () {
                 // Draw context must be initialized before any other setup
                 this._resetCanvas();
             },
             methods: {
-
+                /**
+                 * Add a new layer
+                 */
                 addLayer: function () {
-                    this.drawBuffer.push([])
-                    this.drawStack.push([])
-
+                    this.drawBuffer.push([]);
+                    this.drawStack.push([]);
                 },
-
+                /**
+                 * Add a new color to the color array
+                 * @param color
+                 */
                 addColor: function (color) {
                     this.strokeColors.push(color);
                     var res = color.match(/[a-f0-9]{2}/gi);
-                    this.strokeArray.push(res.map(function (v) { return parseInt(v, 16) }));
+                    this.strokeArray.push(res.map(function (v) {
+                        return parseInt(v, 16);
+                    }));
 
                 },
                 /**
@@ -421,7 +444,7 @@ define([
                         (!this.hasOutlineImage || (this.hasOutlineImage && this.outlineImageState.loaded));
                 },
                 /**
-                 * Clear all drawed strokes
+                 * Clear all drawn strokes
                  * @note this basically flush the stack and buffer and then redraw
                  */
                 clear: function () {
@@ -431,7 +454,7 @@ define([
                     if (this.hasOutlineImage) {
                         this.baseImage = '';
                     }
-                    
+
                     this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
                     this._redrawBaseImage();
                     this.lastPoppedImage[this.activeLayer] = '';
@@ -478,7 +501,7 @@ define([
                             }
 
                             var arrayBuffer = new Uint8Array(content),
-                                blob = new Blob([arrayBuffer.buffer], { type: mime });
+                                blob = new Blob([arrayBuffer.buffer], {type: mime});
 
                             resolve(blob);
                         }
@@ -493,7 +516,7 @@ define([
                  */
                 exportFile: function (type, filename) {
                     return this.exportBlob(type).then(function (blob) {
-                        return new File([blob], filename, { type: blob.type });
+                        return new File([blob], filename, {type: blob.type});
                     });
                 },
                 /**
@@ -521,7 +544,11 @@ define([
 
                     return image;
                 },
-
+                /**
+                 * Exports the current layer as an image
+                 * @param type
+                 * @returns {HTMLImageElement}
+                 */
                 exportLayer: function (type) {
                     var image = new Image();
 
@@ -534,21 +561,20 @@ define([
                             this._detectTainted(e);
                         }
                     }
-
                     return image;
                 },
                 /**
-                 * Detect if the canvas has work in progress changes
+                 * Export the canvas layers as a xml file
                  * @return {Array}
                  */
-                exportMasks: function(){
-                    var xmlDoc = document.implementation.createDocument("http://www.w3.org/1999/xhtml", "xml")
-                    var body = document.createElementNS("http://www.w3.org/1999/xhtml", "masks");
-                    
-                    for (var i = 0; i < this.drawStack.length; i++){
+                exportMasks: function () {
+                    var xmlDoc = document.implementation.createDocument(null, "xml"),
+                        body = document.createElementNS(null, "masks");
+
+                    for (var i = 0; i < this.drawStack.length; i++) {
                         var layer = this.drawStack[i];
-                        
-                        var mask = document.createElementNS("http://www.w3.org/1999/xhtml", "mask");
+
+                        var mask = document.createElementNS(null, "mask");
                         mask.setAttribute('source', layer[layer.length - 1].toString());
                         mask.setAttribute('color', this.strokeColors[i].toString());
                         body.appendChild(mask);
@@ -575,10 +601,10 @@ define([
                     return this.state.tainted;
                 },
                 /**
-                 * Set draw stack
+                 * Saves the changes
                  * @param {Array} drawStack
                  */
-                setChanges: function (drawStack) {
+                setChanges: function () {
 
                     this.drawStack[this.activeLayer].push(this.$refs.canvas.toDataURL());
                     this._clearBuffer();
@@ -605,9 +631,8 @@ define([
 
                     var zoom = this.zoom;
                     if (zoom <= 0) {
-                        zoom = 1 / Math.abs(zoom - 2)
+                        zoom = 1 / Math.abs(zoom - 2);
                     }
-
                     var positions = this._getPositions(e),
                         // @see {Point}
                         point = {
@@ -630,15 +655,13 @@ define([
                     this.drawBuffer[this.activeLayer] = [];
                 },
                 /**
-                 * Transform the drawing buffer (set of points) into a stroke
-                 * Each stroke is later used for redrawing the whole canvas
+                 * Transforms the canvas into an image to load it in the redraw step.
                  * @private
                  */
                 _commitStroke: function (layer) {
                     if (this.drawBuffer[layer].length > 0) {
-
-                        var imagedata = this._smoothCanvas();
-                        var canvas = document.createElement('canvas');
+                        var imagedata = this._smoothCanvas(),
+                            canvas = document.createElement('canvas');
                         var ctx = canvas.getContext('2d');
                         ctx.globalAlpha = 1;
                         canvas.width = imagedata.width;
@@ -649,12 +672,7 @@ define([
                             this.lastPoppedImage[layer] = this.drawStack[layer].shift();
                         }
                         this.drawStack[layer].push(canvas.toDataURL());
-                        //this._clearBuffer();
-                        //this._redraw();
-
                     }
-
-                    //
                 },
                 /**
                  * Detect tainted canvas state
@@ -675,8 +693,8 @@ define([
                  * @return {string}      - web color
                  * @private
                  */
-                _getColorByTool: function (tool) {
-                    return this._isEraser(tool) ? this.backgroundColor : this.strokeColor;
+                _getColorByTool: function () {
+                    return this.isEraser ? this.backgroundColor : this.strokeColor;
                 },
                 /**
                  * Get the current thickness for the chosen tool
@@ -685,8 +703,8 @@ define([
                  * @return {number}
                  * @private
                  */
-                _getThicknessByTool: function (tool) {
-                    return this._isEraser(tool) ? this.eraserThickness : this.strokeThickness;
+                _getThicknessByTool: function () {
+                    return this.isEraser ? this.eraserThickness : this.strokeThickness;
                 },
                 /**
                  * Get the coordinate (x,y) from the drawing event and context
@@ -726,29 +744,7 @@ define([
                         y = positionSource.pageY - offsetTop + scrollTop;
 
                     // @see {Coordinate}
-                    return { x: x, y: y };
-                },
-                /**
-                 * Detect if tool is the eraser
-                 * @param  {string}  tool
-                 * @return {boolean}
-                 * @private
-                 */
-                _isEraser: function (tool) {
-                    return tool === TOOL.ERASER;
-                },
-
-                _isRect: function (tool) {
-
-                    return tool === TOOL.RECT;
-                },
-
-                _isBucket: function (tool) {
-                    return tool === TOOL.BUCKET;
-                },
-
-                _isBucketBack: function (tool) {
-                    return tool === TOOL.BUCKETB;
+                    return {x: x, y: y};
                 },
                 /**
                  * Detect if the canvas has any in-the-middle scrollable areas
@@ -769,7 +765,6 @@ define([
                             element = element.offsetParent;
                         }
                     }
-
                     return inside;
                 },
                 /**
@@ -780,8 +775,12 @@ define([
                     this._loadImage(this.baseImage, this.hasBaseImage, this.baseImageState);
                 },
 
-                _loadOutlineImage: function(){
-                    this._loadImage(this.outlineImageData, this.hasOutlineImage, this.outlineImageState)
+                /**
+                 * Load outline image
+                 * @private
+                 */
+                _loadOutlineImage: function () {
+                    this._loadImage(this.outlineImageData, this.hasOutlineImage, this.outlineImageState);
 
                 },
                 /**
@@ -808,7 +807,7 @@ define([
                         // Handle loaded image state
                         imageState.instance.addEventListener('load', function () {
                             imageState.loaded = true;
-                            
+
                             this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
                             this._redrawBaseImage();
                             this._redraw();
@@ -827,23 +826,27 @@ define([
                         this._redraw();
                     }
                 },
-
-                _loadMasks: function(xmlFile){
+                /**
+                 * Load masks from a xml file
+                 * @param xmlFile
+                 * @private
+                 */
+                _loadMasks: function (xmlFile) {
 
                     var parser = new DOMParser();
                     var xmlDoc = parser.parseFromString(xmlFile, "text/xml"); //important to use "text/xml"
                     var body = xmlDoc.getElementsByTagName('masks');
                     var masks = body[0].getElementsByTagName('mask');
-                    
+
                     //Validate masks file
                     this.drawStack = [[]];
                     this.drawBuffer = [[]];
                     this.layers = [1];
                     this.drawStack[0][0] = masks[0].getAttribute('source');
                     this.strokeColors[0] = masks[0].getAttribute('color');
-                    for (var i = 1; i < masks.length; i++){
+                    for (var i = 1; i < masks.length; i++) {
                         this.addLayer();
-                        this.layers+=[i+1];
+                        this.layers += [i + 1];
                         this.drawStack[i][0] = masks[i].getAttribute('source');
                         this.strokeColors[i] = masks[i].getAttribute('color');
                     }
@@ -868,6 +871,7 @@ define([
                 _onDraw: function (e) {
                     e.preventDefault();
                     if (this.state.painting) {
+                        // Capture mouse interaction
                         this._bufferPoint(e, true);
                         this._redraw();
                     }
@@ -880,10 +884,14 @@ define([
                  */
                 _onDrawEnd: function (e) {
                     e.preventDefault();
+                    //Save canvas state
                     this._commitStroke(this.activeLayer);
+
                     this._notifyCanUndo();
                     this._clearBuffer();
                     this.state.painting = false;
+
+                    //Redraw the canvas
                     this._redraw();
                 },
                 /**
@@ -896,7 +904,7 @@ define([
                     // Set the state
                     this.state.painting = true;
                     this._clearBuffer();
-                    
+
                     // Record the initial point
                     this._bufferPoint(e, false);
                     this._redraw();
@@ -911,13 +919,19 @@ define([
                     e.preventDefault();
                     return false;
                 },
-
+                /**
+                 * Returns a random color from COLORS
+                 * @returns {*}
+                 * @private
+                 */
                 _randomColor: function () {
                     var result;
                     var count = 0;
-                    for (var prop in COLORS.names)
-                        if (Math.random() < 1 / ++count)
+                    for (var prop in COLORS.names) {
+                        if (Math.random() < 1 / ++count) {
                             result = COLORS.names[prop];
+                        }
+                    }
                     return result;
                 },
                 /**
@@ -926,29 +940,27 @@ define([
                  *      -------
                  *    ------- |  LAYERS
                  *   ------ | |
-                 * ------ | |-- --> 1. base image
-                 * |    | |-- ----> 2. stack of commited strokes
-                 * |    |-- ------> 3. buffer of points, in progress stroke,
-                 * ------ --------> 4. outline image
+                 * ------ | |-- --> 1. Base image
+                 * |    | |-- ----> 2. Invisible outline image, if applies
+                 * |    |-- ------> 3. Strokes and drawings, if applies
                  *
                  * On each painting cycle, the following steps are done:
-                 * 1. Clear the whole canvas using the background color property
-                 * 2. Paint the base image (aka. background image)               --> Layer 1
-                 * 3. Over it, draw all commited strokes (aka. saved strokes)    --> Layer 2
-                 * 4. Over it , draw the buffer of points (aka. work in progess) --> Layer 3
-                 * 5. Above all, draw the outline image (aka. painting guide)    --> Layer 4
+                 * 1. Clear the whole canvas if the canvas has no outline image
+                 * 2. If the canvas has been manipulated, get the latest changes
+                 * 3. Set up the canvas for drawing operations
+                 * 4. Drawing operations are performed
                  *
                  * @private
                  */
                 _redraw: function () {
-
+                    // Skips the redraw task if the canvas has no outline image
                     if (!(this.hasOutlineImage)) {
                         this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
                         this._redrawBaseImage();
 
                     }
                     else {
-                        if (!this.state.painting){
+                        if (!this.state.painting) {
                             var layer = this.drawStack[this.activeLayer];
                             if (layer.length > 0) {
 
@@ -960,23 +972,26 @@ define([
                             else {
                                 this.baseImage = this.lastPoppedImage[this.activeLayer];
                             }
-                            
+
                         }
 
-                        if (!(this._isBucket(this.tool) || this._isBucketBack(this.tool))){
+                        // Clear the canvas if a bucket tool is not selected
+                        if (!(this.isBucket || this.isBackgroundBucket)) {
                             this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
                             this._redrawBaseImage();
                         }
+
+                        // Sets the fill style for rectangle and bucket based operations
                         this.drawContext.fillStyle = this.backgroundColor;
                         this.drawContext.imageSmoothingEnabled = false;
                         this.drawContext.lineCap = 'round';
                         this.drawContext.lineJoin = 'round';
 
-
-                        // (4) Buffer
-                        var temp = this.drawContext.globalCompositeOperation;
-                        this._redrawStroke(this.drawBuffer[this.activeLayer], this.currentStrokeColor, this.currentStrokeThickness, this.tool);
-                        this.drawContext.globalCompositeOperation = temp;
+                        // Saves the global composite operation,
+                        var compositeOperation = this.drawContext.globalCompositeOperation;
+                        // Performs the drawing
+                        this._redrawStroke(this.drawBuffer[this.activeLayer], this.currentStrokeColor, this.currentStrokeThickness);
+                        this.drawContext.globalCompositeOperation = compositeOperation;
                     }
                 },
 
@@ -1002,6 +1017,7 @@ define([
                         var img = imageState.instance
 
 
+                        // Centers the image horizontally
                         var canvas = this.drawContext.canvas;
                         var hRatio = canvas.width / img.width;
                         var vRatio = canvas.height / img.height;
@@ -1024,27 +1040,24 @@ define([
                     }
                 },
                 /**
-                 * Redraw a single stroke
+                 * Perform draw operation.
                  * @param {Point[]} strokePoints    - points to be compose as a stroke
                  * @param {string}  strokeColor     - stroke color
                  * @param {Number}  strokeThickness - stroke thickness
-                 * @param {string}  strokeTool      - stroke tool
                  * @private
                  */
-                _redrawStroke: function (strokePoints, strokeColor, strokeThickness, strokeTool) {
-                    // Eraser stroke is always the current background color
-                    // Eraser thickness is stored as is, no need to verify it
+                _redrawStroke: function (strokePoints, strokeColor, strokeThickness) {
                     var operation = this.drawContext.globalCompositeOperation;
-                    //strokeColor = strokeColor.replace(')',','+this.drawContext.globalAlpha+')');
-                    strokeColor = (this._isEraser(strokeTool)) ? "rgba(0,0,0,1)" : this.strokeColors[this.activeLayer];
-                    if (this._isEraser(strokeTool)) {
+                    // Eraser stroke is always transparent black color
+                    // Eraser thickness is stored as is, no need to verify it
+                    strokeColor = (this.isEraser) ? "rgba(0,0,0,1)" : this.strokeColors[this.activeLayer];
+                    if (this.isEraser) {
                         this.drawContext.globalAlpha = 1;
                     }
+                    //Flag that indicates if a bucket tool is selected
+                    var isBucketTool = this.isBucket || this.isBackgroundBucket;
+                    strokeColor = this.isBackgroundBucket ? "rgb(200,200,200)" : strokeColor;
 
-                    //context.strokeStyle = "rgba(0,0,0,1.0)";
-                    isRect = this._isRect(strokeTool);
-                    isBucket = this._isBucket(strokeTool) || this._isBucketBack(strokeTool);
-                    strokeColor = this._isBucketBack(strokeTool) ? "rgb(200,200,200)" : strokeColor;
                     // Optimization: adding shadow is an expensive task
                     if (this.smooth) {
                         this.drawContext.shadowBlur = 2;
@@ -1058,21 +1071,15 @@ define([
                     this.drawContext.lineWidth = strokeThickness;
 
                     // Optimization: compose the whole stroke in a single path, then paint it
-
-
-                    if (isBucket && strokePoints.length > 0) {
+                    //  Perform drawing operation based on the selected tool
+                    if (isBucketTool && strokePoints.length > 0) {
                         var i = strokePoints.length - 1;
                         var stroke1 = strokePoints[i],
                             previousStroke = (i !== 0) ? strokePoints[i - 1] : null;
-
-                        floodfill = Floodfill;
-                        floodfill(this.drawContext, stroke1.x, stroke1.y
+                        Floodfill(this.drawContext, stroke1.x, stroke1.y
                             , this.outlineImageData, this.alpha * 255
                         );
-                        
-
-
-                    } else if (isRect && strokePoints.length > 0) {
+                    } else if (this.isRectangle && strokePoints.length > 0) {
                         var i = 0;
                         var stroke1 = strokePoints[i],
                             previousStroke = (i !== 0) ? strokePoints[i - 1] : null;
@@ -1085,38 +1092,39 @@ define([
                         for (var i = 0; i < strokePoints.length; i++) {
                             var stroke = strokePoints[i],
                                 previousStroke = (i !== 0) ? strokePoints[i - 1] : null;
-
                             if (stroke.drag && previousStroke) {
                                 this.drawContext.moveTo(previousStroke.x, previousStroke.y);
                             } else {
                                 this.drawContext.moveTo(stroke.x - 1, stroke.y);
                             }
-
                             this.drawContext.lineTo(stroke.x, stroke.y);
                         }
-
-
-
-                        if (this._isEraser(strokeTool)) {
+                        if (this.isEraser) {
                             this.drawContext.globalCompositeOperation = "destination-out";
                         }
-
                         this.drawContext.closePath();
                         this.drawContext.stroke();
                     }
-
                     this.drawContext.globalCompositeOperation = operation;
                     this._setAlpha();
                 },
+                /**
+                 * Reset the whole canvas, clearing all the layers and the undo buffer 
+                 * @private
+                 */
                 _resetCanvas: function () {
+
+                    // Clear the layers
                     this.drawStack = [[]];
                     this.activeLayer = 0;
                     this.lastPoppedImage = [''];
 
+                    // sets the draw context for subsequent operations, such as load images or drawing strokes.
                     this._setDrawContext();
-                    // Load external images
+                    // Load external images into the draw context
                     this._loadBaseImage();
 
+                    // Set the alpha level for the drawing operations
                     this._setAlpha();
 
                     // Run the initial draw flow
@@ -1139,9 +1147,12 @@ define([
                     this.drawContext.shadowBlur = 0;
                     this.drawContext.shadowColor = DEFAULT.LINE_COLOR;
                 },
-
+                /**
+                 * Sets the alpha level for the canvas context.
+                 * @private
+                 */
                 _setAlpha: function () {
-                    this.drawContext.globalAlpha = this.alpha
+                    this.drawContext.globalAlpha = this.alpha;
                 },
                 /**
                  * Define drawing context
@@ -1150,6 +1161,11 @@ define([
                 _setDrawContext: function () {
                     this.drawContext = this.$refs.canvas.getContext('2d');
                 },
+                /**
+                 * Transforms the canvas into an image with transparent background and solid color
+                 * @returns {ImageData}
+                 * @private
+                 */
                 _smoothCanvas: function () {
                     var image = this.drawContext.getImageData(0, 0, this.width, this.height);
                     var data = image.data;
@@ -1167,47 +1183,83 @@ define([
                             data[i - 2] = this.strokeArray[this.activeLayer][1];
                             data[i - 3] = this.strokeArray[this.activeLayer][0];
                         }
-                    }                    
+                    }
                     image.data = data;
                     return image;
                 },
-
+                /**
+                 * Clear the canvas, redraw the base image and update the undo flag
+                 * @private
+                 */
+                _updateState: function () {
+                    //Canvas clear
+                    this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
+                    //Redraw canvas
+                    this._redrawBaseImage();
+                    this._redraw();
+                    //Updates undo flag
+                    this._notifyCanUndo();
+                },
+                /**
+                 * Add a new layer or select an existing one
+                 * @private
+                 */
+                _updateLayer: function () {
+                    while (this.drawStack.length < this.activeLayer + 1) {
+                        this.addLayer();
+                        this.addColor(this._randomColor());
+                        this.lastPoppedImage.push('');
+                    }
+                    this.strokeColor = this.strokeColors[this.activeLayer];
+                },
+                /**
+                 * Updates the color array when a new layer is added or the user picks another color.
+                 * @private
+                 */
+                _updateColorArray: function () {
+                    if (this.hasOutlineImage) {
+                        var res = this.strokeColor.match(/[a-f0-9]{2}/gi);
+                        this.strokeArray[this.activeLayer] = res.map(function (v) {
+                            return parseInt(v, 16);
+                        });
+                        this.strokeColors[this.activeLayer] = this.strokeColor;
+                        this._smoothCanvas();
+                        this.drawStack[this.activeLayer].pop();
+                        this.drawStack[this.activeLayer].push(this.$refs.canvas.toDataURL());
+                        this._redraw();
+                    }
+                }
             },
             watch: {
 
+                /**
+                 * On alpha changes, update the canvas
+                 */
                 alpha: function () {
                     this._setAlpha();
-                    
-                    this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
-                    this._redrawBaseImage();
-                    this._redraw();
+                    this._updateState();
                 },
 
                 /**
-                 * On layer switch, redraw
+                 * Updates the canvas when a layer is selected
                  */
                 activeLayer: function () {
-
-                    while (this.drawStack.length < this.activeLayer + 1) {
-                        this.addLayer();
-                        color = this._randomColor();
-                        this.addColor(color);
-                        this.lastPoppedImage.push('');
-
-                    }
-
-                    this.strokeColor = this.strokeColors[this.activeLayer];
+                    this._updateLayer();
                     this._redraw();
-                    this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
-                    this._redrawBaseImage();
-
-                    this._notifyCanUndo();
+                    this._updateState();
                 },
                 /**
                  * Watch background color prop changes for redrawing
                  */
                 backgroundColor: function () {
                     this._redrawAll();
+                },
+                /**
+                 * Redraws the base image
+                 */
+                baseImage: function () {
+                    this._resetImageState(this.baseImageState);
+                    this._loadBaseImage();
                 },
                 /**
                  * On draw stack clear, fire notify event
@@ -1217,16 +1269,15 @@ define([
                     this._notifyCanUndo();
                 },
                 /**
-                 * On base image prop changes, load it then redraw
+                 * On height changes, reset the whole canvas
                  */
-                baseImage: function () {
-                    this._resetImageState(this.baseImageState);
-                    this._loadBaseImage();
-                    
-
+                height: function () {
+                    this._resetCanvas();
                 },
-
-                outlineImageData: function(){
+                /**
+                 * On outline image changes, load image into canvas
+                 */
+                outlineImageData: function () {
                     this._resetImageState(this.outlineImageState);
                     this._loadOutlineImage();
                 },
@@ -1240,23 +1291,18 @@ define([
                     }
                     this._redraw();
                 },
-
+                /**
+                 * On stroke color changes, update the color array
+                 */
                 strokeColor: function () {
-                    if (this.hasOutlineImage) {
-                        var res = this.strokeColor.match(/[a-f0-9]{2}/gi);
-                        this.strokeArray[this.activeLayer] = res.map(function (v) { return parseInt(v, 16) });
-                        this.strokeColors[this.activeLayer] = this.strokeColor;
-                        this._smoothCanvas();
-                        this.drawStack[this.activeLayer].pop();
-                        this.drawStack[this.activeLayer].push(this.$refs.canvas.toDataURL());
-                        this._redraw();
-                    }
+                    this._updateColorArray();
                 },
-
+                /**
+                 * On width changes, reset the whole canvas
+                 */
                 width: function () {
                     this._resetCanvas();
                 }
-
             }
         });
 

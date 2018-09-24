@@ -300,7 +300,7 @@ define([
                      */
                     drawContext: null,
                     /**
-                     * Stores all drawed/commited points
+                     * Stores all drawn/commited points
                      * @type {Array}
                      */
                     drawStack: [[]],
@@ -501,7 +501,9 @@ define([
                             }
 
                             var arrayBuffer = new Uint8Array(content),
-                                blob = new Blob([arrayBuffer.buffer], {type: mime});
+                                blob = new Blob([arrayBuffer.buffer], {
+                                    type: mime
+                                });
 
                             resolve(blob);
                         }
@@ -516,7 +518,9 @@ define([
                  */
                 exportFile: function (type, filename) {
                     return this.exportBlob(type).then(function (blob) {
-                        return new File([blob], filename, {type: blob.type});
+                        return new File([blob], filename, {
+                            type: blob.type
+                        });
                     });
                 },
                 /**
@@ -611,7 +615,7 @@ define([
                     this._redraw();
                 },
                 /**
-                 * Undo the last drawed stroke
+                 * Undo the last drawn stroke
                  * @note remove the last commited stroke from the stack and then redraw
                  */
                 undo: function () {
@@ -739,12 +743,15 @@ define([
                     var scrollLeft = this._isInsideSeveralScrollableArea(DOMUtil.hasHorizontalScroll) ?
                         DOMUtil.getScrollOffsetLeft(element) : 0,
                         scrollTop = this._isInsideSeveralScrollableArea(DOMUtil.hasVerticalScroll) ?
-                            DOMUtil.getScrollOffsetTop(element) : 0,
+                        DOMUtil.getScrollOffsetTop(element) : 0,
                         x = positionSource.pageX - offsetLeft + scrollLeft,
                         y = positionSource.pageY - offsetTop + scrollTop;
 
                     // @see {Coordinate}
-                    return {x: x, y: y};
+                    return {
+                        x: x,
+                        y: y
+                    };
                 },
                 /**
                  * Detect if the canvas has any in-the-middle scrollable areas
@@ -958,8 +965,7 @@ define([
                         this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
                         this._redrawBaseImage();
 
-                    }
-                    else {
+                    } else {
                         if (!this.state.painting) {
                             var layer = this.drawStack[this.activeLayer];
                             if (layer.length > 0) {
@@ -968,8 +974,7 @@ define([
                                 if (this.baseImage != src) {
                                     this.baseImage = src;
                                 }
-                            }
-                            else {
+                            } else {
                                 this.baseImage = this.lastPoppedImage[this.activeLayer];
                             }
 
@@ -1076,9 +1081,7 @@ define([
                         var i = strokePoints.length - 1;
                         var stroke1 = strokePoints[i],
                             previousStroke = (i !== 0) ? strokePoints[i - 1] : null;
-                        Floodfill(this.drawContext, stroke1.x, stroke1.y
-                            , this.outlineImageData, this.alpha * 255
-                        );
+                        Floodfill(this.drawContext, stroke1.x, stroke1.y, this.outlineImageData, this.alpha * 255);
                     } else if (this.isRectangle && strokePoints.length > 0) {
                         var i = 0;
                         var stroke1 = strokePoints[i],

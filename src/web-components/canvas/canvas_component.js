@@ -835,7 +835,7 @@ define([
                 },
                 /**
                  * Load masks from a xml file
-                 * @param xmlFile
+                 * @param xmlFile that represents the masks
                  * @private
                  */
                 _loadMasks: function (xmlFile) {

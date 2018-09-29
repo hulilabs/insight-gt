@@ -19,12 +19,12 @@
                             v-bind:base-image="state.baseImage" v-bind:eraser-thickness="state.eraserThickness" v-bind:height="state.height"
                             v-bind:layers="state.layers" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
                             v-bind:stroke-thickness="state.strokeThickness" v-bind:tool="state.tool" v-bind:width="state.width"
-                            v-bind:zoom="state.zoom" v-on:can-undo="_canUndo"></wc-canvas>
+                            v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
                         <wc-canvas ref="canvas2" cross-origin="anonymous" v-bind:style="[styles]" v-bind:alpha="state.alpha" v-bind:active-layer="myActiveLayer"
                             v-bind:background-color="state.backgroundColor" v-bind:eraser-thickness="state.eraserThickness" v-bind:height="state.height"
                             outline-image="state.outlineImage" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
                             v-bind:stroke-thickness="state.strokeThickness" v-bind:tool="state.tool" v-bind:width="state.width"
-                            v-bind:zoom="state.zoom" v-on:can-undo="_canUndo"></wc-canvas>
+                            v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
                     </div>
 
                     <div style="position:relative; width: 100%; height: 5%; float: left">
@@ -37,20 +37,21 @@
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomOut"> Zoom out</wc-flat-button>
                         <wc-flat-button href="" download="" ref="exportMasks" v-wc-ripple:is-dark v-on:click.native="_exportMasks"> Export masks</wc-flat-button>
                         <div style="text-align:center; float: right">
-                                <label style="border: 1px solid #ccc;
+                            <label style="border: 1px solid #ccc;
                                     display: inline-block;
                                     padding: 4px 12px;
                                     cursor: pointer;
                                     margin: auto">
-                                    <input type='file' name='img' size='40' v-on:change="_openImage" style="display: none" /> Open image
-                                </label>
-                                <label style="border: 1px solid #ccc;
+                                <input type='file' name='img' size='40' v-on:change="_openImage" style="display: none" /> Open image
+                            </label>
+                            <label style="border: 1px solid #ccc;
                                     display: inline-block;
                                     padding: 4px 12px;
                                     cursor: pointer;
                                     margin: auto">
-                                    <input type='file' name='img' size='40' v-on:change="_openMasks" style="display: none" /> Open masks
-                                </label></div>                            
+                                <input type='file' name='img' size='40' v-on:change="_openMasks" style="display: none" /> Open masks
+                            </label>
+                        </div>
 
                     </div>
                     <div style="position:relative; width: 100%; height: 15%; float: left; overflow: auto;  background-color: #c0c0c0; border:1px solid black;">
@@ -66,13 +67,8 @@
                 <div style="width: 20%; float:right; padding-right: 40px">
                     <div class="DemoTable__row">
                         <div class="DemoTable__columnRight">
-                            
-
                             <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_getOutlineImage">Calculate superpixels</wc-flat-button>
-
                             <input type="range" min="10" max="200" value="40" step="10" v-model="state.regionSize"> Region size </input>
-
-
                         </div>
                     </div>
 
@@ -88,7 +84,7 @@
                             </wc-toggle>
                         </div>
                     </div>
-    
+
                     <div class="DemoTable__row">
                         <div class="DemoTable__columnRight">
                             <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_addLayer">Add layer</wc-flat-button>
@@ -108,131 +104,30 @@
                         <div class="DemoTable__columnRight">
                             <wc-textfield type="color" v-model="state.strokeColor"></wc-textfield>
                         </div>
-                    </div>
-                    <div class="DemoTable__row">
-                        <div class="DemoTable__columnLeft">Brush, Eraser and opacity levels</div>
-                        <div class="DemoTable__columnRight">
-                            <input type="range" min="1" max="101" value="10" step="5" v-model="state.strokeThickness"> Brush size </input>
-                            <input type="range" min="1" max="101" value="10" step="5" v-model="state.eraserThickness">Eraser size </input>
-                            <input type="range" min="0.1" max="0.9" value="0.5" step="0.01" v-model="state.alpha">Layer opacity</input>
+                        <div class="DemoTable__row">
+                            <div class="DemoTable__columnLeft">Brush, Eraser and opacity levels</div>
+                            <div class="DemoTable__columnRight">
+                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.strokeThickness"> Brush size </input>
+                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.eraserThickness">Eraser size </input>
+                                <input type="range" min="0.1" max="0.9" value="0.5" step="0.01" v-model="state.alpha">Layer opacity</input>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="DemoTable__row">
-                        <div class="DemoTable__columnLeft">Stroke thickness</div>
-                        <div class="DemoTable__columnRight">
-                            <wc-textfield type="number" step="1" v-model="state.strokeThickness"></wc-textfield>
+                        <div class="DemoTable__row">
+                            <div class="DemoTable__columnLeft">Stroke thickness</div>
+                            <div class="DemoTable__columnRight">
+                                <wc-textfield type="number" step="1" v-model="state.strokeThickness"></wc-textfield>
+                            </div>
+                        </div>
+                        <div class="DemoTable__row">
+                            <div class="DemoTable__columnLeft">Eraser thickness</div>
+                            <div class="DemoTable__columnRight">
+                                <wc-textfield type="number" step="1" v-model="state.eraserThickness"></wc-textfield>
+                            </div>
                         </div>
                     </div>
-                    <div class="DemoTable__row">
-                        <div class="DemoTable__columnLeft">Eraser thickness</div>
-                        <div class="DemoTable__columnRight">
-                            <wc-textfield type="number" step="1" v-model="state.eraserThickness"></wc-textfield>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-
-
-        <!-- </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Snapshots</div>
-                <div class="DemoTable__columnRight">
-                    <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_export">export image</wc-flat-button>
-                    <br>
-                    <template v-for="snapshot in state.snapshots">
-                        <img v-bind:src="snapshot.src" height="100px" width="100px" />&nbsp;
-                    </template>
-                </div>
-            </div>-->
-
-        <!-- 
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Tool</div>
-                <div class="DemoTable__columnRight">
-                    <wc-toggle>
-                        <wc-toggle-button custom-value="pen" v-model="state.tool" name="Pen">Pen</wc-toggle-button>
-                        <wc-toggle-button custom-value="eraser" v-model="state.tool" name="Eraser">Eraser</wc-toggle-button>
-                    </wc-toggle>
-                </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Stroke color<br>(any web color)</div>
-                <div class="DemoTable__columnRight">
-                    <wc-toggle>
-                        <wc-toggle-button
-                            custom-value="red"
-                            name="Red"
-                            v-bind:disabled="isEraserSelected"
-                            v-model="state.strokeColor">Red</wc-toggle-button>
-                        <wc-toggle-button
-                            custom-value="blue"
-                            name="Blue"
-                            v-bind:disabled="isEraserSelected"
-                            v-model="state.strokeColor">Blue</wc-toggle-button>
-                        <wc-toggle-button
-                            custom-value="yellow"
-                            name="Yellow"
-                            v-bind:disabled="isEraserSelected"
-                            v-model="state.strokeColor">Yellow</wc-toggle-button>
-                        <wc-toggle-button
-                            custom-value="rgb(100,210,100,0.7)"
-                            name="Green"
-                            v-bind:disabled="isEraserSelected"
-                            v-model="state.strokeColor">Green</wc-toggle-button>
-                        <wc-toggle-button
-                            custom-value="black"
-                            name="Black"
-                            v-bind:disabled="isEraserSelected"
-                            v-model="state.strokeColor">Black</wc-toggle-button>
-                    </wc-toggle>
-                    <br>
-                    <wc-textfield type="color" v-model="state.strokeColor"></wc-textfield>
-                </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Base image</div>
-                <div class="DemoTable__columnRight">
-                    <wc-textfield v-model="state.baseImage"></wc-textfield>
-                </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Outline image</div>
-                <div class="DemoTable__columnRight">
-                    <wc-textfield v-model="state.outlineImage"></wc-textfield>
-                </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Background</div>
-                <div class="DemoTable__columnRight">
-                    <wc-textfield type="color" v-model="state.backgroundColor"></wc-textfield>
-                </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Stroke thickness</div>
-                <div class="DemoTable__columnRight">
-                    <wc-textfield type="number" step="1" v-model="state.strokeThickness"></wc-textfield>
-                </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Eraser thickness</div>
-                <div class="DemoTable__columnRight">
-                    <wc-textfield type="number" step="1" v-model="state.eraserThickness"></wc-textfield>
-                </div>
-            </div>
-            <div class="DemoTable__row">
-                <div class="DemoTable__columnLeft">Options</div>
-                <div class="DemoTable__columnRight">
-                    <div class="DemoTable__options">
-                        <div class="DemoTable__option">
-                            <wc-checkbox v-model="state.smooth">Smooth</wc-checkbox>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-    
     </div>
+</div>

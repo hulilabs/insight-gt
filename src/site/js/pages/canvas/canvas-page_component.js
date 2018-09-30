@@ -309,16 +309,16 @@ define([
              */
             _zoomIn: function () {
                 this.state.zoom = this.state.zoom + 1;
-                this.styles.width = (this.myWidth * this.zoomFactor).toString() + 'px';
-                this.styles.height = (this.myHeight * this.zoomFactor).toString() + 'px';
+                this.styles.width = (this.myWidth * this.zoomFactor) + 'px';
+                this.styles.height = (this.myHeight * this.zoomFactor) + 'px';
             },
             /**
              * Decrease the zoom by one
              */
             _zoomOut: function () {
                 this.state.zoom = this.state.zoom - 1;
-                this.styles.width = (this.myWidth * this.zoomFactor).toString() + 'px';
-                this.styles.height = (this.myHeight * this.zoomFactor).toString() + 'px';
+                this.styles.width = (this.myWidth * this.zoomFactor) + 'px';
+                this.styles.height = (this.myHeight * this.zoomFactor) + 'px';
             }
         },
         components: {

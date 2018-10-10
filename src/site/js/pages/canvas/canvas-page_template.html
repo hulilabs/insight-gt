@@ -16,13 +16,11 @@
                                 overflow: auto; background-color: gray; text-align: center; resize: vertical;">
 
                         <wc-canvas ref="canvas1" cross-origin="anonymous" v-bind:style="[styles]" v-bind:alpha="1" v-bind:background-color="state.backgroundColor"
-                            v-bind:base-image="state.baseImage" v-bind:eraser-thickness="state.eraserThickness" v-bind:height="state.height"
-                            v-bind:layers="state.layers" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
-                            v-bind:stroke-thickness="state.strokeThickness" v-bind:tool="state.tool" v-bind:width="state.width"
+                            v-bind:base-image="state.baseImage" v-bind:height="state.height" v-bind:width="state.width"
                             v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
                         <wc-canvas ref="canvas2" cross-origin="anonymous" v-bind:style="[styles]" v-bind:alpha="state.alpha" v-bind:active-layer="myActiveLayer"
                             v-bind:background-color="state.backgroundColor" v-bind:eraser-thickness="state.eraserThickness" v-bind:height="state.height"
-                            outline-image="state.outlineImage" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
+                            v-bind:outline-image="state.outlineImage" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
                             v-bind:stroke-thickness="state.strokeThickness" v-bind:tool="state.tool" v-bind:width="state.width"
                             v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
                     </div>

@@ -25,7 +25,10 @@ require.config({
         "highlight" : "site/js/lib/vendor/highlight/highlight.pack",
         "css-loader" : "/site/js/lib/vendor/require-css/css",
         "waves" : "site/js/lib/vendor/Waves/dist",
-        "jump" : "site/js/lib/vendor/jump.js/dist/jump"
+        "jump" : "site/js/lib/vendor/jump.js/dist/jump",
+        "utilities" : "site/js/lib/vendor/utilities/utilities",
+        "floodfill" : "site/js/lib/vendor/utilities/floodfill",
+        "segmentation" : "site/js/lib/vendor/segmentation/segmentation"
     },
     "waitSeconds" : 30
 });

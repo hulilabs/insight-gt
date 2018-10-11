@@ -1,31 +1,9 @@
 <div>
-    <!-- Content displayed to the right of the page -->
-    <div class="WebComponents__appbar">
-        <wc-app-bar style="margin-bottom: 10px" v-bind:active="true">
-            <wc-icon-button slot="navigation"
-                class="wc-IconButton--action"
-                v-wc-ripple:is-dark icon-class="icon-menu"
-                v-on:click.native="toggleDrawer"
-                smart-focus>
-            </wc-icon-button>
-        </wc-app-bar>
-    </div>
-    <div class="WebComponents__desktopNav">
-        <div>
-            <wc-list-item v-for="item in sections" v-bind:key="item.name">
-                <router-link v-if="item.path" v-bind:to="item.path">{{item.name}}</router-link>
-                <a v-else-if="item.url" v-bind:href="item.url" target="_blank">{{item.name}}</a>
-                <span v-else class="WebComponents__navTitle">{{item.name}}</span>
-            </wc-list-item>
-        </div>
-    </div>
-
-    <div class="WebComponents__routerView">
+    
         <router-view></router-view>
-    </div>
+
     <!-- <div class="WebComponents__content"> -->
     <!-- </div> -->
-    <div class="WebComponents__drawer">
         <wc-drawer ref="navDrawer" v-bind:active="state.showNav" v-on:change="drawerChanged" v-bind:disable-swipe="false" class="wc-Drawer--appBar">
             <div slot="content">
                 <div>
@@ -36,6 +14,6 @@
                     </wc-list-item>
                 </div>
             </div>
-        </wc-drawer>
-    </div>
+        <home/wc-drawer>
+
 </div>

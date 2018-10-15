@@ -202,13 +202,6 @@ define([
         default: 0
       },
       /**
-       * An array that keep track of the existing layers
-       */
-      layers: {
-        type: Array,
-        default: function () { return [] }
-      },
-      /**
        * Flag that indicates if a canvas has an outline image
        * If a canvas has an outline image, drawing operations can be performed on the canvas
        */
@@ -852,10 +845,11 @@ define([
         //Validate masks file
         this._resetCanvas();
         this.drawStack[0][0] = masks[0].getAttribute("source");
+        this.strokeColors = [];
+        this.strokeArray = [];
         this.addColor(masks[0].getAttribute("color"));
         for (var i = 1; i < masks.length; i++) {
           this.addLayer();
-          this.layers += [i + 1];
           this.drawStack[i][0] = masks[i].getAttribute("source");
           this.addColor(masks[i].getAttribute("color"));
         }
@@ -907,12 +901,14 @@ define([
        */
       _onDrawStart: function(e) {
         
+        
         e.preventDefault();
         // Set the state
         this.state.painting = true;
         this._clearBuffer();
         // Record the initial point
         this._bufferPoint(e, false);
+        this._redraw();
       },
       /**
        * Avoid canvas selection on mobile

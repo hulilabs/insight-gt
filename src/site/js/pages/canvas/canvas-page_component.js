@@ -19,11 +19,8 @@ define([
   "web-components/buttons/flat/flat-button_component",
   "web-components/canvas/canvas_component",
   "web-components/inputs/textfield/textfield_component",
-  "web-components/markdown/markdown_component",
-  "web-components/selection-controls/checkbox/checkbox_component",
   "web-components/selection-controls/toggle/toggle_component",
   "web-components/selection-controls/toggle/toggle-button_component",
-  "text!web-components/canvas/readme.md",
   "text!pages/canvas/canvas-page_template.html"
 ], function(
   Vue,
@@ -31,11 +28,8 @@ define([
   FlatButton,
   Canvas,
   TextField,
-  Markdown,
-  Checkbox,
   Toggle,
   ToggleButton,
-  CanvasReadme,
   Template
 ) {
   var DEFAULT = {
@@ -103,10 +97,6 @@ define([
           marginLeft: "auto",
           marginRight: "auto"
         },
-
-        markdownSource: {
-          documentation: CanvasReadme
-        }
       };
     },
     computed: {
@@ -212,7 +202,7 @@ define([
       _exportMasks: function() {
         //Get the masks as an XML file
         var xmlFile = this.$refs.canvas2.exportMasks(),
-          downloader = this.$refs.exportMasks;
+          downloader = document.createElement('a');
 
         // Creates an URL from the xml file
         var url = window.URL.createObjectURL(
@@ -252,7 +242,7 @@ define([
        */
       _openImage: function(e) {
         //Reset the canvas page to a default state
-        this._resetCanvasState();
+        
         var files = e.target.files || e.dataTransfer.files;
         if (!files.length) return;
 
@@ -260,8 +250,11 @@ define([
           reader = new FileReader(),
           self = this;
 
+        this._resetCanvasState();
+        this.state.width = 0;
+        this.state.height = 0;
         // Wait for the file to load
-        reader.onload = function(e) {
+        reader.onload = function(e) { 
           var image = new Image();
           // Wait for the image to load
           image.onload = function(e) {
@@ -269,6 +262,7 @@ define([
             self.state.width = image.width;
             self.state.height = image.height;
             self.state.zoom = 1;
+            self._updateZoom();
 
             // Update the canvas
             self._updateStyle();
@@ -285,9 +279,11 @@ define([
        * Open a XML file that contains the enconded masks
        */
       _openMasks: function(e) {
-        this._resetCanvasState();
+        
         var files = e.target.files || e.dataTransfer.files;
         if (!files.length) return;
+
+        this._resetCanvasState();
 
         var xmlFile = files[0],
           reader = new FileReader(),
@@ -299,8 +295,6 @@ define([
           var xmlDoc = parser.parseFromString(reader.result, "text/xml"); //important to use "text/xml"
           var body = xmlDoc.getElementsByTagName("masks");
           var masks = body[0].getElementsByTagName("mask");
-          self.state.layers = DEFAULT.LAYERS;
-          self.state.activeLayer = DEFAULT.ACTIVE_LAYER;
           for (var i = 1; i < masks.length; i++) {
             self.state.layers.push(i + 1);
           }
@@ -308,11 +302,19 @@ define([
         };
         reader.readAsText(xmlFile);
       },
+      _updateZoom: function (e){
+        this.styles.width = (this.myWidth * this.zoomFactor).toString() + "px";
+        this.styles.height =
+          (this.myHeight * this.zoomFactor).toString() + "px";
+
+      },
+
       _resetCanvasState: function(e) {
         this.$refs.canvas2._resetCanvas();
         this.state.activeLayer = DEFAULT.ACTIVE_LAYER;
-        this.state.layers = DEFAULT.LAYERS;
+        this.state.layers = ["1"];
         this.state.zoom = 1;
+        this._updateZoom();
       },
       /**
        * Undo the last action
@@ -334,25 +336,19 @@ define([
        */
       _zoomIn: function() {
         this.state.zoom = this.state.zoom + 1;
-        this.styles.width = (this.myWidth * this.zoomFactor).toString() + "px";
-        this.styles.height =
-          (this.myHeight * this.zoomFactor).toString() + "px";
+        this._updateZoom();
       },
       /**
        * Decrease the zoom by one
        */
       _zoomOut: function() {
         this.state.zoom = this.state.zoom - 1;
-        this.styles.width = (this.myWidth * this.zoomFactor).toString() + "px";
-        this.styles.height =
-          (this.myHeight * this.zoomFactor).toString() + "px";
+        this._updateZoom();
       }
     },
     components: {
       "wc-canvas": Canvas,
-      "wc-checkbox": Checkbox,
       "wc-flat-button": FlatButton,
-      "wc-markdown": Markdown,
       "wc-textfield": TextField,
       "wc-toggle": Toggle,
       "wc-toggle-button": ToggleButton

@@ -501,7 +501,7 @@ define([
 
                             var arrayBuffer = new Uint8Array(content),
                                 blob = new Blob([arrayBuffer.buffer], {
-                                    type: mime,
+                                    type : mime,
                                 });
 
                             resolve(blob);
@@ -1096,7 +1096,7 @@ define([
                     var i = strokePoints.length - 1;
                     var stroke1 = strokePoints[i],
                         previousStroke = i !== 0 ? strokePoints[i - 1] : null;
-                    new Floodfill(
+                    Floodfill(
                         this.drawContext,
                         stroke1.x,
                         stroke1.y,

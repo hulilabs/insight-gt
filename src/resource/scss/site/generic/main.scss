@@ -1,0 +1,9 @@
+/*------------------------------------*\
+
+         #MAIN GENERIC FILE
+
+\*------------------------------------*/
+@import '_resets';
+@import "../tools/mixins/_typography";
+
+@include generate-font-face('MuseoSans300', 'MuseoSans/museo-sans-300');

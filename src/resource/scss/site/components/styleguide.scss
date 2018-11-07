@@ -1,0 +1,56 @@
+/*
+Styleguide showcase
+*/
+@import "../settings/_colors";
+@import "../tools/mixins/_styleguide";
+
+.Styleguide {
+
+    &__page {
+        box-sizing: border-box;
+        display: block;
+        flex-basis : 100%;
+        padding: 20px;
+        vertical-align: top;
+        width: 100%;
+
+        > * {
+            display: block;
+        }
+
+        &--dark {
+            background-color: $wc-primary-color-dark;
+        }
+
+        &--light {
+            background-color: $wc-background-color;
+        }
+    }
+
+    &__palette {
+        display : flex;
+        flex-wrap : wrap;
+    }
+
+    &__pageContainer {
+        display : flex;
+        flex-direction : row;
+    }
+
+    &__color {
+        display: inline-block;
+        @include color-showcase(primary, $wc-primary-color);
+        @include color-showcase(primaryLight, $wc-primary-color-light);
+        @include color-showcase(primaryDark, $wc-primary-color-dark);
+        @include color-showcase(accent, $wc-accent-color);
+        @include color-showcase(accentDark, $wc-accent-color-dark);
+        @include color-showcase(secondary, $wc-secondary-color);
+        @include color-showcase(secondaryDark, $wc-secondary-color-dark);
+        @include color-showcase(error, $wc-error-color);
+        @include color-showcase(background, $wc-background-color);
+        flex-grow : 1;
+        height: 80px;
+        padding: 8px;
+        width: 80px;
+    }
+}

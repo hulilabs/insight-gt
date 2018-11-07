@@ -1,0 +1,75 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Deleter
+
+## Demo
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Sandbox</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__main">
+                    <wc-deleter
+                        v-bind:disable-delete="disableDelete"
+                        v-bind:multiple-inputs="multipleInputs"
+                        v-bind:adjust-padding="adjustPadding"
+                        v-bind:adjust-content="adjustContent">
+                        <div v-bind:style="{ width : adjustContent ? '200px' : null }">
+                            <wc-textfield placeholder="Input 1 - no label"></wc-textfield>
+                            <wc-textfield v-show="multipleInputs" floating-label label="Input 2 - with floating label"></wc-textfield>
+                            <wc-textfield v-show="multipleInputs" label="Input 3 - just label"></wc-textfield>
+                        </div>
+                    </wc-deleter>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Options</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="disableDelete">Disable delete</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="multipleInputs">Multiple inputs</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="adjustPadding">Adjust padding</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="adjustContent">Adjust to content</wc-checkbox>
+                    </div>
+                </div>
+                <span class="DemoTable__note u-caption1">
+                    Boolean properties can be binded to adaptive detectors for customization
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown>
+## Deletable list
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Sample</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__main">
+                    <wc-deleter multiple-inputs
+                                adjust-padding
+                                v-for="(item, index) in items"
+                                v-bind:key="index"
+                                v-bind:item-key="index"
+                                v-on:deleter-delete="_removeItem">
+                        <wc-textfield v-bind:value="item.value"></wc-textfield>
+                    </wc-deleter>
+                    <wc-flat-button v-on:click.native="_addItem" smart-focus style="margin-left: -14px;">Add other</wc-flat-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

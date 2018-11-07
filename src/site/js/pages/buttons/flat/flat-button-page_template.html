@@ -1,0 +1,67 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Flat button
+
+## Demo
+
+The following are the all the available configurations for `wc-FlatButton` component
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Normal</div>
+            <div class="DemoTable__columnRight">
+                <wc-flat-button v-wc-ripple:is-dark>click me!</wc-flat-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Disabled</div>
+            <div class="DemoTable__columnRight">
+                <wc-flat-button disabled>Thou shall not click me!</wc-flat-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Large</div>
+            <div class="DemoTable__columnRight">
+                <wc-flat-button v-wc-ripple:is-dark large>click me!</wc-flat-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Large & disabled</div>
+            <div class="DemoTable__columnRight">
+                <wc-flat-button v-wc-ripple:is-dark large disabled>Thou shall not click me!</wc-flat-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Using smart focus behavior (try TAB/click)</div>
+            <div class="DemoTable__columnRight">
+                <wc-flat-button v-wc-ripple:is-dark smart-focus>
+                    tab me
+                </wc-flat-button>
+                <wc-flat-button v-wc-ripple:is-dark smart-focus>
+                    tab me
+                </wc-flat-button>
+                <wc-flat-button v-wc-ripple:is-dark smart-focus>
+                    tab me
+                </wc-flat-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Resembling a link (no padding, no ripple)</div>
+            <div class="DemoTable__columnRight">
+                <wc-flat-button disabled link>
+                    Legend of Zelda: A link to the past
+                </wc-flat-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Manipulate the active state with a prop</div>
+            <div class="DemoTable__columnRight">
+                <wc-flat-button active>
+                    this is an active flat button
+                </wc-flat-button>
+            </div>
+        </div>
+    </div>
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

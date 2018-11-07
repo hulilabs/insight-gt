@@ -1,0 +1,20 @@
+<span class="wc-ToggleButton" v-bind:class="alignClass">
+    <input ref="input"
+        type="checkbox"
+        class="wc-ToggleButton__input"
+        v-bind:checked="isActive"
+        v-bind:value="customValue"
+        v-bind:id="pseudoId"
+        v-bind:name="name"
+        v-bind:disabled="disabled"
+        v-on:keyup.enter="_toggle"
+        v-on:change="_onChange">
+    <label v-bind:for="pseudoId" class="wc-ToggleButton__inputLabel" v-wc-ripple:is-light>
+        <span class="wc-ToggleButton__inputIcon" v-if="$slots.icon">
+            <slot name="icon"></slot>
+        </span>
+        <span class="wc-ToggleButton__inputText">
+            <slot></slot>
+        </span>
+    </label>
+</span>

@@ -1,0 +1,49 @@
+<div class="wc-Fab"
+    v-bind:class="[fabClassObject, classObject]"
+    v-on:mouseenter="open"
+    v-on:mouseleave="close">
+    <template v-if="hasActions">
+        <div class="wc-Fab__actionsContainer">
+            <ul class="wc-Fab__actions">
+                <li class="wc-Fab__action"
+                    ref="actions"
+                    v-for="(action, index) in orderedActions"
+                    v-bind:key="index"
+                    v-bind:class="action.classObject"
+                    v-on:click="_triggerEvent(action.name)">
+                    <wc-icon v-bind:icon-class="action.icon"></wc-icon>
+                    <wc-tooltip
+                        v-bind:alignment="tooltipAlignment"
+                        v-bind:trigger-element="composeVueRef('actions', index)"
+                        v-bind:active="areTooltipsActive">
+                        {{action.tooltip}}
+                    </wc-tooltip>
+                </li>
+            </ul>
+        </div>
+    </template>
+    <div class="wc-Fab__button"
+        ref="mainAction"
+        v-bind:class="mainAction.classObject"
+        v-on:click="_mainActionHandler">
+        <template v-if="isActive || !hasActions">
+            <wc-icon class="wc-Fab__icon"
+                v-bind:class="iconSizeModifier"
+                v-bind:icon-class="mainAction.icon"
+            ></wc-icon>
+        </template>
+        <template v-else>
+            <wc-icon class="wc-Fab__icon"
+                v-bind:class="iconSizeModifier"
+                icon-class="icon-add"
+            ></wc-icon>
+        </template>
+        <wc-tooltip
+            v-if="hasActions"
+            v-bind:alignment="mainAction.tooltipAlignment || tooltipAlignment"
+            v-bind:trigger-element="composeVueRef('mainAction')"
+            v-bind:active="areTooltipsActive">
+            {{mainAction.tooltip}}
+        </wc-tooltip>
+    </div>
+</div>

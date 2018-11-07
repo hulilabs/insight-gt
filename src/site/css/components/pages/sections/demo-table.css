@@ -1,0 +1,152 @@
+/**
+ * Table layout that can be used for demo pages.
+ *
+ * .DemoTable - main container block
+ * .DemoTable__row - each of the container rows
+ * .DemoTable__columnLeft - column that contains the demo field title/description
+ * .DemoTable__columnRight - column that contains the demo options or components
+ * .DemoTable__main - inner component container
+ * .DemoTable__options - demo configuration options in a column layout
+ * .DemoTable__option - single demo configuration option
+ * .DemoTable__label - options label
+ * .DemoTable__note - additional note to be added in a column
+ */
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/* line 24, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 10px;
+  width: 100%;
+}
+/* line 30, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable--solid {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+  z-index: 2;
+  background-color: #ECEFF1;
+  border-radius: 4px;
+  padding: 20px;
+}
+/* line 39, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__columnLeft {
+  font-weight: bold;
+  padding: 5px 0;
+}
+/* line 46, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__columnRight {
+  padding-bottom: 20px;
+}
+/* line 52, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__main {
+  min-height: 100px;
+}
+/* line 58, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__options {
+  display: flex;
+  flex-flow: column wrap;
+  max-height: 500px;
+}
+/* line 65, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__options--row {
+  flex-flow: row wrap;
+}
+/* line 72, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__option {
+  padding-right: 10px;
+  min-height: 75px;
+  align-items: center;
+  display: flex;
+}
+/* line 81, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__label {
+  height: 40px;
+  line-height: 40px;
+}
+/* line 88, ../../../../input/components/pages/sections/demo-table.scss */
+.DemoTable__note {
+  background-color: #ECEFF1;
+  display: block;
+  padding: 5px;
+}
+@media screen and (min-width: 1025px) {
+  /* line 24, ../../../../input/components/pages/sections/demo-table.scss */
+  .DemoTable {
+    display: table;
+  }
+  /* line 99, ../../../../input/components/pages/sections/demo-table.scss */
+  .DemoTable__row {
+    display: table-row;
+  }
+  /* line 103, ../../../../input/components/pages/sections/demo-table.scss */
+  .DemoTable__columnLeft {
+    display: table-cell;
+    vertical-align: top;
+    width: 150px;
+  }
+  /* line 108, ../../../../input/components/pages/sections/demo-table.scss */
+  .DemoTable__columnLeft--large {
+    width: 350px;
+  }
+  /* line 113, ../../../../input/components/pages/sections/demo-table.scss */
+  .DemoTable__columnRight {
+    display: table-cell;
+  }
+  /* line 117, ../../../../input/components/pages/sections/demo-table.scss */
+  .DemoTable__label {
+    height: 30px;
+    line-height: 30px;
+  }
+  /* line 122, ../../../../input/components/pages/sections/demo-table.scss */
+  .DemoTable__options {
+    max-height: 300px;
+  }
+}

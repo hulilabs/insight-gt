@@ -1,0 +1,39 @@
+<div class="wc-ListItem" v-bind:class="blockClassObject" v-bind:disabled="disabled">
+    <div ref="listItemWrapper" class="wc-ListItem__wrapper" v-bind:class="wrapperClassObject">
+        <div v-if="hasAvatar" class="wc-ListItem__avatar" v-bind:class="avatarClassObject">
+            <slot name="avatar"></slot>
+        </div>
+        <div v-if="hasIcon" class="wc-ListItem__icon">
+            <slot name="icon"></slot>
+        </div>
+        <div v-if="hasRadioButton" class="wc-ListItem__radioButton">
+            <slot name="radioButton"></slot>
+        </div>
+        <div v-if="hasCheckbox" class="wc-ListItem__checkbox">
+            <slot name="checkbox"></slot>
+        </div>
+        <div v-if="hasText" class="wc-ListItem__textWrapper" v-bind:class="textWrapperClassObject">
+            <div class="wc-ListItem__primaryText" v-bind:class="primaryTextClass">
+                <slot name="primaryText"></slot>
+                <slot></slot>
+            </div>
+            <div v-if="hasSecondaryText" class="wc-ListItem__secondaryText" v-bind:class="secondaryTextClass">
+                <slot name="secondaryText"></slot>
+            </div>
+        </div>
+        <div v-if="hasAction && !hasDescription" class="wc-ListItem__action">
+            <slot name="action"></slot>
+        </div>
+        <div v-if="hasDescription" class="wc-ListItem__action" v-bind:class="actionClassObject">
+            <wc-icon icon-class="icon-angle-down"></wc-icon>
+        </div>
+    </div>
+    <transition name="vt-expand-list-item">
+        <div v-if="state.isExpanded"
+             class="wc-ListItem__description"
+             ref="description"
+             v-bind:class="{ 'is-collapsed' : !state.isExpanded }">
+            <slot name="description"></slot>
+        </div>
+    </transition>
+</div>

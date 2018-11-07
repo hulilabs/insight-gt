@@ -1,0 +1,351 @@
+@import "_colors";
+
+//---------- #wc-Drawer  ---------- /
+
+$wc-drawer-nav-background-color : $wc-primary-color;
+$wc-drawer-edge-width : 40px;
+$wc-drawer-nav-max-width : 280px;
+$wc-drawer-nav-max-width-tablet : 360px;
+$wc-drawer-nav-width : calc(100vw - 56px);
+
+//---------- #wc-Icon  ---------- /
+
+$wc-icon-size: 24px;
+// these sizes will be generated as multiples of the grid's size
+// e.g. if the grid is 8px, the generated sizes will include 8, 16, 24, 32, 40, 48
+$wc-icon-sizes: 1, 2, 3, 4, 5, 6;
+$wc-icon-notification-scale-duration: 0.2s;
+
+//---------- #buttons misc  ---------- /
+
+$wc-button-height: 40px;
+$wc-button-min-width: 96px;
+$wc-button-padding: 8px 16px;
+$wc-button-border-radius: 4px;
+$wc-button-large-max-width: 384px;
+$wc-button-color-transition-duration: 0.2s;
+
+//---------- #wc-IconButton  ---------- /
+
+$wc-icon-button-border-radius: 50%;
+$wc-icon-button-desktop-padding: 8px;
+$wc-icon-button-padding: 12px;
+
+//---------- #wc-Dialog  ---------- /
+
+$wc-dialog-max-width: 88%;
+$wc-dialog-min-width: 280px;
+$wc-dialog-max-height: 290px;
+$wc-dialog-min-height: 120px;
+
+//Desktop
+$wc-dialog-desktop-max-width: 55%;
+$wc-dialog-desktop-max-height: 560px;
+
+//---------- #wc-Avatar  ---------- /
+
+// default size for an avatar
+$wc-avatar-size: 24px;
+// these sizes will be generated as multiples of the grid's size
+// for example, the grid is 8px, the generated sizes will include 24, 32, 40, ..., 96
+$wc-avatar-sizes: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+$wc-avatar-background-color: rgba(black, $wc-avatar-background-opacity);
+$wc-avatar-text-color: rgba(black, $wc-avatar-text-color-opacity);
+
+$wc-avatar-min-height: 24px;
+$wc-avatar-min-width: 24px;
+
+//---------- #wc-Thumbnail  ---------- /
+
+// default size for a thumbnail
+$wc-thumbnail-size: 24px;
+// these sizes will be generated as multiples of the grid's size
+// for example, the grid is 8px, the generated sizes will include 24, 32, 40, ..., 96
+$wc-thumbnail-sizes: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+
+//---------- #wc-AppBar  ---------- /
+
+$wc-app-bar-height: 56px;
+$wc-app-bar-height-compact: 40px;
+$wc-app-bar-width: 100%;
+$wc-app-bar-background-color: $wc-primary-color;
+
+
+//---------- #wc-Chip  ---------- /
+
+$wc-chip-border-radius: 16px;
+$wc-chip-height: 32px;
+
+$wc-chip-close-button-size: 24px;
+
+$wc-chip-background-color: rgba($wc-typoicon-base-dark, 0.10);
+$wc-chip-background-color-selected: $wc-typoicon-secondary-dark;
+$wc-chip-font-color: $wc-typoicon-primary-dark;
+$wc-chip-hover-font-color: $wc-typoicon-base-light;
+$wc-chip-close-button-font-color: $wc-typoicon-disabled-dark;
+$wc-chip-close-button-hover-font-color: $wc-typoicon-base-light;
+
+
+//---------- #wc-Dropdown  ---------- /
+
+$wc-dropdown-menu-max-height: 464px;
+$wc-dropdown-menu-min-height: 80px;
+
+$wc-dropdown-disabled-text-color: rgba(black, 0.27);
+$wc-dropdown-placeholder-option-color: rgba(black, 0.54);
+$wc-dropdown-mobile-placeholder-color: rgba(black, 0.54);
+$wc-dropdown-mobile-option-color: rgba(black, 0.87);
+
+$wc-dropdown-secondary-bg: $wc-primary-color;
+
+//---------- #wc-ListItem  ---------- /
+
+$wc-list-item-width: 100%;
+$wc-list-item-single-height: 48px;
+$wc-list-item-double-height: 72px;
+$wc-list-item-triple-height: 88px;
+$wc-list-item-expanded-border-size: 1px;
+
+$wc-list-item-action-transform-transition-duration: 0.3s;
+$wc-list-item-max-height-transition-duration: 0.2s;
+
+$wc-list-item-background-color: $wc-primary-color;
+
+$wc-list-item-background-color-selected: rgba($wc-typoicon-base-dark, $wc-list-item-background-opacity-selected);
+$wc-list-item-background-color-pressed: rgba($wc-typoicon-base-dark, $wc-list-item-background-opacity-pressed);
+$wc-list-item-font-color-disabled: $wc-typoicon-disabled-dark;
+$wc-list-item-expanded-border-color: rgba(black, 0.15);
+
+//---------- #wc-Menu  ---------- /
+
+$wc-menu-min-width: 124px;
+$wc-menu-max-width: 280px;
+$wc-menu-max-width-desktop: 392px;
+$wc-menu-background-color: $wc-primary-color;
+
+//- -------- #wc-Checkbox  ---------- /
+
+$wc-checkbox-size: 24px;
+$wc-checkbox-border-size: 2px;
+$wc-checkbox-border-radius: 4px;
+$wc-checkbox-label-margin: 24px;
+$wc-checkbox-label-margin-list: 32px;
+$wc-checkbox-scale-duration: 0.2s;
+$wc-checkbox-color-transition-duration: 0.1s;
+$wc-checkbox-border-color: rgba(black, 0.54);
+$wc-checkbox-disabled-color: rgba(black, 0.26);
+$wc-checkbox-checked-background-color: $wc-secondary-color;
+$wc-checkbox-checked-border-color: $wc-secondary-color;
+$wc-checkbox-check-color: $wc-primary-color;
+
+//- -------- #wc-RadioButton  ---------- /
+
+$wc-radio-button-size: 24px;
+$wc-radio-button-border-size: 2px;
+$wc-radio-button-color-transition-duration: 0.1s;
+$wc-radio-button-scale-duration: 0.2s;
+$wc-radio-button-label-margin: 24px;
+$wc-radio-button-border-color: rgba(black, 0.54);
+$wc-radio-button-disabled-color: rgba(black, 0.26);
+
+//---------- #wc-Overlay ----------/
+
+$wc-overlay-background-color: rgba($wc-typoicon-base-dark, 0.54);
+$wc-overlay-background-color-secondary: rgba($wc-secondary-color, 0.7);
+
+//---------- #wc-Saver ----------/
+$wc-saver-color: #8BC34A;
+$wc-saver-time-on-screen: 2s;
+$wc-saver-fade-animation-duration: 0.3s;
+
+//- -------- #wc-Snackbar ---------- /
+$wc-snackbar-min-height: 48px;
+
+$wc-snackbar-desktop-min-width: 288px;
+$wc-snackbar-desktop-max-width: 568px;
+$wc-snackbar-desktop-bottom-position: 24px;
+$wc-snackbar-desktop-left-position: 24px;
+
+$wc-snackbar-label-color: $wc-primary-color;
+$wc-snackbar-action-color: $wc-secondary-color;
+$wc-snackbar-action-color-hover: $wc-secondary-color-dark;
+$wc-snackbar-close-color: $wc-primary-color;
+$wc-snackbar-close-color-hover: rgba($wc-primary-color, 0.7);
+$wc-snackbar-background-color: $wc-primary-color-dark;
+
+//---------- #wc-StepDots ----------/
+
+$wc-step-dots-dot-size: 4px;
+$wc-step-dots-dot-spacing: 8px;
+$wc-step-dots-dot-background-color: $wc-typoicon-disabled-dark;
+$wc-step-dots-dot-background-color-active: $wc-typoicon-primary-dark;
+$wc-step-dots-dot-background-color-light: $wc-typoicon-disabled-light;
+$wc-step-dots-dot-background-color-active-light: $wc-typoicon-primary-light;
+
+//---------- #wc-Stepper ----------/
+
+$wc-stepper-dot-size: 8px;
+$wc-stepper-dot-padding: 4px;
+$wc-stepper-dot-spacing: 16px;
+$wc-stepper-dot-background-color: $wc-typoicon-disabled-dark;
+$wc-stepper-dot-background-color-active: $wc-secondary-color;
+$wc-stepper-dot-background-color-hover: $wc-typoicon-secondary-dark;
+
+//- -------- #wc-Ripple  ---------- /
+$wc-static-ripple-animation-duration: 0.3s;
+
+//---------- #wc-SearchBox ----------/
+$wc-search-box-bg: $wc-primary-color;
+$wc-search-box-border-radius: 4px;
+$wc-search-box-grow-animation-duration: 0.5s;
+$wc-search-box-placeholder-color: $wc-typoicon-secondary-dark;
+$wc-search-text-padding-top: 14px;
+
+//---------- #wc-SearchDropdown ----------/
+$wc-search-dropdown-border-radius: 4px;
+$wc-search-dropdown-loader-width: 48px;
+$wc-search-dropdown-not-found-color: $wc-typoicon-primary-dark;
+
+//---------- #wc-Tab ----------/
+
+$wc-tab-icon-size: 24px;
+$wc-tab-font-color-highlight: $wc-secondary-color;
+$wc-tab-font-color-disabled: rgba(black, 0.26);
+
+//---------- #wc-Table ----------/
+
+$wc-table-footer-height: 56px;
+$wc-table-footer-padding: 0 24px;
+$wc-table-title-section-height: 64px;
+$wc-table-title-section-padding-left: 24px;
+
+//---------- #wc-Tabs ----------/
+
+$wc-tabs-tab-indicator-background-color: $wc-secondary-color;
+
+//---------- #wc-Toggle ----------/
+$wc-toggle-label: $wc-typoicon-secondary-dark;
+$wc-toggle-error: $wc-error-color;
+$wc-toggle-button-active-color: $wc-secondary-color;
+$wc-toggle-button-active-text-color: $wc-primary-color;
+$wc-toggle-button-bg-color: $wc-background-color;
+$wc-toggle-button-border-radius: 4px;
+$wc-toggle-button-border: 1px solid $wc-typoicon-secondary-dark;
+$wc-toggle-button-disabled-color: $wc-typoicon-disabled-dark;
+$wc-toggle-button-height-desktop: 32px;
+$wc-toggle-button-height-mobile: 40px;
+$wc-toggle-button-min-width: 24px;
+$wc-toggle-button-text-color: $wc-typoicon-secondary-dark;
+
+//---------- #wc-Tooltip ----------/
+
+$wc-tooltip-border-radius: 2px;
+$wc-tooltip-min-width: 40px;
+$wc-tooltip-max-width: 800px;
+
+//Mobile
+$wc-tooltip-mobile-height: 32px;
+$wc-tooltip-mobile-horizontal-padding: 16px;
+
+//Desktop
+$wc-tooltip-desktop-height: 24px;
+$wc-tooltip-desktop-horizontal-padding: 8px;
+
+//---------- #wc-InputContainer --------/
+
+$wc-input-container-color-disabled: $wc-typoicon-disabled-dark;
+$wc-input-container-element-border-bottom-color: $wc-dividers-dark;
+$wc-input-container-element-color: $wc-typoicon-primary-dark;
+$wc-input-container-highlighter-background-color: $wc-secondary-color-dark;
+$wc-input-container-label-color: $wc-typoicon-secondary-dark;
+$wc-input-container-label-color-focus: $wc-secondary-color-dark;
+$wc-input-container-suffix-color: $wc-typoicon-primary-dark;
+
+//---------- #wc-Card ----------/
+
+$wc-card-min-width: 168px;
+$wc-card-max-width: 816px;
+$wc-card-header-min-height: 56px;
+$wc-card-header-min-height-compact: $wc-app-bar-height-compact;
+$wc-card-border-radius: 4px;
+$wc-card-background-color: white;
+$wc-card-resting-compact-divider-color: $wc-dividers-dark;
+
+//---------- #wc-CardCollection ----------/
+
+$wc-card-collection-overlay-color: rgba(white, 0.6);
+
+//---------- #wc-Onboarding ----------/
+
+$wc-onboarding-min-width : 288px;
+$wc-onboarding-max-width : 312px;
+$wc-onboarding-min-height : 112px;
+$wc-onboarding-max-height : 232px;
+$wc-onboarding-background-color : $wc-primary-color-dark;
+$wc-onboarding-color : $wc-typoicon-primary-light;
+$wc-onboarding-step-animation-duration : 0.75s;
+$wc-onboarding-closing-hiding-animation-duration : 0.3s;
+
+//---------- #wc-CustomLogic  ---------- /
+
+$wc-custom-logic-placeholder-color : $wc-input-container-label-color;
+
+//---------- #wc-Calendar ----------/
+
+$wc-calendar-cell-size : 40px;
+$wc-calendar-highlighted-color : $wc-secondary-color;
+$wc-calendar-selected-background-color : $wc-secondary-color-dark;
+$wc-calendar-width : 288px;
+
+//---------- #wc-Datepicker ----------/
+
+$wc-datepicker-background-color : $wc-primary-color;
+$wc-datepicker-option-background-color-highlighted : rgba(black, 0.15);
+$wc-datepicker-width : 288px;
+
+//---------- #wc-Deleter  ---------- /
+
+$wc-deleter-trash-color : rgba(black, 0.26);
+$wc-deleter-trash-disabled-color : rgba(black, 0.15);
+$wc-deleter-divider-color : $wc-dividers-dark;
+
+//---------- #wc-TimePicker  ---------- /
+
+$wc-time-picker-background-color : $wc-primary-color;
+$wc-time-picker-color-active : $wc-secondary-color;
+$wc-time-picker-color-active-dark : $wc-secondary-color-dark;
+$wc-time-picker-option-background-color-highlighted : rgba(0, 0, 0, 0.1);
+$wc-time-picker-width : 318px;
+
+//---------- #wc-AddPhoto  ---------- /
+
+$wc-add-photo-background-color : rgba(0, 0, 0, 0.26);
+$wc-add-photo-background-color-pressed : rgba(0, 0, 0, 0.54);
+$wc-add-photo-delete-background-color : $wc-primary-color-dark;
+$wc-add-photo-color : $wc-typoicon-primary-light;
+// default size for an add photo avatar
+$wc-add-photo-size: 72px;
+// these sizes will be generated as multiples of the grid's size
+// for example, the grid is 8px, the generated sizes will include 24, 32, 40, ..., 96
+$wc-add-photo-sizes: 6, 7, 8, 9, 10, 11, 12;
+
+//---------- #wc-ExpandablePanel  ---------- /
+
+$wc-expandable-panel-border-radius : 4px;
+$wc-expandable-panel-header-background : #37474f;
+$wc-expandable-panel-header-color : white;
+$wc-expandable-panel-header-height : 56px;
+$wc-expandable-panel-header-padding-desktop : 8px 8px 8px 24px;
+$wc-expandable-panel-header-padding-mobile : 2px 8px 2px 24px;
+$wc-expandable-panel-max-height : 244px;
+$wc-expandable-panel-title-padding-desktop : 10px 8px 10px 0;
+$wc-expandable-panel-title-padding-mobile : 16px 8px 16px 0;
+$wc-expandable-panel-title-width : 224px; // Safari size
+$wc-expandable-panel-width : 360px;
+
+//---------- #wc-Fab  ---------- /
+
+$wc-fab-background-color : $wc-accent-color;
+$wc-fab-background-color-pressed : $wc-accent-color-dark;
+$wc-fab-background-color-action : $wc-secondary-color;
+$wc-fab-background-color-action-pressed : $wc-secondary-color-dark;

@@ -1,0 +1,158 @@
+<div class="FloatingLayerPage" droppable="true" v-on:dragover="_onDragOver" v-on:drop="_onDrop">
+    <wc-markdown>
+# Floating layer demo
+
+Drag the dotted area for testing different viewport positions and options mixes
+    </wc-markdown>
+
+    <div ref="sandbox" class="FloatingLayerPage__sandbox FloatingLayerPage__sandbox--trigger FloatingLayerPage__table" draggable="true" v-on:dragstart="_onDragStart">
+        <div class="FloatingLayerPage__row">
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--bottom">
+                <label for="up">up</label>
+                <br />
+                <input id="up" type="radio" v-model="direction" value="up" />
+            </div>
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell"></div>
+        </div>
+        <div class="FloatingLayerPage__row">
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--right FloatingLayerPage__cell--bottom">
+                <label for="top-left">top-left</label>
+                <input id="top-left" type="radio" v-model="triggerAlignment" value="top-left" />
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--bottom">
+                <label for="top-center">top-center</label>
+                <br />
+                <input id="top-center" type="radio" v-model="triggerAlignment" value="top-center" />
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--left FloatingLayerPage__cell--bottom">
+                <input id="top-right" type="radio" v-model="triggerAlignment" value="top-right" />
+                <label for="top-right">top-right</label>
+            </div>
+            <div class="FloatingLayerPage__cell"></div>
+        </div>
+        <div class="FloatingLayerPage__row">
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--right FloatingLayerPage__cell--middle">
+                <label for="left">left</label>
+                <input id="left" type="radio" v-model="direction" value="left" />
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--right FloatingLayerPage__cell--middle">
+                <label for="middle-left">middle-left</label>
+                <input id="middle-left" type="radio" v-model="triggerAlignment" value="middle-left" />
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--middle">
+                <button ref="trigger" class="FloatingLayerPage__trigger">TRIGGER</button>
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--left FloatingLayerPage__cell--middle">
+                <input id="middle-right" type="radio" v-model="triggerAlignment" value="middle-right" />
+                <label for="middle-right">middle-right</label>
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--left FloatingLayerPage__cell--middle">
+                <input id="right" type="radio" v-model="direction" value="right" />
+                <label for="right">right</label>
+            </div>
+        </div>
+        <div class="FloatingLayerPage__row">
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--right FloatingLayerPage__cell--top">
+                <label for="bottom-left">bottom-left</label>
+                <input id="bottom-left" type="radio" v-model="triggerAlignment" value="bottom-left" />
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--top">
+                <input id="bottom-center" type="radio" v-model="triggerAlignment" value="bottom-center" />
+                <br />
+                <label for="bottom-center">bottom-center</label>
+            </div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--left FloatingLayerPage__cell--top">
+                <input id="bottom-right" type="radio" v-model="triggerAlignment" value="bottom-right" />
+                <label for="bottom-right">bottom-right</label>
+            </div>
+            <div class="FloatingLayerPage__cell"></div>
+        </div>
+        <div class="FloatingLayerPage__row">
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--top">
+                <input id="down" type="radio" v-model="direction" value="down" />
+                <br />
+                <label for="down">down</label>
+            </div>
+            <div class="FloatingLayerPage__cell"></div>
+            <div class="FloatingLayerPage__cell"></div>
+        </div>
+        <div ref="block" v-if="state.isActive" v-bind:class="['FloatingLayerPage__block', floatingLayerClasses]" v-bind:style="{ height: blockHeight + 'px', width: blockWidth + 'px' }">
+            <div class="FloatingLayerPage__sandbox FloatingLayerPage__sandbox--block FloatingLayerPage__table">
+                <div class="FloatingLayerPage__row">
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--right FloatingLayerPage__cell--bottom">
+                        <label for="top-left">top-left</label>
+                        <input id="top-left" type="radio" v-model="blockAlignment" value="top-left" />
+                    </div>
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--bottom">
+                        <label for="top-center">top-center</label>
+                        <br />
+                        <input id="top-center" type="radio" v-model="blockAlignment" value="top-center" />
+                    </div>
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--left FloatingLayerPage__cell--bottom">
+                        <input id="top-right" type="radio" v-model="blockAlignment" value="top-right" />
+                        <label for="top-right">top-right</label>
+                    </div>
+                </div>
+                <div class="FloatingLayerPage__row">
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--right FloatingLayerPage__cell--middle">
+                        <label for="middle-left">middle-left</label>
+                        <input id="middle-left" type="radio" v-model="blockAlignment" value="middle-left" />
+                    </div>
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--middle">
+                        <label for="floatingLayerHeight">Height</label>
+                        <br />
+                        <input id="floatingLayerHeight" type="number" v-model:value="blockHeight" size="4" />
+                        <br />
+                        <label for="floatingLayerWidth">Width</label>
+                        <br />
+                        <input id="floatingLayerWidth" type="number" v-model:value="blockWidth" size="4" />
+                        <br />
+                        <label for="floatingLayerOffset">Offset</label>
+                        <br />
+                        <input id="floatingLayerOffset" type="number" v-model:value="offset" size="4" />
+                        <br />
+                        <label for="connector">Connector</label><input id="connector" type="checkbox" v-model="connector" />
+                        <label for="smart">Smart</label><input id="smart" type="checkbox" v-model="smart" />
+                    </div>
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--left FloatingLayerPage__cell--middle">
+                        <input id="middle-right" type="radio" v-model="blockAlignment" value="middle-right" />
+                        <label for="middle-right">middle-right</label>
+                    </div>
+                </div>
+                <div class="FloatingLayerPage__row">
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--right FloatingLayerPage__cell--top">
+                        <label for="bottom-left">bottom-left</label>
+                        <input id="bottom-left" type="radio" v-model="blockAlignment" value="bottom-left" />
+                    </div>
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--center FloatingLayerPage__cell--top">
+                        <input id="bottom-center" type="radio" v-model="blockAlignment" value="bottom-center" />
+                        <br />
+                        <label for="bottom-center">bottom-center</label>
+                    </div>
+                    <div class="FloatingLayerPage__cell FloatingLayerPage__cell--left FloatingLayerPage__cell--top">
+                        <input id="bottom-right" type="radio" v-model="blockAlignment" value="bottom-right" />
+                        <label for="bottom-right">bottom-right</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="FloatingLayerPage__spacer">&nbsp;</div>
+
+    <span>Currently implemented by: <router-link to="/components/dropdown">Dropdown</router-link>, <router-link to="/components/menu">Menu</router-link>, <router-link to="/components/onboarding">Onboarding</router-link> and <router-link to="/components/tooltip">Tooltip</router-link></span>
+
+    <a name="behavior"></a>
+    <wc-markdown v-bind:source="markdownSource.behaviorDocumentation"></wc-markdown>
+
+    <a name="mixin"></a>
+    <wc-markdown v-bind:source="markdownSource.mixinDocumentation"></wc-markdown>
+
+</div>

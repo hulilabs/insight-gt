@@ -1,0 +1,33 @@
+/**
+* Checklist styles
+*
+* wc-Checklist - main Checklist block
+* wc-Checklist--row - displays row configuration
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/* line 14, checklist_styles.scss */
+.wc-Checklist {
+  padding: 8px 0;
+}
+/* line 18, checklist_styles.scss */
+.wc-Checklist.is-horizontal {
+  display: flex;
+  flex-flow: row wrap;
+}

@@ -1,0 +1,99 @@
+/**
+* Error styles
+*
+* More details:
+* - https://zpl.io/oQOXY
+* - https://zpl.io/oQOXY
+* - https://zpl.io/2tiWvM
+* - https://zpl.io/pxAqD
+*
+* .wc-Error - main block of an error component
+*     .wc-Error--card - custom spacing for an error inside a card component
+*     .wc-Error--selection - custom spacing for an error nearby a selection control component
+*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/* line 28, error_styles.scss */
+.wc-Error {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  font-weight: bold;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #D32F2F;
+}
+/* line 34, error_styles.scss */
+.wc-Error--card {
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  line-height: 17px;
+  font-weight: bold;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  margin-top: 0;
+  padding: 16px;
+}
+@media screen and (min-width: 768px) {
+  /* line 34, error_styles.scss */
+  .wc-Error--card {
+    margin-bottom: 24px;
+    padding: 16px 24px;
+  }
+}
+/* line 52, error_styles.scss */
+.wc-Error--selection {
+  padding-top: 5px;
+}

@@ -1,0 +1,11 @@
+<div class="wc-Drawer" v-bind:style="styles.drawer">
+    <wc-overlay ref="overlay" block-scroll v-bind:active="state.isActive" v-on:overlay-close="_onOverlayClosed"></wc-overlay>
+    <div ref="edge" class="wc-Drawer__edge" v-show="swipe"></div>
+    <div ref="nav" class="wc-Drawer__nav" v-bind:style="styles.nav">
+        <div class="wc-Drawer__content">
+            <slot name="content">
+                <!--the nav content goes here-->
+            </slot>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+/**
+ * RaisedButton, styles for a raised <button> component following material guidelines
+ *
+ * Check the raised-button_template.html file to see its structure
+ *
+ *  wc-RaisedButton - main block
+ *      wc-RaisedButton.is-large - modifier for large button
+ */
+
+@import "settings/_components";
+@import "settings/_elevations";
+@import "compass/css3/user-interface";
+@import "tools/mixins/_utilities";
+@import "tools/mixins/_typography";
+
+$wc-raised-button-disabled-box-shadow: none;
+$wc-raised-button-shadow-transition-duration: .1s;
+$wc-raised-button-large-width: 100%;
+
+//---------- #wc-RaisedButton  ---------- /
+
+.wc-RaisedButton {
+    @include component-elevation($wc-elevations-raised-button-resting);
+    @include user-select(none);
+    @include generate-text-styles("button");
+    background-color: $wc-raised-button-background-color;
+    border: 0;
+    border-radius: $wc-button-border-radius;
+    color: $wc-raised-button-font-color;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: $wc-button-height;
+    min-width: $wc-button-min-width;
+    overflow: hidden;
+    padding: $wc-button-padding;
+    transition: background-color $wc-button-color-transition-duration ease-in-out,
+                box-shadow $wc-raised-button-shadow-transition-duration ease-in-out;
+
+//---------- #states  ---------- /
+
+    &:hover, &:focus {
+        background-color: $wc-raised-button-background-highlight-color;
+        outline: 0;
+    }
+
+    &:active {
+        @include component-elevation($wc-elevations-raised-button-pressed);
+        background-color: $wc-raised-button-background-highlight-color;
+    }
+
+    &:disabled {
+        background-color: $wc-raised-button-disabled-background-color;
+        box-shadow: $wc-raised-button-disabled-box-shadow;
+        color: $wc-raised-button-disabled-font-color;
+        cursor: default;
+    }
+
+    &.is-large {
+        max-width: $wc-button-large-max-width;
+        width: $wc-raised-button-large-width;
+    }
+}

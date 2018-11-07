@@ -1,0 +1,118 @@
+<div class="wc-Datepicker">
+
+    <!-- start:native_datepicker -->
+    <template v-if="native">
+        <wc-textfield
+            type="date"
+            v-model="state.value"
+            v-on:input="setValue"
+            v-on:focus="_onFocus"
+            v-on:blur="_onBlur"
+            v-bind:label="label"
+            v-bind:floating-label="floatingLabel"
+            v-bind:required="required"
+            v-bind:disabled="disabled"
+            v-bind:has-error="hasError"
+            v-bind:error-message="errorMessage"
+            v-bind:hint-text="hintText"
+            v-bind:name="name"
+            v-bind:id="id"
+            v-bind:max="max"
+            v-bind:min="min"
+            v-bind:readonly="readonly"
+            action-disabled>
+            <wc-icon slot="action" icon-class="icon-angle-down"></wc-icon>
+        </wc-textfield>
+    </template>
+    <!-- end:native_datepicker -->
+
+    <!-- start:custom_datepicker -->
+    <template v-else>
+        <wc-custom-logic
+            ref="customLogic"
+            v-on:focus="_onFocus"
+            v-on:blur="_onBlur"
+            v-on:textfield-action="_openDialog"
+            v-on:input="_syncWithCustomLogic(false, false)"
+            v-model="state.customValue"
+            v-bind:format="format"
+            v-bind:label="label"
+            v-bind:floating-label="floatingLabel"
+            v-bind:placeholder="placeholder"
+            v-bind:required="required"
+            v-bind:disabled="disabled"
+            v-bind:has-error="hasError"
+            v-bind:error-message="errorMessage"
+            v-bind:hint-text="hintText"
+            v-bind:name="name"
+            v-bind:id="id"
+            v-bind:readonly="readonly">
+            <wc-icon slot="action" icon-class="icon-angle-down"></wc-icon>
+        </wc-custom-logic>
+
+        <div class="wc-Datepicker__dialog" v-if="shouldDisplayDialog">
+            <template v-if="full">
+                <div v-bind:class="['wc-Datepicker__selectorWrapper', { 'is-disabled' : !isYearSelectorAvailable && !state.isYearSelectorVisible}]">
+                    <div class="wc-Datepicker__label" v-on:click="_toggleYearSelector" data-qa-id="YearSelector">
+                        {{yearSelectorLabel}}
+                        <div class="wc-Datepicker__arrow">
+                            <wc-icon icon-class="icon-angle-down"
+                                v-bind:class="['wc-Datepicker__icon', { 'is-rotated' : state.isYearSelectorVisible }]">
+                            </wc-icon>
+                        </div>
+                    </div>
+                    <transition name="vt-datepicker-fade">
+                        <div ref="yearSelector" class="wc-Datepicker__yearSelector" v-show="state.isYearSelectorVisible">
+                            <div v-for="year in processedYears"
+                                v-on:click="_selectYear(year.value)"
+                                v-bind:class="['wc-Datepicker__option wc-Datepicker__option--year', { 'is-selected' : year.isSelected }]">
+                                {{year.value}}
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+                <div class="wc-Datepicker__selectorWrapper" v-show="!state.isYearSelectorVisible">
+                    <div class="wc-Datepicker__label" v-on:click="_toggleMonthSelector" data-qa-id="MonthSelector">
+                        {{monthSelectorLabel}}
+                        <div class="wc-Datepicker__arrow">
+                            <wc-icon icon-class="icon-angle-down"
+                                    v-bind:class="['wc-Datepicker__icon', { 'is-rotated' : state.isMonthSelectorVisible }]">
+                            </wc-icon>
+                        </div>
+                    </div>
+                    <transition name="vt-datepicker-fade">
+                        <div v-show="state.isMonthSelectorVisible">
+                            <div v-for="month in processedMonths"
+                                v-on:click="_selectMonth(month.value)"
+                                v-bind:class="['wc-Datepicker__option wc-Datepicker__option--month', { 'is-selected' : month.isSelected, 'is-disabled' : month.isDisabled }]">
+                                {{month.value}}
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+            </template>
+
+            <transition name="vt-datepicker-fade">
+                <wc-calendar v-show="!state.isYearSelectorVisible && !state.isMonthSelectorVisible"
+                    ref="calendar"
+                    v-model="state.value"
+                    v-bind:days="days"
+                    v-bind:months="months"
+                    v-bind:min="min"
+                    v-bind:max="max"
+                    v-on:input="_calendarInputHandler"
+                    v-on:calendar-year-changed="_calendarYearChangedHandler"
+                    v-on:calendar-month-changed="_calendarMonthChangedHandler">
+                </wc-calendar>
+            </transition>
+        </div>
+
+        <div class="wc-Datepicker__overlay">
+            <wc-overlay class="wc-Overlay--transparent"
+                        v-bind:active="shouldDisplayDialog"
+                        v-on:overlay-close="_closeDialog">
+            </wc-overlay>
+        </div>
+    </template>
+    <!-- end:custom_datepicker -->
+</div>

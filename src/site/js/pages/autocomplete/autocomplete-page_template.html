@@ -1,0 +1,172 @@
+<div  style="position: relative">
+
+    <wc-markdown>
+# Autocomplete
+
+## Demo
+
+### Try typing in a country name, try with Costa Rica
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Sandbox</div>
+            <div class="DemoTable__columnRight">
+                <wc-autocomplete
+                    ref="sandboxInput"
+                    add-item-label="Agregar"
+                    error-message="Error Message"
+                    not-found-label="No se encontró"
+                    v-bind:allow-adding-items="allowAddingItems"
+                    v-bind:buffer-limit-for-request="bufferLimitForRequest"
+                    v-bind:data-source="dataSource"
+                    v-bind:disabled="disabled"
+                    v-bind:floating-label="floatingLabel"
+                    v-bind:has-error="hasError"
+                    v-bind:hint-text="hintText ? 'Hint Text' : null"
+                    v-bind:is-mobile="mobile"
+                    v-bind:label="label ? 'País' : null"
+                    v-bind:max-length="maxLength"
+                    v-bind:min-length="minLength"
+                    v-bind:placeholder="placeholder ? 'Seleccione un país' : null"
+                    v-bind:required="required"
+                    v-bind:multiline="multiline"
+                    v-bind:search="search"
+                    v-bind:full-width="fullWidth"
+                    v-bind:value="value"
+                    v-bind:show-secondary-style="showSecondaryStyle"
+                    v-on:autocomplete-add="_onAdd"
+                    v-on:autocomplete-clear="_onClear"
+                    v-on:autocomplete-enter="_onEnter"
+                    v-on:autocomplete-overflows-viewport="_onOverflowsViewport"
+                    v-on:autocomplete-search="_onSearch"
+                    v-on:autocomplete-input="_onInput"
+                    v-on:autocomplete-load-more="_onLoadMore">
+                </wc-autocomplete>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Event fired {{ eventFired }}</div>
+            <div class="DemoTable__columnLeft">Selected Option</div>
+            <div class="DemoTable__columnRight">
+                <h4>text : {{ selectedOption.text }}</h4>
+                <h4>value : {{ selectedOption.value }}</h4>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Options</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="label">Label</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="placeholder">Placeholder</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="floatingLabel">Floating label</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="hasError">Has Error</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="hintText">Hint Text</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="multiline">Multiline, displays multiline options, try Costa Rica</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="disabled">Disabled</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="showSecondaryStyle">Show secondary style</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="required">Required</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="mobile">Mobile</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="search">Simulate server requests</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="fullWidth">Set menu width as the input width</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="allowAddingItems">Allow insert new items</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-text-field
+                            type="number"
+                            floating-label
+                            label="Buffer limit"
+                            min="0"
+                            v-model="bufferLimitForRequest">
+                        </wc-text-field>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-text-field
+                            type="number"
+                            floating-label
+                            label="Input min length"
+                            min="0"
+                            v-model="minLength">
+                        </wc-text-field>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-text-field
+                            type="number"
+                            floating-label
+                            label="Input max length"
+                            min="0"
+                            v-model="maxLength">
+                        </wc-text-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Description</div>
+            <div class="DemoTable__columnRight">{{ description }}</div>
+        </div>
+    </div>
+
+    <wc-markdown>
+## Common use cases
+
+Here you'll find some common cases of how to use the autocomplete component:
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Example</div>
+            <div class="DemoTable__columnRight">
+                <wc-autocomplete ref="focusExample"
+                    add-item-label="Agregar"
+                    error-message="Error Message"
+                    not-found-label="No se encontró"
+                    floating-label
+                    label="País"
+                    placeholder="Seleccione un país"
+                    full-width
+                    v-bind:data-source="dataSource"
+                    v-bind:buffer-limit-for-request="2"
+                    v-on:autocomplete-enter="_onInputFocusExample"
+                    v-on:autocomplete-input="_onInputFocusExample">
+                </wc-autocomplete>
+                <wc-text-field
+                    ref="focusExampleTextField"
+                    floating-label
+                    label="Example">
+                </wc-text-field>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Description</div>
+            <div class="DemoTable__columnRight">Focus next element after selecting option, this is made with a setTimeout with a 0 delay to wait for the autocomplete lose its focus state, which is handled manually in the component</div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

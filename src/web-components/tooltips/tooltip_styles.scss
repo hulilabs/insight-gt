@@ -1,0 +1,50 @@
+@import "settings/_breakpoints";
+@import "settings/_colors";
+@import "settings/_components";
+@import "settings/_elevations";
+@import "tools/mixins/_responsive";
+@import "tools/mixins/_typography";
+@import "tools/mixins/_utilities";
+
+/**
+* Tooltip styles
+*
+* More details: https://zpl.io/Z5Vvbt
+*
+* wc-Tooltip
+*/
+
+//---------- #wc-Tooltip  ---------- /
+
+.wc-Tooltip {
+    @include component-elevation($wc-elevations-floating-block);
+    @include generate-text-styles("body2");
+    background: $wc-primary-color-dark;
+    border-radius: $wc-tooltip-border-radius;
+    color: white;
+    display: none;
+    height: $wc-tooltip-mobile-height;
+    line-height: $wc-tooltip-mobile-height;
+    max-width: $wc-tooltip-max-width;
+    min-width: $wc-tooltip-min-width;
+    overflow: hidden;
+    padding: 0 $wc-tooltip-mobile-horizontal-padding;
+    text-align: center;
+    white-space: nowrap;
+    z-index: $wc-elevations-tooltip;
+
+//---------- #wc-Tooltip.is-floatingBlock--opened  ---------- /
+
+    &.is-floatingBlock--opened {
+        display: block;
+    }
+
+    //--------- #Desktop  ---------- //
+
+    @include respond-min($wc-media-desktop-lower-boundary) {
+        @include generate-text-styles("caption2");
+        height: $wc-tooltip-desktop-height;
+        line-height: $wc-tooltip-desktop-height;
+        padding: 0 $wc-tooltip-desktop-horizontal-padding;
+    }
+}

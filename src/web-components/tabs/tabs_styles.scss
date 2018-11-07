@@ -1,0 +1,57 @@
+/**
+* Tabs styles
+*
+* More details: https://zpl.io/Z2gkrd
+*
+* wc-Tabs - main container of wc-Tab blocks
+* wc-Tabs__highlighter - styles for the line that highlights an active tab
+*/
+
+@import "settings/_breakpoints";
+@import "settings/_components";
+@import "tools/mixins/_utilities";
+@import "tools/mixins/_responsive";
+
+//---------- #wc-Tabs  ---------- /
+$wc-tabs-tab-indicator-animation-duration : 0.5s;
+
+.wc-Tabs {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    position: relative;
+    scrollbar-face-color: transparent;      // For hiding the scrollbar in IE
+    scrollbar-track-color: transparent;     // For hiding the scrollbar in IE
+    width: 100%;
+
+
+//- -------- #wc-Tabs__highlighter  ---------- //
+
+    &__highlighter {
+        transition : transform $wc-tabs-tab-indicator-animation-duration ease-out, width $wc-tabs-tab-indicator-animation-duration ease-out;
+        background-color: $wc-tabs-tab-indicator-background-color;
+        bottom: 0;
+        display: none;
+        height: 2px;
+        left: 0;
+        right: 0;
+        position: absolute;
+        will-change: transform;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;                      // Hides the scrollbar in webkit browsers
+    }
+
+//- -------- #States  ---------- //
+
+    .wc-Tab.is-active ~ .wc-Tabs__highlighter {
+        display: block;
+    }
+
+//- -------- #Desktop  ---------- //
+
+    @include respond-min($wc-media-desktop-middle-boundary) {
+        justify-content: center;
+    }
+}

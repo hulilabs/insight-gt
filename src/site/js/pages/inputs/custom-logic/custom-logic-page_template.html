@@ -1,0 +1,60 @@
+<div  style="position: relative">
+
+    <wc-markdown>
+# Custom logic
+## Demo
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Sandbox</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__main">
+                    <wc-custom-logic ref="customLogic"
+                         v-bind:label="hasLabel ? 'Label' : ''"
+                         v-bind:has-error="hasError"
+                         error-message="Error message"
+                         v-bind:format="format"
+                         v-bind:placeholder="placeholder"
+                         v-model="value">
+                    </wc-custom-logic>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Options</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options DemoTable__options--row">
+                    <div class="DemoTable__option">
+                        <wc-textfield label="Format" v-model="format"></wc-textfield>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-textfield label="Placeholder" v-model="placeholder"></wc-textfield>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="hasLabel">Label</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="hasError">Has Error</wc-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Value</div>
+            <div class="DemoTable__columnRight" style="white-space: pre;">{{ value }}</div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Masked value</div>
+            <div class="DemoTable__columnRight">
+                <span style="white-space: pre;">{{ maskedValue }}<span style="color:#CCC">|</span></span>
+                <br><br>
+                <span class="DemoTable__note u-caption1">
+                    The | it's a cursor for visualizing empty spaces
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

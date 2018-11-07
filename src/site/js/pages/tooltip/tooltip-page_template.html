@@ -1,0 +1,107 @@
+<div style="position: relative;">
+    <wc-markdown>
+# Tooltip
+
+## Demo
+
+Hover over each element to see the tooltip.
+
+### Position
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Bottom (default)</div>
+            <div class="DemoTable__columnRight">
+                <!-- Trigger attached to local tooltip component at bottom -->
+                <a ref="tooltipTriggerBottom" href="#">show</a>
+                <wc-tooltip v-bind:trigger-element="composeVueRef('tooltipTriggerBottom')">Tooltip at bottom</wc-tooltip>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Top</div>
+            <div class="DemoTable__columnRight">
+                <!-- Local tooltip at top -->
+                <a ref="tooltipTriggerTop" href="#">show</a>
+                <wc-tooltip v-bind:trigger-element="composeVueRef('tooltipTriggerTop')" alignment="top">Tooltip at top</wc-tooltip>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Left</div>
+            <div class="DemoTable__columnRight">
+                <!-- Local tooltip at left -->
+                <a ref="tooltipTriggerLeft" href="#">show</a>
+                <wc-tooltip v-bind:trigger-element="composeVueRef('tooltipTriggerLeft')" alignment="left">Tooltip at left</wc-tooltip>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Right</div>
+            <div class="DemoTable__columnRight">
+                <!-- Local tooltip at right -->
+                <a ref="tooltipTriggerRight" href="#">show</a>
+                <wc-tooltip v-bind:trigger-element="composeVueRef('tooltipTriggerRight')" alignment="right">Tooltip at right</wc-tooltip>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Tooltip on component</div>
+            <div class="DemoTable__columnRight">
+                <!-- Tooltip attached to a vue component -->
+                <wc-icon icon-class="icon-age-baby" ref="tooltipComponentTrigger"></wc-icon>
+                <wc-tooltip v-bind:trigger-element="composeVueRef('tooltipComponentTrigger')" alignment="right">Tooltip on component</wc-tooltip>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft"></div>
+            <div class="DemoTable__columnRight">
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft"></div>
+            <div class="DemoTable__columnRight">
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown>
+### States
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Active</div>
+            <div class="DemoTable__columnRight">
+                <!-- Local tooltip initialize in active state -->
+                <a ref="tooltipTriggerActive" href="#">the tooltip is displayed</a>
+                <wc-tooltip v-bind:trigger-element="composeVueRef('tooltipTriggerActive')" alignment="right" active>I am active</wc-tooltip>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown>
+### Directive
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Tooltip directive</div>
+            <div class="DemoTable__columnRight">
+                <!-- Trigger with directive tooltip -->
+                <a href="#" v-wc-tooltip.active.alignment:right="'I am a tooltip directive'">using directive is displayed by default</a>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Tooltip directive on component</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon icon-class="icon-age-baby" v-wc-tooltip.active.alignment:right="'I am in a component'">Tooltip directive on component</wc-icon>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+
+    <hr/>
+
+    <a name="directive"></a>
+
+    <wc-markdown v-bind:source="markdownSource.directiveDocumentation"></wc-markdown>
+</div>

@@ -1,0 +1,53 @@
+<div class="wc-SkeletonLoader">
+    <div class="wc-SkeletonLoaderItem" v-bind:class="styleClass" v-for="index in state.length">
+        <div v-if="layout === LAYOUTS.LIST" class="wc-SkeletonLoaderItem__content">
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--avatar"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--headerLeft"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--headerRight"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--headerBottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--subheaderRight"></div>
+        </div>
+        <div v-else-if="layout === LAYOUTS.CARD" class="wc-SkeletonLoaderItem__content">
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line1Right"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line1Bottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line2Bottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line3Bottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line4Bottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line5Right"></div>
+        </div>
+        <div v-else-if="layout === LAYOUTS.DOCUMENT" class="wc-SkeletonLoaderItem__content">
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document1"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document2"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document3"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document4"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document5"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document6"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document7"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document8"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--document9"></div>
+        </div>
+        <div v-else-if="layout === LAYOUTS.ID_CARD" class="wc-SkeletonLoaderItem__content">
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--avatar"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--headerTop"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--headerLeft"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line1Bottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line2Bottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line3Bottom"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--line3Right"></div>
+        </div>
+        <div v-else-if="layout === LAYOUTS.TABLE" class="wc-SkeletonLoaderItem__content">
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--columnsFullTop"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--column1Left"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--column2Left"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--column3Left"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--columnsFullBottom"></div>
+        </div>
+        <div v-else-if="layout === LAYOUTS.TABLE_DOCUMENT" class="wc-SkeletonLoaderItem__content">
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--columnsTop"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--column1Left"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--column2Left"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--column3Left"></div>
+            <div class="wc-SkeletonLoaderItem__mask wc-SkeletonLoaderItem__mask--columnsBottom"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+/**
+* CardCollection styles
+*
+* More details: zpl.io/1iACdJ
+*
+* wc-CardCollection - main block
+*     wc-CardCollection.has-overlay - overlay on resting cards is enabled
+* wc-CardCollection__cardsWrapper - card group wrapper
+* wc-CardCollection__card - inner card component
+*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/* line 19, card-collection_styles.scss */
+.wc-CardCollection {
+  position: relative;
+}
+/* line 24, card-collection_styles.scss */
+.wc-CardCollection__card {
+  margin-bottom: 8px;
+  position: relative;
+}
+/* line 28, card-collection_styles.scss */
+.wc-CardCollection__card + .wc-CardCollection__card {
+  margin-top: 8px;
+}
+/* line 32, card-collection_styles.scss */
+.wc-CardCollection__card + .wc-CardCollection__card.is-fullscreen {
+  margin-top: 0;
+}
+/* line 40, card-collection_styles.scss */
+.wc-CardCollection__cardsWrapper {
+  margin: auto;
+  position: relative;
+}
+/* line 48, card-collection_styles.scss */
+.wc-CardCollection.has-overlay .wc-CardCollection__card.is-resting:before, .wc-CardCollection.has-overlay .wc-CardCollection__card.is-restingCompact:before {
+  opacity: 1;
+}
+/* line 52, card-collection_styles.scss */
+.wc-CardCollection.has-overlay .wc-CardCollection__card:before {
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.6);
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+}
+/* line 70, card-collection_styles.scss */
+.wc-CardCollection:focus {
+  outline: none;
+}
+@media screen and (min-width: 1025px) and (orientation: landscape) {
+  /* line 78, card-collection_styles.scss */
+  .wc-CardCollection__cardsWrapper {
+    max-width: 816px;
+  }
+}

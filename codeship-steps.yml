@@ -2,25 +2,31 @@
   name: gulp lint
   command: lint
 
-- service: web_components
+- service: insight-gt
   name: docker push latest
   type: push
-  image_name: huli/web-components
+  image_name: huli/insight-gt
   image_tag: latest
   tag: master
   encrypted_dockercfg_path: codeship-dockercfg.encrypted
 
-- service: web_components
+- service: insight-gt
   name: docker push tag
   type: push
-  image_name: huli/web-components
+  image_name: huli/insight-gt
   image_tag: "{{.Branch}}"
   # will match tags with format v{semver} like v1.0.0
   tag: ^v([0-9]+)\.([0-9]+)\.([0-9]+)$
   encrypted_dockercfg_path: codeship-dockercfg.encrypted
 
-- service: deploy_ssh
-  name: deploy staging
+- service: deploy-ssh-staging
   command: /bootstrap.sh
-  tag: master
   encrypted_dockercfg_path: codeship-dockercfg.encrypted
+  name: deploy staging
+  tag: master
+
+- service: deploy-ssh-production
+  command: /bootstrap.sh
+  encrypted_dockercfg_path: codeship-dockercfg.encrypted
+  name: deploy production
+  tag: ^v([0-9]+)\.([0-9]+)\.([0-9]+)$

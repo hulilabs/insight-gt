@@ -20,8 +20,3 @@ insight-gt:
   build:
     image: huli/insight-gt
     dockerfile_path: Dockerfile
-
-karma:
-  image: huli/karma
-  volumes:
-    - ./src:/app

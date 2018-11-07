@@ -2,10 +2,6 @@
   name: gulp lint
   command: lint
 
-- service: karma
-  name: karma test
-  command: karma start resource/karma.conf.js
-
 - service: insight-gt
   name: docker push latest
   type: push

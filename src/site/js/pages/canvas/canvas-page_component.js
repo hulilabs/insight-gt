@@ -242,18 +242,19 @@ define([
              */
             _openImage: function (e) {
                 var files = e.target.files || e.dataTransfer.files;
-                if (!files.length)
+                if (!files.length) {
                     return;
+                }
 
                 var file = files[0],
                     reader = new FileReader(),
                     self = this;
 
                 // Wait for the file to load
-                reader.onload = function (e) {
+                reader.onload = function () {
                     var image = new Image();
                     // Wait for the image to load
-                    image.onload = function (e) {
+                    image.onload = function () {
 
                         // Reset the state
                         self.state.width = image.width;
@@ -276,14 +277,16 @@ define([
              */
             _openMasks: function (e) {
                 var files = e.target.files || e.dataTransfer.files;
-                if (!files.length)
+                if (!files.length) {
                     return;
+                }
+
 
                 var file = files[0],
                     reader = new FileReader(),
                     self = this;
 
-                reader.onload = function (e) {
+                reader.onload = function () {
                     // Send the XML file to the canvas component for processing.
                     self.$refs.canvas2._loadMasks(reader.result);
                 };

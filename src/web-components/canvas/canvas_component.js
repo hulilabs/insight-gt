@@ -64,9 +64,9 @@ define([
      * @type {Object}
      */
     var DEFAULT = {
-        BACKGROUND_COLOR: '#FFFFFF',
-        LINE_COLOR: '#000000',
-        STROKE_COLOR: '#DB0404',
+        BACKGROUND_COLOR : '#FFFFFF',
+        LINE_COLOR : '#000000',
+        STROKE_COLOR : '#DB0404',
     };
 
     /**
@@ -74,7 +74,7 @@ define([
      * @type {Object}
      */
     var EVENT = {
-        CAN_UNDO: 'can-undo',
+        CAN_UNDO : 'can-undo',
     };
 
     /**
@@ -82,11 +82,11 @@ define([
      * @type {Object}
      */
     var TOOL = {
-        PEN: 'pen',
-        ERASER: 'eraser',
-        RECT: 'rectangle',
-        BUCKET: 'bucket',
-        BUCKETB: 'bucketBack',
+        PEN : 'pen',
+        ERASER : 'eraser',
+        RECT : 'rectangle',
+        BUCKET : 'bucket',
+        BUCKETB : 'bucketBack',
     };
 
     /**
@@ -103,53 +103,53 @@ define([
 
     var COLORS = {};
     COLORS.names = {
-        aqua: '#00ffff',
-        azure: '#f0ffff',
-        beige: '#f5f5dc',
-        blue: '#0000ff',
-        brown: '#a52a2a',
-        cyan: '#00ffff',
-        darkblue: '#00008b',
-        darkcyan: '#008b8b',
-        darkgreen: '#006400',
-        darkkhaki: '#bdb76b',
-        darkmagenta: '#8b008b',
-        darkolivegreen: '#556b2f',
-        darkorange: '#ff8c00',
-        darkorchid: '#9932cc',
-        darkred: '#8b0000',
-        darksalmon: '#e9967a',
-        darkviolet: '#9400d3',
-        fuchsia: '#ff00ff',
-        gold: '#ffd700',
-        green: '#008000',
-        indigo: '#4b0082',
-        khaki: '#f0e68c',
-        lightblue: '#add8e6',
-        lightcyan: '#e0ffff',
-        lightgreen: '#90ee90',
-        lightpink: '#ffb6c1',
-        lightyellow: '#ffffe0',
-        lime: '#00ff00',
-        magenta: '#ff00ff',
-        maroon: '#800000',
-        navy: '#000080',
-        olive: '#808000',
-        orange: '#ffa500',
-        pink: '#ffc0cb',
-        purple: '#800080',
-        red: '#ff0000',
-        yellow: '#ffff00',
+        aqua : '#00ffff',
+        azure : '#f0ffff',
+        beige : '#f5f5dc',
+        blue : '#0000ff',
+        brown : '#a52a2a',
+        cyan : '#00ffff',
+        darkblue : '#00008b',
+        darkcyan : '#008b8b',
+        darkgreen : '#006400',
+        darkkhaki : '#bdb76b',
+        darkmagenta : '#8b008b',
+        darkolivegreen : '#556b2f',
+        darkorange : '#ff8c00',
+        darkorchid : '#9932cc',
+        darkred : '#8b0000',
+        darksalmon : '#e9967a',
+        darkviolet : '#9400d3',
+        fuchsia : '#ff00ff',
+        gold : '#ffd700',
+        green : '#008000',
+        indigo : '#4b0082',
+        khaki : '#f0e68c',
+        lightblue : '#add8e6',
+        lightcyan : '#e0ffff',
+        lightgreen : '#90ee90',
+        lightpink : '#ffb6c1',
+        lightyellow : '#ffffe0',
+        lime : '#00ff00',
+        magenta : '#ff00ff',
+        maroon : '#800000',
+        navy : '#000080',
+        olive : '#808000',
+        orange : '#ffa500',
+        pink : '#ffc0cb',
+        purple : '#800080',
+        red : '#ff0000',
+        yellow : '#ffff00',
     };
 
     var Canvas = Vue.extend({
-        name: 'CanvasComponent',
-        template: Template,
-        props: {
+        name : 'CanvasComponent',
+        template : Template,
+        props : {
             /**
              * Alpha level of the canvas
              */
-            alpha: {
+            alpha : {
                 type: Number,
                 default: 0.4,
             },
@@ -553,7 +553,7 @@ define([
              * @param type
              * @returns {HTMLImageElement}
              */
-            exportLayer: function(type) {
+            exportLayer: function() {
                 var image = new Image();
 
                 if (!this.isTainted()) {
@@ -737,11 +737,11 @@ define([
                  * @warning beware of changing how the scroll offset is calculated
                  *          keep in mind checking mobile scenarios
                  */
-                var scrollLeft = this._isInsideSeveralScrollableArea(DOMUtil.hasHorizontalScroll)
-                        ? DOMUtil.getScrollOffsetLeft(element)
+                var scrollLeft = this._isInsideSeveralScrollableArea(DOMUtil.hasHorizontalScroll) ?
+                        DOMUtil.getScrollOffsetLeft(element)
                         : 0,
-                    scrollTop = this._isInsideSeveralScrollableArea(DOMUtil.hasVerticalScroll)
-                        ? DOMUtil.getScrollOffsetTop(element)
+                    scrollTop = this._isInsideSeveralScrollableArea(DOMUtil.hasVerticalScroll) ?
+                        DOMUtil.getScrollOffsetTop(element)
                         : 0,
                     x = positionSource.pageX - offsetLeft + scrollLeft,
                     y = positionSource.pageY - offsetTop + scrollTop;
@@ -1096,7 +1096,7 @@ define([
                     var i = strokePoints.length - 1;
                     var stroke1 = strokePoints[i],
                         previousStroke = i !== 0 ? strokePoints[i - 1] : null;
-                    Floodfill(
+                    new Floodfill(
                         this.drawContext,
                         stroke1.x,
                         stroke1.y,

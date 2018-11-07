@@ -10,11 +10,6 @@ gulp:
         - .:/srv
     working_dir: /srv/src/resource
 
-karma:
-    image: huli/karma
-    volumes:
-        - ./src:/app
-
 web_components:
     build:
       image: huli/web-components

@@ -1,0 +1,6 @@
+**/require-config.js
+src/public/js/lib/
+src/resource/.sass-cache/
+src/resource/node_modules/
+src/resource/scss/vendor
+src/vendor/

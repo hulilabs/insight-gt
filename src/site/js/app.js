@@ -41,7 +41,7 @@ require([
     /**
      * Returns a promise that will be used to lazy load components.
      * @param {string} module path to the component
-     * @return {Promise}
+     * @return {function(): Promise<any>}
      */
     var load = function(module) {
         return function() {

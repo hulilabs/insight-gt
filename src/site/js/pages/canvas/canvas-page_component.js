@@ -210,7 +210,7 @@ define([
                     downloader = this.$refs.exportMasks;
 
                 // Creates an URL from the xml file
-                var url = window.URL.createObjectURL(new Blob([xmlFile.documentElement.innerHTML], {type: 'text/plain'}));
+                var url = window.URL.createObjectURL(new Blob([xmlFile.documentElement.innerHTML], {type : 'text/plain'}));
 
                 downloader.setAttribute('href', url);
                 downloader.setAttribute('download', DEFAULT.FILENAME);
@@ -236,9 +236,9 @@ define([
             /**
              * Loads a new image into the canvas1
              */
-            _openImage : function (e) {
+            _openImage : function(e) {
                 var files = e.target.files || e.dataTransfer.files;
-                if(!files.length) {
+                if (!files.length) {
                     return;
                 }
 
@@ -247,16 +247,16 @@ define([
                     self = this;
 
                 // Wait for the file to load
-                reader.onload = function () {
+                reader.onload = function() {
                     var image = new Image();
                     // Wait for the image to load
-                    image.onload = function () {
+                    image.onload = function() {
 
                         // Reset the state
                         self.state.width = image.width;
                         self.state.height = image.height;
                         self.state.zoom = 1;
-                        
+
                         // Update the canvas
                         self._updateStyle();
 
@@ -271,18 +271,17 @@ define([
             /**
              * Open a XML file that contains the enconded masks
              */
-            _openMasks : function (e) {
+            _openMasks : function(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length) {
                     return;
                 }
 
-
                 var file = files[0],
                     reader = new FileReader(),
                     self = this;
 
-                reader.onload = function () {
+                reader.onload = function() {
                     // Send the XML file to the canvas component for processing.
                     self.$refs.canvas2._loadMasks(reader.result);
                 };
@@ -291,7 +290,7 @@ define([
             /**
              * Undo the last action
              */
-            _undo : function () {
+            _undo : function() {
                 if (this.state.isUndoEnabled) {
                     this.$refs.canvas2.undo();
                 }
@@ -299,14 +298,14 @@ define([
             /**
              * Set the styles as pixel values
              */
-            _updateStyle : function () {
+            _updateStyle : function() {
                 this.styles.width = this.myWidthPx;
                 this.styles.height = this.myHeightPx;
             },
             /**
              * Increment the zoom by one
              */
-            _zoomIn : function () {
+            _zoomIn : function() {
                 this.state.zoom = this.state.zoom + 1;
                 this.styles.width = (this.myWidth * this.zoomFactor) + 'px';
                 this.styles.height = (this.myHeight * this.zoomFactor) + 'px';
@@ -314,7 +313,7 @@ define([
             /**
              * Decrease the zoom by one
              */
-            _zoomOut : function () {
+            _zoomOut : function() {
                 this.state.zoom = this.state.zoom - 1;
                 this.styles.width = (this.myWidth * this.zoomFactor) + 'px';
                 this.styles.height = (this.myHeight * this.zoomFactor) + 'px';

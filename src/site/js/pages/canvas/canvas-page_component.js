@@ -48,16 +48,16 @@ define([
 
         /**
          * Store the layers as an array of the form [1, 2, ..., n]
-         * The array form allows to use the values as parameters for establishing the activeLayer property, when a new layer is selected   
+         * The array form allows to use the values as parameters for establishing the activeLayer property, when a new layer is selected
          * There is always at least one layer
-        */ 
+        */
         LAYERS : [1],
-        
-        // Indicates if the canvas is drawable 
+
+        // Indicates if the canvas is drawable
         OUTLINE_IMAGE : true,
         WIDTH : 1280,
         SUPERPIXEL_SIZE : 40,
-        
+
         // SLIC is the most common superpixels implementation and one of the most effectives.
         SUPERPIXELS_METHOD : 'slic',
 
@@ -65,12 +65,12 @@ define([
         STROKE_COLOR : '#DB0404',
 
         // Default filename for the masks file.
-        FILENAME : "masks.xml"
+        FILENAME : 'masks.xml'
     };
 
     return Vue.extend({
-        template: Template,
-        data : function () {
+        template : Template,
+        data : function() {
             return {
                 state : {
                     alpha : DEFAULT.ALPHA,
@@ -111,66 +111,66 @@ define([
             /**
              * Detects if the eraser tool is selected
              */
-            isEraserSelected : function () {
+            isEraserSelected : function() {
                 return this.state.tool === Canvas.TOOL.ERASER;
             },
             /**
              * Detects if the rectangle tool is selected
              */
-            isRectSelected : function () {
+            isRectSelected : function() {
                 return this.state.tool === Canvas.TOOL.RECT;
             },
             /**
              * Detects if the bucket tool is selected
              */
-            isBucketSelected : function () {
+            isBucketSelected : function() {
                 return this.state.tool == Canvas.TOOL.BUCKET;
             },
             /**
              * Get the current width as a pixel units
              */
-            myWidthPx : function () {
+            myWidthPx : function() {
                 return this.state.width + 'px';
             },
-            
+
             /**
              * Get the current height as a pixel units
              */
-            myHeightPx : function () {
+            myHeightPx : function() {
                 return this.state.height + 'px';
             },
             /**
              * Get the integer representation of the width
              */
-            myWidth : function () {
+            myWidth : function() {
                 return parseInt(this.state.width);
             },
             /**
              * Get the integer representation of the heigth
              */
-            myHeight : function () {
+            myHeight : function() {
                 return parseInt(this.state.height);
             },
             /**
-             * Returns the current layer index 
+             * Returns the current layer index
              */
-            myActiveLayer : function () {
+            myActiveLayer : function() {
                 return this.state.activeLayer - 1;
             },
             /**
              * Get the current region size for the calculation of superpixels
              */
-            myRegionSize : function () {
+            myRegionSize : function() {
                 return parseInt(this.state.regionSize);
             },
             /**
              * Get the zoom level of the canvas
              */
-            zoomFactor : function () {
+            zoomFactor : function() {
                 return this.state.zoom <= 0 ? 1 / Math.abs(this.state.zoom - 2) : this.state.zoom;
             },
         },
-        mounted : function () {
+        mounted : function() {
             //Updates the styles to set the canvas width and height
             this._updateStyle();
         },
@@ -178,34 +178,33 @@ define([
             /**
              * Add a layer to the layer array
              */
-            _addLayer : function () {
+            _addLayer : function() {
                 this.state.layers.push(this.state.layers.length + 1);
             },
             /**
              * Set the isUndoEnabled property
              */
-            _setCanUndo : function (canUndo) {
+            _setCanUndo : function(canUndo) {
                 this.state.isUndoEnabled = canUndo;
             },
             /**
              * Clear the canvas
              */
-            _clear : function () {
+            _clear : function() {
                 this.$refs.canvas2.clear();
             },
             /**
              * Export the current layer as an image
              * Store the image in the snapshots array
              */
-            _export : function () {
+            _export : function() {
                 var image = this.$refs.canvas2.exportLayer();
                 this.state.snapshots.push(image);
             },
             /**
              * Export the layers of the canvas as an XmlFile
-             * 
              */
-            _exportMasks : function () {
+            _exportMasks : function() {
                 //Get the masks as an XML file
                 var xmlFile = this.$refs.canvas2.exportMasks(),
                     downloader = this.$refs.exportMasks;
@@ -213,9 +212,9 @@ define([
                 // Creates an URL from the xml file
                 var url = window.URL.createObjectURL(new Blob([xmlFile.documentElement.innerHTML], {type: 'text/plain'}));
 
-                
                 downloader.setAttribute('href', url);
                 downloader.setAttribute('download', DEFAULT.FILENAME);
+
                 //Download the objectURL associated with the XML file.
                 downloader.click();
             },
@@ -223,7 +222,7 @@ define([
              * Generates an invisible outline image that represents the superpixels regions
              * The invisible images contains regions of different colors
              */
-            _getOutlineImage : function () {
+            _getOutlineImage : function() {
                 // The canvas1 reference contains the original background image.
                 var imageData = this.$refs.canvas1.drawContext.getImageData(0, 0, this.state.width, this.state.height),
                     options = {};
@@ -239,7 +238,7 @@ define([
              */
             _openImage : function (e) {
                 var files = e.target.files || e.dataTransfer.files;
-                if (!files.length) {
+                if(!files.length) {
                     return;
                 }
 

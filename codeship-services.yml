@@ -1,21 +1,27 @@
-deploy_ssh:
-    image: huli/deploy-ssh:latest
-    volumes:
-       - ./deploy.sh:/deploy.sh
-    encrypted_env_file: codeship-deploy.env.encrypted
+deploy-ssh-production:
+  encrypted_env_file: codeship-deploy-production.env.encrypted
+  image: huli/deploy-ssh:latest
+  volumes:
+    - ./deploy.sh:/deploy.sh
+
+deploy-ssh-staging:
+  encrypted_env_file: codeship-deploy-staging.env.encrypted
+  image: huli/deploy-ssh:latest
+  volumes:
+    - ./deploy.sh:/deploy.sh
 
 gulp:
-    image: huli/gulp
-    volumes:
-        - .:/srv
-    working_dir: /srv/src/resource
+  image: huli/gulp
+  volumes:
+    - .:/srv
+  working_dir: /srv/src/resource
+
+insight-gt:
+  build:
+    image: huli/insight-gt
+    dockerfile_path: Dockerfile
 
 karma:
-    image: huli/karma
-    volumes:
-        - ./src:/app
-
-web_components:
-    build:
-      image: huli/web-components
-      dockerfile_path: Dockerfile
+  image: huli/karma
+  volumes:
+    - ./src:/app

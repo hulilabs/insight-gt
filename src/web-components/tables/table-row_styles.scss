@@ -1,0 +1,84 @@
+/**
+* TableRow styles
+*
+* More details: https://zpl.io/Z1Cryqv
+*
+* .wc-TableRow - main data table row block
+* .wc-TableRow__content - the actual content of the table row. Useful for distinguish it from the expandable content
+* .wc-TableRow.is-bodyRow - rows inside the data table body
+* .wc-TableRow.is-header - header rows
+* .wc-TableRow.is-selected - selected row styles
+* .wc-TableRow.is-multiline - allows the row content to grow vertically
+* .wc-TableRow__checkbox - checkbox element inside a row
+* .wc-TableRow__checkbox.is-header - removes the border for the header row
+*/
+
+@import "settings/_colors";
+
+$wc-table-row-height: 48px;
+$wc-table-row-is-body-row-active-background-color: rgba(black, 0.15);
+
+//---------- #wc-TableRow  ---------- /
+
+.wc-TableRow {
+
+//---------- #wc-TableRow__content  ---------- /
+
+    &__content {
+        display: flex;
+        flex-flow: row nowrap;
+        height: $wc-table-row-height;
+    }
+
+//---------- #wc-TableRow.is-focusable  ---------- /
+
+    &.is-focusable {
+        &:active {
+            background-color: $wc-table-row-is-body-row-active-background-color;
+        }
+
+
+        &:hover, &:focus {
+            background-color: $wc-typoicon-primary-dark-highlight;
+        }
+
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+//---------- #wc-TableRow.is-header  ---------- /
+
+    &.is-header {
+        &:focus {
+            outline: none;
+        }
+    }
+
+//---------- #wc-TableRow.is-selected  ---------- /
+
+    &.is-selected {
+        background-color: $wc-typoicon-primary-dark-highlight;
+    }
+
+//---------- #wc-TableRow.is-multiline  ---------- /
+
+    &.is-multiline & {
+        &__content {
+            height: auto;
+            min-height: 48px;
+        }
+    }
+
+//---------- #wc-TableRow__checkbox  ---------- /
+
+    &__checkbox {
+        &.is-header {
+
+        //---------- #wc-TableRow__checkbox.is-header  ---------- /
+
+            border: none;
+        }
+    }
+}

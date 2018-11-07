@@ -1,0 +1,39 @@
+<transition v-bind:name="transitionName">
+    <div ref="onboarding" v-bind:class="['wc-Onboarding', floatingLayerClasses]" v-show="active">
+        <transition name="vt-onboarding-step">
+            <div class="wc-Onboarding__content" v-show="active">
+                <div class="wc-Onboarding__stepper" v-show="hasMultipleSteps">
+                    <wc-step-dots ref="stepDots"
+                        class="wc-StepDots--light"
+                        v-bind:size="numberOfSteps"
+                        v-bind:selected="stepNumber">
+                    </wc-step-dots>
+                </div>
+                <div class="wc-Onboarding__step">
+                    <slot></slot>
+                </div>
+                <div class="wc-Onboarding__actions">
+                    <div class="wc-Onboarding__action wc-Onboarding__action--previous"
+                        v-bind:class="{ 'is-visible' : isPreviousStepEnabled }">
+                        <wc-flat-button v-on:click.native="_previousStepHandler" v-if="previousBtnLabel" v-wc-ripple:is-dark large>
+                            <span class="wc-Onboarding__previousActionLabel">{{previousBtnLabel}}</span>
+                        </wc-flat-button>
+                    </div>
+                    <div class="wc-Onboarding__action" v-if="confirmBtnLabel || nextBtnLabel">
+                        <wc-raised-button v-on:click.native="_nextStepHandler" v-wc-ripple:is-light large>
+                            <span v-if="isLastStep">{{confirmBtnLabel}}</span>
+                            <span v-else>{{nextBtnLabel}}</span>
+                        </wc-raised-button>
+                    </div>
+                </div>
+            </div>
+        </transition>
+        <wc-overlay
+            class="wc-Overlay--transparent"
+            v-on:overlay-close="_skipOnboarding"
+            v-bind:active="state.isActive"
+            v-bind:close-on-click="skippable"
+            v-bind:close-on-esc-key="skippable">
+        </wc-overlay>
+    </div>
+</transition>

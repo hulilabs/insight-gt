@@ -1,0 +1,196 @@
+/**
+* TimePicker styles
+*
+* More details: https://zpl.io/Zf9poN
+*
+* .wc-TimePicker - main component wrapper
+* .wc-Timepicker__dialog - styles for the dialog that contains the timepicker's selectors
+* .wc-Timepicker__header - dialog's header labels
+* .wc-Timepicker__title - title inside dialog's header. Each title is aligned in a column
+* .wc-Timepicker__content - content wrapper containing the timepicker's selectors
+* .wc-Timepicker__selector - scrollable area that displays the options
+* .wc-Timepicker__option - single option that can be clicked for selecting it
+* .wc-TimePicker__overlay - window's overlay for exiting the timepicker's dialog
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+* Generates the basic styles for shadows
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+ * Adds ellipsis to any block or element when the text may overflow its boundaries
+ * @return {CssRules} rules for adding ellipsis to overflown text
+ */
+/**
+ * Generates the hack for clearing floats
+ * @return {CssRules} rules for the clearfix hack
+ */
+/* line 32, time-picker_styles.scss */
+.wc-TimePicker {
+  position: relative;
+}
+/* line 36, time-picker_styles.scss */
+.wc-TimePicker ::-webkit-inner-spin-button {
+  display: none;
+}
+/* line 42, time-picker_styles.scss */
+.wc-TimePicker__input {
+  max-height: 20px;
+}
+/* line 48, time-picker_styles.scss */
+.wc-TimePicker__dialog {
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12), 0 24px 24px 0 rgba(0, 0, 0, 0.24);
+  z-index: 24;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #FFF;
+  color: rgba(0, 0, 0, 0.87);
+  overflow: hidden;
+  padding: 8px 0;
+  position: absolute;
+  width: 318px;
+}
+/* line 61, time-picker_styles.scss */
+.wc-TimePicker__header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  line-height: 56px;
+  width: 100%;
+}
+/* line 69, time-picker_styles.scss */
+.wc-TimePicker__title {
+  display: inline-block;
+  text-align: center;
+  width: 86px;
+}
+/* line 77, time-picker_styles.scss */
+.wc-TimePicker__content {
+  padding: 0 8px;
+  text-align: right;
+  width: 100%;
+}
+/* line 85, time-picker_styles.scss */
+.wc-TimePicker__selector {
+  display: inline-block;
+  max-height: 280px;
+  overflow-y: auto;
+  text-align: center;
+  vertical-align: top;
+  width: 86px;
+}
+/* line 96, time-picker_styles.scss */
+.wc-TimePicker__title:not(:first-child), .wc-TimePicker__selector:not(:first-child) {
+  margin-left: 24px;
+}
+/* line 100, time-picker_styles.scss */
+.wc-TimePicker__title:last-child, .wc-TimePicker__selector:last-child {
+  width: 72px;
+}
+/* line 108, time-picker_styles.scss */
+.wc-TimePicker__option {
+  cursor: default;
+  line-height: 40px;
+  width: 100%;
+}
+/* line 115, time-picker_styles.scss */
+.wc-TimePicker__option:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* line 121, time-picker_styles.scss */
+.wc-TimePicker__option.is-active {
+  color: #26C6DA;
+}
+/* line 126, time-picker_styles.scss */
+.wc-TimePicker__option.is-active:hover {
+  color: #00ACC1;
+}
+/* line 134, time-picker_styles.scss */
+.wc-TimePicker__overlay {
+  position: relative;
+  z-index: 23;
+}

@@ -1,0 +1,27 @@
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+@mixin respond-min($width) {
+    // Otherwise, output it using a regular media query
+    @media screen and (min-width: $width) {
+        @content;
+    }
+}
+
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+@mixin respond-max($width) {
+    @media screen and (max-width: $width) {
+        @content;
+    }
+}

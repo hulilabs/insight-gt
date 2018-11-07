@@ -1,0 +1,147 @@
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+* Generates the basic styles for shadows
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+ * Adds ellipsis to any block or element when the text may overflow its boundaries
+ * @return {CssRules} rules for adding ellipsis to overflown text
+ */
+/**
+ * Generates the hack for clearing floats
+ * @return {CssRules} rules for the clearfix hack
+ */
+/**
+* Drawer, styles for the drawer component
+*
+* Check the drawer_template.html to see its structure
+*
+wc-Drawer - root class
+    wc-Drawer--appBar - provides extra top margin when the app bar is shown, just for the edge element
+wc-Drawer__nav - this is the Nav element, the visible part of this component
+wc-Drawer__content - sub element of the nav,  where the content is.
+wc-Drawer__edge - The edge element is the little space where it detects that the user has an intention of opening the drawer by swiping
+*/
+/* line 21, drawer_styles.scss */
+.wc-Drawer {
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 16;
+  -webkit-overflow-scrolling: touch;
+  transform: translate3d(0, 0, 0);
+  /*----------------------------------*\
+              #TABLET
+  \*----------------------------------*/
+}
+/* line 36, drawer_styles.scss */
+.wc-Drawer--appBar .wc-Drawer__edge {
+  top: 56px;
+}
+/* line 43, drawer_styles.scss */
+.wc-Drawer__nav {
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 280px;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.12), 0 16px 16px 0 rgba(0, 0, 0, 0.24);
+  z-index: 16;
+  position: relative;
+  width: calc(100vw - 56px);
+  will-change: transform;
+}
+/* line 57, drawer_styles.scss */
+.wc-Drawer__edge {
+  display: block;
+  height: 100%;
+  left: 0;
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+/* line 69, drawer_styles.scss */
+.wc-Drawer__content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  will-change: transform;
+  webkit-overflow-scrolling: touch;
+}
+@media screen and (min-width: 768px) {
+  /* line 88, drawer_styles.scss */
+  .wc-Drawer__nav {
+    max-width: 360px;
+  }
+}

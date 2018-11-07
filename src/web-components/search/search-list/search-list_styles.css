@@ -1,0 +1,101 @@
+/**
+* Search list styles
+*
+* wc-SearchList: main wrapper
+* wc-SearchList__inputWrapper: wraps the field, the search icon and the avatar
+* wc-SearchList__inputField: field where the user types
+* wc-SearchList_inputField--focused  + .wc-SearchList__action--icon
+* wc-SearchList__inputAvatar: avatar of the selected option
+* wc-SearchList__result : wraps one result of the list
+* wc-SearchList__resultAvatar : avatar of a result item
+* wc-SearchList__resultText : text of a result item
+* wc-SearchList__resultAction : action of a result item
+* wc-SearchList__results: wraps the results list
+* wc-SearchList__no-results: showed when there are no results
+* wc-SearchList__searching: showed when searching
+* wc-SearchList__loading: showed when loading
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/* line 25, search-list_styles.scss */
+.wc-SearchList {
+  background-color: #FFF;
+}
+/* line 30, search-list_styles.scss */
+.wc-SearchList__inputWrapper {
+  align-items: center;
+  display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+/* line 39, search-list_styles.scss */
+.wc-SearchList__inputField {
+  flex: 1;
+}
+/* line 44, search-list_styles.scss */
+.wc-SearchList__inputField--focused + .wc-SearchList__action--icon {
+  display: none;
+}
+/* line 51, search-list_styles.scss */
+.wc-SearchList__inputAvatar {
+  flex: 1;
+  margin-right: 24px;
+  max-width: 32px;
+}
+/* line 61, search-list_styles.scss */
+.wc-SearchList__result:hover {
+  cursor: pointer;
+}
+/* line 69, search-list_styles.scss */
+.wc-SearchList__result.is-disabled:hover {
+  cursor: default;
+}
+/* line 78, search-list_styles.scss */
+.wc-SearchList__resultAvatar.is-disabled {
+  opacity: 0.4;
+}
+/* line 86, search-list_styles.scss */
+.wc-SearchList__resultText.is-disabled {
+  opacity: 0.4;
+}
+/* line 94, search-list_styles.scss */
+.wc-SearchList__resultAction.is-disabled {
+  opacity: 0.4;
+}
+/* line 101, search-list_styles.scss */
+.wc-SearchList__results {
+  height: 210px;
+  overflow-y: scroll;
+}
+/* line 108, search-list_styles.scss */
+.wc-SearchList__searching {
+  height: 210px;
+  text-align: center;
+  line-height: 210px;
+}
+/* line 116, search-list_styles.scss */
+.wc-SearchList__no-results {
+  height: 210px;
+  text-align: center;
+  line-height: 210px;
+}
+/* line 124, search-list_styles.scss */
+.wc-SearchList__loading {
+  padding: 8px 16px;
+}

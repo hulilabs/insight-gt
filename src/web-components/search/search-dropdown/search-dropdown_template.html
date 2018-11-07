@@ -1,0 +1,64 @@
+<div class="wc-SearchDropdown" v-bind:class="{'is-menu-open' : state.isMenuActive}">
+    <wc-search-box
+        v-bind:class="['wc-SearchDropdown__input', {'is-menu-open' : state.isMenuActive}]"
+        v-bind:placeholder="placeholder"
+        v-bind:id="state.id"
+        v-bind:text="text"
+        v-on:searchbox-search="_onInputHandler"
+        v-on:searchbox-close="_onInputClosed">
+    </wc-search-box>
+
+    <wc-menu
+        class="wc-SearchDropdown__menuContainer"
+        floating-direction="right"
+        ref="menu"
+        role="listbox"
+        menu-class="wc-Menu--fullWidth wc-SearchDropdown__menu"
+        trigger-origin="bottom-left"
+        v-bind:close-on-esc-key="false"
+        v-bind:has-floating-layer="false"
+        v-bind:custom-styles="getMenuStyle"
+        v-bind:trigger-element-selector="'#' + state.id"
+        v-on:menu-close="_onMenuClose"
+        v-on:menu-open="_onMenuOpen">
+        <wc-list-item
+            v-if="state.dataSource && !state.isFiltering"
+            layout="double"
+            v-for="item in state.dataSource"
+            v-bind:key="item.value"
+            role="menuitem"
+            v-on:click.native="_selectItem(item.value, item.text)"
+            v-on:keyup.enter="_selectItem(item.value, item.text)">
+
+            <wc-avatar
+                v-if="!useThumbnail && item.imgPath"
+                v-bind:image-path="item.imgPath"
+                slot="avatar"
+                class="wc-Avatar--size-6x">
+            </wc-avatar>
+
+            <wc-avatar
+                v-else-if="!useThumbnail && item.text"
+                v-bind:text="item.text"
+                slot="avatar"
+                class="wc-Avatar--size-6x">
+            </wc-avatar>
+
+            <wc-thumbnail
+                v-else-if="useThumbnail && item.imgPath"
+                v-bind:image-path="item.imgPath"
+                size="6"
+                slot="avatar">
+            </wc-thumbnail>
+
+            <span slot="primaryText" v-html="item.title"></span>
+            <span slot="secondaryText" v-html="item.subtitle"></span>
+        </wc-list-item>
+
+        <div v-if="state.isFiltering" class="wc-SearchDropdown__noResults" role="menuitem">
+            <wc-circular-loader class="wc-SearchDropdown__loader" indeterminate></wc-circular-loader>
+        </div>
+
+        <div v-if="state.isResultEmpty && !state.isFiltering" class="wc-SearchDropdown__noResults">{{notFoundLabel}}</div>
+    </wc-menu>
+</div>

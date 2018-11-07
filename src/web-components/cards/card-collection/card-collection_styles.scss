@@ -1,0 +1,82 @@
+/**
+* CardCollection styles
+*
+* More details: zpl.io/1iACdJ
+*
+* wc-CardCollection - main block
+*     wc-CardCollection.has-overlay - overlay on resting cards is enabled
+* wc-CardCollection__cardsWrapper - card group wrapper
+* wc-CardCollection__card - inner card component
+*/
+
+@import "compass/css3/transition";
+@import "settings/_breakpoints";
+@import "settings/_components";
+@import "settings/_elevations";
+
+$wc-card-collection-card-separation: 8px;
+
+.wc-CardCollection {
+    position: relative;
+
+    //- -------- #wc-CardCollection__card  ---------- /
+
+    &__card {
+        margin-bottom: $wc-card-collection-card-separation;
+        position: relative;
+
+        & + & {
+            margin-top: $wc-card-collection-card-separation;
+
+            // prevents margin on fullscreen cards
+            &.is-fullscreen {
+                margin-top: 0;
+            }
+        }
+    }
+
+    //- -------- #wc-CardCollection__cardsWrapper  ---------- /
+
+    &__cardsWrapper {
+        margin: auto;
+        position: relative;
+    }
+
+    //- -------- #states  ---------- /
+
+    &.has-overlay &__card {
+        &.is-resting:before, &.is-restingCompact:before {
+            opacity: 1;
+        }
+
+        &:before {
+            @include transition(opacity .2s ease-in-out);
+            background-color: $wc-card-collection-overlay-color;
+            bottom: 0;
+            content: '';
+            display: block;
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            z-index: $wc-card-collection-overlay-elevation;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+//--------- #Tablet landscape and desktop  ---------- /
+
+    @media screen and (min-width: $wc-media-desktop-lower-boundary)
+    and (orientation: landscape) {
+        &__cardsWrapper {
+            max-width: $wc-card-max-width;
+        }
+    }
+}

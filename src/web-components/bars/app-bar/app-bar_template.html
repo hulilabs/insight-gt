@@ -1,0 +1,10 @@
+<div class="wc-AppBar" v-bind:class="classObject">
+    <div class="wc-AppBar__navigation" v-show="showNavigation">
+        <slot name="navigation"></slot>
+    </div>
+    <span ref="title" v-if="title" v-bind:class="[{'is-overflowing' : state.isTitleOverflowing, 'wc-AppBar__title--subheader' : !titleClass}, titleClass, 'wc-AppBar__title']" >{{title}}<span v-if="hintText" v-bind:class="hintClass">{{hintText}}</span></span>
+    <slot></slot>
+    <div class="wc-AppBar__actions" v-show="showActions">
+        <slot name="actions"></slot>
+    </div>
+</div>

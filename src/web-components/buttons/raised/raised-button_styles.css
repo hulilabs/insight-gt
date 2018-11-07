@@ -1,0 +1,135 @@
+/**
+ * RaisedButton, styles for a raised <button> component following material guidelines
+ *
+ * Check the raised-button_template.html file to see its structure
+ *
+ *  wc-RaisedButton - main block
+ *      wc-RaisedButton.is-large - modifier for large button
+ */
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+* Generates the basic styles for shadows
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+ * Adds ellipsis to any block or element when the text may overflow its boundaries
+ * @return {CssRules} rules for adding ellipsis to overflown text
+ */
+/**
+ * Generates the hack for clearing floats
+ * @return {CssRules} rules for the clearfix hack
+ */
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/* line 22, raised-button_styles.scss */
+.wc-RaisedButton {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+  z-index: 2;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #FFB300;
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 40px;
+  min-width: 96px;
+  overflow: hidden;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+/* line 41, raised-button_styles.scss */
+.wc-RaisedButton:hover, .wc-RaisedButton:focus {
+  background-color: #FF8F00;
+  outline: 0;
+}
+/* line 46, raised-button_styles.scss */
+.wc-RaisedButton:active {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
+  z-index: 8;
+  background-color: #FF8F00;
+}
+/* line 51, raised-button_styles.scss */
+.wc-RaisedButton:disabled {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.26);
+  cursor: default;
+}
+/* line 58, raised-button_styles.scss */
+.wc-RaisedButton.is-large {
+  max-width: 384px;
+  width: 100%;
+}

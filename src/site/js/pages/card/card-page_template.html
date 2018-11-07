@@ -1,0 +1,357 @@
+<div tabindex="-1" style="position: relative">
+
+    <wc-markdown>
+# Card demo
+    </wc-markdown>
+
+    The following are example configurations for `wc-card` component
+    <wc-card-collection>
+        <wc-card class="wc-CardCollection__card" focus-style="raise" name="example" v-bind:title="positiveCardValue" scrollable>
+            <div slot="actions" style="width:300px" v-if="!isMobile">
+                <wc-radio-group layout="row">
+                    <wc-radio-button name="x" v-model="state.positiveCardState" custom-value="yeah">yes</wc-radio-button>
+                    <wc-radio-button name="x" v-model="state.positiveCardState" custom-value="nope">no</wc-radio-button>
+                </wc-radio-group>
+            </div>
+            <wc-radio-group v-if="isMobile">
+                <wc-radio-button name="a" v-model="state.positiveCardState" custom-value="yeah">yes</wc-radio-button>
+                <wc-radio-button name="a" v-model="state.positiveCardState" custom-value="nope">no</wc-radio-button>
+            </wc-radio-group>
+            <div slot="active">
+                this card displays a custom close button (mobile only)
+            </div>
+            <wc-icon-button icon-class="icon-close" slot="navigation"></wc-icon-button>
+        </wc-card>
+        <wc-card class="wc-CardCollection__card" focus-style="raise" name="example" title="Card with icon action" title-hint-text="and also a hint" title-hint-class="u-caption1 u-secondary-text-dark">
+            <div slot="actions">
+                <div class="wc-Card__iconsTile">
+                    <wc-icon-button class="wc-Card__iconButton" v-on:click.native="_alert('icon')" icon-class="icon-code" v-if="!isMobile"></wc-icon-button>
+                    <wc-icon-button class="wc-Card__iconButton" v-on:click.native="_alert('icon')" icon-class="icon-badge"></wc-icon-button>
+                </div>
+            </div>
+            <wc-radio-group>
+                <wc-radio-button name="b" v-model="state.cardWithActionState" custom-value="1">yes</wc-radio-button>
+                <wc-radio-button name="b" v-model="state.cardWithActionState" custom-value="2">no</wc-radio-button>
+            </wc-radio-group>
+        </wc-card>
+        <wc-card title="Card's title" class="wc-CardCollection__card" focus-style="raise">
+            <div class="wc-Card__tile wc-Card__tile--top">
+                <div slot="actions" class="wc-Card__iconsTile wc-Card__iconsTile--right">
+                    <wc-icon-button icon-class="icon-code" class="wc-Card__iconButton"></wc-icon-button>
+                    <wc-icon-button icon-class="icon-badge" class="wc-Card__iconButton"></wc-icon-button>
+                    <wc-icon-button icon-class="icon-birthday" class="wc-Card__iconButton"></wc-icon-button>
+                </div>
+            </div>
+
+            <wc-dropdown
+                floating-label
+                v-bind:options="cities"
+                v-model="selectedCity"
+                alt-placeholder="Select a city"
+                placeholder="Cities"
+                label="Cities">
+            </wc-dropdown>
+
+            <wc-autocomplete
+                floating-label
+                label="Search a city"
+                placeholder="Cities"
+                not-found-label="Not found"
+                v-model="selectedCity"
+                v-bind:data-source="cities">
+            </wc-autocomplete>
+
+            <p>This card has buttons and icon buttons, but it does not have a header</p>
+            <p>If you add a header, you must add the icon buttons into the actions slot</p>
+
+            <div class="wc-Card__tile wc-Card__tile--bottom">
+                <div class="wc-Card__buttonsTile">
+                    <wc-flat-button class="wc-Card__button">button</wc-flat-button>
+                    <wc-flat-button class="wc-Card__button">button</wc-flat-button>
+                    <div class="wc-Card__iconsTile wc-Card__iconsTile--bottomRight">
+                        <wc-icon-button icon-class="icon-card" class="wc-Card__iconButton"></wc-icon-button>
+                        <wc-icon-button icon-class="icon-card" class="wc-Card__iconButton"></wc-icon-button>
+                    </div>
+                </div>
+            </div>
+        </wc-card>
+
+        <span class="DemoTable__note u-caption1">
+            There was an interesting issue with the previous example regarding the dropdown component and how the card component handles the closing event. What happened was that when there was a dropdown menu contained inside a card and one of its options was clicked, the result was that the card component was closed and lost its focus. <br/>
+            This issue was related with how blur events work, because:
+            <span class="u-caption2" style="font-style: italic">in blur events, the relatedTarget corresponds to the element that GAINED focus.</span> If you combine this with an element having <span class="u-caption2" style="font-style: italic"> visibility : hidden;</span> that element won't be able to really "gain" focus, therefore, it won't appear as the card component blur event's relatedTarget.
+            You can see more about this issue <a href="https://hulihealth.atlassian.net/browse/HULI-2029">here.</a>
+        </span>
+
+        <h3> these two cards are bound together (L) </h3>
+        <div>
+            <wc-card class="wc-CardCollection__card" compact-layout>
+                <wc-radio-group>
+                    <wc-radio-button name="c" v-model="state.boundCardState" custom-value="1">yes</wc-radio-button>
+                    <wc-radio-button name="c" v-model="state.boundCardState" custom-value="2">no</wc-radio-button>
+                </wc-radio-group>
+                <div class="wc-Card__tile wc-Card__tile--bottom">
+                    <div class="wc-Card__buttonsTile">
+                        <wc-flat-button class="wc-Card__button">button</wc-flat-button>
+                    </div>
+                    <div class="wc-Card__buttonsTile">
+                        <wc-flat-button>button</wc-flat-button>
+                    </div>
+                </div>
+            </wc-card>
+            <wc-card class="wc-CardCollection__card" title="I'm a card ftw" compact-layout>
+                <div slot="active" style="height: 1000px">
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                    <div>I'm active</div>
+                </div>
+                <a slot="actions" style="margin: 0 16px 0 16px">ACTION</a>
+            </wc-card>
+        </div>
+
+        <h3> More cards to enjoy :) </h3>
+
+        <wc-card class="wc-CardCollection__card" focus-style="raise">
+            <div slot="header">
+                I am an ugly custom header and I have no styles
+            </div>
+        </wc-card>
+        <wc-card title="I have actions" class="wc-CardCollection__card" focus-style="raise">
+            <div class="spacious js-card-action" v-on:click.stop="_alert('action 1')">I am action 1</div>
+            <div class="wc-Divider"></div>
+            <div class="spacious js-card-action" v-on:click.stop="_alert('action 2')">I am action 2</div>
+            <div class="wc-Divider"></div>
+            <div class="spacious js-card-action" v-on:click.stop="_alert('action 3')">I am action 3</div>
+        </wc-card>
+
+        <wc-card title="I have loader" class="wc-CardCollection__card" focus-style="raise" loading>
+            <div class="spacious js-card-action" v-on:click.stop="_alert('action 1')">I am action 1</div>
+            <div class="wc-Divider"></div>
+            <div class="spacious js-card-action" v-on:click.stop="_alert('action 2')">I am action 2</div>
+            <div class="wc-Divider"></div>
+            <div class="spacious js-card-action" v-on:click.stop="_alert('action 3')">I am action 3</div>
+        </wc-card>
+
+        <wc-card title="This card is compacted" title-class="u-body2" title-hint-text="   remember to turn it off for mobile resolutions" title-hint-class="u-caption1 u-secondary-text-dark" class="wc-CardCollection__card" focus-style="raise" compact>
+            <wc-radio-group>
+                <wc-radio-button name="d" custom-value="1">Content 1</wc-radio-button>
+                <wc-radio-button name="d" custom-value="2">Content 2</wc-radio-button>
+            </wc-radio-group>
+        </wc-card>
+
+        <wc-card class="wc-CardCollection__card" v-bind:resting-max-height="100" v-bind:active-max-height="200">
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+            <div>I'm scrollable</div>
+        </wc-card>
+        <wc-card v-bind:resting-max-height="100" class="wc-CardCollection__card">
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+            <div>I'm scrollable resting</div>
+        </wc-card>
+    </wc-card-collection>
+
+    <h2>Resting only cards</h2>
+    <p>Also known as <strong>always-editable</strong></p>
+
+    <wc-card-collection v-bind:has-overlay="false">
+        <wc-card class="wc-CardCollection__card"
+            focus-style="none"
+            tabindex="-1"
+            title="Single card always in resting mode"
+            v-bind:title-divider="false"
+            v-bind:raised-on-active="false"
+            v-bind:fullscreen-active="false">
+            <p>A common always editable cards has:</p>
+            <ul>
+                <li>Use the default slot for content (not active or resting)</li>
+                <li>focus-style = none</li>
+                <li>tabindex = -1</li>
+                <li>title-divider = false</li>
+                <li>raised-on-active = false</li>
+                <li>fullscreen-active = false</li>
+            </ul>
+            <p>The overlay is removed too from card collection has-overlay=false</p>
+            <wc-textfield label="Text me!"></wc-textfield>
+            <wc-textfield label="Tabbing is fun"></wc-textfield>
+            <wc-textfield label="Tab! Tab! Tab!"></wc-textfield>
+        </wc-card>
+        <wc-card class="wc-CardCollection__card"
+            focus-style="none"
+            tabindex="-1"
+            compact-layout
+            title="Resting only cards in compact layout"
+            v-bind:title-divider="false"
+            v-bind:raised-on-active="false"
+            v-bind:fullscreen-active="false">
+            <wc-dropdown
+                floating-label
+                v-bind:options="[{text:'Text1',value:1},{text:'Text2',value:2}]"
+                placeholder="Try me">
+            </wc-dropdown>
+            <wc-autocomplete
+                label="Search"
+                placeholder="something"
+                not-found-label="Not found"
+                v-bind:data-source="[]">
+            </wc-autocomplete>
+        </wc-card>
+        <wc-card class="wc-CardCollection__card"
+            focus-style="none"
+            tabindex="-1"
+            compact-layout
+            v-bind:title-divider="false"
+            v-bind:raised-on-active="false"
+            v-bind:fullscreen-active="false">
+            <wc-textfield placeholder="Chuck chu chu!"></wc-textfield>
+        </wc-card>
+        <wc-card class="wc-CardCollection__card"
+            focus-style="none"
+            tabindex="-1"
+            compact-layout
+            v-bind:title-divider="false"
+            v-bind:raised-on-active="false"
+            v-bind:fullscreen-active="false">
+            <wc-radio-group layout="row">
+                <wc-radio-button name="x" custom-value="yeah">yes</wc-radio-button>
+                <wc-radio-button name="x" custom-value="nope">no</wc-radio-button>
+            </wc-radio-group>
+        </wc-card>
+    </wc-card-collection>
+
+    <h2>Suspicious demo</h2>
+
+    <wc-card-collection>
+        <wc-card class="wc-CardCollection__card" title-class="u-headline" title="Satanás Ramírez V.">
+            <div slot="resting">
+                <div class="spacious">
+                    <wc-icon icon-class="icon-birthday"></wc-icon>
+                    <span class="u-body1">19 november 1999</span>
+                </div>
+                <div class="spacious">
+                    <div class="u-body2 spacious">Contact information</div>
+                    <div>
+                        <wc-icon icon-class="icon-phone"></wc-icon>
+                        <span class="u-body1">+506 8888 8888</span>
+                    </div>
+                </div>
+            </div>
+            <div slot="active">
+                <div>
+                    <wc-textfield class="fellow" label="Hey, I just met you" floating-label></wc-textfield>
+                    <wc-textfield class="fellow" label="And this is crazy" floating-label></wc-textfield>
+                </div>
+                <div>
+                    <wc-textfield class="fellow" label="But here's my number" floating-label value="8888-8888"></wc-textfield>
+                    <wc-textfield class="fellow" label="So close me maybe D;" floating-label></wc-textfield>
+                </div>
+            </div>
+        </wc-card>
+        <wc-card title="Patient private notes" class="wc-CardCollection__card" title-class="u-body2">
+            <div slot="resting">
+                <span class="u-body1">{{suspiciousPrivateNotes}}</span>
+            </div>
+            <div slot="active">
+                <wc-textfield label="These notes are really really private" floating-label v-model="suspiciousPrivateNotes"></wc-textfield>
+            </div>
+        </wc-card>
+        <wc-card title="Emergency contact" class="wc-CardCollection__card" title-class="u-body2" name="ice" ref="ice">
+            <div slot="active">
+                <wc-deleter
+                    v-for="(_, index) in state.ices"
+                    v-on:deleter-delete="_removeICE"
+                    v-bind:key="index"
+                    v-bind:item-key="index"
+                    multiple-inputs
+                    class="list-item">
+                    <div class="fellow">
+                        <wc-textfield label="Name" floating-label></wc-textfield>
+                    </div>
+                    <div class="fellow">
+                        <wc-textfield label="Relation" floating-label></wc-textfield>
+                    </div>
+                    <div>
+                        <div class="fellow">
+                            <wc-textfield label="Phone" floating-label></wc-textfield>
+                        </div>
+                        <div class="fellow">
+                            <wc-textfield label="Email" floating-label></wc-textfield>
+                        </div>
+                        <div class="wc-Card__tile wc-Card__buttonsTile">
+                            <wc-flat-button>Add other phone</wc-flat-button>
+                        </div>
+                    </div>
+                    <div>
+                        <wc-textfield label="Notes" floating-label></wc-textfield>
+                    </div>
+                </wc-deleter>
+                <div v-on:click="_addICE" class="wc-Card__tile wc-Card__buttonsTile">
+                    <wc-flat-button>Add other contact</wc-flat-button>
+                </div>
+            </div>
+        </wc-card>
+        <wc-card title="Medical insurance (DO NOT open)" class="wc-CardCollection__card" title-class="u-body2">
+            <div class="spacious u-body1" slot="active">
+                Why are you like this? ;-;
+            </div>
+        </wc-card>
+        <wc-card title="Pharmacy (with error)" class="wc-CardCollection__card" title-class="u-body2" has-error>
+            <div slot="active">
+                <wc-error class="wc-Card__tile wc-Card__tile--noMarginTop" layout="card">Error Message</wc-error>
+                <p>Coming soon</p>
+            </div>
+        </wc-card>
+    </wc-card-collection>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+    <wc-markdown v-bind:source="markdownSource.cardCollectionDocumentation"></wc-markdown>
+</div>

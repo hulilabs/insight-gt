@@ -1,0 +1,246 @@
+/**
+* Saver styles
+*
+* More details: https://zpl.io/Z1PkpC0
+*
+* wc-Saver - main saver block
+* wc-Saver__circleWrapper - wrapper of the circle svg
+* wc-Saver__circle - circle svg
+* wc-Saver__checkIcon - check icon
+* wc-Saver__checkWrapper - wrapper of the path svg that draw the check
+* wc-Saver__checkSvg - check svg
+*
+* wc-Saver
+*/
+@-moz-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/* line 38, saver_styles.scss */
+.wc-Saver {
+  background-color: transparent;
+  display: inline-block;
+  height: 24px;
+  margin-left: 16px;
+  position: relative;
+  width: 24px;
+}
+/* line 47, saver_styles.scss */
+.wc-Saver:not(.wc-Saver--keep-visible) {
+  animation: fadeOut 0.3s linear 2.5s 1 forwards;
+}
+/* line 58, saver_styles.scss */
+.wc-Saver__circleWrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+/* line 68, saver_styles.scss */
+.wc-Saver__circle {
+  cx: 12px;
+  cy: 12px;
+  fill: none;
+  r: 10px;
+  stroke-dasharray: 63px;
+  stroke-dashoffset: 0;
+  stroke-width: 2px;
+  stroke: #8BC34A;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+/* line 81, saver_styles.scss */
+.wc-Saver:not(.wc-Saver--keep-visible) .wc-Saver__circle {
+  animation: saverCircle 0.3s linear 1 forwards;
+}
+/* line 87, saver_styles.scss */
+.wc-Saver__checkIcon {
+  background-color: transparent;
+  height: 16px;
+  left: 4px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 3px;
+  width: 16px;
+}
+/* line 100, saver_styles.scss */
+.wc-Saver__checkWrapper {
+  height: 100%;
+  visibility: visible;
+  width: 100%;
+}
+/* line 106, saver_styles.scss */
+.wc-Saver:not(.wc-Saver--keep-visible) .wc-Saver__checkWrapper {
+  animation: checkMaker 0.2s linear 0.3s 1 forwards;
+  visibility: hidden;
+}
+/* line 113, saver_styles.scss */
+.wc-Saver__checkSvg {
+  fill: #8BC34A;
+  stroke-miterlimit: 0;
+  stroke-width: 1px;
+  stroke: #8BC34A;
+}
+
+@-moz-keyframes saverCircle {
+  0% {
+    stroke-dashoffset: 63px;
+  }
+  50% {
+    stroke-dashoffset: 31.5px;
+  }
+}
+@-webkit-keyframes saverCircle {
+  0% {
+    stroke-dashoffset: 63px;
+  }
+  50% {
+    stroke-dashoffset: 31.5px;
+  }
+}
+@keyframes saverCircle {
+  0% {
+    stroke-dashoffset: 63px;
+  }
+  50% {
+    stroke-dashoffset: 31.5px;
+  }
+}
+@-moz-keyframes checkMaker {
+  0% {
+    height: 0;
+    visibility: visible;
+    width: 0;
+  }
+  25% {
+    height: 4px;
+    visibility: visible;
+    width: 2px;
+  }
+  50% {
+    height: 16px;
+    visibility: visible;
+    width: 8px;
+  }
+  100% {
+    height: 16px;
+    visibility: visible;
+    width: 16px;
+  }
+}
+@-webkit-keyframes checkMaker {
+  0% {
+    height: 0;
+    visibility: visible;
+    width: 0;
+  }
+  25% {
+    height: 4px;
+    visibility: visible;
+    width: 2px;
+  }
+  50% {
+    height: 16px;
+    visibility: visible;
+    width: 8px;
+  }
+  100% {
+    height: 16px;
+    visibility: visible;
+    width: 16px;
+  }
+}
+@keyframes checkMaker {
+  0% {
+    height: 0;
+    visibility: visible;
+    width: 0;
+  }
+  25% {
+    height: 4px;
+    visibility: visible;
+    width: 2px;
+  }
+  50% {
+    height: 16px;
+    visibility: visible;
+    width: 8px;
+  }
+  100% {
+    height: 16px;
+    visibility: visible;
+    width: 16px;
+  }
+}

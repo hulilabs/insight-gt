@@ -1,0 +1,27 @@
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+
+@import "../../settings/_typography";
+
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+@mixin generate-text-styles($text-type) {
+    $typography-properties: map-get($wc-typography-variables, $text-type);
+
+    @each $property, $value in $typography-properties {
+        #{$property}: $value;
+    }
+
+    font-family: $wc-base-font;
+
+    @if $text-type == "anchor" {
+        cursor: pointer;
+    }
+}

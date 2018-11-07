@@ -1,0 +1,238 @@
+<div style="position: relative">
+    <wc-markdown>
+# Onboarding
+
+## Demo
+
+### Regular onboarding
+Click on the option below to start the demo of a **regular** onboarding.
+    </wc-markdown>
+
+    <div class="DemoTable">
+    <span ref="example1" v-on:click="startOnboarding('initialOnboarding')"
+          style="background-color: white; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; padding: 16px;">
+        <wc-icon icon-class="icon-age-baby"></wc-icon>
+        <span class="u-body1">Click me to start the onboarding!</span>
+    </span>
+
+    <span ref="example1" v-if="onboardings.initialOnboarding.completed"
+          style="display: inline-flex; flex-direction: column; align-items: center; padding: 16px;">
+        <wc-icon icon-class="icon-age-elder"></wc-icon>
+        <span class="u-body1">Congratulations! You finished the onboarding's onboarding!</span>
+    </span>
+
+    <wc-onboarding
+        v-on:onboarding-change="onboardingChanged"
+        v-bind:number-of-steps="onboardings.initialOnboarding.numberOfSteps"
+        v-bind:step-number="1"
+        v-bind:active="onboardings.initialOnboarding.selected == 1"
+        v-bind:target="composeVueRef('example1')"
+        next-btn-label="Next"
+        onboarding-id="initialOnboarding"
+        trigger-origin="bottom-center"
+        floating-direction="down">
+
+        The onboarding will be positioned according to the target element. You can change this by changing the
+        <span class="u-body2">trigger-origin</span> and <span class="u-body2">floating-direction</span> props.
+    </wc-onboarding>
+
+    <div style="display: flex; justify-content: space-between;">
+        <span ref="example2" style="padding: 16px;">
+            <span class="u-title">Step 2 goes here!</span>
+        </span>
+        <wc-onboarding
+            v-on:onboarding-change="onboardingChanged"
+            v-bind:number-of-steps="onboardings.initialOnboarding.numberOfSteps"
+            v-bind:step-number="2"
+            v-bind:active="onboardings.initialOnboarding.selected == 2"
+            v-bind:target="composeVueRef('example2')"
+            previous-btn-label="Back"
+            next-btn-label="Next"
+            onboarding-id="initialOnboarding"
+            trigger-origin="top-center"
+            floating-direction="up">
+
+            The target element can be an <span class="u-body2">HTMLElement</span> or a compound
+            object like this: <br/> <span class="u-body2">{ local : {Object}, key : {String} }</span>
+        </wc-onboarding>
+
+
+        <span ref="example3" style="background-color: white; padding: 16px;">
+            <span class="u-title">Step 3 goes here!</span>
+        </span>
+        <wc-onboarding
+            v-on:onboarding-change="onboardingChanged"
+            v-bind:number-of-steps="onboardings.initialOnboarding.numberOfSteps"
+            v-bind:step-number="3"
+            v-bind:active="onboardings.initialOnboarding.selected == 3"
+            v-bind:target="composeVueRef('example3')"
+            previous-btn-label="Back"
+            next-btn-label="Next"
+            onboarding-id="initialOnboarding"
+            trigger-origin="bottom-center"
+            floating-direction="down">
+
+            You can move back and forth between steps with the buttons below.
+            The text of these buttons is also configurable via props.
+        </wc-onboarding>
+
+        <span ref="example4" style="padding: 16px;">
+            <span class="u-title">Final step goes here!</span>
+        </span>
+        <wc-onboarding
+            v-on:onboarding-change="onboardingChanged"
+            v-bind:number-of-steps="onboardings.initialOnboarding.numberOfSteps"
+            v-bind:step-number="4"
+            v-bind:active="onboardings.initialOnboarding.selected == 4"
+            v-bind:target="composeVueRef('example4')"
+            previous-btn-label="Back"
+            confirm-btn-label="Got it!"
+            onboarding-id="initialOnboarding"
+            trigger-origin="middle-left"
+            floating-direction="left">
+
+            And once reached the last step. The onboarding can be closed by clicking in the
+            confirm action from below.
+        </wc-onboarding>
+    </div>
+    </div>
+
+    <wc-markdown>
+### Single step onboarding
+
+The following is an example of a **single-step** onboarding process. It doesn't contain a back or next button, just the confirm action.
+    </wc-markdown>
+
+    <div class="DemoTable">
+    <span class="u-title" ref="example5" v-on:click="startOnboarding('singleOnboarding')"
+          style="cursor: pointer; margin-top: 16px; padding: 16px; background-color: white;">
+        Click me to start a single-step onboarding!
+    </span>
+    <wc-onboarding
+        v-on:onboarding-change="onboardingChanged"
+        v-bind:number-of-steps="onboardings.singleOnboarding.numberOfSteps"
+        v-bind:step-number="1"
+        v-bind:active="onboardings.singleOnboarding.selected == 1"
+        v-bind:target="composeVueRef('example5')"
+        confirm-btn-label="Got it!"
+        overlay-modifier="wc-Overlay--secondary"
+        onboarding-id="singleOnboarding"
+        trigger-origin="bottom-center"
+        floating-direction="down">
+        A single-step onboarding process will only contain the confirmation button.
+    </wc-onboarding>
+    </div>
+
+    <wc-markdown>
+### Skippable onboarding
+
+The following is an example of a **skippable/optional** onboarding process. This kind of onboarding corresponds to those onboarding procedures that can be interrupted at any step of the process. This allows users to quickly exit and finish the onboarding.
+    </wc-markdown>
+
+    <div class="DemoTable">
+    <span class="u-title" ref="example6" v-on:click="startOnboarding('skippableOnboarding')"
+          style="cursor: pointer; margin-top: 16px; padding: 16px; background-color: white;">
+        Click me to start a skippable onboarding!
+    </span>
+    <template v-if="onboardings.skippableOnboarding.mustShow">
+        <wc-onboarding
+            v-on:onboarding-change="onboardingChanged"
+            v-bind:number-of-steps="onboardings.skippableOnboarding.numberOfSteps"
+            v-bind:step-number="1"
+            v-bind:active="onboardings.skippableOnboarding.selected == 1"
+            v-bind:target="composeVueRef('example6')"
+            next-btn-label="Next"
+            onboarding-id="skippableOnboarding"
+            skippable
+            trigger-origin="bottom-center"
+            floating-direction="down">
+
+            A skippable onboarding may be finished at any step. Remember to add the <span class="u-body2">skippable</span> prop to each step.
+        </wc-onboarding>
+    </template>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 16px;">
+        <span ref="example7" style="background-color: white; padding: 16px;">
+            <span class="u-title">Another optional step!</span>
+        </span>
+        <template v-if="onboardings.skippableOnboarding.mustShow">
+            <wc-onboarding
+                v-on:onboarding-change="onboardingChanged"
+                v-bind:number-of-steps="onboardings.skippableOnboarding.numberOfSteps"
+                v-bind:step-number="2"
+                v-bind:active="onboardings.skippableOnboarding.selected == 2"
+                v-bind:target="composeVueRef('example7')"
+                previous-btn-label="Back"
+                next-btn-label="Next"
+                onboarding-id="skippableOnboarding"
+                skippable
+                trigger-origin="bottom-center"
+                floating-direction="down">
+
+                You can exit by clicking outside the step. <br>
+            </wc-onboarding>
+        </template>
+
+        <span ref="example8" style="background-color: white; padding: 16px;">
+            <span class="u-title">Optional step #3!</span>
+        </span>
+        <template v-if="onboardings.skippableOnboarding.mustShow">
+            <wc-onboarding
+                v-on:onboarding-change="onboardingChanged"
+                v-bind:number-of-steps="onboardings.skippableOnboarding.numberOfSteps"
+                v-bind:step-number="3"
+                v-bind:active="onboardings.skippableOnboarding.selected == 3"
+                v-bind:target="composeVueRef('example8')"
+                previous-btn-label="Back"
+                next-btn-label="Next"
+                onboarding-id="skippableOnboarding"
+                skippable
+                trigger-origin="bottom-center"
+                floating-direction="down">
+
+                Are you still here? What are you waiting to skip this onboarding?
+            </wc-onboarding>
+        </template>
+
+        <span ref="example9" style="background-color: white; padding: 16px;">
+            <span class="u-title">Final optional step!</span>
+        </span>
+        <template v-if="onboardings.skippableOnboarding.mustShow">
+            <wc-onboarding
+                v-on:onboarding-change="onboardingChanged"
+                v-bind:number-of-steps="onboardings.skippableOnboarding.numberOfSteps"
+                v-bind:step-number="4"
+                v-bind:active="onboardings.skippableOnboarding.selected == 4"
+                v-bind:target="composeVueRef('example9')"
+                previous-btn-label="Back"
+                confirm-btn-label="Escape!"
+                onboarding-id="skippableOnboarding"
+                skippable
+                trigger-origin="bottom-center"
+                floating-direction="down">
+
+                THIS IS THE FINAL WARNING. SKIP THIS ONBOARDING
+            </wc-onboarding>
+        </template>
+    </div>
+
+    <div v-if="onboardings.skippableOnboarding.completed && !onboardings.skippableOnboarding.skipped" class="u-body1" style="color: green;">
+         You completed the optional onboarding!
+    </div>
+    <div v-if="onboardings.skippableOnboarding.skipped && !onboardings.skippableOnboarding.completed" class="u-body1" style="color: red;">
+         You skipped the optional onboarding! >:(
+    </div>
+    </div>
+
+    <wc-markdown>
+### Implementation notes
+* **Remember to read the component-related information in the steps.**
+* Remember to add a `window.setTimeout` function with at least 300ms delay **if you want to wait for the opening/closing animation of the onboarding**
+    </wc-markdown>
+
+    <span>For positioning details, see <router-link to="/behaviors/floating-layer#sandbox">floating layer</router-link> behavior.</span>
+
+    <div v-bind:style="contentStyle">
+        <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+/**
+* Toggle styles
+*
+* More details: zpl.io/1fmokb
+*
+* .wc-Toggle: main component wrapper
+*     .wc-Toggle.is-disabled - styles for the disabled state
+* .wc-Toggle__container: used to position the buttons container in the correct alignment
+*     .wc-Toggle__container--noTopSpacing - removes the spacing between the label and the toggle buttons
+* .wc-Toggle__buttons: container for all the toggle buttons.
+* .wc-Toggle__label: main label for the component
+*/
+
+@import "settings/_components";
+@import "tools/mixins/_typography";
+
+//---------- #wc-Toggle  ---------- /
+
+.wc-Toggle {
+    padding: 14px 0 5px;
+
+    //---------- #wc-Toggle.is-disabled ---------- /
+
+    &.is-disabled & {
+        &__label {
+            color: $wc-typoicon-disabled-dark;
+        }
+    }
+
+    //---------- #wc-Toggle__buttons ---------- /
+
+    &__buttons {
+        display: flex;
+        flex-flow: row wrap;
+        margin: -8px 0 0 -8px;
+    }
+
+    //---------- #wc-Toggle__container ---------- /
+
+    &__container {
+        padding: 8px 0 5px;
+        overflow: hidden;
+
+    //---------- #wc-Toggle__container--noTopSpacing ---------- /
+
+        &--noTopSpacing {
+            padding-top: 0px;
+            overflow: visible;
+        }
+    }
+
+    //---------- #wc-Toggle__label ---------- /
+
+    &__label {
+        @include generate-text-styles("caption2");
+        color: $wc-toggle-label;
+    }
+
+    //---------- #wc-Toggle__error ---------- /
+
+    &__error {
+        @include generate-text-styles("caption1");
+        color: $wc-toggle-error;
+    }
+}

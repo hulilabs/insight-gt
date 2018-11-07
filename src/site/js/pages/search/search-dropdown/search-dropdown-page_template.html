@@ -1,0 +1,57 @@
+<div  style="position: relative">
+
+    <wc-markdown>
+# Search with dropdown
+
+Use `wc-search-dropdown` in order to display a dropdown menu with the filtered
+results below the input.
+    </wc-markdown>
+
+    <div class="DemoTable DemoTable--solid">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <div v-bind:style="getDropdownWidth">
+                    <wc-search-dropdown
+                        v-bind:placeholder="dropdownPlaceholder"
+                        v-bind:dataSource="resultItems"
+                        v-bind:not-found-label="notFoundLabel"
+                        v-bind:rows="dropdownRows"
+                        v-on:searchdropdown-search="_onSearchDropdownHandler"
+                        v-on:searchdropdown-select="_onSearchDropdownSelect">
+                    </wc-search-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Configure</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <div class="DemoTable__option">
+                        <wc-text-field v-model="dropdownWidth"
+                            type="number"
+                            min="0"
+                            step="200"
+                            hintText="0 means full width"
+                            label="Container width"
+                            >
+                        </wc-text-field>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-text-field v-model="dropdownPlaceholder" label="Placeholder">
+                        </wc-text-field>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-text-field v-model="dropdownRows" label="Rows" type="number" min="0"></wc-text-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Value</div>
+            <div class="DemoTable__columnRight">{{searchDropdownValue}}</div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

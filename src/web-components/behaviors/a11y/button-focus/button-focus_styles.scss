@@ -1,0 +1,13 @@
+/*------------------------------------*\
+
+        #BUTTON FOCUS UTILITIES
+
+\*------------------------------------*/
+
+// written like this to prevent side effects in `hover` and `active` states
+// due to specificity, since the buttons keep the focus state after being clicked
+// and we don't want to disallow the default styles for those states
+.is-focus-disabled:not(:hover):not(:active):focus {
+    outline:none;
+    background-color: transparent;
+}

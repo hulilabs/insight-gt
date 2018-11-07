@@ -1,0 +1,9 @@
+<div class="wc-Toggle" v-bind:class="{ 'is-disabled' : disabled }">
+    <label class="wc-Toggle__label">{{label}}</label>
+    <div class="wc-Toggle__container" v-bind:class="{ 'wc-Toggle__container--noTopSpacing' : noTopSpacing }">
+        <div class="wc-Toggle__buttons">
+            <slot></slot>
+        </div>
+    </div>
+    <div class="wc-Toggle__error">{{error}}</div>
+</div>

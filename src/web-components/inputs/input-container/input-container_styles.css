@@ -1,0 +1,383 @@
+/**
+* InputContainer styles
+*
+* More details: https://zpl.io/Z2absbx
+*
+* .wc-InputContainer - wrapper of an input-like element that contains material textfield's behaviors
+*     .wc-InputContainer.is-dirty - state when the user has entered content into the input (not empty)
+*     .wc-InputContainer.is-focused - input is currently focused
+*     .wc-InputContainer.is-disabled - disabled state of the input. Affects the looks of the label
+*     .wc-InputContainer.has-action - if the input element has an action
+*     .wc-InputContainer.has-error - error state of the input. Affects the looks of the label
+*     .wc-InputContainer.has-suffix - flag for determine if extra padding should be added to the content
+*     .wc-InputContainer.has-floating-label - defines the floating label behavior styles
+*     .wc-InputContainer.is-InputContainer__input - element that is being wrapped up
+*     .wc-InputContainer.is-title - increases the size of the label, placeholder and suffix to the title font
+*     .wc-InputContainer.is-headline - increases the size of the label, placeholder and suffix to the headline font
+*     .wc-InputContainer.hide-input-highlighter - hides the highlighter of the input, a little line at the bottom of the field
+*           .wc-InputContainer__element
+*           .wc-InputContainer__element ::after
+* .wc-InputContainer__action - an action that interacts with the input element
+*     .wc-InputContainer__action.is-disabled - action disabled for interaction but still visible
+* .wc-InputContainer__content - container of input element and the suffix, for positioning
+* .wc-InputContainer__label - label tag that describes the input
+* .wc-InputContainer__placeholder - input element's placeholder
+* .wc-InputContainer__required - special character (*) for highlighting required fields
+* .wc-InputContainer__element - wrapper for the input element
+* .wc-InputContainer__hint - hint text displayed below the input. Acts as an additional description
+* .wc-InputContainer__counter - character counter that displays the input's value length
+* .wc-InputContainer__suffix - suffix content placed after the input
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/* line 56, input-container_styles.scss */
+.wc-InputContainer {
+  overflow: hidden;
+  padding-bottom: 5px;
+  padding-top: 14px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+/* line 68, input-container_styles.scss */
+.wc-InputContainer--secondary-style .wc-InputContainer__action {
+  margin-right: 16px;
+}
+/* line 72, input-container_styles.scss */
+.wc-InputContainer--secondary-style .wc-InputContainer__content {
+  padding-left: 16px;
+  box-sizing: border-box;
+}
+/* line 77, input-container_styles.scss */
+.wc-InputContainer--secondary-style .wc-InputContainer__placeholder {
+  padding-left: 16px;
+  padding-right: 32px;
+  box-sizing: border-box;
+}
+/* line 86, input-container_styles.scss */
+.wc-InputContainer__label {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  font-weight: bold;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  cursor: default;
+  display: block;
+  width: 100%;
+}
+/* line 95, input-container_styles.scss */
+.wc-InputContainer__placeholder {
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  cursor: inherit;
+  padding-top: 2px;
+  position: absolute;
+}
+/* line 102, input-container_styles.scss */
+.wc-InputContainer__label, .wc-InputContainer__placeholder {
+  color: rgba(0, 0, 0, 0.54);
+  padding-bottom: 5px;
+}
+/* line 110, input-container_styles.scss */
+.wc-InputContainer__required {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  font-weight: bold;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 117, input-container_styles.scss */
+.wc-InputContainer__element {
+  color: rgba(0, 0, 0, 0.87);
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  position: relative;
+}
+/* line 125, input-container_styles.scss */
+.wc-InputContainer .wc-InputContainer__element {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+/* line 128, input-container_styles.scss */
+.wc-InputContainer .wc-InputContainer__element::after {
+  background-color: #00ACC1;
+  bottom: -1px;
+  content: "";
+  display: block;
+  height: 2px;
+  position: absolute;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+/* line 142, input-container_styles.scss */
+.wc-InputContainer.hide-input-highlighter .wc-InputContainer__element {
+  border-bottom: 0px;
+}
+/* line 145, input-container_styles.scss */
+.wc-InputContainer.hide-input-highlighter .wc-InputContainer__element::after {
+  display: none;
+}
+/* line 153, input-container_styles.scss */
+.wc-InputContainer__action {
+  color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: auto;
+}
+/* line 164, input-container_styles.scss */
+.wc-InputContainer__action.is-disabled {
+  pointer-events: none;
+}
+/* line 171, input-container_styles.scss */
+.wc-InputContainer .is-InputContainer__input {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: initial;
+  color: inherit;
+  min-height: 20px;
+  outline: none;
+  padding: 0;
+  width: 100%;
+}
+/* line 185, input-container_styles.scss */
+.wc-InputContainer .is-InputContainer__input::-webkit-datetime-edit {
+  color: rgba(0, 0, 0, 0.54);
+}
+/* line 190, input-container_styles.scss */
+.wc-InputContainer .is-InputContainer__input[readonly], .is-InputContainer__input[readonly] ~ .wc-InputContainer__action {
+  cursor: default;
+  pointer-events: none;
+}
+/* line 198, input-container_styles.scss */
+.wc-InputContainer__counter, .wc-InputContainer__hint {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  font-weight: bold;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 206, input-container_styles.scss */
+.wc-InputContainer__counter {
+  text-align: right;
+}
+/* line 210, input-container_styles.scss */
+.wc-InputContainer__hint ~ .wc-InputContainer__counter {
+  bottom: 4px;
+  position: absolute;
+  right: 0;
+}
+/* line 218, input-container_styles.scss */
+.wc-InputContainer__suffix {
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.87);
+  padding-bottom: 10px;
+}
+/* line 229, input-container_styles.scss */
+.wc-InputContainer.is-title .wc-InputContainer__placeholder,
+.wc-InputContainer.is-title .wc-InputContainer__suffix,
+.wc-InputContainer.is-title .is-InputContainer__input {
+  font-size: 22px;
+  letter-spacing: 0.3px;
+  line-height: normal;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 235, input-container_styles.scss */
+.wc-InputContainer.is-title .wc-InputContainer__action {
+  top: -3px;
+}
+/* line 243, input-container_styles.scss */
+.wc-InputContainer.is-headline .wc-InputContainer__placeholder,
+.wc-InputContainer.is-headline .wc-InputContainer__suffix,
+.wc-InputContainer.is-headline .is-InputContainer__input {
+  font-size: 26px;
+  letter-spacing: normal;
+  line-height: 34px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 249, input-container_styles.scss */
+.wc-InputContainer.is-headline .is-InputContainer__input {
+  height: auto;
+}
+/* line 253, input-container_styles.scss */
+.wc-InputContainer.is-headline .wc-InputContainer__action {
+  top: 6px;
+}
+/* line 261, input-container_styles.scss */
+.wc-InputContainer.is-disabled .wc-InputContainer__label, .wc-InputContainer.is-disabled .wc-InputContainer__placeholder, .wc-InputContainer.is-disabled .wc-InputContainer__element, .wc-InputContainer.is-disabled .wc-InputContainer__suffix {
+  color: rgba(0, 0, 0, 0.26);
+  cursor: default;
+  pointer-events: none;
+}
+/* line 274, input-container_styles.scss */
+.wc-InputContainer.is-disabled .is-InputContainer__input::-webkit-datetime-edit {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 280, input-container_styles.scss */
+.wc-InputContainer.is-disabled .wc-InputContainer__action {
+  color: rgba(0, 0, 0, 0.26);
+  cursor: default;
+  pointer-events: none;
+}
+/* line 289, input-container_styles.scss */
+.wc-InputContainer.is-focused .wc-InputContainer__label {
+  color: #00ACC1;
+}
+/* line 293, input-container_styles.scss */
+.wc-InputContainer.is-focused .wc-InputContainer__required {
+  color: #D32F2F;
+}
+/* line 297, input-container_styles.scss */
+.wc-InputContainer.is-focused .wc-InputContainer__element::after {
+  transform: translateX(0);
+}
+/* line 305, input-container_styles.scss */
+.wc-InputContainer.has-error .wc-InputContainer__label {
+  color: #D32F2F;
+}
+/* line 309, input-container_styles.scss */
+.wc-InputContainer.has-error .wc-InputContainer__required {
+  color: #D32F2F;
+}
+/* line 313, input-container_styles.scss */
+.wc-InputContainer.has-error .wc-InputContainer__element::after {
+  background-color: #D32F2F;
+  transform: translateX(0);
+}
+/* line 318, input-container_styles.scss */
+.wc-InputContainer.has-error .wc-InputContainer__counter {
+  bottom: 4px;
+  color: #D32F2F;
+  position: absolute;
+  right: 0;
+}
+/* line 329, input-container_styles.scss */
+.wc-InputContainer.is-dirty .wc-InputContainer__placeholder {
+  opacity: 0;
+  pointer-events: none;
+}
+/* line 337, input-container_styles.scss */
+.wc-InputContainer.is-dirty .is-InputContainer__input::-webkit-datetime-edit, .wc-InputContainer.is-focused .is-InputContainer__input::-webkit-datetime-edit {
+  color: rgba(0, 0, 0, 0.87);
+}
+/* line 345, input-container_styles.scss */
+.wc-InputContainer.has-floating-label .wc-InputContainer__label {
+  cursor: inherit;
+  transform: translateY(24px) scale(1.3);
+  transform-origin: top left;
+  transition: transform 0.3s;
+}
+/* line 356, input-container_styles.scss */
+.wc-InputContainer.has-floating-label.is-headline .wc-InputContainer__label {
+  transform: translateY(23px) scale(2.11);
+}
+/* line 364, input-container_styles.scss */
+.wc-InputContainer.has-floating-label.is-title .wc-InputContainer__label {
+  transform: translateY(21px) scale(1.8);
+}
+/* line 372, input-container_styles.scss */
+.wc-InputContainer.has-floating-label:not(.is-dirty) .wc-InputContainer__label {
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: normal;
+}
+/* line 379, input-container_styles.scss */
+.wc-InputContainer.has-floating-label.is-dirty .wc-InputContainer__label {
+  transform: translateY(0) scale(1);
+  transform-origin: top left;
+}
+/* line 388, input-container_styles.scss */
+.wc-InputContainer.has-floating-label.has-error .wc-InputContainer__label {
+  color: #D32F2F;
+}
+/* line 396, input-container_styles.scss */
+.wc-InputContainer.has-floating-label.is-disabled .wc-InputContainer__label {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 404, input-container_styles.scss */
+.wc-InputContainer.has-suffix .wc-InputContainer__content {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+}
+/* line 410, input-container_styles.scss */
+.wc-InputContainer.has-suffix .wc-InputContainer__element {
+  margin-right: 8px;
+  width: 100%;
+}
+/* line 419, input-container_styles.scss */
+.wc-InputContainer.has-action .wc-InputContainer__element {
+  padding-right: 36px;
+}

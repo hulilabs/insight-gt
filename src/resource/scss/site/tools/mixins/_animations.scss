@@ -1,0 +1,35 @@
+/*------------------------------------*\
+
+      #GLOBAL ANIMATION MIXINS
+
+\*------------------------------------*/
+@import "compass/css3/animation";
+
+@mixin checkAnimation($height, $width, $duration, $start-lapse) {
+    @include keyframes(check) {
+      0% {
+        height: 0;
+        width: 0;
+        visibility: visible;
+      }
+
+      25%{
+        height: 0;
+        width: $width;
+        visibility: visible;
+      }
+
+      50% {
+        width: $width;
+        height: $height;
+        visibility: visible;
+      }
+
+      100%{
+        width: $width;
+        height: $height;
+        visibility: visible;
+      }
+    }
+    animation: check $duration linear $start-lapse forwards;
+}

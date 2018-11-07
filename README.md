@@ -1,31 +1,33 @@
-[ ![Codeship Status for hulilabs/web-components](https://codeship.com/projects/c43494a0-617d-0134-a864-52056d8a95f1/status?branch=master)](https://codeship.com/projects/174827)
+[ ![Codeship Status for hulilabs/insight-gt](https://app.codeship.com/projects/d884d130-c4f0-0136-192a-36d931be695a/status?branch=master)](https://app.codeship.com/projects/314239)
 
 # Introduction
+
 Reusable widgets or components in web applications. The intention behind them is to bring component-based software engineering to the Web. The components model allows for encapsulation and interoperability of individual HTML elements.
 
 #Getting started
 
 ## Requirements
+
 The components are based on material design and using the Vue framework
 
 - [vue](https://vuejs.org/)
 
 ## Installation
 
-
 ### Bower
+
 1. Add this reference to the bower.json:
 
-  ```javascript
-  "web-components" : "hulilabs/web-components#latest",
-  ```
+```javascript
+"web-components" : "hulilabs/web-components#latest",
+```
 
 2. Run the command:
 
-  ```bash
-  cd src/resources
-  bower install
-  ```
+```bash
+cd src/resources
+bower install
+```
 
 ## Configuration
 
@@ -34,9 +36,9 @@ The components are based on material design and using the Vue framework
 1. Open the require-config.js file
 2. Add the library reference
 
-  ```javascript
-  "web-components" : "PATH_WHERE_IT_WAS_INSTALLED/src/web-components"
-  ```
+```javascript
+"web-components" : "PATH_WHERE_IT_WAS_INSTALLED/src/web-components"
+```
 
 ## Components naming conventions
 
@@ -45,16 +47,17 @@ The components are based on material design and using the Vue framework
 As we are following material design it makes sense to use the same name material uses. Please validate this with the designer first.
 
 ### Filename
+
 There are basically four types of files on this repo, please follow the pattern this pattern **component-name_type** for each one.
 
-Type |  Example
----- | ---
-component code| drawer_component.js
-component template| drawer_template.html
-component styles | drawer_styles.scss
-
+| Type               | Example              |
+| ------------------ | -------------------- |
+| component code     | drawer_component.js  |
+| component template | drawer_template.html |
+| component styles   | drawer_styles.scss   |
 
 ### Structure
+
 There are categories (material design) when talking about components, for example let's say we have a category 'buttons' with regular buttons (flat, raised) and a image button.
 
 So the structure will be:
@@ -78,12 +81,11 @@ web-components/
 - For each component there is a folder inside a category
 - Each component has all its files on its folder (css,js,html)
 
-
 ### Usage
 
 It's recommended to use a prefix when importing the components into the app (template), example:
 
-``` javascript
+```javascript
 define([
     'web-components/markdown/markdown_component'
 ], function(
@@ -97,6 +99,7 @@ define([
         }
         ...
 ```
+
 Usage in template
 
 ```html
@@ -108,8 +111,8 @@ Usage in template
 There are three main folders:
 
 - **resource**: multipurpose folder, used to store configuration and SCSS files. **Each SCSS folder follows Huli's standard (ITCSS) and are totally independent between them.**
-    - scss/site : SASS files for the site
-    - scss/web-components : SASS files for the components.
+  - scss/site : SASS files for the site
+  - scss/web-components : SASS files for the components.
 - **site**: web components documentation site, each web-component should have a page in the site explaining how to use it and some demos.
 - **web-components**: this is the main folder of the repo, where the components live.
 
@@ -133,6 +136,7 @@ More details:
 - [vue unit testing examples](https://github.com/vuejs/vue/tree/dev/test/unit)
 
 #### Running tests on an actual browser
+
 By default, the tests run on a headless browser, but sometimes you may need to run them on an actual browser, with UI and dev tools (like debugging). If you want to do so:
 
 1. Navigate to the `src/resource` folder
@@ -141,27 +145,31 @@ By default, the tests run on a headless browser, but sometimes you may need to r
 
 As you may have noticed, the tests will use a different setup file named `karma-local.conf.js`. Here are the differences with the default configuration:
 
-* You can pass a `--browser` argument with the browser name to run (e.g. `--browser Chrome`). Firefox is launched by default.  The available values are `Chrome`, `Chromium`, `Firefox`
-* The browser won't exit after running the tests, it will stay open
-* The source files will be watched for changes, so the tests will run automatically when the code changes
-* If you want to dive deep on a test, you will have to add a breakpoint in the test case
+- You can pass a `--browser` argument with the browser name to run (e.g. `--browser Chrome`). Firefox is launched by default. The available values are `Chrome`, `Chromium`, `Firefox`
+- The browser won't exit after running the tests, it will stay open
+- The source files will be watched for changes, so the tests will run automatically when the code changes
+- If you want to dive deep on a test, you will have to add a breakpoint in the test case
 
-*Notice*
+_Notice_
 There are some cases where a headless browser will need a workaround in order to make some tests pass. This setup is ideal to know when you need to do so, because the tests will pass on Firefox but not in the headless browser (PhantomJS).
 
 ### Coverage reports
+
 We use [Karma Coverage package](https://github.com/karma-runner/karma-coverage) to generate coverage reports and ensure that minimal thresholds are met. You can refer to the package's documentation for more detail about the options.
 
 #### Current coverage thresholds
+
 The build process will throw an error if any of the following thresholds isn't met:
-* Statements: 80%
-* Lines: 80%
-* Functions: 80%
-* Branches: no threshold currently set
+
+- Statements: 80%
+- Lines: 80%
+- Functions: 80%
+- Branches: no threshold currently set
 
 #### Obtaining a coverage report
-* On the CI server, a summary report will be automatically displayed, with the percentual coverage for statements, branches, functions and lines.
-* Locally, you need to add the `--coverage` flag, which will output the coverage per file, showing the same statements, branches, functions and lines stats. Example command:
+
+- On the CI server, a summary report will be automatically displayed, with the percentual coverage for statements, branches, functions and lines.
+- Locally, you need to add the `--coverage` flag, which will output the coverage per file, showing the same statements, branches, functions and lines stats. Example command:
 
 ```
 web-components/src/resource$ node_modules/karma/bin/karma start karma-local.conf.js --browser Chromium --coverage
@@ -182,7 +190,7 @@ After install, run `yo web-components --help` for more details
 1. Navigate to `src/resource/generator-web-components` folder
 2. Run `npm install -g yo`
 3. Run `npm install`
-3. Do `npm link`
+4. Do `npm link`
 
 ### Usage
 
@@ -196,6 +204,7 @@ yo web-components {name}
 ## Setup
 
 #### Starting the server
+
 Execute in the terminal these commands:
 
 1. docker-compose pull
@@ -221,52 +230,54 @@ Once you have installed and configured the library in the app, execute the follo
 
 1. Create the following structure inside the resource folder:
 
-	```
-	resource/
-		web-components-config/
-			scss/
+   ```
+   resource/
+   	web-components-config/
+   		scss/
 
-	```
+   ```
 
-2. Copy and paste the web-components configuration from this repo *resource/compass-config/web-components-config.rb* into the app *web-components-config/*
+2. Copy and paste the web-components configuration from this repo _resource/compass-config/web-components-config.rb_ into the app _web-components-config/_
 
-	```
-	resource/
-		web-components-config/
-			scss/
-			web-components-config.rb
-	```
+   ```
+   resource/
+   	web-components-config/
+   		scss/
+   		web-components-config.rb
+   ```
 
-3. Modify the app *web-components-config.rb* and set the variables to the path where the web-components library is installed, for example:
+3. Modify the app _web-components-config.rb_ and set the variables to the path where the web-components library is installed, for example:
 
-	```
-	css_dir = 'src/js/lib/vendors/web-components/src/web-components'
-	sass_dir = 'src/js/lib/vendors/web-components/src/web-components'
+   ```
+   css_dir = 'src/js/lib/vendors/web-components/src/web-components'
+   sass_dir = 'src/js/lib/vendors/web-components/src/web-components'
 
-	add_import_path "src/js/lib/vendors/web-components/src/resource/scss/web-components"
-	```
+   add_import_path "src/js/lib/vendors/web-components/src/resource/scss/web-components"
+   ```
 
-4.  To use the new configuration folder *web-components-config* in compilation time, add an aditional import path:
+4. To use the new configuration folder _web-components-config_ in compilation time, add an aditional import path:
 
-	```
-	additional_import_paths = "resource/web-components-config/scss"
-	```
+   ```
+   additional_import_paths = "resource/web-components-config/scss"
+   ```
 
 ###### Customizing the library
 
 Now that all is set to compile the library using the new configuration folder, define the variables you want to change, for example, if you want to change the primary-color just do sometime like that:
 
-	```
-	// import the original variables file
-	@import "js/lib/vendors/web-components/src/resource/scss/web-components/settings/_colors";
+    ```
+    // import the original variables file
+    @import "js/lib/vendors/web-components/src/resource/scss/web-components/settings/_colors";
 
-	// define the new value
-	$wc-primary-color: red;
+    // define the new value
+    $wc-primary-color: red;
 
-	```
+    ```
+
 This is a better approach than overriding variables because we can track what variables are we changing and we can update the library easily.
 
 ## References
+
 - [Introduction to web components and guidelines](https://github.com/hulilabs/docs/blob/master/sections/frontend/components.md)
 - [Vue](https://vuejs.org/)
 - [Material Design](https://material.google.com/)

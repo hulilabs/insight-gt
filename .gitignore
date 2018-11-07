@@ -23,8 +23,8 @@ src/test/selenium/test-cases/compiled
 selenium/selenium/target
 
 codeship.aes
-codeship-deployment.env
-codeship-deploy.env
+codeship-deploy-production.env
+codeship-deploy-staging.env
 
 # Karma & test-related
 src/coverage

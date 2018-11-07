@@ -31,15 +31,15 @@ if [ "$tag" = "master" ]; then
 fi
 
 # create the service if not exists, update otherwise
-sudo docker service ls | grep -q " web-components "
+sudo docker service ls | grep -q " insight-gt "
 if [ $? -eq 1 ]; then
     sudo docker service create \
         --constraint 'node.labels.group == internal' \
         --container-label version="$version" \
         --detach=false \
         --log-driver syslog \
-        --log-opt tag=web-components \
-        --name web-components \
+        --log-opt tag=insight-gt \
+        --name insight-gt \
         --network huli \
         --replicas 2 \
         --reserve-cpu $reserve_cpu \
@@ -54,16 +54,16 @@ if [ $? -eq 1 ]; then
         --update-order 'start-first' \
         --update-parallelism 0 \
         --with-registry-auth \
-        huli/web-components:$tag \
-    || { echo $0: Failed to create web-components; exit 1; }
+        huli/insight-gt:$tag \
+    || { echo $0: Failed to create insight-gt; exit 1; }
 else
     sudo docker service update \
         --container-label-add version="$version" \
         --detach=false \
         --force \
-        --image huli/web-components:$tag \
+        --image huli/insight-gt:$tag \
         --log-driver syslog \
-        --log-opt tag=web-components \
+        --log-opt tag=insight-gt \
         --reserve-cpu $reserve_cpu \
         --reserve-memory $reserve_memory \
         --rollback-delay 10s \
@@ -75,8 +75,8 @@ else
         --update-monitor 30s \
         --update-order 'start-first' \
         --update-parallelism 0 \
-        web-components \
-    || { echo $0: Failed to update web-components; exit 1; }
+        insight-gt \
+    || { echo $0: Failed to update insight-gt; exit 1; }
 fi
 
 exit 0

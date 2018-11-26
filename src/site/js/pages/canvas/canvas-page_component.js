@@ -15,7 +15,7 @@
  */
 define([
     'vue',
-    'segmentation',
+    'segmentation/segmentation',
     'web-components/buttons/flat/flat-button_component',
     'web-components/canvas/canvas_component',
     'web-components/inputs/textfield/textfield_component',

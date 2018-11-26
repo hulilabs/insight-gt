@@ -28,7 +28,8 @@ require.config({
         "jump" : "site/js/lib/vendor/jump.js/dist/jump",
         "utilities" : "site/js/lib/vendor/utilities/utilities",
         "floodfill" : "site/js/lib/vendor/utilities/floodfill",
-        "segmentation" : "site/js/lib/vendor/segmentation/segmentation"
+        "segmentation" : "site/js/insight-gt/segmentation",
+        "morph" : "site/js/insight-gt/segmentation/morph"
     },
     "waitSeconds" : 30
 });

@@ -8,10 +8,10 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(["./segmentation/pff",
-        "./segmentation/slic",
-        "./segmentation/slico",
-        "./segmentation/watershed"],
+define(["segmentation/pff",
+        "segmentation/slic",
+        "segmentation/slico",
+        "segmentation/watershed"],
 function (pff, slic, slico, watershed) {
 
   var methods = {

@@ -10,8 +10,8 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(["./base",
-        "../compat"],
+define(["segmentation/base",
+        "segmentation/compat"],
 function(BaseSegmentation, compat) {
   function SLICO(imageData, options) {
     BaseSegmentation.call(this, imageData, options);

@@ -6,8 +6,7 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(["./compat"],
-function (compat) {
+define(function () {
   var INF = 1e20;
 
   function distanceTransform1D(f, n) {
@@ -80,8 +79,9 @@ function (compat) {
       height: intensity.height,
       data: new Float32Array(intensity.data.length)
     };
-    for (var offset = 0; offset < distanceMap.data.length; ++offset)
-      distanceMap.data[offset] = (intensity.data[offset]) ? 0 : INF;
+    for (var offset = 0; offset < distanceMap.data.length; ++offset) {
+        distanceMap.data[offset] = (intensity.data[offset]) ? 0 : INF;
+    }
     distanceTransform2D(distanceMap);
     //if (options.outputRGB)
     //  distanceMap = intensity2rgb(distanceMap);

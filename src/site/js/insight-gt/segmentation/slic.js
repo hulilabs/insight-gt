@@ -20,8 +20,8 @@
  *
  * Copyright 2014  LongLong Yu.
  */
-define(["./base",
-        "../compat"],
+define(["segmentation/base",
+        "segmentation/compat"],
 function(BaseSegmentation, compat) {
 
   // SLIC segmentation.

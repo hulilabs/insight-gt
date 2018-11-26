@@ -3,7 +3,7 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(["../compat"],
+define(["segmentation/compat"],
 function (compat) {
   
     function BaseSegmentation(imageData, options) {

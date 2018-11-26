@@ -11,11 +11,11 @@
  *  * Create a graph-structure for coarse/fine adjustment.
  *
  */
-define(["./base",
-        "./binary-heap-priority-queue",
-        "../canny",
-        "../compat",
-        "../distance-transform"],
+define(["segmentation/base",
+        "segmentation/binary-heap-priority-queue",
+        "segmentation/canny",
+        "segmentation/compat",
+        "segmentation/distance-transform"],
 function (BaseSegmentation, PriorityQueue, canny, compat, distanceTransform) {
   // Constructor for the segmentation configuration.
   function WatershedSegmentation(imageData, options) {

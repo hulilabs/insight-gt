@@ -2,8 +2,8 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(["./compat",
-        "./morph/max-filter"],
+define(["segmentation/compat",
+        "morph/max-filter"],
 function (compat, maxFilter) {
   function decodeIndexImage(imageData) {
     var indexImage = {

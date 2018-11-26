@@ -4,8 +4,7 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(["./compat"],
-function (compat) {
+define(function () {
   function createIntensityData(width, height) {
     return {
       width: width,

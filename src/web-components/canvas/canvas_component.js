@@ -24,7 +24,7 @@
  */
 define([
     'vue',
-    'segmentation',
+    'segmentation/segmentation',
     'floodfill',
     'web-components/utils/dom',
     'text!web-components/canvas/canvas_template.html',
@@ -205,7 +205,9 @@ define([
              */
             layers : {
                 type : Array,
-                default : 0,
+                default : function() {
+                    return [];
+                },
             },
             /**
              * Flag that indicates if a canvas has an outline image
@@ -236,7 +238,9 @@ define([
              */
             strokeColors : {
                 type : Array,
-                default : [DEFAULT.STROKE_COLOR],
+                default : function() {
+                    return [DEFAULT.STROKE_COLOR];
+                },
             },
             /**
              * Store the colors corresponding to each layer.
@@ -244,7 +248,10 @@ define([
              */
             strokeArray : {
                 type : Array,
-                default : [[219, 4, 4]],
+                default : function() {
+                    // @TODO: change for constant
+                    return [[219, 4, 4]];
+                },
             },
             /**
              * Stroke thickness

@@ -3,7 +3,7 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(function() {
+define([], function() {
     function BaseSegmentation(imageData) {
         var context = document.createElement('canvas').getContext('2d');
         this.imageData = context.createImageData(imageData.width, imageData.height);

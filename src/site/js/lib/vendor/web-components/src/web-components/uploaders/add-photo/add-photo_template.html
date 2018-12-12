@@ -1,0 +1,50 @@
+<button class="wc-AddPhoto" v-bind:class="[ {'is-clickable' : uploadable} , 'wc-AddPhoto--size-' + size + 'x']" v-on:click="_upload">
+
+    <wc-avatar v-bind:image-path="imagePath"
+               v-bind:text="text"
+               class="wc-AddPhoto__avatar"
+               v-bind:square="square"
+               v-bind:expand="expand"
+               v-bind:class="['wc-Avatar--size-' + size + 'x']">
+    </wc-avatar>
+
+    <template v-if="progress">
+        <div class="wc-AddPhoto__overlay"
+             v-bind:class="['wc-Avatar--size-' + size + 'x', { 'wc-AddPhoto__overlay--square' : square }]"></div>
+        <wc-circular-loader
+                v-if="progress > 0 && !square"
+                light
+                v-bind:indeterminate="indeterminate"
+                v-bind:progress="progress"
+                class="wc-AddPhoto__loader">
+        </wc-circular-loader>
+        <wc-linear-loader
+                v-if="progress > 0 && square"
+                v-bind:indeterminate="indeterminate"
+                v-bind:progress="progress">
+        </wc-linear-loader>
+    </template>
+
+    <template v-else>
+        <div v-if="uploadable || retry"
+             class="wc-AddPhoto__overlay"
+             v-bind:class="['wc-Avatar--size-' + size + 'x', { 'wc-AddPhoto__overlay--square' : square }]">
+
+            <div class="wc-AddPhoto__upload">
+                <wc-icon v-if="retry" class="wc-Icon--size-5x" icon-class="icon-refresh"></wc-icon>
+                <wc-icon v-else-if="uploadable" class="wc-Icon--size-5x" icon-class="icon-camera"></wc-icon>
+            </div>
+        </div>
+
+        <div class="wc-AddPhoto__delete"
+             v-if="deletable"
+             v-on:click.stop="_delete">
+            <wc-icon icon-class="icon-close" class="wc-AddPhoto__deleteIcon"></wc-icon>
+        </div>
+
+        <p class="wc-AddPhoto__error" v-if="error">
+            {{ error }}
+        </p>
+    </template>
+
+</button>

@@ -1,0 +1,50 @@
+<div style="position: relative">
+    <wc-Markdown>
+# Gestures
+
+## Demo
+
+The following are the supported gestures as of the lastest version.
+
+If you want to test this in a non-touch desktop version then you have to open the dev tools and enable force touch events.
+```
+> Open Dev tools.
+> Open the console.
+> See the three-dot menu in the top left of the console.
+> Hit Sensors.
+> Scroll down and force touch events.
+```
+    </wc-Markdown>
+
+    <div class="GesturesPage">
+    	<div v-wc-gesture:tap="_onTap" class="GesturesPage__gesture">
+         	Tap over me (&lt;300ms)
+        </div>
+
+        <div v-wc-gesture:longtap="_onLongTap" class="GesturesPage__gesture">
+         	Long tap over me (&gt;700ms)
+        </div>
+
+       	<div v-wc-gesture:swipe="_onSwipe" class="GesturesPage__gesture">
+         	Swipe to any direction over me
+        </div>
+
+        <div v-wc-gesture:swipeleft="_onSwipeLeft" class="GesturesPage__gesture">
+         	Swipe left me
+        </div>
+
+        <div v-wc-gesture:swiperight="_onSwipeRight" class="GesturesPage__gesture">
+         	Swipe right me
+        </div>
+
+        <div v-wc-gesture:swipedown="_onSwipeDown" class="GesturesPage__gesture">
+         	Swipe down me
+        </div>
+
+        <div v-wc-gesture:swipeup="_onSwipeUp" class="GesturesPage__gesture">
+         	Swipe up me
+        </div>
+    </div>
+
+    <wc-Markdown v-bind:source="markdownSource.documentation"></wc-Markdown>
+</div>

@@ -1,0 +1,49 @@
+/**
+* Textarea styles
+*
+* wc-Textarea - main component container
+* wc-Textarea__container - inner container
+* wc-Textarea__mirror - container used to grow the text area dynamically
+* wc-Textarea__input - contains the textarea item
+* wc-Textarea__textarea - html textarea
+*/
+
+@import "tools/mixins/_typography";
+
+//---------- #wc-Textarea  ---------- /
+
+.wc-TextArea {
+    cursor: text;
+
+    //---------- #wc-Textarea__container  ---------- /
+
+    &__container {
+        position: relative;
+    }
+
+    //---------- #wc-Textarea__mirror ---------- /
+
+    &__mirror {
+        @include generate-text-styles("body1");
+        visibility: hidden;
+        word-wrap: break-word;
+    }
+
+    //---------- #wc-Textarea__input ---------- /
+
+    &__input {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    //---------- #wc-Textarea_textarea  ---------- /
+
+    &__textarea {
+        height: 100%;
+        resize: none;
+        width: 100%;
+    }
+}

@@ -1,0 +1,73 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Switch
+
+## DEMO
+
+Two states switch component
+
+    </wc-markdown>
+    <h2>Single switch</h2>
+    <div>
+        <div class="DemoTable__row">
+            <wc-switch v-model="switchValue" name="standard"> 
+                Standard Switch
+            </wc-switch>
+        </div>
+        <div class="DemoTable__row">
+            <wc-switch v-model="switchValue2">
+                Switch On
+            </wc-switch>
+        </div>
+        <div class="DemoTable__row">
+            <wc-switch v-model="switchValue3" disabled>
+                Disabled Switch
+            </wc-switch>
+        </div>
+    </div>
+    <h2>List with switches</h2>
+    <div class="DemoTable__columnLeft">
+        <wc-list-item >
+            <wc-switch v-model="switchList" name="id"> 
+                Id
+            </wc-switch>
+        </wc-list-item>
+        <wc-list-item >
+            <wc-switch v-model="switchList2" name="private"> 
+                Private 
+            </wc-switch>
+        </wc-list-item>
+        <wc-list-item >
+            <wc-switch v-model="switchList3" name="email"> 
+                Email
+            </wc-switch>
+        </wc-list-item>
+    </div>
+    <h2>List with custom values</h2>
+    <div class="DemoTable__columnLeft">
+        <wc-list-item >
+            <wc-switch  v-model="listValue" v-bind:custom-value="1"> 
+                Big element
+            </wc-switch>
+        </wc-list-item>
+        <wc-list-item >
+            <wc-switch v-model="listValue" v-bind:custom-value="2"> 
+                Medium element 
+            </wc-switch>
+        </wc-list-item>
+        <wc-list-item >
+            <wc-switch v-model="listValue" v-bind:custom-value="3"> 
+                Small element
+            </wc-switch>
+        </wc-list-item>
+        <wc-list-item >
+            <wc-switch v-model="listValue" v-bind:custom-value="4"> 
+                No element
+            </wc-switch>
+        </wc-list-item>
+    </div>
+    <span class="u-caption4">Switch value: </span><span class="u-caption3">{{listValue}}</span>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+
+</div>

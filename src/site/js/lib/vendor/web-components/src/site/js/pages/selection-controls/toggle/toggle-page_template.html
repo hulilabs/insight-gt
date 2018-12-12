@@ -1,0 +1,59 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Toggle
+
+Toggles are single selection input controls (similar to radio buttons) but can
+include both text and icons.
+
+## Demo
+
+Click on any of the buttons or use the tab or the left/right arrows to navigate,
+and select with space/enter.
+
+    </wc-markdown>
+
+    <div style="margin:10px auto; max-width:400px;">
+        <wc-toggle v-bind:label="state.labelBasic">
+            <wc-toggle-button custom-value="a" v-model="state.selectedBasicValue" name="foo">A</wc-toggle-button>
+            <wc-toggle-button custom-value="b" v-model="state.selectedBasicValue" name="foo">B</wc-toggle-button>
+            <wc-toggle-button custom-value="c" v-model="state.selectedBasicValue" name="foo">C</wc-toggle-button>
+            <wc-toggle-button custom-value="d" v-model="state.selectedBasicValue" name="foo">D</wc-toggle-button>
+            <wc-toggle-button custom-value="e" v-model="state.selectedBasicValue" name="foo">E</wc-toggle-button>
+            <wc-toggle-button custom-value="f" value="f" name="foo" disabled>F</wc-toggle-button>
+        </wc-toggle>
+    </div>
+
+    <p  style="margin:0 auto 20px; max-width:400px;">
+        Current selected value: <span style="font-weight: bold; font-size: 2em;">{{state.selectedBasicValue}}</span>
+    </p>
+
+    <div style="margin:10px auto; max-width:400px;">
+        <wc-toggle v-bind:label="state.noTopSpacingLabel" no-top-spacing>
+            <wc-toggle-button custom-value="a" v-model="state.selectedNoTopSpacingValue" name="foo">A</wc-toggle-button>
+            <wc-toggle-button custom-value="b" v-model="state.selectedNoTopSpacingValue" name="foo">B</wc-toggle-button>
+        </wc-toggle>
+    </div>
+
+    <p  style="margin:0 auto 20px; max-width:400px;">
+        Current selected value: <span style="font-weight: bold; font-size: 2em;">{{state.selectedNoTopSpacingValue}}</span>
+    </p>
+
+    <div style="margin:10px auto; max-width:400px;">
+        <wc-toggle v-bind:label="state.labelWithIcon" v-bind:error="state.errorText">
+            <wc-toggle-button
+                v-for="(item, index) in itemsWithIcons"
+                v-bind:key="index"
+                v-bind:custom-value="item.id"
+                v-model="state.selectedIconValue"
+                v-bind:disabled="!item.isEnabled"
+                name="bar"><wc-icon slot="icon" icon-class="icon-language"></wc-icon>{{item.label}}
+            </wc-toggle-button>
+        </wc-toggle>
+    </div>
+
+    <p style="margin:0 auto 20px; max-width:400px;">
+        Current selected value: <span style="font-weight: bold; font-size: 2em;">{{state.selectedIconValue}}</span>
+    </p>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

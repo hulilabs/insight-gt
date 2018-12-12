@@ -1,0 +1,73 @@
+<div class="wc-TimePicker">
+    <!-- start:native_timepicker -->
+    <wc-textfield
+        type="time"
+        input-class="wc-TimePicker__input"
+        v-bind:action-disabled="native"
+        v-bind:disabled="disabled"
+        v-bind:error-message="errorMessage"
+        v-bind:floating-label="floatingLabel"
+        v-bind:has-error="hasError"
+        v-bind:hint-text="hintText"
+        v-bind:id="id"
+        v-bind:label="label"
+        v-bind:max="max"
+        v-bind:min="min"
+        v-bind:name="name"
+        v-bind:native-error="nativeError"
+        v-bind:readonly="readonly"
+        v-bind:required="required"
+        v-model="state.value"
+        v-on:blur="_onBlur"
+        v-on:focus="_onFocus"
+        v-on:input="setValue"
+        v-on:textfield-action="_openDialog">
+        <wc-icon slot="action" icon-class="icon-angle-down"></wc-icon>
+    </wc-textfield>
+    <!-- end:native_timepicker -->
+
+    <!-- start:custom_timepicker -->
+    <template v-if="!native">
+        <div class="wc-TimePicker__dialog" v-show="shouldDisplayDialog">
+            <div class="wc-TimePicker__header">
+                <span class="wc-TimePicker__title">{{hoursLabel}}</span>
+                <span class="wc-TimePicker__title">{{minutesLabel}}</span>
+                <span class="wc-TimePicker__title"></span>
+            </div>
+            <div class="wc-TimePicker__content">
+                <div class="wc-TimePicker__selector" ref="hoursSelector">
+                    <div class="wc-TimePicker__option"
+                         v-for="hour in hours"
+                         v-bind:class="{ 'is-active' : hour.isActive }"
+                         v-on:click="_selectHours(hour.value)">
+                        {{hour.value}}
+                    </div>
+                </div>
+                <div class="wc-TimePicker__selector" ref="minutesSelector">
+                    <div class="wc-TimePicker__option"
+                         v-for="minute in minutes"
+                         v-bind:class="{ 'is-active' : minute.isActive }"
+                         v-on:click="_selectMinutes(minute.value)">
+                        {{minute.value}}
+                    </div>
+                </div>
+                <div class="wc-TimePicker__selector">
+                    <div class="wc-TimePicker__option"
+                         v-for="meridian in meridians"
+                         v-bind:class="{ 'is-active' : meridian.isActive }"
+                         v-on:click="_selectMeridian(meridian.value)">
+                        {{meridian.value}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="wc-TimePicker__overlay">
+            <wc-overlay block-scroll class="wc-Overlay--transparent"
+                        v-bind:active="shouldDisplayDialog"
+                        v-on:overlay-close="_closeDialog">
+            </wc-overlay>
+        </div>
+    </template>
+    <!-- end:custom_timepicker -->
+</div>

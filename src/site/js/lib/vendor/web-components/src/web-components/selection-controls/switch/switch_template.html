@@ -1,0 +1,23 @@
+<span class="wc-Switch">
+    <input type="checkbox" 
+        v-model="state.value"
+        class="wc-Switch__input"
+        ref="input"
+        v-bind:value="customValue"
+        v-bind:id="pseudoId"
+        v-bind:name="name"
+        v-bind:disabled="disabled"
+        v-on:keyup.enter="_toggle"
+        v-on:change="_onChange">
+    <label class="wc-Switch__view" v-bind:for="pseudoId">
+        <span class="wc-Switch__label">
+            <slot></slot>
+        </span>
+        <span class="wc-Switch__figure">
+            <span class="wc-Switch__track"></span>
+            <span class="wc-Switch__thumb">
+                <wc-ripple ref="ripple" static></wc-ripple>
+            </span>
+        </span>
+    </label>
+</span>

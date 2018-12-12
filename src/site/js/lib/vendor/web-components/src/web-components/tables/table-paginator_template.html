@@ -1,0 +1,25 @@
+<div class="wc-TablePaginator">
+    <span class="wc-TablePaginator__rowsSelectorLabel">{{ rowsSelectorLabel }}</span>
+    <wc-dropdown
+        class="wc-TablePaginator__rowsSelector"
+        v-bind:options="rowsSelectorRange"
+        v-model="model.rowsSelector">
+    </wc-dropdown>
+    <span class="wc-TablePaginator__currentRowsLabel">{{ paginationMixin_currentPageItemsLowerLimit }} - {{ paginationMixin_currentPageItemsHigherLimit }} {{ currentRowsLabel }} {{ totalRows }}</span>
+    <div>
+        <wc-icon-button
+            class="wc-TablePaginator__pageControl"
+            icon-class="icon-angle-left"
+            v-bind:disabled="paginationMixin_isBackDisabled"
+            v-on:click.native="$_paginationMixin_onPreviousPageClickHandler"
+            v-wc-ripple:is-dark
+        ></wc-icon-button>
+        <wc-icon-button
+            class="wc-TablePaginator__pageControl"
+            icon-class="icon-angle-right"
+            v-bind:disabled="paginationMixin_isNextDisabled"
+            v-on:click.native="$_paginationMixin_onNextPageClickHandler"
+            v-wc-ripple:is-dark
+        ></wc-icon-button>
+    </div>
+</div>

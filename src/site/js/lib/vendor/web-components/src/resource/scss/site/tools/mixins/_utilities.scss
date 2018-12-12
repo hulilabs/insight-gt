@@ -1,0 +1,19 @@
+@import "settings/_colors";
+
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+
+//- -------- #Elevation ---------- //
+
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+@mixin component-elevation($elevation){
+    $elevation-in-px : #{$elevation}px;
+    box-shadow: 0 0 $elevation-in-px 0 rgba(#000,$wc-component-shadow-opacity),
+     0 $elevation-in-px $elevation-in-px 0 rgba(#000,$wc-component-second-shadow-opacity);
+    z-index: $elevation;
+}

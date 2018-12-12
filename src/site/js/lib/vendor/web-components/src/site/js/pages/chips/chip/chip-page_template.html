@@ -1,0 +1,58 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Chip
+
+## Demo
+
+The following are all the available configurations for the `wc-Chip` component
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">
+                Normal chip with text
+            </div>
+            <div class="DemoTable__columnRight" ref="chipContainer1">
+                <wc-chip ref="chip1" v-bind:text="text" v-on:chip-close="closeChip(1)"></wc-chip>
+            </div>
+        </div>
+
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">
+                Normal chip using an alphanumeric avatar
+            </div>
+            <div class="DemoTable__columnRight" ref="chipContainer2">
+                <wc-chip ref="chip2" v-bind:text="text" v-bind:avatarText="avatarText" v-on:chip-close="closeChip(2)"></wc-chip>
+            </div>
+        </div>
+
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">
+                Normal chip using an image avatar and the close button is visible
+            </div>
+            <div class="DemoTable__columnRight" ref="chipContainer3">
+                <wc-chip ref="chip3" v-bind:text="text" v-bind:imagePath="avatarSource.imagePath" v-bind:closeButtonVisible="closeButtonVisible" v-on:chip-close="closeChip(3)"></wc-chip>
+            </div>
+        </div>
+
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">
+                Mobile chip
+            </div>
+            <div class="DemoTable__columnRight" ref="chipContainer4">
+                <wc-chip ref="chip4" v-bind:text="text" v-on:chip-close="closeChip(4)" mobile></wc-chip>
+            </div>
+        </div>
+
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft DemoTable__columnLeft--large">
+                Normal chip with error
+            </div>
+            <div class="DemoTable__columnRight">
+                <wc-chip v-bind:text="text" v-bind:imagePath="avatarSource.imagePath" v-bind:closeButtonVisible="closeButtonVisible" has-error></wc-chip>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

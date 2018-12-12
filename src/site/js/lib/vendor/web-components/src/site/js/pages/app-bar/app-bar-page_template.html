@@ -1,0 +1,195 @@
+<div  style="position: relative">
+    <wc-markdown>
+# App Bar
+
+## Demo
+    </wc-markdown>
+
+<div class="DemoTable">
+    <wc-markdown>
+
+#### App bar with only the navigation action:
+    </wc-markdown>
+
+    <wc-app-bar title="Title" titleClass="titleClass" style="margin-bottom: 10px" v-bind:active="true">
+        <wc-icon-button slot="navigation" icon-class="icon-arrow-left" smart-focus></wc-icon-button>
+    </wc-app-bar>
+
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar v-bind:title=&quot;Title&quot; titleClass=&quot;titleClass&quot; style=&quot;margin-bottom: 10px&quot; v-bind:active=&quot;true&quot;&gt;
+    &lt;button slot=&quot;navigation&quot; style=&quot;width: 48px;height: 48px;&quot;&gt;X&lt;/button&gt;
+&lt;/wc-app-bar&gt;
+```
+
+
+### App bar with left actions:
+
+Notice the gradient in the title when it overflows
+</wc-markdown>
+
+    <wc-app-bar title="New title new title new title" v-bind:active="true" style="margin-bottom: 10px">
+        <wc-icon-button slot="navigation" icon-class="icon-badge" smart-focus></wc-icon-button>
+        <button slot="actions" style="width: 48px;height: 48px;">A</button>
+        <button slot="actions" style="width: 48px;height: 48px;">B</button>
+    </wc-app-bar>
+
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar title=&quot;New title new title new title&quot; v-bind:active=&quot;true&quot; style=&quot;margin-bottom: 10px&quot;&gt;
+    &lt;button slot=&quot;navigation&quot; style=&quot;width: 48px;height: 48px;&quot;&gt;X&lt;/button&gt;
+    &lt;button slot=&quot;actions&quot; style=&quot;width: 48px;height: 48px;&quot;&gt;A&lt;/button&gt;
+    &lt;button slot=&quot;actions&quot; style=&quot;width: 48px;height: 48px;&quot;&gt;B&lt;/button&gt;
+&lt;/wc-app-bar&gt;
+```
+
+### App bar with a link action:
+</wc-markdown>
+    <wc-app-bar title="New title" v-bind:active="true" style="margin-bottom: 10px">
+        <wc-icon-button slot="navigation" icon-class="icon-menu" smart-focus></wc-icon-button>
+        <a slot="actions" style="margin: 0 16px 0 16px">SAVE</a>
+    </wc-app-bar>
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar title=&quot;New title&quot; v-bind:active=&quot;true&quot; style=&quot;margin-bottom: 10px&quot;&gt;
+&lt;button slot=&quot;navigation&quot; style=&quot;width: 48px;height: 48px;&quot;&gt;X&lt;/button&gt;
+&lt;a slot=&quot;actions&quot; style=&quot;margin: 0 16px 0 16px&quot;&gt;SAVE&lt;/a&gt;
+&lt;/wc-app-bar&gt;
+```
+
+### App bar with a search box:
+</wc-markdown>
+    <wc-app-bar
+        active
+        fill-space
+        style="margin-bottom: 10px"
+        v-bind:title="'Expanded: ' + searchBox.isExpanded">
+        <wc-icon-button slot="navigation" icon-class="icon-close" smart-focus></wc-icon-button>
+        <wc-search-box
+            placeholder="Search"
+            slot="actions"
+            style="width: 100%"
+            v-on:searchbox-toggle="_onSearchBoxToggle"
+        ></wc-search-box>
+    </wc-app-bar>
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar
+    active
+    fill-space
+    style=&quot;margin-bottom: 10px&quot;
+    v-bind:title=&quot;&apos;Expanded: &apos; + searchBox.isExpanded&quot;&gt;
+    &lt;wc-icon-button slot=&quot;navigation&quot; icon-class=&quot;icon-arrow-left&quot; smart-focus&gt;&lt;/wc-icon-button&gt;
+    &lt;wc-search-box
+        placeholder=&quot;Search&quot;
+        slot=&quot;actions&quot;
+        style=&quot;width: 100%&quot;
+        v-on:searchbox-toggle=&quot;_onSearchBoxToggle&quot;
+    &gt;&lt;/wc-search-box&gt;
+&lt;/wc-app-bar&gt;
+```
+
+### App bar with a search dropdown:
+</wc-markdown>
+    <wc-app-bar
+        active
+        fill-space
+        style="margin-bottom: 10px"
+        v-bind:title="'Expanded: ' + searchDropdown.isExpanded">
+        <wc-icon-button slot="navigation" icon-class="icon-angle-left" smart-focus></wc-icon-button>
+        <wc-search-dropdown
+            not-found-label="Not found"
+            placeholder="Search"
+            slot="actions"
+            style="width: 100%"
+            v-bind:data-source="[]"
+            v-bind:rows="1"
+            v-on:searchdropdown-toggle="_onSearchDropdownToggle"
+        ></wc-search-dropdown>
+    </wc-app-bar>
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar
+    active
+    fill-space
+    style=&quot;margin-bottom: 10px&quot;
+    v-bind:title=&quot;&apos;Expanded: &apos; + searchDropdown.isExpanded&quot;&gt;
+    &lt;wc-icon-button slot=&quot;navigation&quot; icon-class=&quot;icon-arrow-left&quot; smart-focus&gt;&lt;/wc-icon-button&gt;
+    &lt;wc-search-dropdown
+        not-found-label=&quot;Not found&quot;
+        placeholder=&quot;Search&quot;
+        slot=&quot;actions&quot;
+        style=&quot;width: 100%&quot;
+        v-bind:data-source=&quot;[]&quot;
+        v-bind:rows=&quot;1&quot;
+        v-on:searchdropdown-toggle=&quot;_onSearchDropdownToggle&quot;
+    &gt;&lt;/wc-search-dropdown&gt;
+&lt;/wc-app-bar&gt;
+```
+
+### App bar without shadow and without navigation:
+</wc-markdown>
+
+    <wc-app-bar title="This app bar has a compact layout" v-bind:active="true" style="margin-bottom: 10px" no-shadow>
+    </wc-app-bar>
+
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar title=&quot;This app bar has a compact layout&quot; v-bind:active=&quot;true&quot; compact&gt;
+&lt;/wc-app-bar&gt;
+```
+
+### App bar fixed on top
+
+Code:
+
+``` html
+&lt;wc-app-bar title=&quot;This app bar will appear on top&quot; v-bind:active=&quot;true&quot; fixed&gt;
+&lt;/wc-app-bar&gt;
+```
+
+### App bar with compact layout (has less height than normal)
+</wc-markdown>
+
+    <wc-app-bar title="I'm compact" v-bind:active="true" style="margin-bottom: 10px" compact>
+    </wc-app-bar>
+
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar title=&quot;I am almost invisible&quot; v-bind:active=&quot;true&quot; style=&quot;margin-bottom: 10px&quot; no-shadow&gt;
+&lt;/wc-app-bar&gt;
+```
+
+### App bar with progress
+</wc-markdown>
+
+    <wc-app-bar title="I have progress" v-bind:active="true" style="margin-bottom: 10px">
+        <wc-linear-loader slot="progress" indeterminate></wc-linear-loader>
+    </wc-app-bar>
+<wc-markdown>
+Code:
+
+``` html
+&lt;wc-app-bar title=&quot;I have progress&quot; v-bind:active=&quot;true&quot; style=&quot;margin-bottom: 10px&quot;&gt;
+    &lt;wc-linear-loader slot=&quot;progress&quot; indeterminate&gt;&lt;/wc-linear-loader&gt;
+&lt;/wc-app-bar&gt;
+```
+</wc-markdown>
+
+</div>
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

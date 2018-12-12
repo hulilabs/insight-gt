@@ -1,0 +1,131 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Radio Button
+## Demo
+Note: `&lt;div&gt;` tags with margins were added to properly display the radio buttons, but they're displayed inline and without any margins by default.
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Radio Group Component</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__main">
+                    <wc-radio-group v-bind:layout="sandboxLayout" v-bind:compact="compact">
+                        <wc-radio-button v-for="n in 5" v-bind:key="n" v-model="sandboxValue" v-bind:custom-value="n">Dyamic radio: {{n}}</wc-radio-button>
+                    </wc-radio-group>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Layout Mode</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <wc-radio-group>
+                        <wc-radio-button name="layout" v-model="sandboxLayout" custom-value="row">Row</wc-radio-button>
+                        <wc-radio-button name="layout" v-model="sandboxLayout" custom-value="column">Column</wc-radio-button>
+                        <wc-radio-button name="layout" v-model="sandboxLayout" custom-value="list">List</wc-radio-button>
+                    </wc-radio-group>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="compact">Compact?</wc-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <wc-radio-button v-model="radioButtons1" v-bind:custom-value="1" name="a">
+            normal radio button
+        </wc-radio-button>
+    </div>
+    <div style="margin-bottom: 20px;">
+        <wc-radio-button v-model="radioButtons1" v-bind:custom-value="2" name="a">
+            checked radio button
+        </wc-radio-button>
+    </div>
+    <div style="margin-bottom: 20px;">
+        <wc-radio-button v-model="radioButtons1" v-bind:custom-value="3" name="a" disabled>
+            disabled radio button
+        </wc-radio-button>
+    </div>
+
+
+    <wc-markdown>
+# Radio Group
+## Demo
+### Column
+Use `layout="column"` to display all radio buttons horizontally arrange in columns with a fixed set of 3 radio buttons in desktop and stacked on mobile.
+    </wc-markdown>
+
+    <wc-radio-group layout="column">
+        <wc-radio-button v-model="radioGroup0" v-bind:custom-value="1" name="a">
+            radio button 1
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup0" v-bind:custom-value="2" name="a">
+            radio button 2
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup0" v-bind:custom-value="3" name="a">
+            radio button 3
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup0" v-bind:custom-value="4"  name="a" disabled>
+            disabled &amp; checked radio button 4
+        </wc-radio-button>
+    </wc-radio-group>
+
+    <wc-markdown>
+### List
+Includes the same paddings as a `&lt;wc-list&gt;` and `&lt;wc-list-item&gt;`
+    </wc-markdown>
+
+    <span class="u-body1">Is v-model cool?</span>
+
+    <wc-radio-group>
+        <wc-radio-button v-model="radioGroup1" custom-value="yes" name="b">
+            yes
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup1" custom-value="hell yeah!" name="b">
+            hell yeah!
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup1" custom-value="of course" name="b">
+            of course!
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup1" custom-value="no" name="b" disabled>
+            no
+        </wc-radio-button>
+    </wc-radio-group>
+
+    <span class="u-caption4">Radio group value: </span><span class="u-caption3">{{radioGroup1}}</span>
+
+    <br/><br/>
+
+    <span class="DemoTable__note u-caption1">
+        Remember to link the radio buttons <span class="u-caption2">v-model</span> to the same parent's value, so there can be only 1 radio button selected at the same time. Also, remember to give them the same name, so the keyboard navigation works appropriately.
+    </span>
+
+    <wc-markdown>
+### Row
+Use `layout="row"` to display all radio buttons horizontally arrange in rows, without a fixed number of radio buttons per row.
+    </wc-markdown>
+
+    <wc-radio-group layout="row">
+        <wc-radio-button v-model="radioGroup2" v-bind:custom-value="1" name="c">
+            radio button 1
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup2" v-bind:custom-value="2" name="c">
+            radio button 2
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup2" v-bind:custom-value="3" name="c">
+            radio button 3
+        </wc-radio-button>
+        <wc-radio-button v-model="radioGroup2" v-bind:custom-value="4"  name="c" disabled>
+            disabled &amp; checked radio button 4
+        </wc-radio-button>
+    </wc-radio-group>
+
+    <span class="u-caption4">Radio group value: </span><span class="u-caption3">{{radioGroup2}}</span>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+    <br/>
+    <br/>
+    <wc-markdown v-bind:source="markdownSource.radioGroupDocumentation"></wc-markdown>
+</div>

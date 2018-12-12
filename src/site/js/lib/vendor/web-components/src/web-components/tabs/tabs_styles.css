@@ -1,0 +1,120 @@
+/**
+* Tabs styles
+*
+* More details: https://zpl.io/Z2gkrd
+*
+* wc-Tabs - main container of wc-Tab blocks
+* wc-Tabs__highlighter - styles for the line that highlights an active tab
+*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+* Generates the basic styles for shadows
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+ * Adds ellipsis to any block or element when the text may overflow its boundaries
+ * @return {CssRules} rules for adding ellipsis to overflown text
+ */
+/**
+ * Generates the hack for clearing floats
+ * @return {CssRules} rules for the clearfix hack
+ */
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/* line 18, tabs_styles.scss */
+.wc-Tabs {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  position: relative;
+  scrollbar-face-color: transparent;
+  scrollbar-track-color: transparent;
+  width: 100%;
+}
+/* line 30, tabs_styles.scss */
+.wc-Tabs__highlighter {
+  transition: transform 0.5s ease-out, width 0.5s ease-out;
+  background-color: #26C6DA;
+  bottom: 0;
+  display: none;
+  height: 2px;
+  left: 0;
+  right: 0;
+  position: absolute;
+  will-change: transform;
+}
+/* line 42, tabs_styles.scss */
+.wc-Tabs::-webkit-scrollbar {
+  display: none;
+}
+/* line 48, tabs_styles.scss */
+.wc-Tabs .wc-Tab.is-active ~ .wc-Tabs__highlighter {
+  display: block;
+}
+@media screen and (min-width: 1280px) {
+  /* line 18, tabs_styles.scss */
+  .wc-Tabs {
+    justify-content: center;
+  }
+}

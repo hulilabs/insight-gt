@@ -1,0 +1,130 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Avatar
+
+## Demo
+
+The following are all the available configurations for the `wc-Avatar` component
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <table>
+            <tr>
+                <td><h3>Example</h3></td>
+                <td><h3>Description</h3></td>
+                <td><h3><code>size</code> modifier class</h3></td>
+                <td><h3>Actual size <br> Using the grid size as 8px</h3></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar square v-bind:text="avatarBehavior.username"></wc-avatar>
+                </td>
+                <td>square alphanumeric avatar</td>
+                <td>none, 24 px by default</td>
+                <td>24px x 24px </td>
+            </tr>
+
+            <tr>
+               <td>
+                    <wc-avatar class="wc-Avatar--size-4x"
+                        v-bind:text="avatarBehavior.username">
+                    </wc-avatar>
+                </td>
+                <td>round alphanumeric avatar</td>
+                <td><code>wc-Avatar--size-4x</code></td>
+                <td>32px x 32px </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar square class="wc-Avatar--size-5x"
+                        v-bind:text="avatarBehavior.username">
+                    </wc-avatar>
+                </td>
+                <td>square alphanumeric avatar</td>
+                <td><code>wc-Avatar--size-5x</code></td>
+                <td>40px x 40px</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar class="wc-Avatar--size-6x"
+                        v-bind:text="avatarBehavior.username">
+                    </wc-avatar>
+                </td>
+                <td>round alphanumeric round avatar</td>
+                <td><code>wc-Avatar--size-6x</code></td>
+                <td>48px x 48px</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar square class="wc-Avatar--size-7x"
+                        v-bind:imagePath="avatarSource.svgPath">
+                    </wc-avatar>
+                </td>
+                <td>square avatar with photo</td>
+                <td><code>wc-Avatar--size-7x</code></td>
+                <td>56px x 56px</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar class="wc-Avatar--size-8x"
+                        v-bind:imagePath="avatarSource.svgPath">
+                    </wc-avatar>
+                </td>
+                <td>round avatar with photo</td>
+                <td><code>wc-Avatar--size-8x</code></td>
+                <td>64px x 64px</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar square class="wc-Avatar--size-9x"
+                        v-bind:imagePath="avatarSource.svgPath">
+                    </wc-avatar>
+                </td>
+                <td>square avatar with photo</td>
+                <td><code>wc-Avatar--size-9x</code></td>
+                <td>72px x 72px</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar class="wc-Avatar--size-10x"
+                        v-bind:imagePath="avatarSource.svgPath">
+                    </wc-avatar>
+                </td>
+                <td>round avatar with placeholder</td>
+                <td><code>wc-Avatar--size-10x</code></td>
+                <td>80px x 80px</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar class="wc-Avatar--size-11x"
+                        v-bind:imagePath="avatarSource.svgPath">
+                    </wc-avatar>
+                </td>
+                <td>round avatar with placeholder</td>
+                <td><code>wc-Avatar--size-11x</code></td>
+                <td>88px x 88px</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <wc-avatar class="wc-Avatar--size-12x"
+                        v-bind:imagePath="avatarSource.svgPath">
+                    </wc-avatar>
+                </td>
+                <td>round avatar with placeholder</td>
+                <td><code>wc-Avatar--size-12x</code></td>
+                <td>96px x 96px</td>
+            </tr>
+        </table>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

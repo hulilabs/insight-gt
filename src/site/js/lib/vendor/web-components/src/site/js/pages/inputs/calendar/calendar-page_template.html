@@ -1,0 +1,69 @@
+<div  style="position: relative">
+
+    <router-link to="/">Home</router-link>
+
+    <wc-markdown>
+# Calendar demo
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__main">
+                    <wc-calendar
+                        v-bind:days="days"
+                        v-bind:months="months"
+                        v-bind:min="min"
+                        v-bind:max="max"
+                        v-bind:days-data="{
+                            1 : {
+                                hasEvent : false
+                            },
+                            15 : {
+                                hasEvent : true
+                            },
+                            20 : {
+                                hasEvent : true
+                            },
+                            24 : {
+                                hasEvent : true
+                            },
+                            29 : {
+                                hasEvent : true
+                            },
+                            30 : {
+                                hasEvent : true
+                            }
+                        }"
+                        v-bind:show-busy-days-hint="true"
+                        v-bind:highlight-selected-week="true"
+                        v-model="value">
+                    </wc-calendar>
+                </div>
+                <span class="DemoTable__note u-caption1">
+                    The calendar itself doesn't have the "dialog" styles.
+                    Check: <router-link to="/components/datepicker">Datepicker</router-link>
+                </span>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Options</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <div class="DemoTable__option">
+                        <wc-textfield label="Value" id="value" type="date" v-model="value"></wc-textfield>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-textfield label="Min" id="min" type="date" v-model="min"></wc-textfield>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-textfield label="Max" id="max" type="date" v-model="max"></wc-textfield>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

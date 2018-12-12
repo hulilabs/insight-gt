@@ -1,0 +1,111 @@
+/**
+* Chip styles
+*
+* More details: https://zpl.io/2tiWvM
+*
+* wc-Chip - main block
+* wc-Chip--desktop - add focus state only on desktop
+* wc-Chip--avatar - changes the left padding of the chip when it contains an avatar
+* wc-Chip--closeButtonVisible - changes the right padding of the chip when it contains a close button
+* wc-Chip__avatar - used for the avatar child component
+* wc-Chip__closeButton - used for the close button child
+* wc-Chip__wrapper - all the content of the chip is contained in this wrapper
+*/
+
+@import "settings/_colors";
+@import "settings/_components";
+@import "settings/_elevations";
+@import "tools/mixins/_utilities";
+@import "tools/mixins/_typography";
+
+//---------- #wc-Chip  ---------- /
+
+.wc-Chip {
+    background: $wc-chip-background-color;
+    border: none;
+    border-radius: $wc-chip-border-radius;
+    color: $wc-chip-font-color;
+    cursor: pointer;
+    display: inline-block;
+    height: $wc-chip-height;
+    line-height: $wc-chip-height;
+    margin: 0 4px 8px 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    vertical-align: middle;
+    z-index: 0;
+
+    &:active {
+        @include component-elevation($wc-elevations-chip-pressed);
+    }
+
+    //---------- #wc-Chip--desktop  ---------- /
+
+    &--desktop {
+
+        &:focus,
+        &:hover {
+            background: $wc-chip-background-color-selected;
+            color: $wc-chip-hover-font-color;
+
+            .wc-Chip__closeButton {
+                color: $wc-chip-close-button-hover-font-color;
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    //---------- #wc-Chip--avatar  ---------- /
+
+    &--avatar {
+        padding-left: 0;
+    }
+
+    //---------- #wc-Chip--closeButtonVisible  ---------- /
+
+    &--closeButtonVisible {
+        padding-right: 8px;
+    }
+
+    //---------- #wc-Chip__avatar  ---------- /
+
+    &__avatar {
+        align-self: flex-start;
+        margin-right: 8px;
+    }
+
+    //---------- #wc-Chip__closeButton  ---------- /
+
+    &__closeButton {
+        color: $wc-chip-close-button-font-color;
+        cursor: pointer;
+        height: $wc-chip-close-button-size;
+        margin-left: 4px;
+        outline: none;
+        width: $wc-chip-close-button-size;
+    }
+
+    //---------- #wc-Chip__wrapper  ---------- /
+
+    &__wrapper {
+        @include generate-text-styles("caption3");
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        line-height: $wc-chip-height;
+    }
+
+    //---------- #states  ---------- /
+
+    &.has-error {
+        background: $wc-error-color;
+
+        &,
+        .wc-Chip__closeButton {
+            color: white;
+        }
+    }
+}

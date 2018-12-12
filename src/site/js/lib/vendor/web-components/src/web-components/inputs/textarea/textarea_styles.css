@@ -1,0 +1,57 @@
+/**
+* Textarea styles
+*
+* wc-Textarea - main component container
+* wc-Textarea__container - inner container
+* wc-Textarea__mirror - container used to grow the text area dynamically
+* wc-Textarea__input - contains the textarea item
+* wc-Textarea__textarea - html textarea
+*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/* line 15, textarea_styles.scss */
+.wc-TextArea {
+  cursor: text;
+}
+/* line 20, textarea_styles.scss */
+.wc-TextArea__container {
+  position: relative;
+}
+/* line 26, textarea_styles.scss */
+.wc-TextArea__mirror {
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  visibility: hidden;
+  word-wrap: break-word;
+}
+/* line 34, textarea_styles.scss */
+.wc-TextArea__input {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* line 44, textarea_styles.scss */
+.wc-TextArea__textarea {
+  height: 100%;
+  resize: none;
+  width: 100%;
+}

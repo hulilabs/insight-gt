@@ -1,0 +1,131 @@
+/**
+* Table styles
+*
+* More details: https://zpl.io/Z1Cryqv
+*
+* .wc-Table - main data table block
+* .wc-Table__action  - action element
+* .wc-Table__footer - footer section of the data table component
+* .wc-Table__header - table header
+*     .is-sortable - sortable state of a header
+* .wc-Table__sortIcon - icon placed in a header that indicates the way that is going to be sorted the table
+* .wc-Table__titleSection - section that includes the title and custom actions
+* .wc-Table__wrapper - data table component wrapper
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/* line 22, table_styles.scss */
+.wc-Table {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  margin: 0;
+  width: 100%;
+}
+/* line 31, table_styles.scss */
+.wc-Table__action {
+  color: rgba(0, 0, 0, 0.54);
+}
+/* line 37, table_styles.scss */
+.wc-Table__footer {
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  font-weight: bold;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  display: flex;
+  flex-flow: row nowrap;
+  height: 56px;
+  padding: 0 24px;
+}
+/* line 49, table_styles.scss */
+.wc-Table__sortIcon {
+  color: rgba(0, 0, 0, 0.26);
+  vertical-align: middle;
+}
+/* line 55, table_styles.scss */
+.wc-Table__sortIcon.is-active {
+  color: rgba(0, 0, 0, 0.87);
+}
+/* line 59, table_styles.scss */
+.is-sortable:hover .wc-Table__sortIcon {
+  color: rgba(0, 0, 0, 0.87);
+}
+/* line 66, table_styles.scss */
+.wc-Table__titleSection {
+  font-size: 18px;
+  letter-spacing: 0.3px;
+  line-height: normal;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+  line-height: 64px;
+  padding-left: 24px;
+  width: 100%;
+}
+/* line 79, table_styles.scss */
+.wc-Table__wrapper {
+  margin: 0;
+  width: 100%;
+}
+/* line 84, table_styles.scss */
+.wc-Table__wrapper.is-scrollable .wc-Table__body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-y: overlay;
+}

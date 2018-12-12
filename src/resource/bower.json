@@ -11,7 +11,8 @@
     "marked": "0.3.6",
     "require-css": "0.1.8",
     "Waves": "waves#~0.7.5",
-    "jump.js": "hulilabs/jump.js#1.1.0"
+    "jump.js": "hulilabs/jump.js#1.1.0",
+    "web-components": "https://github.com/hulilabs/web-components.git#v13.0.0"
   },
   "moduleType": [
     "amd"

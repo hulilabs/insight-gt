@@ -1,0 +1,87 @@
+/**
+* Stepper styles
+*
+* More details: https://zpl.io/24bLhD
+*
+* wc-Stepper - main wrapper
+* wc-Stepper__dot - element that indicates a step
+*     wc-Stepper__dot.is-active - current active dot (step)
+* wc-Stepper__innerDot - helper block for adding padding to the dot and increase its clickable area
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #wc-Stepper
+\*------------------------------------*/
+/* line 21, stepper_styles.scss */
+.wc-Stepper {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+/* line 28, stepper_styles.scss */
+.wc-Stepper__dot {
+  cursor: pointer;
+  display: block;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+/* line 34, stepper_styles.scss */
+.wc-Stepper__dot:not(:first-child) {
+  margin-top: 6px;
+}
+/* line 39, stepper_styles.scss */
+.wc-Stepper__dot:hover .wc-Stepper__innerDot {
+  background-color: rgba(0, 0, 0, 0.54);
+}
+/* line 45, stepper_styles.scss */
+.wc-Stepper__dot.is-active .wc-Stepper__innerDot {
+  background-color: #26C6DA;
+}
+/* line 50, stepper_styles.scss */
+.wc-Stepper__dot.is-active, .wc-Stepper__dot:hover {
+  transform: scale(1.5);
+}
+/* line 56, stepper_styles.scss */
+.wc-Stepper__innerDot {
+  background-color: rgba(0, 0, 0, 0.26);
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+}

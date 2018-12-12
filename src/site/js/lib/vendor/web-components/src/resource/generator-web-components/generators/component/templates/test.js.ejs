@@ -1,0 +1,44 @@
+/**                   _
+ *  _             _ _| |_
+ * | |           | |_   _|
+ * | |___  _   _ | | |_|
+ * | '_  \| | | || | | |
+ * | | | || |_| || | | |
+ * |_| |_|\___,_||_| |_|
+ *
+ * (c) Huli Inc
+ */
+/* jshint mocha:true, expr:true *//* global expect */
+/**
+ * @file <%= componentNameTitleCase %> unit test
+ * @requires vue
+ * @requires test/helpers/vue-components
+ * @requires web-components/<%= componentNameLowerCase %>/<%= componentNameLowerCase %>_component
+ * @module test/web-components/<%= componentNameLowerCasePlural %>/<%= componentNameLowerCase %>_test
+ */
+define([
+    'vue',
+    'test/helpers/vue-components',
+    'web-components/<%= componentNameLowerCasePlural %>/<%= componentNameLowerCase %>_component'
+],
+function(
+    Vue,
+    VueTestHelper,
+    <%= componentNameTitleCase %>
+) {
+    describe('<%= componentNameTitleCase %>', function() {
+
+        context('on instance creation', function() {
+            it('sets props with default values', function() {
+                var vm = new <%= componentNameTitleCase %>().$mount();
+            });
+
+            it('sets props with custom values', function() {
+                var vm = new <%= componentNameTitleCase %>({
+                    propsData : {
+                    }
+                }).$mount();
+            });
+        });
+    });
+});

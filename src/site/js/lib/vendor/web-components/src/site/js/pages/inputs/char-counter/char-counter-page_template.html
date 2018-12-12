@@ -1,0 +1,40 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Character Counter
+## Demo
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Input</div>
+            <div class="DemoTable__columnRight">
+                <wc-text-field placeholder="Start typing here" v-model="value"></wc-text-field>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Enter limit</div>
+            <div class="DemoTable__columnRight">
+                <wc-text-field v-model.number="maxLength" type="number"></wc-text-field>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <wc-char-counter
+                    v-bind:target="value"
+                    v-bind:max-length="maxLength"
+                    v-on:change="_onChange">
+                </wc-char-counter>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">State</div>
+            <div class="DemoTable__columnRight">
+                <div v-if="hasError" class="u-caption4" style="color: #D32F2F">Error: target value is longer</div>
+                <div v-else class="u-caption3">Ok!</div>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

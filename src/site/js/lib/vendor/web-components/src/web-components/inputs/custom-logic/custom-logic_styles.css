@@ -1,0 +1,119 @@
+/**
+* CustomLogic styles
+*
+* More details: https://zpl.io/Z2absbx
+*
+* .wc-CustomLogic - wrapper for an input with a mask
+*     .wc-CustomLogic.has-label - if the textfield handles a label, then change the mask position
+*     .wc-CustomLogic.is-disabled - styles for the disabled state
+* .wc-CustomLogic__mask - wrapper of the current masked value and placeholder (mask)
+*     .wc-CustomLogic__mask.is-android change mask position on android
+* .wc-CustomLogic__placeholder - holder of the full or partial content of the mask to be filled
+* .wc-CustomLogic__value - hidden holder of the current masked value (input content)
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/* line 22, custom-logic_styles.scss */
+.wc-CustomLogic {
+  line-height: 1;
+  position: relative;
+}
+/* line 29, custom-logic_styles.scss */
+.wc-CustomLogic.has-label .wc-CustomLogic__mask {
+  top: 35px;
+}
+/* line 37, custom-logic_styles.scss */
+.wc-CustomLogic.is-disabled .wc-CustomLogic__placeholder, .wc-CustomLogic.is-disabled .wc-CustomLogic__value {
+  color: rgba(0, 0, 0, 0.26);
+  cursor: default;
+  pointer-events: none;
+}
+/* line 47, custom-logic_styles.scss */
+.wc-CustomLogic__mask {
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  pointer-events: none;
+  position: absolute;
+  top: 17px;
+}
+/* line 54, custom-logic_styles.scss */
+.wc-CustomLogic__mask.is-android {
+  top: 15px;
+}
+/* line 61, custom-logic_styles.scss */
+.wc-CustomLogic__placeholder {
+  color: rgba(0, 0, 0, 0.54);
+}
+/* line 67, custom-logic_styles.scss */
+.wc-CustomLogic__value {
+  color: transparent;
+  opacity: 0;
+  visibility: hidden;
+}
+/* line 73, custom-logic_styles.scss */
+.wc-CustomLogic__placeholder, .wc-CustomLogic__value {
+  display: inline-block;
+  vertical-align: top;
+  white-space: pre;
+}
+@media screen and (min-width: 1025px) {
+  /* line 83, custom-logic_styles.scss */
+  .wc-CustomLogic__mask {
+    top: 14px;
+  }
+}

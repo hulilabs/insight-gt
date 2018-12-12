@@ -52,19 +52,7 @@ module.exports = function(config) {
                 included : false
             },
             {
-                pattern : 'site/js/lib/vendor/Waves/dist/waves.*',
-                included : false
-            },
-            {
-                pattern : 'site/js/lib/vendor/marked/marked.min.js',
-                included : false
-            },
-            {
                 pattern : 'site/js/lib/vendor/highlight/highlight.pack.js',
-                included : false
-            },
-            {
-                pattern : 'site/js/lib/vendor/jump.js/dist/jump.js',
                 included : false
             }
         ],

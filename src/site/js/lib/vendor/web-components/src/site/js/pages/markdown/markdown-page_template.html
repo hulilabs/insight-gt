@@ -1,0 +1,23 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Markdown
+
+## Demo
+
+Please type your markdown here:
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <textarea v-model="text" style="width:100%; min-height:100px"></textarea>
+    </div>
+
+    <wc-markdown>
+Generated HTML :
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <wc-markdown v-bind:source="text" style="border: 1px solid grey; padding: 30px;"></wc-markdown>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

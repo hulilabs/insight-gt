@@ -1,0 +1,18 @@
+<div class="wc-Dialog" v-bind:class="{ 'is-active' : state.isActive, 'is-scrollable' : state.isScrollable }">
+    <wc-overlay
+        block-scroll
+        v-bind:close-on-esc-key="closeOnEscKey"
+        v-bind:close-on-click="closeOnClick"
+        v-bind:active="state.isActive"
+        v-on:overlay-close="_onOverlayClosed">
+    </wc-overlay>
+    <div ref="dialog" class="wc-Dialog__window" v-bind:style="styles.dialog">
+        <h3 class="wc-Dialog__title" v-show="title" v-bind:style="styles.title">{{title}}</h3>
+        <div ref="content" class="wc-Dialog__content" v-bind:style="styles.content">
+            <slot name="content"></slot>
+        </div>
+        <div ref="actions" class="wc-Dialog__actions" v-bind:style="styles.actions">
+            <slot name="actions"></slot>
+        </div>
+    </div>
+</div>

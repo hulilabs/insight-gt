@@ -1,0 +1,243 @@
+/**
+* Avatar styles
+*
+* More details: https://zpl.io/ZUOL8p
+*
+* wc-Avatar - main block
+* wc-Avatar--transparent - sets transparent background
+* wc-Avatar--darkBackground - sets a different font and background colors when using the avatar in a dark background
+* wc-Avatar__image - used for the avatar image child
+* wc-Avatar[square] - used to set the border radius property to 0 (square shape)
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/**
+ * Generates modifiers using a list of factors to be multiplied by the grid size
+ * e.g. sizes=[1,2,3]
+ *      default-size=2
+ *      grid-size=5
+ *
+ * will generate the classes:
+ * .size-1x {size: 5px} // one time the grid size, smaller than default
+ * .size-3x {size- 15px} // three times the grid size, bigger than default
+ * size-2x won't be generated as it's the default
+ *
+ * @param  {List}    $sizes - available factors to generate grid-scaled icons
+ * @param  {Integer} $default-size - one member of $sizes list that's the default, so the modifier isn't generated
+ * @param  {Integer} $grid-size - the grid size the icons are based ons
+ */
+/* line 20, avatar_styles.scss */
+.wc-Avatar {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  color: rgba(0, 0, 0, 0.26);
+  display: block;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 24px;
+  line-height: 26.4px;
+  min-height: 24px;
+  min-width: 24px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  text-transform: capitalize;
+  width: 24px;
+}
+/* line 39, avatar_styles.scss */
+.wc-Avatar--transparent {
+  background: transparent;
+}
+/* line 45, avatar_styles.scss */
+.wc-Avatar--darkBackground {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+/* line 51, avatar_styles.scss */
+.wc-Avatar__image {
+  height: auto;
+  max-width: 100%;
+  width: auto;
+}
+/* line 58, avatar_styles.scss */
+.wc-Avatar__image--expand {
+  height: 100%;
+  width: 100%;
+}
+/* line 64, avatar_styles.scss */
+.wc-Avatar--square {
+  border-radius: 0;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-4x {
+  font-size: 16px;
+  height: 32px;
+  line-height: 35.2px;
+  min-height: 32px;
+  min-width: 32px;
+  width: 32px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-5x {
+  font-size: 20px;
+  height: 40px;
+  line-height: 44px;
+  min-height: 40px;
+  min-width: 40px;
+  width: 40px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-6x {
+  font-size: 24px;
+  height: 48px;
+  line-height: 52.8px;
+  min-height: 48px;
+  min-width: 48px;
+  width: 48px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-7x {
+  font-size: 28px;
+  height: 56px;
+  line-height: 61.6px;
+  min-height: 56px;
+  min-width: 56px;
+  width: 56px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-8x {
+  font-size: 32px;
+  height: 64px;
+  line-height: 70.4px;
+  min-height: 64px;
+  min-width: 64px;
+  width: 64px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-9x {
+  font-size: 36px;
+  height: 72px;
+  line-height: 79.2px;
+  min-height: 72px;
+  min-width: 72px;
+  width: 72px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-10x {
+  font-size: 40px;
+  height: 80px;
+  line-height: 88px;
+  min-height: 80px;
+  min-width: 80px;
+  width: 80px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-11x {
+  font-size: 44px;
+  height: 88px;
+  line-height: 96.8px;
+  min-height: 88px;
+  min-width: 88px;
+  width: 88px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-12x {
+  font-size: 48px;
+  height: 96px;
+  line-height: 105.6px;
+  min-height: 96px;
+  min-width: 96px;
+  width: 96px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-13x {
+  font-size: 52px;
+  height: 104px;
+  line-height: 114.4px;
+  min-height: 104px;
+  min-width: 104px;
+  width: 104px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-14x {
+  font-size: 56px;
+  height: 112px;
+  line-height: 123.2px;
+  min-height: 112px;
+  min-width: 112px;
+  width: 112px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-15x {
+  font-size: 60px;
+  height: 120px;
+  line-height: 132px;
+  min-height: 120px;
+  min-width: 120px;
+  width: 120px;
+}
+/* line 36, ../../../web-components-library/tools/mixins/_image.scss */
+.wc-Avatar--size-16x {
+  font-size: 64px;
+  height: 128px;
+  line-height: 140.8px;
+  min-height: 128px;
+  min-width: 128px;
+  width: 128px;
+}

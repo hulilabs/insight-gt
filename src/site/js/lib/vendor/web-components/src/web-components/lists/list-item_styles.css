@@ -1,0 +1,377 @@
+/**
+* List item styles
+*
+* More details: https://zpl.io/2v4Q4X
+*
+* .wc-ListItem - Block root component
+*     .wc-ListItem--double - it is taller than the default value, space for 2 lines of text
+*     .wc-ListItem--double.is-expandable - set the styles for a 'double' layout item that can be expanded
+*     .wc-ListItem--expanded - item with borders as dividers
+*     .wc-ListItem--hasDescription - show a description under label
+*     .wc-ListItem--horizontalPadding2x - default horizontal padding of 2 grid units = 16px
+*     .wc-ListItem--horizontalPadding3x - horizontal padding of 3 grid unit = 24px
+*     .wc-ListItem--triple - It is taller than the default value, space for 2 lines of text
+*     .wc-ListItem--triple.is-expandable - set the styles for a 'triple' layout item that can be expanded
+*     .wc-ListItem--multiline - support multiple lines of text when the layout is single
+*     .wc-ListItem.is-expanded - expanded state styles for a 'single' layout
+*     .wc-ListItem.is-multiple-expanded - expanded state for a 'double' or 'triple' layout item
+*     .wc-ListItem.is-selected - set the style of the focus/hover states
+*     .wc-ListItem[disabled] - set the list item as disabled
+*     .wc-ListItem[role=menuitem] -  add the hover, focus and disabled states to the component.
+* .wc-ListItem__avatar - avatar placeholder (left element)
+*     .wc-ListItem__avatar--double - changes the margin when the avatar is bigger
+*     .wc-ListItem__avatar--triple - changes the margin when the avatar is bigger
+* .wc-ListItem__description - textual content wrapper
+*     .wc-ListItem__description.is-collapsed - hide content when collapsed
+* .wc-ListItem__icon - icon placeholder (left element)
+* .wc-ListItem__textWrapper - div container for the primary and secondary text
+*     .wc-ListItem__textWrapper.is-expanded - increase padding of textual content
+* .wc-ListItem__primaryText - placeholder for the primary text element
+*     .wc-ListItem__primaryText--light - make the textual content light colored
+* .wc-ListItem__secondaryText - placeholder for the secondary text element
+*     .wc-ListItem__secondaryText--light - make the secondary text ligh colored
+* .wc-ListItem__action - placeholder for the action (right element)
+*     .wc-ListItem__action--rotated - transform the action position 180 degrees
+* .wc-ListItem__wrapper - content wrapper
+*     .wc-ListItem__wrapper--clickable - clickable content
+*     .wc-ListItem__wrapper--singleExpandable - set the styles for a 'single' layout item that can be expanded
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY MIXINS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #TYPOGRAPHY STANDARDS
+
+\*------------------------------------*/
+/**
+ * Generates all the CSS properties for the respective typography type
+ * @param  {String} $text-type  A key from the $typography-variables map where the properties
+ *                              and their values are going to be obtained.
+ * @return {CssRules}           CSS properties for the given text type.
+ */
+/*------------------------------------*\
+     #wc-ListItem
+\*------------------------------------*/
+/* line 53, list-item_styles.scss */
+.wc-ListItem {
+  background-color: #FFF;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 48px;
+  /**
+   * This min height is required becuase of an issue in safari 9.x
+   * Although the height is a fixed value we need the min-height
+   * to force safari to correctly render the item.
+   */
+  min-height: 48px;
+  padding: 0;
+  width: 100%;
+}
+/* line 69, list-item_styles.scss */
+.wc-ListItem--horizontalPadding2x {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+/* line 76, list-item_styles.scss */
+.wc-ListItem--horizontalPadding3x {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+/* line 83, list-item_styles.scss */
+.wc-ListItem[role=menuitem] {
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* line 86, list-item_styles.scss */
+.wc-ListItem[role=menuitem]:hover {
+  cursor: pointer;
+}
+/* line 90, list-item_styles.scss */
+.wc-ListItem[role=menuitem]:hover, .wc-ListItem[role=menuitem]:focus, .wc-ListItem[role=menuitem].is-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+/* line 95, list-item_styles.scss */
+.wc-ListItem[role=menuitem]:active {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+/* line 102, list-item_styles.scss */
+.wc-ListItem[disabled] {
+  opacity: 0.40;
+  pointer-events: none;
+}
+/* line 109, list-item_styles.scss */
+.wc-ListItem.is-expandable {
+  height: 50px;
+}
+/* line 115, list-item_styles.scss */
+.wc-ListItem--multiline {
+  height: auto;
+}
+/* line 118, list-item_styles.scss */
+.wc-ListItem--multiline.is-expandable {
+  height: auto;
+}
+/* line 121, list-item_styles.scss */
+.wc-ListItem--multiline.is-expandable .wc-ListItem__textWrapper {
+  overflow: auto;
+  padding: 0;
+}
+/* line 127, list-item_styles.scss */
+.wc-ListItem--multiline .wc-ListItem__wrapper {
+  align-items: flex-start;
+}
+/* line 130, list-item_styles.scss */
+.wc-ListItem--multiline .wc-ListItem__action, .wc-ListItem--multiline .wc-ListItem__avatar, .wc-ListItem--multiline .wc-ListItem__radioButton, .wc-ListItem--multiline .wc-ListItem__checkbox, .wc-ListItem--multiline .wc-ListItem__icon {
+  padding-top: 8px;
+}
+/* line 137, list-item_styles.scss */
+.wc-ListItem--multiline .wc-ListItem__textWrapper {
+  overflow: auto;
+  padding: 12px 0;
+}
+/* line 142, list-item_styles.scss */
+.wc-ListItem--multiline .wc-ListItem__primaryText {
+  height: auto;
+  overflow: auto;
+  text-overflow: initial;
+  white-space: normal;
+}
+/* line 152, list-item_styles.scss */
+.wc-ListItem--double {
+  height: 72px;
+  padding: 16px;
+}
+/* line 156, list-item_styles.scss */
+.wc-ListItem--double.is-expandable {
+  height: 72px;
+}
+/* line 163, list-item_styles.scss */
+.wc-ListItem--triple {
+  height: 88px;
+  padding: 16px;
+}
+/* line 167, list-item_styles.scss */
+.wc-ListItem--triple.is-expandable {
+  height: 88px;
+}
+/* line 174, list-item_styles.scss */
+.wc-ListItem.is-expanded {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  height: calc(100% + 2px);
+  padding-top: 8px;
+}
+/* line 183, list-item_styles.scss */
+.wc-ListItem.is-multiple-expanded {
+  padding: 15px 16px;
+}
+/* line 189, list-item_styles.scss */
+.wc-ListItem__wrapper {
+  -webkit-tap-highlight-color: transparent;
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  height: 100%;
+  width: 100%;
+}
+/* line 199, list-item_styles.scss */
+.wc-ListItem__wrapper--clickable {
+  cursor: pointer;
+  box-sizing: border-box;
+}
+/* line 206, list-item_styles.scss */
+.wc-ListItem__wrapper--singleExpandable {
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+/* line 213, list-item_styles.scss */
+.wc-ListItem--double .wc-ListItem__wrapper {
+  height: 40px;
+}
+/* line 217, list-item_styles.scss */
+.wc-ListItem--triple .wc-ListItem__wrapper {
+  height: 56px;
+  align-items: flex-start;
+}
+/* line 225, list-item_styles.scss */
+.wc-ListItem__textWrapper {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+/* line 235, list-item_styles.scss */
+.wc-ListItem__textWrapper.is-expanded {
+  padding: 7px 0;
+}
+/* line 242, list-item_styles.scss */
+.wc-ListItem__avatar {
+  margin-right: 24px;
+}
+/* line 247, list-item_styles.scss */
+.wc-ListItem__avatar--double, .wc-ListItem__avatar--triple {
+  margin-right: 16px;
+}
+/* line 255, list-item_styles.scss */
+.wc-ListItem__icon {
+  margin-right: 32px;
+}
+/* line 261, list-item_styles.scss */
+.wc-ListItem__primaryText {
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.87);
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+/* line 272, list-item_styles.scss */
+.wc-ListItem__primaryText--light {
+  color: white;
+}
+/* line 279, list-item_styles.scss */
+.wc-ListItem__secondaryText {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  line-height: 17px;
+  font-weight: normal;
+  font-family: "MuseoSans300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.54);
+  display: -webkit-box;
+  max-height: 36px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+/* line 292, list-item_styles.scss */
+.wc-ListItem__secondaryText--light {
+  color: white;
+}
+/* line 299, list-item_styles.scss */
+.wc-ListItem__action {
+  margin-left: 16px;
+  transition: transform 0.3s linear;
+}
+/* line 305, list-item_styles.scss */
+.wc-ListItem__action--rotated {
+  transform: rotate(180deg) translate(0, 6px);
+}
+/* line 312, list-item_styles.scss */
+.wc-ListItem__description {
+  display: block;
+}
+/* line 317, list-item_styles.scss */
+.wc-ListItem__description.is-collapsed {
+  display: none;
+}
+
+/* line 323, list-item_styles.scss */
+.vt-expand-list-item-enter-active {
+  animation: expand-list-item 0.3s;
+}
+
+@-moz-keyframes expand-list-item {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  50% {
+    max-height: 1000px;
+    opacity: 0.25;
+  }
+  75% {
+    max-height: 1000px;
+    opacity: 0.5;
+  }
+  100% {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes expand-list-item {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  50% {
+    max-height: 1000px;
+    opacity: 0.25;
+  }
+  75% {
+    max-height: 1000px;
+    opacity: 0.5;
+  }
+  100% {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+@keyframes expand-list-item {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  50% {
+    max-height: 1000px;
+    opacity: 0.25;
+  }
+  75% {
+    max-height: 1000px;
+    opacity: 0.5;
+  }
+  100% {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}

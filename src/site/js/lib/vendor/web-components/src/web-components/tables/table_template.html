@@ -1,0 +1,24 @@
+<div class="wc-Table__wrapper" v-bind:class="{ 'is-scrollable' : scrollable }">
+    <header
+        v-if="title"
+        class="wc-Table__titleSection">
+        <span>{{ title }}</span>
+        <section class="wc-Table__action">
+            <slot name="headerActions"></slot>
+        </section>
+    </header>
+    <div class="wc-Table">
+        <div class="wc-Table__header">
+            <slot name="headers"></slot>
+        </div>
+        <div class="wc-Table__body" v-bind:class="bodyClass">
+            <slot name="data"></slot>
+        </div>
+    </div>
+    <footer class="wc-Table__footer" v-if="$slots.customFooterActions">
+        <template>
+            <slot name="customFooterActions"></slot>
+        </template>
+    </footer>
+</div>
+

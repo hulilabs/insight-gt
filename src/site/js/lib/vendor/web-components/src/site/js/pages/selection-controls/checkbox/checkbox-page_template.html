@@ -1,0 +1,114 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Checkbox
+## Demo
+Try using TAB, ENTER and SPACE keys
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Checklist Component</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__main">
+                    <wc-checklist v-bind:display-row="sandboxDisplayRow">
+                        <wc-checkbox v-for="n in 5" v-bind:key="n" v-model="sandboxValue" v-bind:custom-value="n">Dyamic checkbox: {{n}}</wc-checkbox>
+                    </wc-checklist>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Options</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <wc-checkbox name="layout" v-model="sandboxDisplayRow">Display row</wc-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+        <wc-checkbox v-model="checkbox1">
+            I'm a standalone checkbox:
+        </wc-checkbox><span class="u-body2 u-primary-text-dark" style="vertical-align: sub;">  {{checkbox1}}</span>
+    </div>
+
+    <div style="margin-bottom:20px;">
+        <wc-checkbox v-model="checkbox2">
+            I'm a standalone checked checkbox:
+        </wc-checkbox><span class="u-body2 u-primary-text-dark" style="vertical-align: sub;">  {{checkbox2}}</span>
+    </div>
+
+    <div style="margin-bottom:20px;">
+        <wc-checkbox v-model="checkbox3" disabled>
+            I'm a standalone disabled checkbox:
+        </wc-checkbox><span class="u-body2 u-primary-text-dark" style="vertical-align: sub;">  {{checkbox3}}</span>
+    </div>
+
+    <div style="margin-bottom:20px;">
+        <wc-checkbox v-model="checkbox4" color="red">
+            I'm a checkbox with custom color:
+        </wc-checkbox><span class="u-body2 u-primary-text-dark" style="vertical-align: sub;">  {{checkbox4}}</span>
+    </div>
+
+    <wc-markdown>
+# Checklist
+## List demo
+Try using TAB, ENTER, SPACE, UP and DOWN keys
+    </wc-markdown>
+    <wc-checklist>
+        <wc-checkbox v-model="checklistValue" v-bind:custom-value="1">
+            checkbox 1
+        </wc-checkbox>
+        <wc-checkbox v-model="checklistValue" v-bind:custom-value="2">
+            checkbox 2
+        </wc-checkbox>
+        <wc-checkbox v-model="checklistValue" v-bind:custom-value="3">
+            checked checkbox 3
+        </wc-checkbox>
+        <wc-checkbox v-model="checklistValue" v-bind:custom-value="4" disabled>
+            disabled checkbox 4 linked with the one below
+        </wc-checkbox>
+        <wc-checkbox v-model="checklistValue" v-bind:custom-value="4">
+            checkbox 4 linked with the one above
+        </wc-checkbox>
+    </wc-checklist>
+
+    <span class="u-caption4">Checklist value: </span><span class="u-caption3">{{checklistValue}}</span>
+
+    <br/><br/>
+
+    <span class="DemoTable__note u-caption1">
+        Remember to link the checkboxes <span class="u-caption2">v-model</span> with a value corresponding to an array, so all the clicked values are stored in that array. Also, remeber to define the <span class="u-caption2">customValue</span> prop to checkboxes inside a checklist.
+    </span>
+
+    <wc-markdown>
+## Row demo
+Uses `display-row` to show an horizontal configuration.
+Try using TAB, ENTER, SPACE, UP and DOWN keys.
+    </wc-markdown>
+
+    <wc-checklist display-row>
+        <wc-checkbox v-model="rowChecklistValue" v-bind:custom-value="1">
+            checked checkbox 1
+        </wc-checkbox>
+        <wc-checkbox v-model="rowChecklistValue" v-bind:custom-value="2">
+            checkbox 2
+        </wc-checkbox>
+        <wc-checkbox v-model="rowChecklistValue" v-bind:custom-value="3">
+            checkbox 3
+        </wc-checkbox>
+        <wc-checkbox v-model="rowChecklistValue" v-bind:custom-value="4" disabled>
+            disabled checkbox 4
+        </wc-checkbox>
+        <wc-checkbox v-model="rowChecklistValue" v-bind:custom-value="5">
+            checkbox 5
+        </wc-checkbox>
+    </wc-checklist>
+
+    <span class="u-caption4">Checklist value: </span><span class="u-caption3">{{rowChecklistValue}}</span>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+    <br/>
+    <br/>
+    <wc-markdown v-bind:source="markdownSource.checklistDocumentation"></wc-markdown>
+</div>

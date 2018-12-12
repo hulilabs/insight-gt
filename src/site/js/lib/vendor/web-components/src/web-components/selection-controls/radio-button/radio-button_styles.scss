@@ -1,0 +1,164 @@
+/**
+* RadioButton styles
+*
+* .wc-RadioButton - main block & radio wrapper
+*     .wc-RadioButton.is-compact - a more compact version of a radio button (less height)
+* .wc-RadioButton__input - the <input> tag
+* .wc-RadioButton__inputLabel - the radio button's <label> tag that contains everything that's visible
+* .wc-RadioButton__label - the actual displayed text label
+* .wc-RadioButton__radio - the visible fake radio button
+* .wc-RadioButton.is-inRadioGroupColumn - buttons horizontally align in columns
+* .wc-RadioButton.is-inRadioGroupList - buttons vertically align in a single column
+* .wc-RadioButton.is-inRadioGroupRow - buttons horizontally align in rows
+*/
+
+@import "settings/_breakpoints";
+@import "settings/_components";
+@import "tools/mixins/_responsive";
+@import "tools/mixins/_typography";
+
+$wc-radio-button-filling-size: $wc-radio-button-size / 2;
+$wc-radio-button-filling-margin: ($wc-radio-button-size - $wc-radio-button-filling-size - 2 * $wc-radio-button-border-size) / 2;
+$wc-radio-button-group-height: $wc-list-item-single-height;
+$wc-radio-button-group-padding: 0 16px;
+$wc-radio-button-height-compact: 40px;
+
+//---------- #wc-RadioButton  ---------- /
+
+.wc-RadioButton {
+    display: inline-block;
+
+    //---------- #wc-RadioButton__input  ---------- /
+
+    &__input {
+        float: left;
+        height: 0;
+        margin: 0;
+        opacity: 0;
+        position: absolute;
+        width: 0;
+    }
+
+    //---------- #wc-RadioButton__inputLabel  ---------- /
+
+    &__inputLabel {
+        -webkit-tap-highlight-color: transparent;
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+    //---------- #wc-RadioButton__label  ---------- /
+
+    &__label {
+        @include generate-text-styles("body1");
+        color: $wc-typoicon-primary-dark;
+        margin-left: $wc-radio-button-label-margin;
+        overflow: hidden;
+        position: relative;
+        text-overflow: ellipsis;
+        top: 2px; // offset from vertical align as design request
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    //---------- #wc-RadioButton__radio  ---------- /
+
+    &__radio {
+        border-radius: 50%;
+        border: $wc-radio-button-border-size solid $wc-radio-button-border-color;
+        box-sizing: border-box;
+        content: '';
+        height: $wc-radio-button-size;
+        min-height: $wc-radio-button-size;
+        min-width: $wc-radio-button-size;
+        position: relative;
+        transition: border-color $wc-radio-button-color-transition-duration ease-in-out;
+        width: $wc-radio-button-size;
+
+        &:before {
+            border-radius: 50%;
+            content: '';
+            display: inline-block;
+            height: $wc-radio-button-filling-size;
+            margin: $wc-radio-button-filling-margin;
+            transform: scale(0);
+            transition: transform $wc-radio-button-scale-duration ease-in-out;
+            width: $wc-radio-button-filling-size;
+        }
+    }
+
+    //---------- #states  ---------- /
+
+    &__input:checked + &__inputLabel &__radio {
+        border-color: $wc-secondary-color;
+
+        &:before {
+            transform: scale(1);
+            background-color: $wc-secondary-color;
+        }
+    }
+
+    &__input[disabled="disabled"] + &__inputLabel {
+        cursor: default;
+    }
+
+    &__input[disabled="disabled"] + &__inputLabel &__radio {
+        border-color: $wc-radio-button-disabled-color;
+    }
+
+    &__input[disabled="disabled"]:checked + &__inputLabel &__radio:before {
+        background-color: $wc-radio-button-disabled-color;
+    }
+
+    &__input[disabled="disabled"] + &__inputLabel &__label {
+        color: $wc-radio-button-disabled-color;
+    }
+
+    &.is-inRadioGroupColumn,
+    &.is-inRadioGroupList,
+    &.is-inRadioGroupRow {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+        height: $wc-radio-button-group-height;
+    }
+
+    //---------- #wc-RadioButton.is-compact  ---------- /
+
+    &.is-compact,
+    &.is-compact.is-inRadioGroupColumn,
+    &.is-compact.is-inRadioGroupList,
+    &.is-compact.is-inRadioGroupRow {
+        height: $wc-radio-button-height-compact;
+    }
+
+    //---------- #wc-RadioButton.is-inRadioGroupColumn  ---------- /
+
+    &.is-inRadioGroupColumn {
+        flex-grow: 0;
+        width: 100%;
+
+        .wc-RadioButton__label {
+            width: calc(100% - #{$wc-radio-button-size + $wc-radio-button-label-margin});
+        }
+    }
+
+    //---------- #wc-RadioButton.is-inRadioGroupRow  ---------- /
+
+    &.is-inRadioGroupRow {
+        & + & {
+            margin-left: 40px;
+        }
+    }
+
+    //---------- Desktop  ---------- /
+
+    @include respond-min($wc-media-tablet-lower-boundary) {
+        &.is-inRadioGroupColumn {
+            width: 33%;
+        }
+    }
+}

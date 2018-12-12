@@ -1,0 +1,11 @@
+<div
+    class="wc-LinearLoader"
+    v-bind:class="{
+        'wc-LinearLoader--indeterminate' : indeterminate, 'wc-LinearLoader--determinate' : !indeterminate
+    }">
+    <div
+        v-if="!indeterminate"
+        class="wc-LinearLoader__progress"
+        v-bind:style="'width: ' + progress + '%'">
+    </div>
+</div>

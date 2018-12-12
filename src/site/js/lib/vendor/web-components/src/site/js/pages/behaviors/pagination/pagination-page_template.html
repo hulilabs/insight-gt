@@ -1,0 +1,54 @@
+<div  style="position: relative">
+    <wc-markdown>
+# PaginationBehavior demo
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Items per page</div>
+            <div class="DemoTable__columnRight">
+                <wc-textfield type="number" v-model="model.itemsPerPage"></wc-textfield>
+                <span>Pagination items per page: {{ paginationMixin.state.itemsPerPage }}</span>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Current page</div>
+            <div class="DemoTable__columnRight">
+                <wc-textfield type="number" v-model="model.page"></wc-textfield>
+                <span>Pagination page: {{ paginationMixin.state.page }}</span>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Total items</div>
+            <div class="DemoTable__columnRight">
+                <wc-textfield type="number" v-model="model.totalItems"></wc-textfield>
+                <span>Pagination total items: {{ paginationMixin.state.totalItems }}</span>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Custom paginator</div>
+            <div class="DemoTable__columnRight">
+                <wc-icon-button
+                    icon-class="icon-angle-left"
+                    v-bind:disabled="paginationMixin_isBackDisabled"
+                    v-on:click.native="$_paginationMixin_onPreviousPageClickHandler"
+                    v-wc-ripple:is-dark
+                ></wc-icon-button>
+                <wc-icon-button
+                    icon-class="icon-angle-right"
+                    v-bind:disabled="paginationMixin_isNextDisabled"
+                    v-on:click.native="$_paginationMixin_onNextPageClickHandler"
+                    v-wc-ripple:is-dark
+                ></wc-icon-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft"></div>
+            <div class="DemoTable__columnRight">
+                <wc-checkbox v-model="notifyEvents">Notify events</wc-checkbox>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

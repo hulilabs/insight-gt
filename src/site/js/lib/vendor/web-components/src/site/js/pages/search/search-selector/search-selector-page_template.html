@@ -1,0 +1,43 @@
+<div  style="position: relative">
+
+    <wc-markdown>
+# Search with selector
+
+Use `wc-search-selector` in order to display a selector menu with the filtered results below the input or a mobile page to filter results.
+    </wc-markdown>
+
+    <div class="DemoTable DemoTable--solid">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <div>
+                    <wc-search-selector
+                        v-bind:placeholder="placeholder"
+                        v-bind:not-found-label="notFoundLabel"
+                        v-bind:value="searchSelectorValue"
+                        v-bind:data-source="dataSource"
+                        v-bind:is-self-contained="selfContainedMode"
+                        v-on:search-selector-value-changed="valueChanged">
+                    </wc-search-selector>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Options</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="selfContainedMode">Show self contained</wc-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Value</div>
+            <div class="DemoTable__columnRight">{{searchSelectorValue}}</div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

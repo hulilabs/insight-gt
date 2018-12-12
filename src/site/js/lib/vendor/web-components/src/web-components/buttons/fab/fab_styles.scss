@@ -1,0 +1,228 @@
+/**
+* Fab styles
+*
+* More details: https://zpl.io/fIi35
+*
+* .wc-Fab - component's wrapper
+*     .wc-Fab.is-mini - modifier that adds smaller dimensions
+*     .wc-Fab--topRight - fixed position in the top right corner of the screen
+*     .wc-Fab--bottomRight - fixed position in the bottom right corner of the screen
+*     .wc-Fab--bottomLeft - fixed position in the bottom left corner of the screen
+*     .wc-Fab--topLeft - fixed position in the top left corner of the screen
+* .wc-Fab__button - gives the circular styles to the main FAB button
+* .wc-Fab__actionsContainer - container that allows absolute-positioning of the actions
+* .wc-Fab__actions - wrapper for correct positioning and layout of each FAB extra action
+* .wc-Fab__action - single element that appears to the top or bottom of the main button
+*/
+
+@import "compass/css3/user-interface";
+@import "settings/_breakpoints";
+@import "settings/_colors";
+@import "settings/_components";
+@import "settings/_elevations";
+@import "tools/mixins/_responsive";
+@import "tools/mixins/_utilities";
+
+$wc-fab-size-mini: 40px;
+$wc-fab-size-normal: 56px;
+$wc-fab-icon-size-mini: 24px;
+$wc-fab-icon-size-normal: 32px;
+$wc-fab-icon-padding-mini: 8px;
+$wc-fab-icon-padding-normal: 12px;
+$wc-fab-offset: 16px;
+$wc-fab-offset-desktop: 24px;
+$wc-fab-color-transition-duration: 0.2s;
+$wc-fab-shadow-transition-duration: 0.1s;
+$wc-fab-action-size: 40px;
+$wc-fab-icon-action-padding: 8px;
+
+//---------- #wc-Fab  ---------- /
+
+.wc-Fab {
+    @include user-select(none);
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    border: 0;
+    display: inline-block;
+    z-index: 6;
+
+    &:active,
+    &:focus,
+    &:hover {
+        outline: 0;
+        z-index: 6;
+    }
+
+    &:active &,
+    &:hover & {
+
+        &__actions {
+            opacity: 1;
+        }
+    }
+
+//---------- #wc-Fab.is-mini  ---------- /
+
+    &.is-mini & {
+
+    //---------- #wc-Fab.is-mini wc-Fab__button ---------- /
+
+        &__button {
+            height: $wc-fab-size-mini;
+            padding: $wc-fab-icon-padding-mini;
+            width: $wc-fab-size-mini;
+        }
+
+    //---------- #wc-Fab.is-mini wc-Fab__action ---------- /
+
+        &__actions {
+            margin: 0;
+            top: calc(100% + #{$wc-fab-size-mini});
+        }
+    }
+
+//---------- #wc-Fab--topRight, wc-Fab--bottomRight, wc-Fab--bottomLeft, wc-Fab--topLeft ---------- /
+
+    &--topRight,
+    &--bottomRight,
+    &--bottomLeft,
+    &--topLeft {
+        position: fixed;
+    }
+
+//---------- #wc-Fab--topRight  ---------- /
+
+    &--topRight {
+        top: $wc-fab-offset;
+        right: $wc-fab-offset;
+    }
+
+//---------- #wc-Fab--bottomRight  ---------- /
+
+    &--bottomRight {
+        bottom: $wc-fab-offset;
+        right: $wc-fab-offset;
+    }
+
+//---------- #wc-Fab--bottomLeft  ---------- /
+
+    &--bottomLeft {
+        left: $wc-fab-offset;
+        bottom: $wc-fab-offset;
+    }
+
+//---------- #wc-Fab--topLeft  ---------- /
+
+    &--topLeft {
+        top: $wc-fab-offset;
+        left: $wc-fab-offset;
+    }
+
+    &--bottomRight &,
+    &--bottomLeft & {
+
+        &__actions {
+            bottom: calc(100% - #{$wc-fab-offset});
+            padding: 0 0 $wc-fab-offset 0;
+            top: initial;
+        }
+    }
+
+    &--bottomRight.is-mini &,
+    &--bottomLeft.is-mini & {
+
+        &__actions {
+            bottom: 100%;
+            top: initial;
+        }
+    }
+
+//---------- #wc-Fab__button  ---------- /
+
+    &__button {
+        background-color: $wc-fab-background-color;
+        height: $wc-fab-size-normal;
+        padding: $wc-fab-icon-padding-normal;
+        width: $wc-fab-size-normal;
+
+        &:active,
+        &:hover,
+        &:focus {
+            @include component-elevation($wc-elevations-fab-pressed);
+            background-color: $wc-fab-background-color-pressed;
+        }
+    }
+
+//---------- #wc-Fab__action  ---------- /
+
+    &__button,
+    &__action {
+        @include component-elevation($wc-elevations-fab-resting);
+        border-radius: 50%;
+        box-sizing: border-box;
+        color: $wc-primary-color;
+        cursor: pointer;
+        transition: background-color $wc-fab-color-transition-duration ease-in-out,
+                    box-shadow $wc-fab-shadow-transition-duration ease-in-out;
+    }
+
+//---------- #wc-Fab__actionsContainer  ---------- /
+
+    &__actionsContainer {
+        position: relative;
+    }
+
+//---------- #wc-Fab__actions  ---------- /
+
+    &__actions {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        padding: $wc-fab-offset 0 0 0;
+        position: absolute;
+        top: calc(100% + #{$wc-fab-size-normal} - #{$wc-fab-offset});
+        width: 100%;
+    }
+
+//---------- #wc-Fab__action  ---------- /
+
+    &__action {
+        background-color: $wc-fab-background-color-action;
+        height: $wc-fab-action-size;
+        list-style-type: none;
+        margin: 8px 0;
+        padding: $wc-fab-icon-action-padding;
+        width: $wc-fab-action-size;
+
+        &:hover {
+            @include component-elevation($wc-elevations-fab-pressed);
+            background-color: $wc-fab-background-color-action-pressed;
+        }
+    }
+
+//---------- Desktop breakpoint  ---------- /
+
+    @include respond-min($wc-media-desktop-lower-boundary) {
+
+        &--topRight {
+            top: $wc-fab-offset-desktop;
+            right: $wc-fab-offset-desktop;
+        }
+
+        &--bottomRight {
+            bottom: $wc-fab-offset-desktop;
+            right: $wc-fab-offset-desktop;
+        }
+
+        &--bottomLeft {
+            left: $wc-fab-offset-desktop;
+            bottom: $wc-fab-offset-desktop;
+        }
+
+        &--topLeft {
+            top: $wc-fab-offset-desktop;
+            left: $wc-fab-offset-desktop;
+        }
+    }
+}

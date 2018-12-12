@@ -1,0 +1,56 @@
+/**
+* StepDots styles.
+*
+* More details: https://zpl.io/ZDJJkq
+*
+* .wc-StepDots - main block
+*     .wc-StepDots--light - modifier for changing the dots background color to a light version
+* .wc-StepDots__dot - dot element
+*     .wc-StepDots__dot.is-active - current active dot in a set
+*/
+
+@import "settings/_colors";
+@import "settings/_components";
+
+//--------- #wc-StepDots  ---------- //
+
+.wc-StepDots {
+
+//--------- #wc-StepDots--light  ---------- //
+
+    &--light & {
+        &__dot {
+            background-color: $wc-step-dots-dot-background-color-light;
+
+            &.is-active {
+                background: $wc-step-dots-dot-background-color-active-light;
+            }
+        }
+    }
+
+//--------- #wc-StepDots__dot  ---------- //
+
+    &__dot {
+        background-color: $wc-step-dots-dot-background-color;
+        border-radius: 50%;
+        // using float because of a known browser issue adding "spaces" between inline-blocks
+        // @note https://css-tricks.com/fighting-the-space-between-inline-block-elements/
+        float: left;
+        font-size: 0;
+        height: $wc-step-dots-dot-size;
+        margin: 2px 0;
+        width: $wc-step-dots-dot-size;
+
+        //---------- #relations  ---------- /
+
+        & + & {
+            margin-left: $wc-step-dots-dot-spacing;
+        }
+
+        //--------- #wc-StepDots.is-active  ---------- //
+
+        &.is-active {
+            background: $wc-step-dots-dot-background-color-active;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Circular Loaders
+
+## Demo
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Indeterminate</div>
+            <div class="DemoTable__columnRight">
+                <wc-circular-loader
+                    v-bind:light="light"
+                    style="width: 48px;"
+                    indeterminate></wc-circular-loader>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Determinate</div>
+            <div class="DemoTable__columnRight">
+                <wc-circular-loader
+                    v-bind:light="light"
+                    style="width: 48px;"
+                    v-bind:progress="progress"></wc-circular-loader>
+                <wc-textfield
+                    floating-label
+                    label="Progress percentage"
+                    hint-text="Write a number between 0 and 100"
+                    type="number"
+                    max="100"
+                    min="0"
+                    v-model.number="progress">
+                </wc-textfield>
+                <wc-checkbox v-model="light">Is light</wc-checkbox>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Saver color</div>
+            <div class="DemoTable__columnRight">
+                <wc-circular-loader style="width: 24px;" indeterminate is-saver></wc-circular-loader>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

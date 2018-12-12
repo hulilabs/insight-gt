@@ -1,0 +1,16 @@
+<div class="wc-Deleter" v-bind:class="{ 'has-content-adjustment' : this.adjustContent }">
+    <div class="wc-Deleter__left">
+        <slot></slot>
+    </div>
+    <div class="wc-Deleter__right" v-bind:class="{ 'has-multiple-inputs' : this.multipleInputs, 'has-padding-adjusted' : this.adjustPadding }">
+        <wc-icon-button
+            class="wc-Deleter__trash"
+            icon-class="icon-delete"
+            smart-focus
+            v-bind:disabled="disableDelete"
+            v-wc-ripple:is-dark
+            v-on:click.native="_onTrashTap"
+            v-wc-gesture:tap="_onTrashTap">
+        </wc-icon-button>
+    </div>
+</div>

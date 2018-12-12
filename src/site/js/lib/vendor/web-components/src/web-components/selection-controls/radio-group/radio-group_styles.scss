@@ -1,0 +1,20 @@
+/**
+* RadioGroup styles
+*
+* wc-RadioGroup - main RadioGroup block
+* wc-RadioGroup.is-horizontal - items align horizontally
+*/
+
+@import "settings/_components";
+
+//---------- #wc-RadioGroup  ---------- /
+
+.wc-RadioGroup {
+
+    //---------- #states  ---------- /
+
+    &.is-horizontal {
+        display: flex;
+        flex-flow: row wrap;
+    }
+}

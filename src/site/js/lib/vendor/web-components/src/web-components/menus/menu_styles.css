@@ -1,0 +1,153 @@
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+* Generates the basic styles for shadows
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+ * Adds ellipsis to any block or element when the text may overflow its boundaries
+ * @return {CssRules} rules for adding ellipsis to overflown text
+ */
+/**
+ * Generates the hack for clearing floats
+ * @return {CssRules} rules for the clearfix hack
+ */
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/**
+* Menu styles.
+*
+* wc-Menu - menu
+* wc-Menu__container - menu container
+*     wc-Menu__container.is-active - menu container
+*/
+/* line 17, menu_styles.scss */
+.wc-Menu__container {
+  border: none;
+  margin: 0;
+  opacity: 0;
+  overflow: visible;
+  padding: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+/* line 32, menu_styles.scss */
+.wc-Menu__container.is-floatingBlock {
+  visibility: visible;
+}
+/* line 37, menu_styles.scss */
+.wc-Menu__container.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 9;
+}
+
+/* line 46, menu_styles.scss */
+.wc-Menu {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
+  z-index: 8;
+  background-color: #FFF;
+  display: flex;
+  flex-flow: column nowrap;
+  height: auto;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  max-width: 280px;
+  min-width: 124px;
+  overflow: auto;
+  padding: 8px 0;
+  position: absolute;
+  top: 0;
+  width: auto;
+}
+/* line 63, menu_styles.scss */
+.wc-Menu--fullWidth {
+  max-width: 100%;
+  width: 100%;
+}
+/* line 70, menu_styles.scss */
+.wc-Menu--overflow {
+  max-width: 680px;
+  min-width: 100%;
+}
+@media screen and (min-width: 1025px) {
+  /* line 46, menu_styles.scss */
+  .wc-Menu {
+    max-width: 392px;
+  }
+  /* line 81, menu_styles.scss */
+  .wc-Menu--fullWidth {
+    max-width: 100%;
+    width: 100%;
+  }
+  /* line 88, menu_styles.scss */
+  .wc-Menu--overflow {
+    max-width: 680px;
+  }
+}

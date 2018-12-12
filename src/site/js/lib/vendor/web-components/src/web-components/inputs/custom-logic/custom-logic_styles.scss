@@ -1,0 +1,87 @@
+/**
+* CustomLogic styles
+*
+* More details: https://zpl.io/Z2absbx
+*
+* .wc-CustomLogic - wrapper for an input with a mask
+*     .wc-CustomLogic.has-label - if the textfield handles a label, then change the mask position
+*     .wc-CustomLogic.is-disabled - styles for the disabled state
+* .wc-CustomLogic__mask - wrapper of the current masked value and placeholder (mask)
+*     .wc-CustomLogic__mask.is-android change mask position on android
+* .wc-CustomLogic__placeholder - holder of the full or partial content of the mask to be filled
+* .wc-CustomLogic__value - hidden holder of the current masked value (input content)
+*/
+
+@import "settings/_components";
+@import "settings/_breakpoints";
+@import "tools/mixins/_responsive";
+@import "tools/mixins/_typography";
+
+//---------- #wc-CustomLogic  ---------- /
+
+.wc-CustomLogic {
+    line-height: 1;
+    position: relative;
+
+    //- -------- #wc-CustomLogic.has-label  ---------- //
+
+    &.has-label & {
+        &__mask {
+            top: 35px;
+        }
+    }
+
+    //- -------- #wc-CustomLogic.is-disabled  ---------- //
+
+    &.is-disabled & {
+        &__placeholder,
+        &__value {
+            color: $wc-input-container-color-disabled;
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+
+    //- -------- #wc-CustomLogic__mask  ---------- //
+
+    &__mask {
+        @include generate-text-styles("body1");
+        display: flex;
+        pointer-events: none;
+        position: absolute;
+        top: 17px;
+
+        &.is-android {
+            top: 15px;
+        }
+    }
+
+    //- -------- #wc-CustomLogic__placeholder  ---------- //
+
+    &__placeholder {
+        color: $wc-custom-logic-placeholder-color;
+    }
+
+    //- -------- #wc-CustomLogic__value  ---------- //
+
+    &__value {
+        color: transparent;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &__placeholder,
+    &__value {
+        display: inline-block;
+        vertical-align: top;
+        white-space: pre;
+    }
+
+    //- -------- #Desktop  ---------- //
+
+    @include respond-min($wc-media-desktop-lower-boundary) {
+        &__mask {
+            top: 14px;
+        }
+    }
+}

@@ -1,0 +1,105 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Image button
+
+## Demo
+
+The following are the all the available configurations for `wc-ImageButton` component
+    </wc-markdown>
+
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">
+	            <h3>Single Selection</h3>
+	            <h4>Selected value : {{singleSelectionValue}}</h4>
+            </div>
+            <div class="DemoTable__columnRight" style="display: flex; justify-content: space-around">
+                <wc-image-button
+                    v-bind:path="imagePath"
+                    v-bind:title="'Julio Health'"
+                    v-bind:subtitle="'Doctor'"
+                    v-bind:value="'Julio'"
+                    allow-single-selection
+                    custom-value="Julio"
+                    v-model="singleSelectionValue"></wc-image-button>
+                <wc-image-button
+                    v-bind:path="imagePath"
+                    v-bind:title="'Ramón Health'"
+                    value="Ramón"
+                    custom-value="Ramón"
+                    allow-single-selection
+                    v-model="singleSelectionValue"
+                    selected></wc-image-button>
+                <wc-image-button
+                    v-bind:path="imagePath"
+                    v-bind:title="'Lucía'"
+                    v-bind:subtitle="'Asistente'"
+                    allow-single-selection
+                    value="Lucía"
+                    custom-value="Lucía"
+                    v-model="singleSelectionValue"></wc-image-button>
+                <wc-image-button
+                    v-bind:path="imagePath"
+                    v-bind:title="'Andrey'"
+                    value="Andrey"
+                    custom-value="Andrey"
+                    allow-single-selection
+                    v-model="singleSelectionValue"
+                    disabled></wc-image-button>
+            </div>
+        </div>
+	    <div class="DemoTable__row">
+		    <div class="DemoTable__columnLeft">
+			    <h3>Multiple Selection</h3>
+			    <h4>Julio is selected : {{julioIsSelected}}</h4>
+			    <h4>Ramón is selected : {{ramonIsSelected}}</h4>
+			    <h4>Lucía is selected : {{luciaIsSelected}}</h4>
+		    </div>
+		    <div class="DemoTable__columnRight" style="display: flex; justify-content: space-around">
+			    <wc-image-button
+					    v-bind:path="imagePath"
+					    v-bind:title="'Julio Health'"
+					    v-bind:subtitle="'Doctor'"
+					    v-model="julioIsSelected"></wc-image-button>
+			    <wc-image-button
+					    v-bind:path="imagePath"
+					    v-bind:title="'Ramón Health'"
+					    v-model="ramonIsSelected"></wc-image-button>
+			    <wc-image-button
+					    v-bind:path="imagePath"
+					    v-bind:title="'Lucía'"
+					    v-bind:subtitle="'Asistente'"
+					    v-model="luciaIsSelected"></wc-image-button>
+		    </div>
+	    </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Disabled</div>
+            <div class="DemoTable__columnRight">
+                <wc-image-button
+                    v-bind:path="imagePath"
+                    v-bind:title="'Andrey'"
+                    value="'Andrey'"
+                    disabled></wc-image-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Without text</div>
+            <div class="DemoTable__columnRight">
+                <wc-image-button
+                    v-bind:path="imagePath"
+                    value="'stuff'"></wc-image-button>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Selected</div>
+            <div class="DemoTable__columnRight">
+                <wc-image-button
+                    v-bind:path="imagePath"
+                    value="'123'"
+                    v-bind:title="'Test'"
+                    selected></wc-image-button>
+            </div>
+        </div>
+    </div>
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

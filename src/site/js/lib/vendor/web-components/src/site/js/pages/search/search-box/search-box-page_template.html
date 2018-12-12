@@ -1,0 +1,73 @@
+<div  style="position: relative">
+    <wc-markdown>
+# Search box
+
+The search bar expands to fill the container width.
+
+The minimum recomended width is 200px.
+
+### Simple search input
+
+The basic `wc-search-box` displays a button and the input. Anything the user inputs
+will be notified by events. Use this component when you need to render results in
+custom/complex ways.
+    </wc-markdown>
+
+    <div class="DemoTable DemoTable--solid">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Component</div>
+            <div class="DemoTable__columnRight">
+                <div v-bind:style="getBoxWidth">
+                    <wc-search-box
+                        ref="searchBox"
+                        v-bind:active="active"
+                        v-bind:animate="animate"
+                        v-bind:text="text"
+                        v-bind:outline="outline"
+                        v-bind:placeholder="boxPlaceholder"
+                        v-on:searchbox-search="_onSearchBoxHandler">
+                    </wc-search-box>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Configure</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <div class="DemoTable__option">
+                        <wc-text-field v-model="boxWidth"
+                            type="number"
+                            min="0"
+                            step="200"
+                            hintText="0 means full width"
+                            label="Container width">
+                        </wc-text-field>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-text-field v-model="boxPlaceholder" label="Placeholder">
+                        </wc-text-field>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-text-field
+                            v-model="text"
+                            label="Text">
+                        </wc-text-field>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="active">Active</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="animate">Animate</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="outline">Outline</wc-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Parent value</div>
+            <div class="DemoTable__columnRight">{{ searchValue }}</div>
+        </div>
+    </div>
+</div>

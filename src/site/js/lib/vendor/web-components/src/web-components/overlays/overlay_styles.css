@@ -1,0 +1,64 @@
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/**
+* Overlay styles.
+*
+* wc-Overlay - root class
+*     wc-Overlay.is-active - state class when the overlay is active
+* wc-Overlay--secondary - modifier for setting the background color to secondary color
+* wc-Overlay--transparent - modifier for setting the background color transparent
+* js-wc-scrollFixed - utility class to block the scroll in the body
+* vt-overlay - Vue transitions classes
+*/
+/*------------------------------------*\
+     #wc-Overlay
+\*------------------------------------*/
+/* line 21, overlay_styles.scss */
+.wc-Overlay {
+  background: rgba(0, 0, 0, 0.54);
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
+  width: 100%;
+  will-change: opacity;
+}
+/* line 37, overlay_styles.scss */
+.wc-Overlay.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* line 44, overlay_styles.scss */
+.wc-Overlay--secondary {
+  background-color: rgba(38, 198, 218, 0.7);
+}
+/* line 50, overlay_styles.scss */
+.wc-Overlay--transparent {
+  background-color: transparent;
+}

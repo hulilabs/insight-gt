@@ -1,0 +1,70 @@
+<div style="position: relative;">
+
+    <wc-markdown>
+# Menu
+
+## Demo
+
+Click on the  buttons to see how the menu works. Each menu is displayed from the origin according to the labeled position.
+    </wc-markdown>
+    <br>
+    <div class="DemoTable" style="height:200px; position: relative;">
+        <wc-flat-button id="buttonTopLeft" style="position: absolute;  top: 0; left: 0;">Top Left</wc-flat-button>
+        <wc-menu ref="menu" trigger-element-selector="#buttonTopLeft" menu-class="example" trigger-origin="top-left" floating-origin="top-left">
+            <wc-raised-button large v-wc-ripple:is-light styles="width:320px">Click Me!</wc-raised-button>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('1')">This is a very long element that will be cut using ellipsis</wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark disabled v-on:click.native="say('2')">I am disabled</wc-list-item>
+            <div class="wc-Divider wc-Divider--verticalSpace"></div>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('3')">Third!</wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('4')">Fourth!</wc-list-item>
+        </wc-menu>
+
+        <wc-flat-button id="buttonTopRight" style="position: absolute; top: 0; right: 0;">Top Right</wc-flat-button>
+        <wc-menu trigger-element-selector="#buttonTopRight" trigger-origin="top-right" floating-origin="top-right">
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('1')">Look Ma! No divider!</wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('2')">Second!</wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('3')">Third!</wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('4')">Fourth!</wc-list-item>
+        </wc-menu>
+
+        <wc-flat-button id="buttonBottomLeft" style="position: absolute; bottom: 0; left: 0;">Bottom Left</wc-flat-button>
+        <wc-menu trigger-element-selector="#buttonBottomLeft" trigger-origin="bottom-left" direction="up" floating-origin="bottom-left">
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('1')">First somewhat long element</wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('2')">Second!</wc-list-item>
+            <div class="wc-Divider wc-Divider--verticalSpace"></div>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('3')">Third!</wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark v-on:click.native="say('4')">Fourth!</wc-list-item>
+        </wc-menu>
+
+        <wc-flat-button id="buttonBottomRight" style="position: absolute; bottom: 0; right: 0;">Bottom Right</wc-flat-button>
+        <wc-menu
+            prevent-close-on-item-click
+            direction="up"
+            trigger-element-selector="#buttonBottomRight"
+            trigger-origin="bottom-right"
+            floating-origin="bottom-right">
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark>
+                <wc-checkbox class="wc-Checkbox--nowrap" slot="checkbox">This is a checkbox asd</wc-checkbox>
+            </wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark>
+                <wc-checkbox class="wc-Checkbox--nowrap" slot="checkbox">This is a checkbox asd</wc-checkbox>
+            </wc-list-item>
+            <wc-list-item role="menuitem" v-wc-ripple:is-dark>
+                <wc-checkbox class="wc-Checkbox--nowrap" slot="checkbox">This is a checkbox asd</wc-checkbox>
+            </wc-list-item>
+        </wc-menu>
+    </div>
+    <br>
+
+    <wc-markdown>
+* **Top Left** displays a raised button inside the menu and a disabled item.
+* **Top Right** doesn't have a divider.
+* **Bottom Left** has longer content but within the constraints.
+* **Bottom Right** displays short content.
+    </wc-markdown>
+
+    <p>For positioning details, see <router-link to="/behaviors/floating-layer#sandbox">floating layer</router-link> behavior.</p>
+
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

@@ -1,0 +1,70 @@
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/**
+* Divider mixin, generates the divider styles
+*
+* More details: https://zpl.io/Z1GxN96
+*
+* @param {HEX} $color - color for the divider
+*/
+/**
+* Divider styles
+*
+* More details: https://zpl.io/Z1GxN96
+*
+* wc-Divider - using default color for the dark theme
+*     wc-Divider--light -  using default color for the light theme
+*     wc-Divider--verticalSpace -  the divider has margin top and bottom of 8px
+*/
+/* line 16, divider_styles.scss */
+.wc-Divider {
+  box-sizing: border-box;
+  height: 1px;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+/* line 20, divider_styles.scss */
+.wc-Divider--light {
+  box-sizing: border-box;
+  height: 1px;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+/* line 25, divider_styles.scss */
+.wc-Divider--verticalSpace {
+  margin: 8px 0;
+}

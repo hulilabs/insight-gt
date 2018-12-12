@@ -1,0 +1,51 @@
+<div  style="position: relative">
+    <wc-markdown>
+# FAB Demo
+    </wc-markdown>
+
+    <!-- Use DemoTable if you need a neat responsive layout for your demo -->
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Floating Action Button</div>
+            <div class="DemoTable__columnRight" style="text-align: center;">
+                <wc-fab v-bind:actions="exampleAction"></wc-fab>
+                <wc-fab
+                    v-bind:actions="actions"
+                    v-bind:is-mobile="isMobile"
+                    v-bind:mini="mini"
+                    v-bind:position="position"
+                    v-on:baby-clicked="_babyClicked"
+                    v-on:kid-clicked="_kidClicked"
+                    v-on:adult-clicked="_adultClicked"
+                    v-on:elder-clicked="_elderClicked"
+                ></wc-fab>
+            </div>
+        </div>
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Options</div>
+            <div class="DemoTable__columnRight">
+                <div class="DemoTable__options">
+                    <div class="DemoTable__option">
+                        <wc-dropdown
+                            label="Select a position"
+                            placeholder="Position"
+                            v-model="position"
+                            v-bind:options="positionOptions">
+                        </wc-dropdown>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="mini">Mini</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="isMobile">Mobile</wc-checkbox>
+                    </div>
+                    <div class="DemoTable__option">
+                        <wc-checkbox v-model="singleAction">Only 1 action</wc-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation" style="position: relative; z-index: -1;"></wc-markdown>
+</div>

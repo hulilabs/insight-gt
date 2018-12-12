@@ -1,0 +1,283 @@
+/*
+ *  wc-IconButton - main block. a <button> represented with an icon, with two available color modifiers:
+ *      wc-IconButton--action - applies action typoicon color scheme
+ *      wc-IconButton--light - applies light typoicon color scheme
+ *      wc-IconButton--primary - applies primary color background style
+ *      wc-IconButton--secondaryDark - dark theme, secondary typography black color scheme
+ *      wc-IconButton.is-selectedDark - applies the focus styles for the dark theme
+ *      wc-IconButton.is-selectedLight - applies the focus styles for the light theme
+ *      wc-IconButton.is-selectedPrimaryDark - applies the focus styles using the primary dark color
+ *      wc-IconButton.is-selectedWhite - applies the focus styles using white (primary color)
+ *  wc-IconButton__icon - the actual icon, wrapped
+ */
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+
+         #BREAKPOINTS SETTINGS
+
+\*------------------------------------*/
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/*------------------------------------*\
+         #RESPONSIVE
+\*------------------------------------*/
+/**
+* Used to work for responsive design of mobile first.
+* @param  {Number} $width - The width of a large display, for example a desktop or tablet display.
+*
+*/
+/**
+* Used to work for responsive design of mobile first.
+* Sets a max width to respong
+* @param  {Number} $width - The width of a small display.
+*
+*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+* Generates the basic styles for shadows
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+ * Adds ellipsis to any block or element when the text may overflow its boundaries
+ * @return {CssRules} rules for adding ellipsis to overflown text
+ */
+/**
+ * Generates the hack for clearing floats
+ * @return {CssRules} rules for the clearfix hack
+ */
+/* line 24, icon-button_styles.scss */
+.wc-IconButton {
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+  flex-shrink: 0;
+  flex-grow: 0;
+  /**
+   * This font size 0 is used to remove a margin added by safari
+   * We do not use a margin 0 to prevent collisions with trumps
+   */
+  font-size: 0;
+  overflow: hidden;
+  padding: 12px;
+  transition: background-color 0.2s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 45, icon-button_styles.scss */
+.wc-IconButton--no-padding {
+  background-color: transparent;
+  padding: 0;
+}
+/* line 52, icon-button_styles.scss */
+.wc-IconButton__icon {
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 60, icon-button_styles.scss */
+.wc-IconButton[has-hover]:hover {
+  outline: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* line 68, icon-button_styles.scss */
+.wc-IconButton.is-selectedPrimaryDark {
+  background-color: #37474F;
+  outline: 0;
+}
+/* line 72, icon-button_styles.scss */
+.wc-IconButton.is-selectedPrimaryDark:focus {
+  background-color: #37474F;
+}
+/* line 77, icon-button_styles.scss */
+.wc-IconButton.is-selectedPrimaryDark[has-hover]:hover {
+  background-color: #37474F;
+}
+/* line 85, icon-button_styles.scss */
+.wc-IconButton.is-selectedDark {
+  background-color: rgba(0, 0, 0, 0.1);
+  outline: 0;
+}
+/* line 92, icon-button_styles.scss */
+.wc-IconButton.is-selectedLight {
+  background-color: rgba(255, 255, 255, 0.3);
+  outline: 0;
+}
+/* line 97, icon-button_styles.scss */
+.wc-IconButton:focus {
+  outline: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* line 102, icon-button_styles.scss */
+.wc-IconButton:disabled {
+  color: rgba(0, 0, 0, 0.26);
+  cursor: default;
+  pointer-events: none;
+}
+/* line 107, icon-button_styles.scss */
+.wc-IconButton:disabled .wc-IconButton__avatar {
+  opacity: .5;
+}
+/* line 114, icon-button_styles.scss */
+.wc-IconButton.is-selectedWhite {
+  background-color: #FFF;
+  outline: 0;
+}
+/* line 118, icon-button_styles.scss */
+.wc-IconButton.is-selectedWhite:focus {
+  background-color: #FFF;
+}
+/* line 123, icon-button_styles.scss */
+.wc-IconButton.is-selectedWhite[has-hover]:hover {
+  background-color: #FFF;
+}
+/* line 131, icon-button_styles.scss */
+.wc-IconButton--action {
+  color: #26c6da;
+}
+/* line 134, icon-button_styles.scss */
+.wc-IconButton--action:disabled {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 138, icon-button_styles.scss */
+.wc-IconButton--action:focus {
+  background-color: rgba(38, 198, 218, 0.26);
+}
+/* line 145, icon-button_styles.scss */
+.wc-IconButton--action[has-hover]:hover {
+  background-color: rgba(38, 198, 218, 0.26);
+}
+/* line 153, icon-button_styles.scss */
+.wc-IconButton--light {
+  color: white;
+}
+/* line 156, icon-button_styles.scss */
+.wc-IconButton--light:disabled {
+  color: rgba(255, 255, 255, 0.4);
+}
+/* line 160, icon-button_styles.scss */
+.wc-IconButton--light:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+/* line 167, icon-button_styles.scss */
+.wc-IconButton--light[has-hover]:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+/* line 175, icon-button_styles.scss */
+.wc-IconButton--primary {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: white;
+}
+/* line 179, icon-button_styles.scss */
+.wc-IconButton--primary:disabled {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 183, icon-button_styles.scss */
+.wc-IconButton--primary:focus {
+  background-color: #ECEFF1;
+}
+/* line 189, icon-button_styles.scss */
+.wc-IconButton--primary:hover {
+  background-color: #ECEFF1;
+}
+/* line 196, icon-button_styles.scss */
+.wc-IconButton--raised {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+  z-index: 2;
+}
+/* line 202, icon-button_styles.scss */
+.wc-IconButton--secondaryDark {
+  color: rgba(0, 0, 0, 0.54);
+}
+/* line 205, icon-button_styles.scss */
+.wc-IconButton--secondaryDark:disabled {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* line 209, icon-button_styles.scss */
+.wc-IconButton--secondaryDark:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* line 216, icon-button_styles.scss */
+.wc-IconButton--secondaryDark[has-hover]:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+@media screen and (min-width: 1025px) {
+  /* line 24, icon-button_styles.scss */
+  .wc-IconButton {
+    padding: 8px;
+  }
+  /* line 227, icon-button_styles.scss */
+  .wc-IconButton--no-padding {
+    background-color: transparent;
+    padding: 0;
+  }
+}

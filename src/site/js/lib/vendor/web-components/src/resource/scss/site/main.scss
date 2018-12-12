@@ -1,0 +1,83 @@
+/*------------------------------------*\
+
+         #MAIN CSS FILE
+
+\*------------------------------------*/
+
+/* ITCSS Structure : https://sites.google.com/a/hulihealth.com/tech/guidelines/css/standard#TOC-Layers: */
+
+/* Settings */
+
+/* Tools */
+
+/* Generic */
+@import "generic/main"; /* Ground-zero styles (normalize, resets,box-sizing)*/
+
+/* Base */
+@import "base/main";  /* Unclassed HTML elements (type selectors).*/
+@import "tools/mixins/_responsive";
+@import "settings/_breakpoints";
+
+/* Objects */
+
+/* Components */
+.WebComponents {
+    $nav-offset: 270px;
+
+    &__body {
+        padding: 0;
+
+        &.is-pullUpDialogActive {
+            overflow: hidden;
+        }
+    }
+
+    &__routerView {
+        padding: 30px;
+
+        .is-pullUpDialogActive & {
+            padding: 0;
+        }
+    }
+
+    &__desktopNav {
+        display: none;
+    }
+
+    &__appbar {
+        .is-pullUpDialogActive & {
+            display: none;
+        }
+    }
+
+    &__drawer {
+        .is-pullUpDialogActive & {
+            display: none;
+        }
+    }
+
+    @include respond-min($wc-media-desktop-lower-boundary) {
+        &__appbar {
+            display: none;
+        }
+
+        &__desktopNav {
+            display: block;
+            height: 100%;
+            overflow: scroll;
+            position: fixed;
+            top: 0;
+            width: $nav-offset;
+            padding-left: 25px;
+        }
+
+        &__navTitle {
+            font-weight: bold;
+        }
+
+        &__routerView {
+            margin-left: $nav-offset;
+        }
+    }
+}
+/* Trumps */

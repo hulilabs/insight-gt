@@ -1,0 +1,55 @@
+/**                   _
+ *  _             _ _| |_
+ * | |           | |_   _|
+ * | |___  _   _ | | |_|
+ * | '_  \| | | || | | |
+ * | | | || |_| || | | |
+ * |_| |_|\___,_||_| |_|
+ *
+ * (c) Huli Inc
+ */
+/**
+ * @file <%= componentNameTitleCase %> documentation page
+ * @requires vue
+ * @requires web-components/<%= componentNameLowerCasePlural %>/<%= componentNameLowerCase %>_component
+ * @requires web-components/markdown/markdown_component
+ * @requires web-components/<%= componentNameLowerCasePlural %>/readme.md
+ * @requires pages/<%= componentNameLowerCase %>/<%= componentNameLowerCase %>-page_template.html
+ * @module pages/<%= componentNameLowerCase %>/<%= componentNameLowerCase %>-page_component
+ * @extends Vue
+ */
+define([
+    'vue',
+    'web-components/<%= componentNameLowerCasePlural %>/<%= componentNameLowerCase %>_component',
+    'web-components/markdown/markdown_component',
+    'text!web-components/<%= componentNameLowerCasePlural %>/readme.md',
+    'text!pages/<%= componentNameLowerCase %>/<%= componentNameLowerCase %>-page_template.html'
+], function(
+    Vue,
+    <%= componentNameTitleCase %>,
+    Markdown,
+    <%= componentNameTitleCase %>Readme,
+    Template
+) {
+
+    var <%= componentNameTitleCase %>Page = Vue.extend({
+        template : Template,
+        data : function() {
+            return {
+                state : {
+                },
+                markdownSource : {
+                    documentation : <%= componentNameTitleCase %>Readme
+                }
+            };
+        },
+        methods : {
+        },
+        components : {
+            'wc-<%= componentNameLowerCase %>' : <%= componentNameTitleCase %>,
+            'wc-markdown' : Markdown
+        }
+    });
+
+    return <%= componentNameTitleCase %>Page;
+});

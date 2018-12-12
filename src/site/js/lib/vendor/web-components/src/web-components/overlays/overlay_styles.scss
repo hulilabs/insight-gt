@@ -1,0 +1,53 @@
+@import "settings/_components";
+@import "settings/_elevations";
+
+/**
+* Overlay styles.
+*
+* wc-Overlay - root class
+*     wc-Overlay.is-active - state class when the overlay is active
+* wc-Overlay--secondary - modifier for setting the background color to secondary color
+* wc-Overlay--transparent - modifier for setting the background color transparent
+* js-wc-scrollFixed - utility class to block the scroll in the body
+* vt-overlay - Vue transitions classes
+*/
+
+/*------------------------------------*\
+     #wc-Overlay
+\*------------------------------------*/
+
+$wc-overlay-transition-duration: 0.3s;
+
+.wc-Overlay {
+    background: $wc-overlay-background-color;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    pointer-events : none;
+    position: fixed;
+    top: 0;
+    transform:translate3d(0,0,0);
+    transition: opacity $wc-overlay-transition-duration cubic-bezier(0, 0, 0.3, 1);
+    width: 100%;
+    will-change: opacity;
+
+//---------- #States ---------- /
+
+    &.is-active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+//---------- #wc-Overlay--secondary ---------- /
+
+    &--secondary {
+        background-color: $wc-overlay-background-color-secondary;
+    }
+
+//---------- #wc-Overlay--transparent ---------- /
+
+    &--transparent {
+        background-color: transparent;
+    }
+}

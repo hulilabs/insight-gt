@@ -1,0 +1,152 @@
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+
+//- -------- #Primary Color  ---------- //
+
+$wc-primary-color: #FFF;           // White
+$wc-primary-color-light: #CFD8DC;  // Blue Gray 100
+$wc-primary-color-dark: #37474F;   // Blue Gray 800
+
+//- -------- #Accent Colors  -------- //
+
+$wc-accent-color: #FFB300;         // Amber 600
+$wc-accent-color-dark: #FF8F00;    // Amber 800
+
+//- -------- #Secondary Colors  -------- //
+
+$wc-secondary-color: #26C6DA;      // Cyan 400
+$wc-secondary-color-dark: #00ACC1; // Cyan 600
+
+//- -------- #Errors and warnings  -------- //
+
+$wc-error-color: #D32F2F;
+
+//- -------- #Errors and warnings  -------- //
+
+$wc-success-color: #8BC34A;
+
+//- -------- #Background color  -------- //
+
+$wc-background-color: #ECEFF1;     // Blue Gray 50
+
+//- -------- #Typoicon colors  -------- //
+
+$wc-typoicon-base-dark: #000;
+$wc-typoicon-base-light: #FFF;
+
+
+
+
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+
+//- -------- #dividers  ---------- //
+
+$wc-dividers-dark-opacity: 0.15;
+$wc-dividers-light-opacity: 0.30;
+
+//- -------- #shadows  ---------- //
+
+$wc-component-shadow-opacity: 0.12;
+$wc-component-second-shadow-opacity: 0.24;
+
+//- -------- #buttons  ---------- //
+
+$wc-raised-button-disabled-opacity: 0.10;
+$wc-raised-button-disabled-font-color-opacity: 0.26;
+
+//- -------- #wc-ListItem  ---------- //
+
+// background opacity when the item is focused or hovered
+$wc-list-item-background-opacity-selected : 0.10;
+// background opacity when the item is being press
+$wc-list-item-background-opacity-pressed : 0.15;
+
+//- -------- #wc-Avatar  ---------- //
+
+$wc-avatar-background-opacity : 0.15;
+$wc-avatar-text-color-opacity : 0.26;
+
+
+
+
+
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+
+$wc-typoicon-primary-dark: rgba($wc-typoicon-base-dark, 0.87);
+$wc-typoicon-secondary-dark: rgba($wc-typoicon-base-dark, 0.54);
+$wc-typoicon-disabled-dark: rgba($wc-typoicon-base-dark, 0.26);
+// hightlight for focus/active states
+$wc-typoicon-primary-dark-highlight: rgba($wc-typoicon-base-dark, 0.1);
+
+$wc-typoicon-primary-light: rgba($wc-typoicon-base-light, 1);
+$wc-typoicon-secondary-light: rgba($wc-typoicon-base-light, 0.7);
+$wc-typoicon-disabled-light: rgba($wc-typoicon-base-light, 0.4);
+// hightlight for focus/active states
+$wc-typoicon-primary-light-highlight: rgba($wc-typoicon-base-light, 0.3);
+
+$wc-typoicon-actions: rgba($wc-secondary-color, 1);
+$wc-typoicon-disabled-actions: rgba($wc-typoicon-base-dark, 0.26);
+// hightlight for focus/active states
+$wc-typoicon-actions-highlight: rgba($wc-secondary-color, 0.26);
+
+
+
+
+
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+
+$wc-dividers-dark: rgba($wc-typoicon-base-dark, $wc-dividers-dark-opacity);
+$wc-dividers-light: rgba($wc-typoicon-base-light, $wc-dividers-light-opacity);
+
+
+
+
+
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+
+$wc-ripple-dark-color: rgba(black, 0.05);
+$wc-ripple-light-color: rgba(white, 0.4);
+
+//- -------- #wc-StaticRipple  ---------- /
+
+$wc-static-ripple-dark-color: rgba(black, 0.1);
+
+
+
+
+
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+
+//- -------- #wc-RaisedButton  ---------- /
+
+$wc-raised-button-disabled-color: black;
+$wc-raised-button-primary-color: $wc-accent-color;
+$wc-raised-button-primary-dark-color: $wc-accent-color-dark;
+$wc-raised-button-disabled-background-color: rgba($wc-raised-button-disabled-color, $wc-raised-button-disabled-opacity);
+$wc-raised-button-disabled-font-color: rgba($wc-raised-button-disabled-color, $wc-raised-button-disabled-font-color-opacity);
+
+$wc-raised-button-background-highlight-color: $wc-raised-button-primary-dark-color;
+$wc-raised-button-background-color: $wc-raised-button-primary-color;
+$wc-raised-button-secondary-background-color: $wc-raised-button-primary-color;
+$wc-raised-button-secondary-background-highlight-color: $wc-raised-button-primary-dark-color;
+$wc-raised-button-font-color: white;
+
+//- -------- #wc-FlatButton  ---------- /
+
+$wc-flat-button-font-color: $wc-secondary-color;
+$wc-flat-button-font-color-hover: $wc-secondary-color-dark;
+$wc-flat-button-background-hover-color: rgba(black, .1);
+$wc-flat-button-background-active-color: rgba(black, .15);
+$wc-flat-button-disabled-font-color: rgba(black, .26);
+

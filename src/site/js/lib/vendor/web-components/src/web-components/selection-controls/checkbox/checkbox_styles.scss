@@ -1,0 +1,147 @@
+/**
+* Checkbox styles
+*
+* wc-Checkbox - main checkbox block
+*     wc-Checkbox--nowrap - adds nowrap white space to the label. Used when there are checkboxes in a menu
+* wc-Checkbox__input - the checkbox <input> tag
+* wc-Checkbox__inputLabel - the checkbox <label> tag that contains everything that's visible
+* wc-Checkbox__checkbox - the visible fake checkbox
+* wc-Checkbox__check - the check mark inside the fake checkbox
+* wc-Checkbox__label - the actual displayed text label
+* wc-Checkbox.is-inCheckList - state to act as a checklist item (analogue to list item)
+*/
+
+@import "settings/_components";
+@import "tools/mixins/_typography";
+
+$wc-checkbox-checklist-check-width: $wc-list-item-width;
+$wc-checkbox-checklist-check-height: $wc-list-item-single-height;
+$wc-checkbox-checkrow-check-padding: 0 40px 0 0;
+
+//---------- #wc-Checkbox  ---------- /
+
+.wc-Checkbox {
+    display: inline-block;
+
+    //---------- #wc-Checkbox--nowrap  ---------- /
+
+    &--nowrap & {
+
+        //---------- #wc-Checkbox--nowrap  .wc-Checkbox__inputLabel ---------- /
+
+        &__inputLabel {
+            white-space: nowrap;
+        }
+    }
+
+    //---------- #wc-Checkbox__input  ---------- /
+
+    &__input {
+        float: left;
+        height: 0;
+        margin: 0;
+        opacity: 0;
+        position: absolute;
+        width: 0;
+    }
+
+    //---------- #wc-Checkbox__inputLabel  ---------- /
+
+    &__inputLabel {
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        vertical-align: middle;
+    }
+
+    //---------- #wc-Checkbox__checkbox  ---------- /
+
+    &__checkbox {
+        border: $wc-checkbox-border-size solid $wc-checkbox-border-color;
+        border-radius: $wc-checkbox-border-radius;
+        box-sizing: border-box;
+        float: left;
+        height: $wc-checkbox-size;
+        position: relative;
+        transition: border-color $wc-checkbox-color-transition-duration ease-in-out,
+                    background-color $wc-checkbox-color-transition-duration ease-in-out;
+        width: $wc-checkbox-size;
+    }
+
+    //---------- #wc-Checkbox__check  ---------- /
+
+    &__check {
+        background-color: $wc-checkbox-checked-background-color;
+        border-radius: 50%;
+        color: $wc-checkbox-check-color;
+        left: -$wc-checkbox-border-size; // fixes checkbox border offset
+        top: -$wc-checkbox-border-size; // fixes checkbox border offset
+        transform: scale(0);
+        transition: transform $wc-checkbox-scale-duration ease-in-out;
+    }
+
+    //---------- #wc-Checkbox__label  ---------- /
+
+    &__label {
+        @include generate-text-styles("body1");
+        color: $wc-typoicon-primary-dark;
+        display: block;
+        margin-left: $wc-checkbox-label-margin + $wc-checkbox-size;
+        position: relative;
+        top: 4px; // offset from vertical align as design request
+    }
+
+    //---------- #states  ---------- /
+
+    &__input:checked + &__inputLabel &__checkbox {
+        background-color: $wc-checkbox-checked-background-color;
+        border-color: $wc-checkbox-checked-border-color;
+    }
+
+    &__input:checked + &__inputLabel &__check {
+        transform: scale(1);
+        border-radius: $wc-checkbox-border-radius;
+    }
+
+    &__input[disabled="disabled"]:checked + &__inputLabel &__checkbox {
+        background-color: $wc-checkbox-disabled-color;
+        border: none;
+    }
+
+    &__input[disabled="disabled"]:checked + &__inputLabel &__check {
+        background-color: $wc-checkbox-disabled-color;
+        left: 0;
+        top: 0;
+    }
+
+    &__input[disabled="disabled"] + &__inputLabel {
+        cursor: default;
+    }
+
+    &__input[disabled="disabled"] + &__inputLabel &__checkbox {
+        border-color: $wc-checkbox-disabled-color;
+    }
+
+    &__input[disabled="disabled"] + &__inputLabel &__label {
+        color: $wc-checkbox-disabled-color;
+    }
+
+    &.is-inCheckList,
+    &.is-inCheckRow {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+        height: $wc-checkbox-checklist-check-height;
+    }
+
+    &.is-inCheckList {
+        width: $wc-checkbox-checklist-check-width;
+
+        .wc-Checkbox__label {
+            margin-left: $wc-checkbox-label-margin-list + $wc-checkbox-size;
+        }
+    }
+
+    &.is-inCheckRow {
+        padding: $wc-checkbox-checkrow-check-padding;
+    }
+}

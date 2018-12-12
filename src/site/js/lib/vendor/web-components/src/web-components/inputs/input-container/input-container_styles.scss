@@ -1,0 +1,423 @@
+/**
+* InputContainer styles
+*
+* More details: https://zpl.io/Z2absbx
+*
+* .wc-InputContainer - wrapper of an input-like element that contains material textfield's behaviors
+*     .wc-InputContainer.is-dirty - state when the user has entered content into the input (not empty)
+*     .wc-InputContainer.is-focused - input is currently focused
+*     .wc-InputContainer.is-disabled - disabled state of the input. Affects the looks of the label
+*     .wc-InputContainer.has-action - if the input element has an action
+*     .wc-InputContainer.has-error - error state of the input. Affects the looks of the label
+*     .wc-InputContainer.has-suffix - flag for determine if extra padding should be added to the content
+*     .wc-InputContainer.has-floating-label - defines the floating label behavior styles
+*     .wc-InputContainer.is-InputContainer__input - element that is being wrapped up
+*     .wc-InputContainer.is-title - increases the size of the label, placeholder and suffix to the title font
+*     .wc-InputContainer.is-headline - increases the size of the label, placeholder and suffix to the headline font
+*     .wc-InputContainer.hide-input-highlighter - hides the highlighter of the input, a little line at the bottom of the field
+*           .wc-InputContainer__element
+*           .wc-InputContainer__element ::after
+* .wc-InputContainer__action - an action that interacts with the input element
+*     .wc-InputContainer__action.is-disabled - action disabled for interaction but still visible
+* .wc-InputContainer__content - container of input element and the suffix, for positioning
+* .wc-InputContainer__label - label tag that describes the input
+* .wc-InputContainer__placeholder - input element's placeholder
+* .wc-InputContainer__required - special character (*) for highlighting required fields
+* .wc-InputContainer__element - wrapper for the input element
+* .wc-InputContainer__hint - hint text displayed below the input. Acts as an additional description
+* .wc-InputContainer__counter - character counter that displays the input's value length
+* .wc-InputContainer__suffix - suffix content placed after the input
+*/
+
+@import "compass/css3/appearance";
+@import "compass/css3/flexbox";
+@import "settings/_colors";
+@import "settings/_components";
+@import "tools/mixins/_typography";
+
+//---------- #wc-InputContainer  ---------- /
+
+$wc-input-container-action-padding : 12px;
+$wc-input-container-action-width : 24px;
+$wc-input-container-content-margin-right : 8px;
+$wc-input-container-element-height : 20px;
+$wc-input-container-element-margin-bottom : 5px;
+$wc-input-container-element-padding-bottom : 5px;
+$wc-input-container-floating-label-animation-duration : 0.3s;
+$wc-input-container-highlighter-animation-duration : 0.3s;
+$wc-input-container-highlighter-height : 2px;
+$wc-input-container-label-padding-bottom : 5px;
+$wc-input-container-padding-bottom: 5px;
+$wc-input-container-padding-top : 14px;
+
+$wc-input-container-secondary-style-input-padding-left: 16px;
+$wc-input-container-secondary-style-input-padding-right: 32px;
+
+.wc-InputContainer {
+    overflow: hidden;
+    padding-bottom: $wc-input-container-padding-bottom;
+    padding-top: $wc-input-container-padding-top;
+    position: relative;
+    text-align: left;
+    width: 100%;
+
+    //---------- #wc-InputContainer--secondary-style ---------- /
+    // This is used to support the layout of https://zpl.io/Z29g75o
+    &--secondary-style {
+
+        .wc-InputContainer__action {
+            margin-right: 16px;
+        }
+
+        .wc-InputContainer__content {
+            padding-left: $wc-input-container-secondary-style-input-padding-left;
+            box-sizing: border-box;
+        }
+
+        .wc-InputContainer__placeholder {
+            padding-left: $wc-input-container-secondary-style-input-padding-left;
+            padding-right: $wc-input-container-secondary-style-input-padding-right;
+            box-sizing: border-box;
+        }
+    }
+
+    //--------- #wc-InputContainer__label  ---------- //
+
+    &__label {
+        @include generate-text-styles("caption2");
+        cursor: default;
+        display: block;
+        width: 100%;
+    }
+
+    //--------- #wc-InputContainer__placeholder  ---------- //
+
+    &__placeholder {
+        @include generate-text-styles("body1");
+        cursor: inherit;
+        padding-top: 2px;
+        position: absolute;
+    }
+
+    &__label,
+    &__placeholder {
+        color: $wc-input-container-label-color;
+        padding-bottom: $wc-input-container-label-padding-bottom;
+    }
+
+    //--------- #wc-InputContainer__required  ---------- //
+
+    &__required {
+        @include generate-text-styles("caption2");
+    }
+
+    //--------- #wc-InputContainer__element  ---------- //
+
+    // This rule avoids double margin between container-element and element-input
+    &__element {
+        color: $wc-input-container-element-color;
+        margin-bottom: $wc-input-container-element-margin-bottom;
+        padding-bottom: $wc-input-container-element-padding-bottom;
+        position: relative;
+    }
+
+    //--------- #wc-InputContainer.hide-input-highlighter  ---------- //
+    .wc-InputContainer__element {
+        border-bottom: 1px solid $wc-input-container-element-border-bottom-color;
+
+        &::after {
+            background-color: $wc-input-container-highlighter-background-color;
+            bottom: -1px;
+            content: "";
+            display: block;
+            height: $wc-input-container-highlighter-height;
+            position: absolute;
+            transform : translateX(-100%);
+            transition: transform $wc-input-container-highlighter-animation-duration ease-in-out;
+            width: 100%;
+        }
+    }
+
+    &.hide-input-highlighter {
+        .wc-InputContainer__element {
+            border-bottom: 0px;
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    //--------- #wc-InputContainer__action  ---------- //
+
+    &__action {
+        color: $wc-input-container-label-color;
+        cursor: pointer;
+        outline: none;
+        position: absolute;
+        right: 0;
+        top: -2px;
+        width: auto;
+
+       //--------- #wc-InputContainer__action.is-disabled ---------- //
+
+        &.is-disabled {
+            pointer-events: none;
+        }
+    }
+
+    //--------- #is-InputContainer__input  ---------- //
+
+    .is-InputContainer__input {
+        @include appearance('textfield');
+        @include generate-text-styles("body1");
+        background: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: initial;
+        color: inherit;
+        min-height: $wc-input-container-element-height;
+        outline: none;
+        padding: 0;
+        width: 100%;
+
+        // Fix for changing the color of Chrome's placeholder for date, time, month, etc. input types
+        &::-webkit-datetime-edit {
+            color : $wc-input-container-label-color;
+        }
+    }
+
+    .is-InputContainer__input[readonly],
+    .is-InputContainer__input[readonly] ~ &__action {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    //--------- #wc-InputContainer__hint  ---------- //
+
+    &__counter,
+    &__hint {
+        @include generate-text-styles("caption2");
+        color: $wc-input-container-color-disabled;
+    }
+
+    //--------- #wc-InputContainer__counter  ---------- //
+
+    &__counter {
+        text-align: right;
+    }
+
+    &__hint ~ &__counter {
+        bottom: 4px;
+        position: absolute;
+        right: 0;
+    }
+
+    //--------- #wc-InputContainer__suffix  ---------- //
+
+    &__suffix {
+        @include generate-text-styles("body1");
+        color: $wc-input-container-suffix-color;
+        padding-bottom: $wc-input-container-element-margin-bottom + $wc-input-container-element-padding-bottom;
+    }
+
+//--------- #States  ---------- //
+
+    //--------- #wc-InputContainer.is-title  ---------- //
+
+    &.is-title {
+        .wc-InputContainer__placeholder,
+        .wc-InputContainer__suffix,
+        .is-InputContainer__input {
+            @include generate-text-styles("title");
+        }
+
+        .wc-InputContainer__action {
+            top : -3px;
+        }
+    }
+
+    //--------- #wc-InputContainer.is-headline  ---------- //
+
+    &.is-headline {
+        .wc-InputContainer__placeholder,
+        .wc-InputContainer__suffix,
+        .is-InputContainer__input {
+            @include generate-text-styles("headline");
+        }
+
+        .is-InputContainer__input {
+            height: auto;
+        }
+
+        .wc-InputContainer__action {
+            top : 6px;
+        }
+    }
+
+    //--------- #wc-InputContainer.is-disabled  ---------- //
+
+    &.is-disabled & {
+        &__label,
+        &__placeholder,
+        &__element,
+        &__suffix {
+            color: $wc-input-container-color-disabled;
+            cursor: default;
+            pointer-events: none;
+        }
+
+    }
+
+    //- -------- #wc-InputContainer.is-disabled .is-InputContainer__input  ---------- //
+
+    &.is-disabled .is-InputContainer__input::-webkit-datetime-edit {
+        color: $wc-input-container-color-disabled;
+    }
+
+    //- -------- #wc-InputContainer.is-disabled .wc-InputContainer__action  ---------- //
+
+    &.is-disabled &__action {
+        color: $wc-input-container-color-disabled;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    //--------- #wc-InputContainer.is-focused  ---------- //
+
+    &.is-focused & {
+        &__label {
+            color: $wc-input-container-label-color-focus;
+        }
+
+        &__required {
+            color: $wc-error-color;
+        }
+
+        &__element::after {
+            transform : translateX(0);
+        }
+    }
+
+    //--------- #wc-InputContainer.has-error  ---------- //
+
+    &.has-error & {
+        &__label {
+            color: $wc-error-color;
+        }
+
+        &__required {
+            color: $wc-error-color;
+        }
+
+        &__element::after {
+            background-color: $wc-error-color;
+            transform : translateX(0);
+        }
+
+        &__counter {
+            bottom: 4px;
+            color: $wc-error-color;
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    //--------- #wc-InputContainer.is-dirty  ---------- //
+
+    &.is-dirty & {
+        &__placeholder {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    //--------- #wc-InputContainer.is-dirty .is-InputContainer__input ---------- //
+
+    &.is-dirty .is-InputContainer__input::-webkit-datetime-edit,
+    &.is-focused .is-InputContainer__input::-webkit-datetime-edit {
+        color: $wc-input-container-element-color;
+    }
+
+    //--------- #wc-InputContainer.has-floating-label  ---------- //
+
+    &.has-floating-label & {
+        &__label {
+            cursor: inherit;
+            transform: translateY(24px) scale(1.3);
+            transform-origin: top left;
+            transition: transform $wc-input-container-floating-label-animation-duration;
+        }
+    }
+
+    //--------- #wc-InputContainer.has-floating-label.is-headline  ---------- //
+
+    &.has-floating-label.is-headline & {
+        &__label {
+            transform: translateY(23px) scale(2.11);
+        }
+    }
+
+    //--------- #wc-InputContainer.has-floating-label.is-title  ---------- //
+
+    &.has-floating-label.is-title & {
+        &__label {
+            transform: translateY(21px) scale(1.80);
+        }
+    }
+
+    //--------- #wc-InputContainer.has-floating-label.is-dirty  ---------- //
+
+    &.has-floating-label:not(.is-dirty) & {
+        &__label {
+            color: $wc-input-container-label-color;
+            font-weight: normal;
+        }
+    }
+
+    &.has-floating-label.is-dirty & {
+        &__label {
+            transform: translateY(0) scale(1);
+            transform-origin: top left;
+        }
+    }
+
+    //--------- #wc-InputContainer.has-floating-label.has-error  ---------- //
+
+    &.has-floating-label.has-error & {
+        &__label {
+            color: $wc-error-color;
+        }
+    }
+
+    //--------- #wc-InputContainer.has-floating-label.is-disabled  ---------- //
+
+    &.has-floating-label.is-disabled & {
+        &__label {
+            color: $wc-input-container-color-disabled;
+        }
+    }
+
+    //--------- #wc-InputContainer.has-suffix  ---------- //
+
+    &.has-suffix & {
+        &__content {
+            @include display-flex();
+            @include flex-direction(row);
+            @include align-items(center);
+        }
+
+        &__element {
+            margin-right: $wc-input-container-content-margin-right;
+            width: 100%;
+        }
+    }
+
+    //--------- #wc-InputContainer.has-action  ---------- //
+
+    &.has-action & {
+        &__element {
+            padding-right: $wc-input-container-action-width + $wc-input-container-action-padding;
+        }
+    }
+}

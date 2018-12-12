@@ -1,0 +1,13 @@
+<div class="wc-AppBar" v-bind:class="classObject">
+    <div v-show="showNavigation" class="wc-AppBar__navigation">
+        <slot name="navigation"></slot>
+    </div>
+    <span ref="title" v-if="title" class="wc-AppBar__title" v-bind:class="[{'wc-AppBar__title--subheader' : !titleClass}, titleClass]" >{{title}}<span v-if="hintText" v-bind:class="hintClass">{{hintText}}</span></span>
+    <slot></slot>
+    <div v-show="showActions" class="wc-AppBar__actions" v-bind:class="{'wc-AppBar__actions--fillSpace' : fillSpace}">
+        <slot name="actions"></slot>
+    </div>
+    <div v-if="hasProgress" class="wc-AppBar__progress">
+        <slot name  ="progress"></slot>
+    </div>
+</div>

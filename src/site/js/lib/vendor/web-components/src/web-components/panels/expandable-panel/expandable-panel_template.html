@@ -1,0 +1,21 @@
+<div class="wc-ExpandablePanel" v-bind:class="{ 'is-opened' : state.isOpened }">
+    <div class="wc-ExpandablePanel__header">
+        <span class="wc-ExpandablePanel__title u-body1 u-secondary-text-light">{{ title }}</span>
+        <div class="wc-ExpandablePanel__actions">
+            <wc-icon-button
+                light
+                smart-focus
+                v-bind:icon-class="toggleIcon"
+                v-on:click.native="_onToggleClick"
+                v-wc-ripple:is-light
+            ></wc-icon-button>
+            <slot name="action"></slot>
+        </div>
+    </div>
+    <div class="wc-ExpandablePanel__body" v-if="renderBody">
+        <slot name="beforeContent"></slot>
+        <div class="wc-ExpandablePanel__content">
+            <slot name="content"></slot>
+        </div>
+    </div>
+</div>

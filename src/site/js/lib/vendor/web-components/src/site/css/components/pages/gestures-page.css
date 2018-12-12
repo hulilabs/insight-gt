@@ -1,0 +1,26 @@
+/**
+ * Gesture page styles
+ *
+ * .GesturesPage - main container
+ * .GesturesPage__gesture - each gesture block
+ */
+/* line 11, ../../../input/components/pages/gestures-page.scss */
+.GesturesPage {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  max-width: 770px;
+}
+/* line 19, ../../../input/components/pages/gestures-page.scss */
+.GesturesPage__gesture {
+  align-items: center;
+  background-color: #00b2ff;
+  color: #FFF;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  margin: 5px;
+  text-align: center;
+  vertical-align: middle;
+  width: 100px;
+}

@@ -1,0 +1,22 @@
+/**
+* Checklist styles
+*
+* wc-Checklist - main Checklist block
+* wc-Checklist--row - displays row configuration
+*/
+
+@import "settings/_components";
+
+$wc-checklist-padding: 8px 0;
+
+//---------- #wc-Checklist  ---------- /
+
+.wc-Checklist {
+    padding: $wc-checklist-padding;
+
+    //---------- #states  ---------- /
+    &.is-horizontal {
+        display: flex;
+        flex-flow: row wrap;
+    }
+}

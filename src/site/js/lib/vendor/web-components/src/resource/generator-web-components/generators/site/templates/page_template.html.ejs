@@ -1,0 +1,20 @@
+<div  style="position: relative">
+    <wc-markdown>
+# <%= componentNameTitleCase %>
+
+## Demo
+    </wc-markdown>
+
+    <!-- Use DemoTable if you need a neat responsive layout for your demo -->
+    <div class="DemoTable">
+        <div class="DemoTable__row">
+            <div class="DemoTable__columnLeft">Descriptive label</div>
+            <div class="DemoTable__columnRight">
+                <wc-<%= componentNameLowerCase %>>
+                </wc-<%= componentNameLowerCase %>>
+            </div>
+        </div>
+    </div>
+
+    <wc-markdown v-bind:source="markdownSource.documentation"></wc-markdown>
+</div>

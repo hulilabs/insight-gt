@@ -1,0 +1,154 @@
+/**
+* Pull up dialog component
+*
+* wc-PullUpDialog__wrapper - this is the wrapper element for the overlay and dialog
+* wc-PullUpDialog - dialog component
+* wc-PullUpDialog__headerContainer - wrapper container for the header and cover elements
+* wc-PullUpDialog__cover - cover image space
+* wc-PullUpDialog__header - header container, contains the avatar, actions and slot content
+* wc-PullUpDialog__avatar
+* wc-PullUpDialog__actions - space for the actions
+* wc-PullUpDialog__headerExpandedContent - slot content when the header is expanded
+* wc-PullUpDialog__headerCollapsedContent - slot content when the header is collapsed
+* wc-PullUpDialog__content - content of the dialog
+*/
+/*------------------------------------*\
+
+        #ELEVATION-SETTINGS
+
+\*------------------------------------*/
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/*------------------------------------*\
+         #utilities
+\*------------------------------------*/
+/**
+* Generates the basic styles for shadows and sets the z-index
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+* Generates the basic styles for shadows
+* Elevations are defined in the design styleguide.
+* @param {Number} $elevation - size of the shadow(without unit size)
+*/
+/**
+ * Adds ellipsis to any block or element when the text may overflow its boundaries
+ * @return {CssRules} rules for adding ellipsis to overflown text
+ */
+/**
+ * Generates the hack for clearing floats
+ * @return {CssRules} rules for the clearfix hack
+ */
+/* line 21, pull-up-dialog_styles.scss */
+.wc-PullUpDialog {
+  transition: transform 1s ease-out;
+}
+/* line 26, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__wrapper {
+  height: 100vh;
+  position: relative;
+  width: 100%;
+}
+/* line 34, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__headerContainer {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+}
+/* line 43, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__cover {
+  position: relative;
+  transform: none;
+  width: 100%;
+  z-index: 0;
+}
+/* line 52, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__header {
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.12), 0 4px 4px 0 rgba(0, 0, 0, 0.24);
+  z-index: 4;
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: initial;
+  overflow: visible;
+  pointer-events: auto;
+  position: relative;
+  transform: none;
+  width: 100%;
+}
+/* line 65, pull-up-dialog_styles.scss */
+.wc-PullUpBar.is-collapsed .wc-PullUpDialog__header {
+  box-shadow: none;
+  pointer-events: none;
+}
+/* line 73, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__avatar {
+  left: calc(50vw - 48px);
+  position: absolute;
+  top: -48px;
+  z-index: 3;
+}
+/* line 79, pull-up-dialog_styles.scss */
+.wc-PullUpBar.is-collapsed .wc-PullUpDialog__avatar {
+  pointer-events: none;
+}
+/* line 86, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__actions {
+  left: 4px;
+  position: absolute;
+  top: 4px;
+  z-index: 3;
+}
+/* line 92, pull-up-dialog_styles.scss */
+.wc-PullUpDialog.is-collapsed .wc-PullUpDialog__actions {
+  pointer-events: none;
+}
+/* line 99, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__headerExpandedContent {
+  margin-top: 48px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 3;
+}
+/* line 109, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__headerCollapsedContent {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+/* line 119, pull-up-dialog_styles.scss */
+.wc-PullUpDialog.is-collapsed .wc-PullUpDialog__headerCollapsedContent {
+  pointer-events: auto;
+  z-index: 4;
+}
+/* line 127, pull-up-dialog_styles.scss */
+.wc-PullUpDialog__content {
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 1;
+}

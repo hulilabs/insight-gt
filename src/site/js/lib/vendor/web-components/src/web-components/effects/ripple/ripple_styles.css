@@ -1,0 +1,39 @@
+/*
+ * Ripple, material ripple effect. Built on top of Waves vendor
+ *
+ * Check the Waves vendor for structure details
+ *
+ *  wc-RippleEffect - main dynamic ripple block
+ *      wc-RippleEffect.is-dark - dark ripple, disables default 3D
+ *      wc-RippleEffect.is-light - light ripple
+ */
+/*----------------------------------*\
+        #BASIC-THEME
+\*----------------------------------*/
+/*------------------------------------*\
+     #OPACITIES
+\*------------------------------------*/
+/*------------------------------------*\
+     #TYPOGRAPHY-ICONS
+\*------------------------------------*/
+/*------------------------------------*\
+     #DIVIDERS
+\*------------------------------------*/
+/*------------------------------------*\
+     #RIPPLE EFFECT
+\*------------------------------------*/
+/*------------------------------------*\
+     #BUTTONS
+\*------------------------------------*/
+/* line 14, ripple_styles.scss */
+.wc-RippleEffect {
+  transform: translateZ(0);
+}
+/* line 20, ripple_styles.scss */
+.wc-RippleEffect.is-dark .waves-ripple {
+  background: rgba(0, 0, 0, 0.05);
+}
+/* line 27, ripple_styles.scss */
+.wc-RippleEffect.is-light .waves-ripple {
+  background: rgba(255, 255, 255, 0.4);
+}

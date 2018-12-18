@@ -29,7 +29,6 @@ var tasks = {
             paths.source + 'components/**/*.js',
             paths.source + 'site/js/**/*.js',
             '!' + paths.source + 'site/js/lib/**',
-            '!' + paths.source + 'site/js/insight-gt/**',
             '!' + paths.source + 'site/js/require-config.js',
         ],
         eslint: {

@@ -7,9 +7,9 @@
 define(function() {
     function createIntensityData(width, height) {
         return {
-            width : width,
-            height : height,
-            data : new Float32Array(width * height),
+            width: width,
+            height: height,
+            data: new Float32Array(width * height),
         };
     }
 
@@ -76,18 +76,18 @@ define(function() {
             j;
         for (i = 0; i < newIntensity.height; ++i) {
             var y =
-                i < size[1] ?
-                    size[1] - i :
-                    i >= height + size[1] ?
-                        2 * height - size[1] + 1 - i :
-                        i - size[1];
+                i < size[1]
+                    ? size[1] - i
+                    : i >= height + size[1]
+                    ? 2 * height - size[1] + 1 - i
+                    : i - size[1];
             for (j = 0; j < newIntensity.width; ++j) {
                 var x =
-                        j < size[0] ?
-                            size[0] - j :
-                            j >= width + size[0] ?
-                                2 * width - size[0] + 1 - j :
-                                j - size[0],
+                        j < size[0]
+                            ? size[0] - j
+                            : j >= width + size[0]
+                            ? 2 * width - size[0] + 1 - j
+                            : j - size[0],
                     newOffset = i * newIntensity.width + j,
                     oldOffset = y * width + x;
                 newData[newOffset] = data[oldOffset];
@@ -163,11 +163,11 @@ define(function() {
             magnitude[i] = Math.sqrt(Math.pow(dx.data[i], 2) + Math.pow(dy.data[i], 2));
             direction = Math.atan2(dy.data[i], dx.data[i]);
             orientation[i] =
-                direction < 0 ?
-                    direction + Math.PI :
-                    direction > Math.PI ?
-                        direction - Math.PI :
-                        direction;
+                direction < 0
+                    ? direction + Math.PI
+                    : direction > Math.PI
+                    ? direction - Math.PI
+                    : direction;
         }
         // NMS.
         for (i = 1; i < height - 1; ++i) {
@@ -188,9 +188,9 @@ define(function() {
                     offset2 = offset + width - 1;
                 }
                 suppressed[offset] =
-                    magnitude[offset] > magnitude[offset1] && magnitude[offset] > magnitude[offset2] ?
-                        magnitude[offset] :
-                        0;
+                    magnitude[offset] > magnitude[offset1] && magnitude[offset] > magnitude[offset2]
+                        ? magnitude[offset]
+                        : 0;
             }
         }
         // Hysteresis.
@@ -216,9 +216,10 @@ define(function() {
                     suppressed[offset] >= options.highThreshold ||
                     (suppressed[offset] >= options.lowThreshold &&
                         suppressed[offset1] >= options.highThreshold) ||
-                    (suppressed[offset] >= options.lowThreshold && suppressed[offset2] >= options.highThreshold) ?
-                        suppressed[offset] :
-                        0;
+                    (suppressed[offset] >= options.lowThreshold &&
+                        suppressed[offset2] >= options.highThreshold)
+                        ? suppressed[offset]
+                        : 0;
             }
         }
         result.magnitude = magnitude;

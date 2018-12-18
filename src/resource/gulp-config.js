@@ -26,9 +26,10 @@ var paths = {
 var tasks = {
     lintScripts : {
         src : [
-            paths.source + 'web-components/**/*.js',
+            paths.source + 'components/**/*.js',
             paths.source + 'site/js/**/*.js',
-            '!' + paths.source + 'site/js/lib/**'],
+            '!' + paths.source + 'site/js/lib/**',
+            '!' + paths.source + 'site/js/insight-gt/**'],
         jshint : {
             configuration : './jshint-config.jshintrc',
             reporter : 'jshint-stylish'

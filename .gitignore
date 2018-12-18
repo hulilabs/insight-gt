@@ -10,6 +10,9 @@ src/public/img/photos
 # NodeJS modules
 node_modules
 
+# NodeJS package-lock
+src/resource/package-lock.json
+
 *.sass-cache
 
 # Test related
@@ -23,8 +26,8 @@ src/test/selenium/test-cases/compiled
 selenium/selenium/target
 
 codeship.aes
-codeship-deploy-production.env
-codeship-deploy-staging.env
+codeship-deployment.env
+codeship-deploy.env
 
 # Karma & test-related
 src/coverage

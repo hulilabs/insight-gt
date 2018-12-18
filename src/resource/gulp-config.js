@@ -15,7 +15,7 @@
  * paths configuration
  */
 var paths = {
-    source : './../'
+    source: './../',
 };
 
 /**
@@ -24,25 +24,38 @@ var paths = {
  */
 
 var tasks = {
-    lintScripts : {
-        src : [
-            paths.source + 'components/**/*.js',
+    lintScripts: {
+        src: [
+            paths.source + 'web-components/**/*.js',
             paths.source + 'site/js/**/*.js',
             '!' + paths.source + 'site/js/lib/**',
-            '!' + paths.source + 'site/js/insight-gt/**'],
-        jshint : {
-            configuration : './jshint-config.jshintrc',
-            reporter : 'jshint-stylish'
+            '!' + paths.source + 'site/js/insight-gt/**',
+            '!' + paths.source + 'site/js/require-config.js',
+        ],
+        eslint: {
+            formatter: result => {
+                if (result.messages.length || result.warningCount || result.errorCount) {
+                    // Called for each ESLint result.
+                    console.log(`\nESLint result: ${result.filePath}`);
+                    result.messages.forEach(function(message) {
+                        let isAnError = message.fatal || message.severity === 2;
+                        let severity = isAnError ? 'error' : 'warning';
+                        let position = `${message.line}:${message.column}`;
+                        console.log(
+                            `${position} \t ${severity} \t ${message.ruleId} \t ${message.message}`
+                        );
+                    });
+                    console.log('\n');
+                }
+            },
+            options: {
+                configFile: '../../.eslintrc',
+            },
         },
-        jscs : {
-            configuration : {
-                configPath : '.jscsrc'
-            }
-        }
-    }
+    },
 };
 
 module.exports = {
-    paths : paths,
-    tasks : tasks
+    paths: paths,
+    tasks: tasks,
 };

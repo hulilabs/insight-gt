@@ -23,13 +23,14 @@ require.config({
         "marked" : "site/js/lib/vendor/marked/marked.min",
         "pages" : "site/js/pages",
         "highlight" : "site/js/lib/vendor/highlight/highlight.pack",
-        "css-loader" : "/site/js/lib/vendor/require-css/css",
+        "css-loader" : "site/js/lib/vendor/require-css/css",
         "waves" : "site/js/lib/vendor/Waves/dist",
         "jump" : "site/js/lib/vendor/jump.js/dist/jump",
-        "utilities" : "site/js/lib/vendor/utilities/utilities",
-        "floodfill" : "site/js/lib/vendor/utilities/floodfill",
-        "segmentation" : "site/js/insight-gt/segmentation",
-        "morph" : "site/js/insight-gt/segmentation/morph"
+        "zxcvbn" : "site/js/lib/vendor/zxcvbn/dist/zxcvbn",
+        "utilities" : "site/js/insight-gt/utilities",
+        "image-segmentation" : "site/js/insight-gt/image",
+        "morph" : "site/js/insight-gt/image/morph",
+        "web-components" : "site/js/lib/vendor/web-components/src/web-components"
     },
     "waitSeconds" : 30
 });

@@ -42,5 +42,10 @@
     "mocha": "3",
     "requirejs": "2",
     "sinon": "1"
+  },
+  "dependencies": {
+    "eslint-plugin-prettier": "^3.0.0",
+    "gulp-eslint": "^5.0.0",
+    "prettier": "^1.15.3"
   }
 }

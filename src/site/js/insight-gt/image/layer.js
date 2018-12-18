@@ -33,14 +33,14 @@ define(function() {
     Layer.prototype.load = function(source, options) {
         options = options || {};
         if (typeof options === 'function') {
-            options = { onload : options };
+            options = { onload: options };
         }
         var image,
             self = this;
         this.canvas.width = options.width || this.canvas.width;
         this.canvas.height = options.height || this.canvas.height;
         if (typeof source === 'string') {
-            image = new Image();
+            image = new Image(); // eslint-disable-line no-undef
             image.src = source;
         } else {
             image = source;
@@ -79,7 +79,7 @@ define(function() {
     Layer.prototype.fromCanvas = function(source, options) {
         options = options || {};
         if (typeof options === 'function') {
-            options = { onload : options };
+            options = { onload: options };
         }
         this.canvas.width = source.width;
         this.canvas.height = source.height;
@@ -96,7 +96,7 @@ define(function() {
     Layer.prototype.fromImageData = function(imageData, options) {
         options = options || {};
         if (typeof options === 'function') {
-            options = { onload : options };
+            options = { onload: options };
         }
         this.canvas.width = imageData.width;
         this.canvas.height = imageData.height;

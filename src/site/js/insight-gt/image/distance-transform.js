@@ -82,12 +82,13 @@ define(function() {
         }
     }
 
+    /* eslint-disable no-unused-vars */
     function distanceTransform(intensity, options) {
         options = options || {};
         var distanceMap = {
-            width : intensity.width,
-            height : intensity.height,
-            data : new Float32Array(intensity.data.length),
+            width: intensity.width,
+            height: intensity.height,
+            data: new Float32Array(intensity.data.length),
         };
         for (var offset = 0; offset < distanceMap.data.length; ++offset) {
             distanceMap.data[offset] = intensity.data[offset] ? 0 : INF;
@@ -97,6 +98,7 @@ define(function() {
         //  distanceMap = intensity2rgb(distanceMap);
         return distanceMap;
     }
+    /* eslint-enable no-unused-vars */
 
     // For debugging.
     // function intensity2rgb(intensity) {

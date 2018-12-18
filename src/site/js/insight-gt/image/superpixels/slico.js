@@ -78,9 +78,9 @@ define(['./base'], function(BaseSegmentation) {
 
     SLICO.prototype._compute = function() {
         var labels =
-            this.method === 'FixedK' ?
-                this.performSLICOForGivenK() :
-                this.performSLICOForGivenStepSize();
+            this.method === 'FixedK'
+                ? this.performSLICOForGivenK()
+                : this.performSLICOForGivenStepSize();
         var result = new ImageData(this.width, this.height);
         result.numSegments = remapLabels(labels);
         encodeLabels(labels, result.data);
@@ -223,7 +223,7 @@ define(['./base'], function(BaseSegmentation) {
         var step = Math.sqrt(parseFloat(size) / parseFloat(K));
         var xoff = Math.round(step / 2);
         var yoff = Math.round(step / 2);
-        var n = 0;
+        var n = 0; // eslint-disable-line no-unused-vars
         var r = 0;
         this.kSeedsL = [];
         this.kSeedsA = [];
@@ -236,7 +236,6 @@ define(['./base'], function(BaseSegmentation) {
                 break;
             }
             for (var x = 0; x < this.width; ++x) {
-                /*jslint bitwise: true*/
                 var X = Math.floor(x * step + (xoff << (r & 0x1))); //hex grid
                 if (X > this.width - 1) {
                     break;
@@ -310,7 +309,8 @@ define(['./base'], function(BaseSegmentation) {
                 for (y = y1; y < y2; ++y) {
                     for (x = x1; x < x2; ++x) {
                         i = Math.floor(y * this.width + x);
-                        if (!(y < this.height && x < this.width && y >= 0 && x >= 0)) { /*jshint ignore: line*/
+                        if (!(y < this.height && x < this.width && y >= 0 && x >= 0)) {
+                            /*jshint ignore: line*/
                             throw 'Assertion error';
                         }
 
@@ -324,7 +324,8 @@ define(['./base'], function(BaseSegmentation) {
                         distxy[i] =
                             Math.pow(x - this.kSeedsX[n], 2) + Math.pow(y - this.kSeedsY[n], 2);
                         var dist = distlab[i] / maxlab[n] + distxy[i] / maxxy[n];
-                        if (dist < distvec[i]) { /*jshint ignore: line*/
+                        if (dist < distvec[i]) {
+                            /*jshint ignore: line*/
                             distvec[i] = dist;
                             kLabels[i] = n;
                         }
@@ -405,7 +406,8 @@ define(['./base'], function(BaseSegmentation) {
                     for (n = 0; n < 4; ++n) {
                         x = Math.floor(xvec[0] + dx4[n]);
                         y = Math.floor(yvec[0] + dy4[n]);
-                        if (x >= 0 && x < this.width && (y >= 0 && y < this.height)) { /*jshint ignore: line*/
+                        if (x >= 0 && x < this.width && (y >= 0 && y < this.height)) {
+                            /*jshint ignore: line*/
                             nindex = Math.floor(y * this.width + x);
                             if (nlabels[nindex] >= 0) {
                                 adjlabel = nlabels[nindex];
@@ -414,7 +416,8 @@ define(['./base'], function(BaseSegmentation) {
                     }
                     var count = 1;
                     for (c = 0; c < count; ++c) {
-                        for (n = 0; n < 4; ++n) { /*jshint ignore: line*/
+                        for (n = 0; n < 4; ++n) {
+                            /*jshint ignore: line*/
                             x = Math.floor(xvec[c] + dx4[n]);
                             y = Math.floor(yvec[c] + dy4[n]);
                             if (x >= 0 && x < this.width && (y >= 0 && y < this.height)) {
@@ -432,7 +435,8 @@ define(['./base'], function(BaseSegmentation) {
                     // adjacent label found before, and decrement label count.
                     /*jslint bitwise: true*/
                     if (count <= SUPSZ >> 2) {
-                        for (c = 0; c < count; c++) { /*jshint ignore: line*/
+                        for (c = 0; c < count; c++) {
+                            /*jshint ignore: line*/
                             var ind = Math.floor(yvec[c] * this.width + xvec[c]);
                             nlabels[ind] = adjlabel;
                         }
@@ -455,7 +459,7 @@ define(['./base'], function(BaseSegmentation) {
         }
         this.getLABXYSeedsForGivenStepSize(this.step, this.perturb);
         this.performSuperpixelSegmentationVariableSandM(kLabels, this.step, this.maxIterations);
-        var numlabels = kLabels.length;
+        var numlabels = kLabels.length; // eslint-disable-line no-unused-vars
         if (this.enforceConnectivity) {
             var nlabels = fillArray(new Int32Array(size), -1);
             numlabels = this.enforceLabelConnectivity(
@@ -508,7 +512,8 @@ define(['./base'], function(BaseSegmentation) {
                         if (
                             istaken[index] === 0 &&
                             result.labels[mainindex] !== result.labels[index]
-                        ) { /*jshint ignore: line*/
+                        ) {
+                            /*jshint ignore: line*/
                             ++np;
                         }
                     }

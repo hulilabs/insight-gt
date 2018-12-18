@@ -47,9 +47,9 @@ define(['morph/neighbor-map'], function(NeighborMap) {
             result[i] = findDominantLabel(indexImage.data, neighborMap.get(i));
         }
         return {
-            width : indexImage.width,
-            height : indexImage.height,
-            data : result,
+            width: indexImage.width,
+            height: indexImage.height,
+            data: result,
         };
     }
 

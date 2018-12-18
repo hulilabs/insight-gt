@@ -64,9 +64,9 @@ define([
      * @type {Object}
      */
     var DEFAULT = {
-        BACKGROUND_COLOR : '#FFFFFF',
-        LINE_COLOR : '#000000',
-        STROKE_COLOR : '#DB0404',
+        BACKGROUND_COLOR: '#FFFFFF',
+        LINE_COLOR: '#000000',
+        STROKE_COLOR: '#DB0404',
     };
 
     /**
@@ -74,7 +74,7 @@ define([
      * @type {Object}
      */
     var EVENT = {
-        CAN_UNDO : 'can-undo',
+        CAN_UNDO: 'can-undo',
     };
 
     /**
@@ -82,11 +82,11 @@ define([
      * @type {Object}
      */
     var TOOL = {
-        PEN : 'pen',
-        ERASER : 'eraser',
-        RECT : 'rectangle',
-        BUCKET : 'bucket',
-        BUCKETB : 'bucketBack',
+        PEN: 'pen',
+        ERASER: 'eraser',
+        RECT: 'rectangle',
+        BUCKET: 'bucket',
+        BUCKETB: 'bucketBack',
     };
 
     /**
@@ -103,109 +103,109 @@ define([
 
     var COLORS = {};
     COLORS.names = {
-        aqua : '#00ffff',
-        azure : '#f0ffff',
-        beige : '#f5f5dc',
-        blue : '#0000ff',
-        brown : '#a52a2a',
-        cyan : '#00ffff',
-        darkblue : '#00008b',
-        darkcyan : '#008b8b',
-        darkgreen : '#006400',
-        darkkhaki : '#bdb76b',
-        darkmagenta : '#8b008b',
-        darkolivegreen : '#556b2f',
-        darkorange : '#ff8c00',
-        darkorchid : '#9932cc',
-        darkred : '#8b0000',
-        darksalmon : '#e9967a',
-        darkviolet : '#9400d3',
-        fuchsia : '#ff00ff',
-        gold : '#ffd700',
-        green : '#008000',
-        indigo : '#4b0082',
-        khaki : '#f0e68c',
-        lightblue : '#add8e6',
-        lightcyan : '#e0ffff',
-        lightgreen : '#90ee90',
-        lightpink : '#ffb6c1',
-        lightyellow : '#ffffe0',
-        lime : '#00ff00',
-        magenta : '#ff00ff',
-        maroon : '#800000',
-        navy : '#000080',
-        olive : '#808000',
-        orange : '#ffa500',
-        pink : '#ffc0cb',
-        purple : '#800080',
-        red : '#ff0000',
-        yellow : '#ffff00',
+        aqua: '#00ffff',
+        azure: '#f0ffff',
+        beige: '#f5f5dc',
+        blue: '#0000ff',
+        brown: '#a52a2a',
+        cyan: '#00ffff',
+        darkblue: '#00008b',
+        darkcyan: '#008b8b',
+        darkgreen: '#006400',
+        darkkhaki: '#bdb76b',
+        darkmagenta: '#8b008b',
+        darkolivegreen: '#556b2f',
+        darkorange: '#ff8c00',
+        darkorchid: '#9932cc',
+        darkred: '#8b0000',
+        darksalmon: '#e9967a',
+        darkviolet: '#9400d3',
+        fuchsia: '#ff00ff',
+        gold: '#ffd700',
+        green: '#008000',
+        indigo: '#4b0082',
+        khaki: '#f0e68c',
+        lightblue: '#add8e6',
+        lightcyan: '#e0ffff',
+        lightgreen: '#90ee90',
+        lightpink: '#ffb6c1',
+        lightyellow: '#ffffe0',
+        lime: '#00ff00',
+        magenta: '#ff00ff',
+        maroon: '#800000',
+        navy: '#000080',
+        olive: '#808000',
+        orange: '#ffa500',
+        pink: '#ffc0cb',
+        purple: '#800080',
+        red: '#ff0000',
+        yellow: '#ffff00',
     };
 
     var Canvas = Vue.extend({
-        name : 'CanvasComponent',
-        template : Template,
-        props : {
+        name: 'CanvasComponent',
+        template: Template,
+        props: {
             /**
              * Alpha level of the canvas
              */
-            alpha : {
-                type : Number,
-                default : 0.4,
+            alpha: {
+                type: Number,
+                default: 0.4,
             },
             /**
              * Current layer on which operations are performed
              */
-            activeLayer : {
-                type : Number,
-                default : 0,
+            activeLayer: {
+                type: Number,
+                default: 0,
             },
             /**
              * Canvas main background color
              */
-            backgroundColor : {
-                type : String,
-                default : DEFAULT.BACKGROUND_COLOR,
+            backgroundColor: {
+                type: String,
+                default: DEFAULT.BACKGROUND_COLOR,
             },
             /**
              * Background image
              * Used for loading initial image state
              * If a canvas is for drawing operations, the base image acts as the canvas pixels state
              */
-            baseImage : {
-                type : String,
-                default : '',
+            baseImage: {
+                type: String,
+                default: '',
             },
             /**
              * Define a cross origin for images loading
              * Values: anonymous, use-credentials
              * @see https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes
              */
-            crossOrigin : {
-                type : String,
-                default : null,
-                required : false,
+            crossOrigin: {
+                type: String,
+                default: null,
+                required: false,
             },
             /**
              * Eraser thickness
              */
-            eraserThickness : {
-                type : [Number, String],
-                default : 1,
+            eraserThickness: {
+                type: [Number, String],
+                default: 1,
             },
             /**
              * Canvas height dimension
              */
-            height : {
-                type : [Number, String],
-                default : 0,
+            height: {
+                type: [Number, String],
+                default: 0,
             },
             /**
              * An array that keep track of the existing layers
              */
-            layers : {
-                type : Array,
-                default : function() {
+            layers: {
+                type: Array,
+                default: function() {
                     return [];
                 },
             },
@@ -213,32 +213,32 @@ define([
              * Flag that indicates if a canvas has an outline image
              * If a canvas has an outline image, drawing operations can be performed on the canvas
              */
-            outlineImage : {
-                type : Boolean,
-                default : false,
+            outlineImage: {
+                type: Boolean,
+                default: false,
             },
             /**
              * Improves trace smoothness by adding a shadow to the stroke
              * This is a heavy task, so the performance may be impacted on continuous drawing
              */
-            smooth : {
-                type : Boolean,
-                default : false,
+            smooth: {
+                type: Boolean,
+                default: false,
             },
             /**
              * Current stroke color
              * Accepts any web color naming like 'red' or '#F00'
              */
-            strokeColor : {
-                type : String,
-                default : DEFAULT.STROKE_COLOR,
+            strokeColor: {
+                type: String,
+                default: DEFAULT.STROKE_COLOR,
             },
             /**
              * Store the colors corresponding to each layer
              */
-            strokeColors : {
-                type : Array,
-                default : function() {
+            strokeColors: {
+                type: Array,
+                default: function() {
                     return [DEFAULT.STROKE_COLOR];
                 },
             },
@@ -246,9 +246,9 @@ define([
              * Store the colors corresponding to each layer.
              * Each color is enconded as an RGB int array.
              */
-            strokeArray : {
-                type : Array,
-                default : function() {
+            strokeArray: {
+                type: Array,
+                default: function() {
                     // @TODO: change for constant
                     return [[219, 4, 4]];
                 },
@@ -256,167 +256,167 @@ define([
             /**
              * Stroke thickness
              */
-            strokeThickness : {
-                type : [Number, String],
-                default : 1,
+            strokeThickness: {
+                type: [Number, String],
+                default: 1,
             },
             /**
              * Currently in-use tool
              * @see Canvas.TOOL
              */
-            tool : {
-                type : String,
-                default : TOOL.PEN,
-                validator : function(value) {
+            tool: {
+                type: String,
+                default: TOOL.PEN,
+                validator: function(value) {
                     return TOOL.hasOwnProperty(value.toUpperCase());
                 },
             },
             /**
              * Canvas width dimension
              */
-            width : {
-                type : [Number, String],
-                default : 0,
+            width: {
+                type: [Number, String],
+                default: 0,
             },
             /**
              * Zoom level
              */
-            zoom : {
-                type : Number,
-                default : 1,
+            zoom: {
+                type: Number,
+                default: 1,
             },
         },
-        data : function() {
+        data: function() {
             return {
                 /**
                  * Stores drawing in-progress points
                  * @type {Array}
                  */
-                drawBuffer : [[]],
+                drawBuffer: [[]],
                 /**
                  * Canvas 2D context
                  */
-                drawContext : null,
+                drawContext: null,
                 /**
                  * Stores all drawn/commited points
                  * @type {Array}
                  */
-                drawStack : [[]],
+                drawStack: [[]],
                 /**
                  * base image state
                  * @see {ImageState}
                  */
-                baseImageState : {
-                    loaded : false,
-                    instance : null,
+                baseImageState: {
+                    loaded: false,
+                    instance: null,
                 },
                 /**
                  * outline image state
                  * @see {ImageState}
                  */
-                outlineImageState : {
-                    loaded : false,
-                    instance : null,
+                outlineImageState: {
+                    loaded: false,
+                    instance: null,
                 },
                 /**
                  * The superpixels outline image
                  */
-                outlineImageData : null,
+                outlineImageData: null,
                 /**
                  *State of the canvas
                  */
-                state : {
-                    lastBufferedPoint : null,
-                    painting : false,
-                    tainted : false,
+                state: {
+                    lastBufferedPoint: null,
+                    painting: false,
+                    tainted: false,
                 },
                 /**
                  * Buffer that contains images that are popped from the drawStack
                  */
-                lastPoppedImage : [''],
+                lastPoppedImage: [''],
             };
         },
-        computed : {
+        computed: {
             /**
              * Get current stroke color based on selected tool
              * @return {string}
              */
-            currentStrokeColor : function() {
+            currentStrokeColor: function() {
                 return this._getColorByTool();
             },
             /**
              * Get current stroke thickness based on selected tool
              * @return {string}
              */
-            currentStrokeThickness : function() {
+            currentStrokeThickness: function() {
                 return this._getThicknessByTool();
             },
             /**
              * Get draw area height
              * @return {number} pixels
              */
-            drawHeight : function() {
+            drawHeight: function() {
                 return this.height;
             },
             /**
              * Get draw area width
              * @return {number} pixels
              */
-            drawWidth : function() {
+            drawWidth: function() {
                 return this.width;
             },
             /**
              * Detect if base image was provided
              * @return {boolean}
              */
-            hasBaseImage : function() {
+            hasBaseImage: function() {
                 return this.baseImage !== '';
             },
             /**
              * Detect if outline image was provided
              * @return {boolean}
              */
-            hasOutlineImage : function() {
+            hasOutlineImage: function() {
                 return this.outlineImage;
             },
             /**
              * Detects if the eraser tool is selected
              * @return {boolean}
              */
-            isEraser : function() {
+            isEraser: function() {
                 return this.tool === TOOL.ERASER;
             },
             /**
              * Detects if the rectangle tool is selected
              * @return {boolean}
              */
-            isRectangle : function() {
+            isRectangle: function() {
                 return this.tool === TOOL.RECT;
             },
             /**
              * Detects if the bucket fill tool is selected
              * @return {boolean}
              */
-            isBucket : function() {
+            isBucket: function() {
                 return this.tool === TOOL.BUCKET;
             },
             /**
              * Detects if the background bucket tool is selected
              * @return {boolean}
              */
-            isBackgroundBucket : function() {
+            isBackgroundBucket: function() {
                 return this.tool === TOOL.BUCKETB;
             },
         },
-        mounted : function() {
+        mounted: function() {
             // Draw context must be initialized before any other setup
             this._resetCanvas();
         },
-        methods : {
+        methods: {
             /**
              * Add a new layer
              */
-            addLayer : function() {
+            addLayer: function() {
                 this.drawBuffer.push([]);
                 this.drawStack.push([]);
             },
@@ -424,7 +424,7 @@ define([
              * Add a new color to the color array
              * @param color
              */
-            addColor : function(color) {
+            addColor: function(color) {
                 this.strokeColors.push(color);
                 var res = color.match(/[a-f0-9]{2}/gi);
                 this.strokeArray.push(
@@ -437,7 +437,7 @@ define([
              * Verify if the image assets are loaded
              * @return {boolean}
              */
-            areImagesReady : function() {
+            areImagesReady: function() {
                 return (
                     (!this.hasBaseImage || (this.hasBaseImage && this.baseImageState.loaded)) &&
                     (!this.hasOutlineImage ||
@@ -448,7 +448,7 @@ define([
              * Clear all drawn strokes
              * @note this basically flush the stack and buffer and then redraw
              */
-            clear : function() {
+            clear: function() {
                 this.drawStack[this.activeLayer] = [];
                 this._notifyCanUndo();
                 this._clearBuffer();
@@ -468,7 +468,7 @@ define([
              * @param  {string} type
              * @return {Promise} - resolves Blob as first argument
              */
-            exportBlob : function(type) {
+            exportBlob: function(type) {
                 var mime = 'image/' + type,
                     canvas = this.$refs.canvas;
 
@@ -495,7 +495,7 @@ define([
 
                             // convert base64/URLEncoded data component to raw binary data held in a string
                             if (data[0].indexOf('base64') >= 0) {
-                                binary = atob(data[1]);
+                                binary = atob(data[1]); // eslint-disable-line no-undef
                             } else {
                                 binary = unescape(data[1]); // decodeURI
                             }
@@ -506,11 +506,12 @@ define([
                                 content[i] = binary.charCodeAt(i);
                             }
 
+                            /* eslint-disable no-undef */
                             var arrayBuffer = new Uint8Array(content),
                                 blob = new Blob([arrayBuffer.buffer], {
-                                    type : mime,
+                                    type: mime,
                                 });
-
+                            /* eslint-enable no-undef */
                             resolve(blob);
                         }
                     }.bind(this)
@@ -523,11 +524,13 @@ define([
              * @param  {string} filename
              * @return {Promise} - resolves File as first argument
              */
-            exportFile : function(type, filename) {
+            exportFile: function(type, filename) {
                 return this.exportBlob(type).then(function(blob) {
+                    /* eslint-disable no-undef */
                     return new File([blob], filename, {
-                        type : blob.type,
+                        type: blob.type,
                     });
+                    /* eslint-enable no-undef */
                 });
             },
             /**
@@ -541,8 +544,8 @@ define([
              * @param  {string} type
              * @return {Image}
              */
-            exportImage : function(type) {
-                var image = new Image();
+            exportImage: function(type) {
+                var image = new Image(); // eslint-disable-line no-undef
 
                 if (!this.isTainted()) {
                     try {
@@ -560,8 +563,8 @@ define([
              * @param type
              * @returns {HTMLImageElement}
              */
-            exportLayer : function() {
-                var image = new Image();
+            exportLayer: function() {
+                var image = new Image(); // eslint-disable-line no-undef
 
                 if (!this.isTainted()) {
                     try {
@@ -578,7 +581,7 @@ define([
              * Export the canvas layers as a xml file
              * @return {Array}
              */
-            exportMasks : function() {
+            exportMasks: function() {
                 var xmlDoc = document.implementation.createDocument(null, 'xml'),
                     body = document.createElementNS(null, 'masks');
 
@@ -594,28 +597,28 @@ define([
                 return xmlDoc;
             },
 
-            getChanges : function() {
+            getChanges: function() {
                 return this.drawStack[this.activeLayer];
             },
             /**
              * Detect if the canvas has changes
              * @return {boolean}
              */
-            hasChanges : function() {
+            hasChanges: function() {
                 return this.drawStack[this.activeLayer].length > 0;
             },
             /**
              * Verify if the canvas was marked as tainted
              * @return {boolean}
              */
-            isTainted : function() {
+            isTainted: function() {
                 return this.state.tainted;
             },
             /**
              * Saves the changes
              * @param {Array} drawStack
              */
-            setChanges : function() {
+            setChanges: function() {
                 this.drawStack[this.activeLayer].push(this.$refs.canvas.toDataURL());
                 this._clearBuffer();
                 this._redraw();
@@ -624,7 +627,7 @@ define([
              * Undo the last drawn stroke
              * @note remove the last commited stroke from the stack and then redraw
              */
-            undo : function() {
+            undo: function() {
                 this.drawStack[this.activeLayer].pop();
                 this._notifyCanUndo();
                 this._redraw();
@@ -636,7 +639,7 @@ define([
              * @return {Point}        - the buffered point
              * @private
              */
-            _bufferPoint : function(e, drag) {
+            _bufferPoint: function(e, drag) {
                 var zoom = this.zoom;
                 if (zoom <= 0) {
                     zoom = 1 / Math.abs(zoom - 2);
@@ -644,9 +647,9 @@ define([
                 var positions = this._getPositions(e),
                     // @see {Point}
                     point = {
-                        drag : drag,
-                        x : positions.x / zoom,
-                        y : positions.y / zoom,
+                        drag: drag,
+                        x: positions.x / zoom,
+                        y: positions.y / zoom,
                     };
 
                 this.state.lastBufferedPoint = point;
@@ -658,7 +661,7 @@ define([
              * Flush the buffered points
              * @private
              */
-            _clearBuffer : function() {
+            _clearBuffer: function() {
                 this.state.lastBufferedPoint = null;
                 this.drawBuffer[this.activeLayer] = [];
             },
@@ -666,7 +669,7 @@ define([
              * Transforms the canvas into an image to load it in the redraw step.
              * @private
              */
-            _commitStroke : function(layer) {
+            _commitStroke: function(layer) {
                 if (this.drawBuffer[layer].length > 0) {
                     var imagedata = this._smoothCanvas(),
                         canvas = document.createElement('canvas');
@@ -686,7 +689,7 @@ define([
              * Detect tainted canvas state
              * @param  {Error} e - SecurityError
              */
-            _detectTainted : function(e) {
+            _detectTainted: function(e) {
                 if (e.code === ERROR_CODE_CANVAS_TAINTED) {
                     this.state.tainted = true;
                 }
@@ -701,7 +704,7 @@ define([
              * @return {string}      - web color
              * @private
              */
-            _getColorByTool : function() {
+            _getColorByTool: function() {
                 return this.isEraser ? this.backgroundColor : this.strokeColor;
             },
             /**
@@ -711,7 +714,7 @@ define([
              * @return {number}
              * @private
              */
-            _getThicknessByTool : function() {
+            _getThicknessByTool: function() {
                 return this.isEraser ? this.eraserThickness : this.strokeThickness;
             },
             /**
@@ -726,7 +729,7 @@ define([
              *
              * @private
              */
-            _getPositions : function(e) {
+            _getPositions: function(e) {
                 var element = this.$refs.canvas,
                     isTouchEvent = !!e.changedTouches,
                     // using e.touches instead of changedTouches makes no difference
@@ -744,19 +747,19 @@ define([
                  * @warning beware of changing how the scroll offset is calculated
                  *          keep in mind checking mobile scenarios
                  */
-                var scrollLeft = this._isInsideSeveralScrollableArea(DOMUtil.hasHorizontalScroll) ?
-                        DOMUtil.getScrollOffsetLeft(element)
+                var scrollLeft = this._isInsideSeveralScrollableArea(DOMUtil.hasHorizontalScroll)
+                        ? DOMUtil.getScrollOffsetLeft(element)
                         : 0,
-                    scrollTop = this._isInsideSeveralScrollableArea(DOMUtil.hasVerticalScroll) ?
-                        DOMUtil.getScrollOffsetTop(element)
+                    scrollTop = this._isInsideSeveralScrollableArea(DOMUtil.hasVerticalScroll)
+                        ? DOMUtil.getScrollOffsetTop(element)
                         : 0,
                     x = positionSource.pageX - offsetLeft + scrollLeft,
                     y = positionSource.pageY - offsetTop + scrollTop;
 
                 // @see {Coordinate}
                 return {
-                    x : x,
-                    y : y,
+                    x: x,
+                    y: y,
                 };
             },
             /**
@@ -766,7 +769,7 @@ define([
              * @return {boolean}
              * @private
              */
-            _isInsideSeveralScrollableArea : function(scrollDetector) {
+            _isInsideSeveralScrollableArea: function(scrollDetector) {
                 var element = this.$refs.canvas,
                     inside = false;
 
@@ -784,7 +787,7 @@ define([
              * Load base image
              * @private
              */
-            _loadBaseImage : function() {
+            _loadBaseImage: function() {
                 this._loadImage(this.baseImage, this.hasBaseImage, this.baseImageState);
             },
 
@@ -792,7 +795,7 @@ define([
              * Load outline image
              * @private
              */
-            _loadOutlineImage : function() {
+            _loadOutlineImage: function() {
                 this._loadImage(
                     this.outlineImageData,
                     this.hasOutlineImage,
@@ -806,10 +809,10 @@ define([
              * @param  {ImageState} imageState - image loaded flag and instance
              * @private
              */
-            _loadImage : function(imagePath, hasImage, imageState) {
+            _loadImage: function(imagePath, hasImage, imageState) {
                 if (hasImage && !imageState.loaded && !imageState.instance) {
                     // Create an in-memory image DOM object
-                    imageState.instance = new Image();
+                    imageState.instance = new Image(); // eslint-disable-line no-undef
 
                     /**
                      * To avoid CORS policy errors on image loading,
@@ -854,8 +857,8 @@ define([
              * @param xmlFile that represents the masks
              * @private
              */
-            _loadMasks : function(xmlFile) {
-                var parser = new DOMParser();
+            _loadMasks: function(xmlFile) {
+                var parser = new DOMParser(); // eslint-disable-line no-undef
                 var xmlDoc = parser.parseFromString(xmlFile, 'text/xml'); //important to use "text/xml"
                 var body = xmlDoc.getElementsByTagName('masks');
                 var masks = body[0].getElementsByTagName('mask');
@@ -882,7 +885,7 @@ define([
              * @fires module:Canvas#EVENT.CAN_UNDO
              * @private
              */
-            _notifyCanUndo : function() {
+            _notifyCanUndo: function() {
                 this.$emit(EVENT.CAN_UNDO, this.drawStack[this.activeLayer].length > 0);
             },
             /**
@@ -890,7 +893,7 @@ define([
              * @param {Event} e
              * @private
              */
-            _onDraw : function(e) {
+            _onDraw: function(e) {
                 e.preventDefault();
                 if (this.state.painting) {
                     // Capture mouse interaction
@@ -903,7 +906,7 @@ define([
              * @param {Event} e
              * @private
              */
-            _onDrawEnd : function(e) {
+            _onDrawEnd: function(e) {
                 e.preventDefault();
                 //Save canvas state
                 this._commitStroke(this.activeLayer);
@@ -920,7 +923,7 @@ define([
              * @param  {Event} e
              * @private
              */
-            _onDrawStart : function(e) {
+            _onDrawStart: function(e) {
                 e.preventDefault();
                 // Set the state
                 this.state.painting = true;
@@ -936,7 +939,7 @@ define([
              * @return {boolean}
              * @private
              */
-            _onSelectStart : function(e) {
+            _onSelectStart: function(e) {
                 e.preventDefault();
                 return false;
             },
@@ -945,7 +948,7 @@ define([
              * @returns {*}
              * @private
              */
-            _randomColor : function() {
+            _randomColor: function() {
                 var result;
                 var count = 0;
                 for (var prop in COLORS.names) {
@@ -973,7 +976,7 @@ define([
              *
              * @private
              */
-            _redraw : function() {
+            _redraw: function() {
                 // Skips the redraw task if the canvas has no outline image
                 if (!this.hasOutlineImage) {
                     this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
@@ -1019,7 +1022,7 @@ define([
              * Redraw base image
              * @private
              */
-            _redrawBaseImage : function() {
+            _redrawBaseImage: function() {
                 this._redrawImage(this.hasBaseImage, this.baseImageState);
             },
             /**
@@ -1028,7 +1031,7 @@ define([
              * @param {ImageState} imageState - image loaded flag and instance
              * @private
              */
-            _redrawImage : function(hasImage, imageState) {
+            _redrawImage: function(hasImage, imageState) {
                 if (hasImage && imageState.loaded) {
                     this._resetShadow();
 
@@ -1073,7 +1076,7 @@ define([
              * @param {Number}  strokeThickness - stroke thickness
              * @private
              */
-            _redrawStroke : function(strokePoints, strokeColor, strokeThickness) {
+            _redrawStroke: function(strokePoints, strokeColor, strokeThickness) {
                 var operation = this.drawContext.globalCompositeOperation;
                 // Eraser stroke is always transparent black color
                 // Eraser thickness is stored as is, no need to verify it
@@ -1149,7 +1152,7 @@ define([
              * Reset the whole canvas, clearing all the layers and the undo buffer
              * @private
              */
-            _resetCanvas : function() {
+            _resetCanvas: function() {
                 // Clear the layers
                 this.drawStack = [[]];
                 this.activeLayer = 0;
@@ -1171,7 +1174,7 @@ define([
              * Reset image state
              * @param {object} imageState - reference to local image state
              */
-            _resetImageState : function(imageState) {
+            _resetImageState: function(imageState) {
                 imageState.instance = null;
                 imageState.loaded = false;
             },
@@ -1179,7 +1182,7 @@ define([
              * Clear stroke shadow properties
              * @private
              */
-            _resetShadow : function() {
+            _resetShadow: function() {
                 this.drawContext.shadowBlur = 0;
                 this.drawContext.shadowColor = DEFAULT.LINE_COLOR;
             },
@@ -1187,14 +1190,14 @@ define([
              * Sets the alpha level for the canvas context.
              * @private
              */
-            _setAlpha : function() {
+            _setAlpha: function() {
                 this.drawContext.globalAlpha = this.alpha;
             },
             /**
              * Define drawing context
              * @private
              */
-            _setDrawContext : function() {
+            _setDrawContext: function() {
                 this.drawContext = this.$refs.canvas.getContext('2d');
             },
             /**
@@ -1202,7 +1205,7 @@ define([
              * @returns {ImageData}
              * @private
              */
-            _smoothCanvas : function() {
+            _smoothCanvas: function() {
                 var image = this.drawContext.getImageData(0, 0, this.width, this.height);
                 var data = image.data;
                 for (var i = 3; i < data.length; i += 4) {
@@ -1226,7 +1229,7 @@ define([
              * Clear the canvas, redraw the base image and update the undo flag
              * @private
              */
-            _updateState : function() {
+            _updateState: function() {
                 //Canvas clear
                 this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
                 //Redraw canvas
@@ -1239,7 +1242,7 @@ define([
              * Add a new layer or select an existing one
              * @private
              */
-            _updateLayer : function() {
+            _updateLayer: function() {
                 while (this.drawStack.length < this.activeLayer + 1) {
                     this.addLayer();
                     this.addColor(this._randomColor());
@@ -1251,7 +1254,7 @@ define([
              * Updates the color array when a new layer is added or the user picks another color.
              * @private
              */
-            _updateColorArray : function() {
+            _updateColorArray: function() {
                 if (this.hasOutlineImage) {
                     var res = this.strokeColor.match(/[a-f0-9]{2}/gi);
                     this.strokeArray[this.activeLayer] = res.map(function(v) {
@@ -1265,11 +1268,11 @@ define([
                 }
             },
         },
-        watch : {
+        watch: {
             /**
              * On alpha changes, update the canvas
              */
-            alpha : function() {
+            alpha: function() {
                 this._setAlpha();
                 this._updateState();
             },
@@ -1277,7 +1280,7 @@ define([
             /**
              * Updates the canvas when a layer is selected
              */
-            activeLayer : function() {
+            activeLayer: function() {
                 this._updateLayer();
                 this._redraw();
                 this._updateState();
@@ -1285,13 +1288,13 @@ define([
             /**
              * Watch background color prop changes for redrawing
              */
-            backgroundColor : function() {
+            backgroundColor: function() {
                 this._redrawAll();
             },
             /**
              * Redraws the base image
              */
-            baseImage : function() {
+            baseImage: function() {
                 this._resetImageState(this.baseImageState);
                 this._loadBaseImage();
             },
@@ -1299,19 +1302,19 @@ define([
              * On draw stack clear, fire notify event
              * @fires module:Canvas#EVENT.CAN_UNDO
              */
-            drawStack : function() {
+            drawStack: function() {
                 this._notifyCanUndo();
             },
             /**
              * On height changes, reset the whole canvas
              */
-            height : function() {
+            height: function() {
                 this._resetCanvas();
             },
             /**
              * On outline image changes, load image into canvas
              */
-            outlineImageData : function() {
+            outlineImageData: function() {
                 this._resetImageState(this.outlineImageState);
                 this._loadOutlineImage();
             },
@@ -1319,7 +1322,7 @@ define([
              * On smooth prop changes, handle shadow and performance updates
              * @param  {boolean} enable
              */
-            smooth : function(enable) {
+            smooth: function(enable) {
                 if (!enable) {
                     this._resetShadow();
                 }
@@ -1328,13 +1331,13 @@ define([
             /**
              * On stroke color changes, update the color array
              */
-            strokeColor : function() {
+            strokeColor: function() {
                 this._updateColorArray();
             },
             /**
              * On width changes, reset the whole canvas
              */
-            width : function() {
+            width: function() {
                 this._resetCanvas();
             },
         },

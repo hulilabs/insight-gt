@@ -10,6 +10,9 @@ src/public/img/photos
 # NodeJS modules
 node_modules
 
+# NodeJS package-lock
+src/resource/package-lock.json
+
 *.sass-cache
 
 # Test related

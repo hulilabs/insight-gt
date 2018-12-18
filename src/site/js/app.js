@@ -10,8 +10,8 @@ require([
     'web-components/lists/list-item_component',
     'site/js/sections',
     'text!pages/layout_template.html',
-    'text!pages/home-page_template.html'
-],function(
+    'text!pages/home-page_template.html',
+], function(
     Vue,
     VueRouter,
     // Directives
@@ -54,47 +54,48 @@ require([
     };
 
     var router = new VueRouter({
-        mode : 'history',
-        routes : [
+        mode: 'history',
+        routes: [
             {
-                path : '/', component : {
-                    template : HomePageTemplate
-                }
+                path: '/',
+                component: {
+                    template: HomePageTemplate,
+                },
             },
             {
-                path : '/canvas', component : load('pages/canvas/canvas-page_component')
-            }
-        ]
+                path: '/canvas',
+                component: load('pages/canvas/canvas-page_component'),
+            },
+        ],
     });
 
     /**
      * Root component or router component
      */
     new Vue({
-        router : router,
-        template : LayoutTemplate,
-        data : function() {
+        router: router,
+        template: LayoutTemplate,
+        data: function() {
             return {
-                state : {
-                    showNav : false
+                state: {
+                    showNav: false,
                 },
-                sections : SectionsEnum.ITEMS
+                sections: SectionsEnum.ITEMS,
             };
         },
-        methods : {
-            toggleDrawer : function() {
+        methods: {
+            toggleDrawer: function() {
                 this.state.showNav = !this.state.showNav;
             },
-            drawerChanged : function(newState) {
+            drawerChanged: function(newState) {
                 this.state.showNav = newState.active;
-            }
+            },
         },
-        components : {
-            'wc-icon-button' : IconButton,
-            'wc-app-bar' : AppBar,
-            'wc-drawer' : Drawer,
-            'wc-list-item' : ListItem
-        }
+        components: {
+            'wc-icon-button': IconButton,
+            'wc-app-bar': AppBar,
+            'wc-drawer': Drawer,
+            'wc-list-item': ListItem,
+        },
     }).$mount('#app');
-
 });

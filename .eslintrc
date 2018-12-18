@@ -1,0 +1,46 @@
+{	
+    "extends": ["eslint:recommended"],	
+    "plugins": ["prettier"],	
+    "rules": {	
+        "prettier/prettier": [	
+            "error",	
+            {	
+                "printWidth": 100,	
+                "tabWidth": 4,	
+                "useTabs": false,	
+                "semi": true,	
+                "singleQuote": true,	
+                "trailingComma": "es5",	
+                "bracketSpacing": true,	
+                "arrowParens": "avoid",	
+                "parser": "babylon"	
+            }	
+        ],	
+        "no-redeclare": 0,	
+        "no-useless-escape": 1	
+    },	
+    "parserOptions": {	
+        "ecmaVersion": 6	
+    },	
+    "env": {	
+        "es6": true,	
+        "amd": true	
+    },	
+    "globals": {	
+        "document": true,	
+        "window": true,	
+        "setTimeout": true,	
+        "setInterval": true,	
+        "clearTimeout": true,	
+        "clearInterval": true,	
+        "alert": true,	
+        "log": true,	
+        "Logger": true,	
+        "$": true,	
+        "navigator" : true,	
+        "HTMLElement" : true,	
+        "CustomEvent" : true,	
+        "requestAnimationFrame" : true,	
+        "Node" : true	
+    }	
+} 

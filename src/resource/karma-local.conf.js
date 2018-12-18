@@ -58,7 +58,23 @@ module.exports = function(config) {
                 included : false
             },
             {
+                pattern : 'site/js/lib/vendor/Waves/dist/waves.*',
+                included : false
+            },
+            {
+                pattern : 'site/js/lib/vendor/marked/marked.min.js',
+                included : false
+            },
+            {
                 pattern : 'site/js/lib/vendor/highlight/highlight.pack.js',
+                included : false
+            },
+            {
+                pattern : 'site/js/lib/vendor/jump.js/dist/jump.js',
+                included : false
+            },
+            {
+                pattern : 'site/js/lib/vendor/interactjs/dist/interact.js',
                 included : false
             }
         ],
@@ -94,7 +110,8 @@ module.exports = function(config) {
                         'web-components/tabs/*.js',
                         'web-components/text-fields/char-counter/*.js',
                         'web-components/tooltips/*.js',
-                        'web-components/dialogs/pull-up/*.js'
+                        'web-components/dialogs/pull-up/*.js',
+                        'web-components/interactive/resize/*.js'
                     ]
                 },
 
@@ -118,7 +135,8 @@ module.exports = function(config) {
                         'web-components/text-fields/*.js',
                         'web-components/text-fields/char-counter/*.js',
                         'web-components/tooltips/*.js',
-                        'web-components/dialogs/pull-up/*.js'
+                        'web-components/dialogs/pull-up/*.js',
+                        'web-components/interactive/resize/*.js'
                     ]
                 }
             }

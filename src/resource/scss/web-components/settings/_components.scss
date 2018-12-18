@@ -48,7 +48,7 @@ $wc-dialog-desktop-max-height: 560px;
 $wc-avatar-size: 24px;
 // these sizes will be generated as multiples of the grid's size
 // for example, the grid is 8px, the generated sizes will include 24, 32, 40, ..., 96
-$wc-avatar-sizes: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+$wc-avatar-sizes: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
 $wc-avatar-background-color: rgba(black, $wc-avatar-background-opacity);
 $wc-avatar-text-color: rgba(black, $wc-avatar-text-color-opacity);
 
@@ -105,6 +105,7 @@ $wc-list-item-single-height: 48px;
 $wc-list-item-double-height: 72px;
 $wc-list-item-triple-height: 88px;
 $wc-list-item-expanded-border-size: 1px;
+$wc-list-item-text-distance: 24px;
 
 $wc-list-item-action-transform-transition-duration: 0.3s;
 $wc-list-item-max-height-transition-duration: 0.2s;
@@ -199,7 +200,7 @@ $wc-search-box-bg: $wc-primary-color;
 $wc-search-box-border-radius: 4px;
 $wc-search-box-grow-animation-duration: 0.5s;
 $wc-search-box-placeholder-color: $wc-typoicon-secondary-dark;
-$wc-search-text-padding-top: 14px;
+$wc-search-text-padding-top: 15px;
 
 //---------- #wc-SearchDropdown ----------/
 $wc-search-dropdown-border-radius: 4px;
@@ -295,6 +296,9 @@ $wc-custom-logic-placeholder-color : $wc-input-container-label-color;
 $wc-calendar-cell-size : 40px;
 $wc-calendar-highlighted-color : $wc-secondary-color;
 $wc-calendar-selected-background-color : $wc-secondary-color-dark;
+$wc-calendar-event-hint-color : $wc-secondary-color-dark;
+$wc-calendar-event-hint-selected-color : white;
+$wc-calendar-week-highlight : rgba($wc-typoicon-base-dark, 0.1);
 $wc-calendar-width : 288px;
 
 //---------- #wc-Datepicker ----------/
@@ -349,3 +353,23 @@ $wc-fab-background-color : $wc-accent-color;
 $wc-fab-background-color-pressed : $wc-accent-color-dark;
 $wc-fab-background-color-action : $wc-secondary-color;
 $wc-fab-background-color-action-pressed : $wc-secondary-color-dark;
+
+//---------- #wc-Switch  ---------- /
+
+$wc-switch-slide-duration: .08s;
+$wc-switch-thumb-size: 24px;
+$wc-switch-thumb-on-color: $wc-secondary-color;
+$wc-switch-thumb-color: $wc-background-color;
+$wc-switch-thumb-disabled-color: #B0BEC5;
+$wc-switch-track-width: 48px;
+$wc-switch-track-height: 12px;
+$wc-switch-track-on-color: rgba( $wc-secondary-color, .3 );
+$wc-switch-track-color: rgba( $wc-raised-button-disabled-color, .54 );
+$wc-switch-track-disabled-color: rgba( $wc-raised-button-disabled-color, .15 );
+
+//---------- #wc-Resize  ---------- /
+
+$wc-resize-background-color : rgba( $wc-accent-color-dark, 0.05 );
+$wc-resize-border-color : $wc-accent-color-dark;
+$wc-resize-measure-background-color : $wc-accent-color-dark;
+$wc-resize-guideline-color : $wc-accent-color-dark;

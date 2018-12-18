@@ -823,18 +823,14 @@ Renderer.prototype.paragraph = function(text) {
 };
 
 Renderer.prototype.table = function(header, body) {
-  // BEGIN HULI CODE
-  return '<div style="max-width:100%;overflow:scroll;">\n'
-    + '<table>\n'
-  // END HULI CODE
+  return '<table>\n'
     + '<thead>\n'
     + header
     + '</thead>\n'
     + '<tbody>\n'
     + body
     + '</tbody>\n'
-    + '</table>\n'
-    + '</div>\n';
+    + '</table>\n';
 };
 
 Renderer.prototype.tablerow = function(content) {
@@ -1098,7 +1094,7 @@ function escape(html, encode) {
 }
 
 function unescape(html) {
-	// explicitly match decimal, hex, and named HTML entities
+	// explicitly match decimal, hex, and named HTML entities 
   return html.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/g, function(_, n) {
     n = n.toLowerCase();
     if (n === 'colon') return ':';

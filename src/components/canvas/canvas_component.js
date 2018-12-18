@@ -24,12 +24,12 @@
  */
 define([
     'vue',
-    'segmentation/segmentation',
-    'floodfill',
+    'image-segmentation/segmentation',
+    'utilities/utilities',
     'web-components/utils/dom',
     'text!web-components/canvas/canvas_template.html',
     'css-loader!web-components/canvas/canvas_styles.css',
-], function(Vue, Segmentation, Floodfill, DOMUtil, Template) {
+], function(Vue, Segmentation, Utilities, DOMUtil, Template) {
     /**
      * @typedef  {Object}  Coordinate
      * @property {Number}  x    - point X-axis coordinate position
@@ -1100,16 +1100,17 @@ define([
                 // Optimization: compose the whole stroke in a single path, then paint it
                 //  Perform drawing operation based on the selected tool
                 if (isBucketTool && strokePoints.length > 0) {
-                    /*var i = strokePoints.length - 1;
+                    var i = strokePoints.length - 1;
                     var stroke1 = strokePoints[i],
                         previousStroke = i !== 0 ? strokePoints[i - 1] : null;
-                    Floodfill(
+                        utils = Utilities;
+                    Utilities.floodFill(
                         this.drawContext,
                         stroke1.x,
                         stroke1.y,
                         this.outlineImageData,
                         this.alpha * 255
-                    );*/
+                    );
                     return;
                 } else if (this.isRectangle && strokePoints.length > 0) {
                     var i = 0;

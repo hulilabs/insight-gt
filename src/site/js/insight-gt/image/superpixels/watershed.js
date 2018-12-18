@@ -13,11 +13,11 @@
  */
 /*global ImageData*/
 define([
-    'segmentation/base',
-    'segmentation/binary-heap-priority-queue',
-    'segmentation/canny',
-    'segmentation/compat',
-    'segmentation/distance-transform',
+    './base',
+    './../binary-heap-priority-queue',
+    './../canny',
+    './../compat',
+    './../distance-transform',
 ], function(BaseSegmentation, PriorityQueue, canny, compat, distanceTransform) {
     // Neighbor Map.
     function NeighborMap(width, height, neighbors) {

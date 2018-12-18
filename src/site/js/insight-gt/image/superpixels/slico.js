@@ -11,7 +11,7 @@
  * Copyright 2015  Kota Yamaguchi
  */
 /*globals ImageData*/
-define(['segmentation/base'], function(BaseSegmentation) {
+define(['./base'], function(BaseSegmentation) {
     function SLICO(imageData, options) {
         BaseSegmentation.call(this, imageData, options);
         this.width = this.imageData.width;

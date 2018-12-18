@@ -62,7 +62,7 @@ require([
                 }
             },
             {
-                path : '/components/canvas', component : load('pages/canvas/canvas-page_component')
+                path : '/canvas', component : load('pages/canvas/canvas-page_component')
             }
         ]
     });

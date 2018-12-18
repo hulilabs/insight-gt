@@ -8,20 +8,15 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(["./floodfill"],
+define(["./image/floodfill"],
 function (Floodfill) {
 
-    var floodfill = Floodfill;
-
-    function fillFlood(canvasContext, x, y
+    function floodFill(canvasContext, x, y
     , outlineImageData, alpha){
-
-        debugger;
-        floodfill.fillContext(canvasContext, x,y,outlineImageData, alpha )
-
+        Floodfill(canvasContext, x,y,outlineImageData, alpha )
     }
-
+      
   return {
-    fillFlood : fillFlood
-  };
+    floodFill
+  }; 
 });

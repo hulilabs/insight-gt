@@ -16,25 +16,26 @@
  *
  * `gulp` aka gulp default, execute the development mode
  * `gulp development` watches the js and css files, on each file changed it lints the file and compiles it.
- * `gulp lintScripts` lint the scripts files (jshint and jscs)
-**/
+ * `gulp lintScripts` lint the scripts files (eslint)
+ **/
 
 /**
  * Dependencies
  */
 var gulp = require('gulp'),
     plugins = require('gulp-load-plugins')(),
+    eslint = require('gulp-eslint'),
     gulpConfig = require('./gulp-config');
 
 require('gulp-stats')(gulp);
 
 /**
  * Checks the code structure and syntax of the javascript files
- * #jshint #jscs
+ * #eslint
  */
 gulp.task('lintScripts', function() {
     var config = gulpConfig.tasks.lintScripts;
-    return lintScripts(config)
+    return lintScripts(config);
 });
 
 /**
@@ -44,12 +45,11 @@ gulp.task('lintScripts', function() {
  * @returns {*}
  */
 function lintScripts(config, src) {
-    return gulp.src(src || config.src)
-        .pipe(plugins.jshint(config.jshint.configuration))
-        .pipe(plugins.jscs(config.jscs.configuration))
-        .pipe(plugins.jscsStylish.combineWithHintResults())
-        .pipe(plugins.jshint.reporter(config.jshint.reporter, {verbose : true}))
-        .pipe(plugins.jshint.reporter('fail'))
+    return gulp
+        .src(src || config.src)
+        .pipe(eslint(config.eslint.options))
+        .pipe(eslint.result(config.eslint.formatter))
+        .pipe(eslint.failAfterError());
 }
 
 gulp.task('lint', ['lintScripts']);
@@ -66,7 +66,7 @@ gulp.task('watchJs', function() {
     });
 });
 
-gulp.task('development',['watchJs']);
+gulp.task('development', ['watchJs']);
 
 /***
  * Default task

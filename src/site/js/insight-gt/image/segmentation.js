@@ -15,10 +15,10 @@ define([
     './superpixels/watershed',
 ], function(pff, slic, slico, watershed) {
     var methods = {
-        pff : pff,
-        slic : slic,
-        slico : slico,
-        watershed : watershed,
+        pff: pff,
+        slic: slic,
+        slico: slico,
+        watershed: watershed,
     };
 
     methods.create = function(imageData, options) {

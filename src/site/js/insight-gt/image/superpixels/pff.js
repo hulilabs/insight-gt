@@ -103,9 +103,9 @@ define(['./base', './../compat'], function(BaseSegmentation, compat) {
             edgeSize = 4 * width * height - 3 * width - 3 * height + 2,
             index = 0,
             edges = {
-                a : new Int32Array(edgeSize),
-                b : new Int32Array(edgeSize),
-                w : new Float32Array(edgeSize),
+                a: new Int32Array(edgeSize),
+                b: new Int32Array(edgeSize),
+                w: new Float32Array(edgeSize),
             },
             x1,
             x2;
@@ -201,11 +201,11 @@ define(['./base', './../compat'], function(BaseSegmentation, compat) {
     // Create a universe struct.
     function createUniverse(nodes, c) {
         var universe = {
-            nodes : nodes,
-            rank : new Int32Array(nodes),
-            p : new Int32Array(nodes),
-            size : new Int32Array(nodes),
-            threshold : new Float32Array(nodes),
+            nodes: nodes,
+            rank: new Int32Array(nodes),
+            p: new Int32Array(nodes),
+            size: new Int32Array(nodes),
+            threshold: new Float32Array(nodes),
         };
         for (var i = 0; i < nodes; ++i) {
             universe.size[i] = 1;

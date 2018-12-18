@@ -126,7 +126,8 @@ define(['./base'], function(BaseSegmentation) {
                     for (xp = Math.max(0, x - 1); xp <= Math.min(imW - 1, x + 1); ++xp) {
                         var thisEdgeValue = edgeMap[yp * imW + xp];
 
-                        if (thisEdgeValue < minEdgeValue) { /*jshint ignore: line*/
+                        if (thisEdgeValue < minEdgeValue) {
+                            /*jshint ignore: line*/
                             minEdgeValue = thisEdgeValue;
                             centerx = xp;
                             centery = yp;

@@ -14,7 +14,7 @@
  */
 
 require.config({
-    baseUrl : '/'
+    baseUrl: '/',
 });
 
 require(['site/js/require-config'], function() {

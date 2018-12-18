@@ -5,9 +5,9 @@
 define(['segmentation/compat', 'morph/max-filter'], function(compat, maxFilter) {
     function decodeIndexImage(imageData) {
         var indexImage = {
-            width : imageData.width,
-            height : imageData.height,
-            data : new Int32Array(imageData.width * imageData.height),
+            width: imageData.width,
+            height: imageData.height,
+            data: new Int32Array(imageData.width * imageData.height),
         };
         for (var i = 0; i < imageData.data.length; ++i) {
             var offset = 4 * i;
@@ -35,8 +35,8 @@ define(['segmentation/compat', 'morph/max-filter'], function(compat, maxFilter) 
     }
 
     return {
-        encodeIndexImage : encodeIndexImage,
-        decodeIndexImage : decodeIndexImage,
-        maxFilter : maxFilter,
+        encodeIndexImage: encodeIndexImage,
+        decodeIndexImage: decodeIndexImage,
+        maxFilter: maxFilter,
     };
 });

@@ -111,15 +111,15 @@ define([
     // Compute canny-watershed segmentation.
     WatershedSegmentation.prototype._compute = function() {
         var queue = new PriorityQueue({
-            comparator : function(a, b) {
+            comparator: function(a, b) {
                 return a[0] - b[0];
             },
         });
         var edge = canny(this.imageData, {
-            kernelTail : this.kernelRange[this.currentConfig],
-            sigma : this.sigmaRange[this.currentConfig],
-            lowThreshold : this.lowThreshold,
-            highThreshold : this.highThreshold,
+            kernelTail: this.kernelRange[this.currentConfig],
+            sigma: this.sigmaRange[this.currentConfig],
+            lowThreshold: this.lowThreshold,
+            highThreshold: this.highThreshold,
         });
         var seeds = this._findLocalMaxima(distanceTransform(edge));
         var labels = new Int32Array(edge.data.length);
@@ -307,6 +307,7 @@ define([
             }
         }
         var iter = 0;
+        /* eslint-disable no-constant-condition */
         while (true) {
             var smallLabel = this._findSmallLabel(histogram);
             if (smallLabel !== null) {
@@ -321,6 +322,7 @@ define([
                 throw 'Too many iterations';
             }
         }
+        /* eslint-enable no-constant-condition */
     };
 
     WatershedSegmentation.prototype._relabel = function(labels) {

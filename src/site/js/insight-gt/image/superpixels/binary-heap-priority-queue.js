@@ -75,8 +75,8 @@ define([], function() {
             left,
             right,
             minIndex;
+        /* eslint-disable no-constant-condition */
         while (true) {
-            /*jslint bitwise: true*/
             left = (i << 1) + 1;
             right = left + 1;
             minIndex = i;
@@ -98,6 +98,7 @@ define([], function() {
                 break;
             }
         }
+        /* eslint-enable no-constant-condition */
     };
 
     return BinaryHeapPriorityQueue;

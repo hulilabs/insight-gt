@@ -158,7 +158,6 @@ define([
             transformMask(data, alphaLevel);
             ctx.putImageData(image, left, top);
         }
-    };
-
+    }
     return fillContext;
 });

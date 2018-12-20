@@ -1047,12 +1047,12 @@ define([
                 //  Perform drawing operation based on the selected tool
                 if (isBucketTool && strokePoints.length > 0) {
                     var i = strokePoints.length - 1;
-                    var stroke1 = strokePoints[i],
+                    var stroke = strokePoints[i],
                         previousStroke = i !== 0 ? strokePoints[i - 1] : null;
                     Utilities.floodFill(
                         this.drawContext,
-                        stroke1.x,
-                        stroke1.y,
+                        stroke.x,
+                        stroke.y,
                         this.outlineImageData,
                         this.alpha * 255
                     );

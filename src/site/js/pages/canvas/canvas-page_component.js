@@ -54,6 +54,9 @@ define([
         FILENAME: 'masks.xml',
     };
 
+    var MAX_RGB = 255;
+    var PIXEL_SIZE = 4;
+
     return Vue.extend({
         template: Template,
         data: function() {
@@ -180,18 +183,24 @@ define([
                     yAxis = imageData.width,
                     data = imageData.data,
                     currentRow = 0 * xAxis;
-                var borders = new Uint8ClampedArray(yAxis * xAxis * 4);
-                for (var j = 0; j < xAxis * 4; j += 4) {
+                var PIXEL_SIZE = 4;
+                // Initialize an empty array to store the borders
+                var borders = new Uint8ClampedArray(yAxis * xAxis * PIXEL_SIZE);
+                // Traverse the data that represents the image. Each 4 entries in the array represent a pixel
+                for (var j = 0; j < xAxis * PIXEL_SIZE; j += PIXEL_SIZE) {
                     currentRow = j * yAxis;
-                    for (var offset = 0; offset < yAxis * 4; offset += 4) {
+                    //
+                    for (var offset = 0; offset < yAxis * PIXEL_SIZE; offset += PIXEL_SIZE) {
                         var currentPixel = data.slice(
                             currentRow + offset,
-                            currentRow + (offset + 4)
+                            currentRow + (offset + PIXEL_SIZE)
                         );
+                        // flags that indicate if the algorithm is traversing the borders of the image
                         var upperBorder = currentRow == 0 ? true : false,
-                            lowerBorder = currentRow == (xAxis - 1) * 4 * yAxis ? true : false,
+                            lowerBorder =
+                                currentRow == (xAxis - 1) * PIXEL_SIZE * yAxis ? true : false,
                             leftmostBorder = offset == 0 ? true : false,
-                            rightmostBorder = offset == (yAxis - 1) * 4 ? true : false;
+                            rightmostBorder = offset == (yAxis - 1) * PIXEL_SIZE ? true : false;
                         var neighbors = this._getPixelNeighbors(
                             currentRow,
                             offset,
@@ -214,10 +223,10 @@ define([
                                     neighborPixel[2] === currentPixel[2] &&
                                     neighborPixel[3] === currentPixel[3];
                                 if (!isSamePixel) {
-                                    borders[currentRow + offset] = 255;
-                                    borders[currentRow + offset + 1] = 255;
-                                    borders[currentRow + offset + 2] = 255;
-                                    borders[currentRow + offset + 3] = 255;
+                                    borders[currentRow + offset] = MAX_RGB;
+                                    borders[currentRow + offset + 1] = MAX_RGB;
+                                    borders[currentRow + offset + 2] = MAX_RGB;
+                                    borders[currentRow + offset + 3] = MAX_RGB;
                                 }
                             }
                         }
@@ -293,34 +302,40 @@ define([
                 yAxis
             ) {
                 var neighbors = [];
-                var previousRow = currentRow - yAxis * 4;
-                var nextRow = currentRow + yAxis * 4;
+                var PIXEL_SIZE = 4;
+                var previousRow = currentRow - yAxis * PIXEL_SIZE;
+                var nextRow = currentRow + yAxis * PIXEL_SIZE;
                 var topLeftPixel =
                         upperBorder || leftmostBorder
                             ? null
-                            : [previousRow + (offset - 4), previousRow + offset],
+                            : [previousRow + (offset - PIXEL_SIZE), previousRow + offset],
                     topRightPixel =
                         upperBorder || rightmostBorder
                             ? null
-                            : [previousRow + (offset + 4), previousRow + (offset + 8)],
+                            : [
+                                  previousRow + (offset + PIXEL_SIZE),
+                                  previousRow + (offset + PIXEL_SIZE * 2),
+                              ],
                     bottomLeftPixel =
                         lowerBorder || leftmostBorder
                             ? null
-                            : [nextRow + (offset - 4), nextRow + offset],
+                            : [nextRow + (offset - PIXEL_SIZE), nextRow + offset],
                     bottomRightPixel =
                         lowerBorder || rightmostBorder
                             ? null
-                            : [nextRow + (offset + 4), nextRow + (offset + 8)],
+                            : [nextRow + (offset + PIXEL_SIZE), nextRow + (offset + 8)],
                     topPixel = upperBorder
                         ? null
-                        : [previousRow + offset, previousRow + (offset + 4)],
-                    bottomPixel = lowerBorder ? null : [nextRow + offset, nextRow + (offset + 4)],
+                        : [previousRow + offset, previousRow + (offset + PIXEL_SIZE)],
+                    bottomPixel = lowerBorder
+                        ? null
+                        : [nextRow + offset, nextRow + (offset + PIXEL_SIZE * 2)],
                     leftPixel = leftmostBorder
                         ? null
-                        : [currentRow + (offset - 4), currentRow + offset],
+                        : [currentRow + (offset - PIXEL_SIZE), currentRow + offset],
                     rightPixel = rightmostBorder
                         ? null
-                        : [nextRow + (offset + 4), nextRow + (offset + 8)];
+                        : [nextRow + (offset + PIXEL_SIZE), nextRow + (offset + PIXEL_SIZE * 2)];
 
                 neighbors.push(
                     topLeftPixel,

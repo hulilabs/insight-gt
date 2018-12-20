@@ -60,7 +60,7 @@ define([
      */
 
     /**
-     * Contains the default values for the first layer of the canvas. 
+     * Contains the default values for the first layer of the canvas.
      * When the canvas is initialized, a layer will be initialized as well.
      * @type {Object}
      */
@@ -1102,15 +1102,12 @@ define([
                 this.strokeColors = [];
                 this.lastPoppedImage = [''];
                 this.addColor(this.currentStrokeColor);
-                
                 // sets the draw context for subsequent operations, such as load images or drawing strokes.
                 this._setDrawContext();
                 // Load external images into the draw context
                 this._loadBaseImage();
-
                 // Set the alpha level for the drawing operations
                 this._setAlpha();
-
                 // Run the initial draw flow
                 this._notifyCanUndo();
                 this._redraw();

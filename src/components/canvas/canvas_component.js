@@ -12,9 +12,9 @@
  * @file Canvas component
  * @requires vue
  * @requires web-components/utils/dom
- * @requires web-components/canvas/canvas_template.html
- * @requires web-components/canvas/canvas_styles.css
- * @module web-components/canvas/canvas_component
+ * @requires components/canvas/canvas_template.html
+ * @requires components/canvas/canvas_styles.css
+ * @module components/canvas/canvas_component
  * @extends Vue
  * @fires module:Canvas#EVENT.CAN_UNDO
  * @see {@link https://www.html5rocks.com/en/tutorials/canvas/performance/} for canvas performance optimizations
@@ -28,7 +28,7 @@ define([
     'colors',
     'web-components/utils/dom',
     'text!components/canvas/canvas_template.html',
-    'css-loader!web-components/canvas/canvas_styles.css',
+    'css-loader!components/canvas/canvas_styles.css',
 ], function(Vue, Utilities, Colors, DOMUtil, Template) {
     /**
      * @typedef  {Object}  Coordinate
@@ -60,7 +60,8 @@ define([
      */
 
     /**
-     * Canvas drawing default values
+     * Contains the default values for the first layer of the canvas. 
+     * When the canvas is initialized, a layer will be initialized as well.
      * @type {Object}
      */
     var DEFAULT = {
@@ -68,6 +69,7 @@ define([
         LINE_COLOR: '#000000',
         STROKE_COLOR: '#DB0404',
         STROKE_ARRAY: [[219, 4, 4]],
+        POPPED_IMAGES_BUFFER: [''],
     };
 
     /**
@@ -221,7 +223,7 @@ define([
         data: function() {
             return {
                 /**
-                 * Object that contains the base image encoded in base64
+                 * Contains the base image encoded in a base64 string
                  */
                 baseImageData: '',
                 /**
@@ -238,7 +240,8 @@ define([
                  */
                 drawContext: null,
                 /**
-                 * Stores all drawn/commited points
+                 * For each layer, stores up to 10 frames of the canvas, encoded in a base64 string
+                 * Each frame represents the state of the canvas of the last 10 draw operations
                  * @type {Array}
                  */
                 drawStack: [[]],
@@ -285,9 +288,10 @@ define([
                  */
                 strokeArray: DEFAULT.STROKE_ARRAY,
                 /**
-                 * Buffer that contains images that are popped from the drawStack
+                 * Buffer that contains frames that are popped from the drawStack, for each layer
+                 * When a maximum of undo operations is reached, the last popped image will be redrawn and the undo button will be disabled.
                  */
-                lastPoppedImage: [''],
+                lastPoppedImageArray: DEFAULT.POPPED_IMAGES_BUFFER,
             };
         },
         computed: {
@@ -1087,7 +1091,7 @@ define([
              * @private
              */
             _resetCanvas: function() {
-                // Reset the canvas to a default state
+                // Reset the canvas to a default state and initializes a layer with the default values
                 this.baseImageData = this.baseImage;
                 this.activeStrokeColor = this.strokeColor;
                 this.activeLayer = 0;
@@ -1096,10 +1100,9 @@ define([
                 this.drawBuffer = [[]];
                 this.strokeArray = [];
                 this.strokeColors = [];
-                this.addColor(this.currentStrokeColor);
-                // It starts
                 this.lastPoppedImage = [''];
-
+                this.addColor(this.currentStrokeColor);
+                
                 // sets the draw context for subsequent operations, such as load images or drawing strokes.
                 this._setDrawContext();
                 // Load external images into the draw context

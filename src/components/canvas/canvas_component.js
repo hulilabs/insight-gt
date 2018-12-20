@@ -932,6 +932,8 @@ define([
                         } else {
                             this.baseImageData = this.lastPoppedImage[this.state.activeLayer];
                         }
+                        this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
+                        this._redrawBaseImage();
                     }
                     // Clear the canvas if a bucket tool is not selected
                     if (!(this.isBucket || this.isBackgroundBucket)) {

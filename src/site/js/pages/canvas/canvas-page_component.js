@@ -240,7 +240,7 @@ define([
             _exportMasks: function() {
                 //Get the masks as an XML file
                 var xmlFile = this.$refs.canvas2.exportMasks(),
-                    downloader = document.createElement('a');
+                    downloader = this.$refs.downloader;
 
                 // Creates an URL from the xml file
                 var url = window.URL.createObjectURL(
@@ -250,11 +250,8 @@ define([
                     })
                     /* eslint-enable no-undef */
                 );
-
                 downloader.setAttribute('href', url);
                 downloader.setAttribute('download', DEFAULT.FILENAME);
-                //Download the objectURL associated with the XML file.
-                downloader.click();
             },
             /**
              * Generates an invisible outline image that represents the superpixels regions

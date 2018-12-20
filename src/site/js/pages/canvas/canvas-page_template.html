@@ -27,7 +27,9 @@
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_export">Export image</wc-flat-button>
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomIn"> Zoom in</wc-flat-button>
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomOut"> Zoom out</wc-flat-button>
-                        <wc-flat-button href="" download="" ref="exportMasks" v-wc-ripple:is-dark v-on:click.native="_exportMasks"> Export masks</wc-flat-button>
+                        <a ref="downloader" href="" download="">
+                            <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_exportMasks"> Export masks</wc-flat-button>
+                        </a>
                         <div style="text-align:center; float: right">
                             <label style="border: 1px solid #ccc;
                                     display: inline-block;

@@ -1284,6 +1284,9 @@ define([
                 this.activeStrokeColor = this.strokeColor;
                 this._updateColorArray();
             },
+            /**
+             * On tool change, redraw the canvas
+             */
             tool: function() {
                 this._redraw();
             },

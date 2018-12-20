@@ -19,39 +19,26 @@ define([
     'web-components/buttons/flat/flat-button_component',
     'components/canvas/canvas_component',
     'web-components/inputs/textfield/textfield_component',
-    'web-components/markdown/markdown_component',
-    'web-components/selection-controls/checkbox/checkbox_component',
     'web-components/selection-controls/toggle/toggle_component',
     'web-components/selection-controls/toggle/toggle-button_component',
-    'text!web-components/canvas/readme.md',
     'text!pages/canvas/canvas-page_template.html',
-], function(
-    Vue,
-    Segmentation,
-    FlatButton,
-    Canvas,
-    TextField,
-    Markdown,
-    Checkbox,
-    Toggle,
-    ToggleButton,
-    CanvasReadme,
-    Template
-) {
+], function(Vue, Segmentation, FlatButton, Canvas, TextField, Toggle, ToggleButton, Template) {
     var DEFAULT = {
-        // The alpha level of the canvas
+        // The alpha level of the canvass
         ALPHA: 0.4,
         // The active layer of the canvas
-        ACTIVE_LAYER: 1,
+        ACTIVE_LAYER: '1',
         BACKGROUND_COLOR: 'rgba(0, 0, 0, 0.5)',
         HEIGHT: 720,
 
         /**
-         * Store the layers as an array of the form [1, 2, ..., n]
+         * Store the layers as an array of the form ["1", "2", ..., "n"]
          * The array form allows to use the values as parameters for establishing the activeLayer property, when a new layer is selected
+         * Also allows to bind the array values to toggle buttons that display the layer number
          * There is always at least one layer
          */
-        LAYERS: [1],
+
+        LAYERS: ['1'],
 
         // Indicates if the canvas is drawable
         OUTLINE_IMAGE: true,
@@ -100,10 +87,6 @@ define([
                     right: '0',
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                },
-
-                markdownSource: {
-                    documentation: CanvasReadme,
                 },
             };
         },
@@ -155,7 +138,7 @@ define([
              * Returns the current layer index
              */
             myActiveLayer: function() {
-                return this.state.activeLayer - 1;
+                return parseInt(this.state.activeLayer) - 1;
             },
             /**
              * Get the current region size for the calculation of superpixels
@@ -179,7 +162,7 @@ define([
              * Add a layer to the layer array
              */
             _addLayer: function() {
-                this.state.layers.push(this.state.layers.length + 1);
+                this.state.layers.push((this.state.layers.length + 1).toString());
             },
             /**
              * Set the isUndoEnabled property
@@ -193,6 +176,56 @@ define([
             _clear: function() {
                 this.$refs.canvas2.clear();
             },
+            _detectBorders: function(imageData) {
+                var xAxis = imageData.height,
+                    yAxis = imageData.width,
+                    data = imageData.data,
+                    currentRow = 0 * xAxis;
+                var borders = new Uint8ClampedArray(yAxis * xAxis * 4);
+                for (var j = 0; j < xAxis * 4; j += 4) {
+                    currentRow = j * yAxis;
+                    for (var offset = 0; offset < yAxis * 4; offset += 4) {
+                        var currentPixel = data.slice(
+                            currentRow + offset,
+                            currentRow + (offset + 4)
+                        );
+                        var upperBorder = currentRow == 0 ? true : false,
+                            lowerBorder = currentRow == (xAxis - 1) * 4 * yAxis ? true : false,
+                            leftmostBorder = offset == 0 ? true : false,
+                            rightmostBorder = offset == (yAxis - 1) * 4 ? true : false;
+                        var neighbors = this._getPixelNeighbors(
+                            currentRow,
+                            offset,
+                            upperBorder,
+                            lowerBorder,
+                            leftmostBorder,
+                            rightmostBorder,
+                            yAxis
+                        );
+                        for (var i = 0; i < neighbors.length; i++) {
+                            var currentNeighbor = neighbors[i];
+                            if (currentNeighbor !== null) {
+                                var neighborPixel = data.slice(
+                                    currentNeighbor[0],
+                                    currentNeighbor[1]
+                                );
+                                var isSamePixel =
+                                    neighborPixel[0] === currentPixel[0] &&
+                                    neighborPixel[1] === currentPixel[1] &&
+                                    neighborPixel[2] === currentPixel[2] &&
+                                    neighborPixel[3] === currentPixel[3];
+                                if (!isSamePixel) {
+                                    borders[currentRow + offset] = 255;
+                                    borders[currentRow + offset + 1] = 255;
+                                    borders[currentRow + offset + 2] = 255;
+                                    borders[currentRow + offset + 3] = 255;
+                                }
+                            }
+                        }
+                    }
+                }
+                return borders;
+            },
             /**
              * Export the current layer as an image
              * Store the image in the snapshots array
@@ -203,20 +236,24 @@ define([
             },
             /**
              * Export the layers of the canvas as an XmlFile
+             *
              */
             _exportMasks: function() {
                 //Get the masks as an XML file
                 var xmlFile = this.$refs.canvas2.exportMasks(),
-                    downloader = this.$refs.exportMasks;
+                    downloader = document.createElement('a');
 
                 // Creates an URL from the xml file
                 var url = window.URL.createObjectURL(
-                    new Blob([xmlFile.documentElement.innerHTML], { type: 'text/plain' }) // eslint-disable-line no-undef
+                    /* eslint-disable no-undef */
+                    new Blob([xmlFile.documentElement.innerHTML], {
+                        type: 'text/plain',
+                    })
+                    /* eslint-enable no-undef */
                 );
 
                 downloader.setAttribute('href', url);
                 downloader.setAttribute('download', DEFAULT.FILENAME);
-
                 //Download the objectURL associated with the XML file.
                 downloader.click();
             },
@@ -226,6 +263,8 @@ define([
              */
             _getOutlineImage: function() {
                 // The canvas1 reference contains the original background image.
+                this.$refs.canvas1.drawContext.clearRect(0, 0, this.state.width, this.state.height);
+                this.$refs.canvas1._redrawBaseImage();
                 var imageData = this.$refs.canvas1.drawContext.getImageData(
                         0,
                         0,
@@ -238,24 +277,83 @@ define([
                 options.regionSize = this.myRegionSize;
 
                 // Creates the superpixels outline image, and sets it as invisible outline image of the drawable canvas
-                this.$refs.canvas2.outlineImageData = Segmentation.create(
-                    imageData,
-                    options
-                ).result;
+                var superpixelsImage = Segmentation.create(imageData, options).result;
+                this.$refs.canvas2.outlineImageData = superpixelsImage;
+
+                this.$refs.canvas1.maskBorders = new ImageData( // eslint-disable-line no-undef
+                    this._detectBorders(superpixelsImage),
+                    imageData.width,
+                    imageData.height
+                );
+                this.$refs.canvas1._redraw();
+            },
+            _getPixelNeighbors: function(
+                currentRow,
+                offset,
+                upperBorder,
+                lowerBorder,
+                leftmostBorder,
+                rightmostBorder,
+                yAxis
+            ) {
+                var neighbors = [];
+                var previousRow = currentRow - yAxis * 4;
+                var nextRow = currentRow + yAxis * 4;
+                var topLeftPixel =
+                        upperBorder || leftmostBorder
+                            ? null
+                            : [previousRow + (offset - 4), previousRow + offset],
+                    topRightPixel =
+                        upperBorder || rightmostBorder
+                            ? null
+                            : [previousRow + (offset + 4), previousRow + (offset + 8)],
+                    bottomLeftPixel =
+                        lowerBorder || leftmostBorder
+                            ? null
+                            : [nextRow + (offset - 4), nextRow + offset],
+                    bottomRightPixel =
+                        lowerBorder || rightmostBorder
+                            ? null
+                            : [nextRow + (offset + 4), nextRow + (offset + 8)],
+                    topPixel = upperBorder
+                        ? null
+                        : [previousRow + offset, previousRow + (offset + 4)],
+                    bottomPixel = lowerBorder ? null : [nextRow + offset, nextRow + (offset + 4)],
+                    leftPixel = leftmostBorder
+                        ? null
+                        : [currentRow + (offset - 4), currentRow + offset],
+                    rightPixel = rightmostBorder
+                        ? null
+                        : [nextRow + (offset + 4), nextRow + (offset + 8)];
+
+                neighbors.push(
+                    topLeftPixel,
+                    topRightPixel,
+                    bottomLeftPixel,
+                    bottomRightPixel,
+                    topPixel,
+                    bottomPixel,
+                    leftPixel,
+                    rightPixel
+                );
+                return neighbors;
             },
             /**
              * Loads a new image into the canvas1
              */
             _openImage: function(e) {
+                //Reset the canvas page to a default state
+
                 var files = e.target.files || e.dataTransfer.files;
-                if (!files.length) {
-                    return;
-                }
+                if (!files.length) return;
 
                 var file = files[0],
                     reader = new FileReader(), // eslint-disable-line no-undef
                     self = this;
 
+                this._resetCanvasState();
+                this.state.width = 0;
+                this.state.height = 0;
                 // Wait for the file to load
                 reader.onload = function() {
                     var image = new Image(); // eslint-disable-line no-undef
@@ -265,13 +363,14 @@ define([
                         self.state.width = image.width;
                         self.state.height = image.height;
                         self.state.zoom = 1;
+                        self._updateZoom();
 
                         // Update the canvas
                         self._updateStyle();
 
                         //Reset the layers and the base image
                         self.state.baseImage = reader.result;
-                        self.state.layers = [1];
+                        self.state.layers = ['1'];
                     };
                     image.src = reader.result;
                 };
@@ -282,19 +381,38 @@ define([
              */
             _openMasks: function(e) {
                 var files = e.target.files || e.dataTransfer.files;
-                if (!files.length) {
-                    return;
-                }
+                if (!files.length) return;
 
-                var file = files[0],
+                this._resetCanvasState();
+
+                var xmlFile = files[0],
                     reader = new FileReader(), // eslint-disable-line no-undef
-                    self = this;
+                    self = this,
+                    parser = new DOMParser(); // eslint-disable-line no-undef
 
                 reader.onload = function() {
                     // Send the XML file to the canvas component for processing.
-                    self.$refs.canvas2._loadMasks(reader.result);
+                    var xmlDoc = parser.parseFromString(reader.result, 'text/xml'); //important to use "text/xml"
+                    var body = xmlDoc.getElementsByTagName('masks');
+                    var masks = body[0].getElementsByTagName('mask');
+                    for (var i = 1; i < masks.length; i++) {
+                        self.state.layers.push(i + 1);
+                    }
+                    self.$refs.canvas2._loadMasks(masks);
                 };
-                reader.readAsText(file);
+                reader.readAsText(xmlFile);
+            },
+            _updateZoom: function() {
+                this.styles.width = (this.myWidth * this.zoomFactor).toString() + 'px';
+                this.styles.height = (this.myHeight * this.zoomFactor).toString() + 'px';
+            },
+
+            _resetCanvasState: function() {
+                this.$refs.canvas2._resetCanvas();
+                this.state.activeLayer = DEFAULT.ACTIVE_LAYER;
+                this.state.layers = ['1'];
+                this.state.zoom = 1;
+                this._updateZoom();
             },
             /**
              * Undo the last action
@@ -316,23 +434,19 @@ define([
              */
             _zoomIn: function() {
                 this.state.zoom = this.state.zoom + 1;
-                this.styles.width = this.myWidth * this.zoomFactor + 'px';
-                this.styles.height = this.myHeight * this.zoomFactor + 'px';
+                this._updateZoom();
             },
             /**
              * Decrease the zoom by one
              */
             _zoomOut: function() {
                 this.state.zoom = this.state.zoom - 1;
-                this.styles.width = this.myWidth * this.zoomFactor + 'px';
-                this.styles.height = this.myHeight * this.zoomFactor + 'px';
+                this._updateZoom();
             },
         },
         components: {
             'wc-canvas': Canvas,
-            'wc-checkbox': Checkbox,
             'wc-flat-button': FlatButton,
-            'wc-markdown': Markdown,
             'wc-textfield': TextField,
             'wc-toggle': Toggle,
             'wc-toggle-button': ToggleButton,

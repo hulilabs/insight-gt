@@ -89,7 +89,7 @@ define([
         ERASER: 'eraser',
         RECT: 'rectangle',
         BUCKET: 'bucket',
-        BACKGROUND_BUCKET: 'bucketBackground',
+        BACKGROUND_BUCKET: 'backgroundBucket',
     };
 
     /**
@@ -911,6 +911,8 @@ define([
             _redraw: function() {
                 // Skips the redraw task if the canvas has no outline image
                 if (!this.hasOutlineImage) {
+                    this.drawContext.clearRect(0, 0, this.drawWidth, this.drawHeight);
+                    this._redrawBaseImage();
                     if (this.maskBorders !== null && (this.isBucket || this.isBackgroundBucket)) {
                         var self = this;
                         /* eslint-disable no-undef */

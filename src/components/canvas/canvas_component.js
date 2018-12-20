@@ -922,7 +922,7 @@ define([
                         /* eslint-enable no-undef */
                     }
                 } else {
-                    if (!this.state.painting2) {
+                    if (!this.state.painting) {
                         var layer = this.drawStack[this.state.activeLayer];
                         if (layer.length > 0) {
                             var src = layer[layer.length - 1];

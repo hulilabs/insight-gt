@@ -24,7 +24,7 @@ define([
     'text!pages/canvas/canvas-page_template.html',
 ], function(Vue, Segmentation, FlatButton, Canvas, TextField, Toggle, ToggleButton, Template) {
     var DEFAULT = {
-        // The alpha level of the canvass
+        // The alpha level of the canvas
         ALPHA: 0.4,
         // The active layer of the canvas
         ACTIVE_LAYER: '1',
@@ -33,11 +33,10 @@ define([
 
         /**
          * Store the layers as an array of the form ["1", "2", ..., "n"]
-         * The array form allows to use the values as parameters for establishing the activeLayer property, when a new layer is selected
-         * Also allows to bind the array values to toggle buttons that display the layer number
-         * There is always at least one layer
+         * Allows to bind the array values to toggle buttons that display the layer number
+         * The numbers also act as index for the layer array of the canvas component.
+         * There must be at least one layer
          */
-
         LAYERS: ['1'],
 
         // Indicates if the canvas is drawable

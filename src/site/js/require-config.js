@@ -28,6 +28,7 @@ require.config({
         "jump" : "site/js/lib/vendor/jump.js/dist/jump",
         "zxcvbn" : "site/js/lib/vendor/zxcvbn/dist/zxcvbn",
         "utilities" : "site/js/insight-gt/utilities",
+        "colors" : "site/js/insight-gt/utilities/colors",
         "image-segmentation" : "site/js/insight-gt/image",
         "morph" : "site/js/insight-gt/image/morph",
         "web-components" : "site/js/lib/vendor/web-components/src/web-components"

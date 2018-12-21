@@ -65,11 +65,12 @@ define([
      * @type {Object}
      */
     var DEFAULT = {
-        BACKGROUND_COLOR: '#FFFFFF',
+        BACKGROUND_COLOR: 'rgb(200,200,200)',
         LINE_COLOR: '#000000',
         STROKE_COLOR: '#DB0404',
         STROKE_ARRAY: [[219, 4, 4]],
         POPPED_IMAGES_BUFFER: [''],
+        ERASER_COLOR: 'rgba(0,0,0,1)',
     };
 
     /**
@@ -87,9 +88,9 @@ define([
     var TOOL = {
         PEN: 'pen',
         ERASER: 'eraser',
-        RECT: 'rectangle',
+        RECTANGLE: 'rectangle',
         BUCKET: 'bucket',
-        BACKGROUND_BUCKET: 'backgroundBucket',
+        BACKGROUNDBUCKET: 'backgroundBucket',
     };
 
     /**
@@ -349,7 +350,7 @@ define([
              * @return {boolean}
              */
             isRectangle: function() {
-                return this.tool === TOOL.RECT;
+                return this.tool === TOOL.RECTANGLE;
             },
             /**
              * Detects if the bucket fill tool is selected
@@ -363,7 +364,7 @@ define([
              * @return {boolean}
              */
             isBackgroundBucket: function() {
-                return this.tool === TOOL.BACKGROUND_BUCKET;
+                return this.tool === TOOL.BACKGROUNDBUCKET;
             },
         },
         mounted: function() {
@@ -1022,14 +1023,14 @@ define([
                 // Eraser stroke is always transparent black color
                 // Eraser thickness is stored as is, no need to verify it
                 strokeColor = this.isEraser
-                    ? 'rgba(0,0,0,1)'
+                    ? DEFAULT.ERASER_COLOR
                     : this.strokeColors[this.state.activeLayer];
                 if (this.isEraser) {
                     this.drawContext.globalAlpha = 1;
                 }
                 //Flag that indicates if a bucket tool is selected
                 var isBucketTool = this.isBucket || this.isBackgroundBucket;
-                strokeColor = this.isBackgroundBucket ? 'rgb(200,200,200)' : strokeColor;
+                strokeColor = this.isBackgroundBucket ? DEFAULT.BACKGROUND_COLOR : strokeColor;
 
                 // Optimization: adding shadow is an expensive task
                 if (this.smooth) {

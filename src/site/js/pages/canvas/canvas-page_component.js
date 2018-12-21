@@ -109,7 +109,13 @@ define([
              * Detects if the bucket tool is selected
              */
             isBucketSelected: function() {
-                return this.state.tool == Canvas.TOOL.BUCKET;
+                return this.state.tool === Canvas.TOOL.BUCKET;
+            },
+            /**
+             * Detects if the bucket tool is selected
+             */
+            isBackgroundBucketSelected: function() {
+                return this.state.tool === Canvas.TOOL.BACKGROUNDBUCKET;
             },
             /**
              * Get the current width as a pixel units

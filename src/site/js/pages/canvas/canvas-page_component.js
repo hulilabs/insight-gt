@@ -183,7 +183,6 @@ define([
                     yAxis = imageData.width,
                     data = imageData.data,
                     currentRow = 0 * xAxis;
-                var PIXEL_SIZE = 4;
                 // Initialize an empty array to store the borders
                 var borders = new Uint8ClampedArray(yAxis * xAxis * PIXEL_SIZE);
                 // Traverse the data that represents the image. Each 4 entries in the array represent a pixel
@@ -302,7 +301,6 @@ define([
                 yAxis
             ) {
                 var neighbors = [];
-                var PIXEL_SIZE = 4;
                 var previousRow = currentRow - yAxis * PIXEL_SIZE;
                 var nextRow = currentRow + yAxis * PIXEL_SIZE;
                 var topLeftPixel =

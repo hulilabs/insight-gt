@@ -1,10 +1,4 @@
 <div style="position: relative">
-    <wc-markdown>
-        # Insight GT
-
-    </wc-markdown>
-
-    <!-- Use DemoTable if you need a neat responsive layout for your demo -->
     <div class="DemoTable">
         <div class="DemoTable__row">
             <div class="DemoTable__columnRight">
@@ -16,13 +10,11 @@
                                 overflow: auto; background-color: gray; text-align: center; resize: vertical;">
 
                         <wc-canvas ref="canvas1" cross-origin="anonymous" v-bind:style="[styles]" v-bind:alpha="1" v-bind:background-color="state.backgroundColor"
-                            v-bind:base-image="state.baseImage" v-bind:eraser-thickness="state.eraserThickness" v-bind:height="state.height"
-                            v-bind:layers="state.layers" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
-                            v-bind:stroke-thickness="state.strokeThickness" v-bind:tool="state.tool" v-bind:width="state.width"
+                            v-bind:base-image="state.baseImage" v-bind:height="state.height" v-bind:width="state.width" v-bind:tool="state.tool"
                             v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
                         <wc-canvas ref="canvas2" cross-origin="anonymous" v-bind:style="[styles]" v-bind:alpha="state.alpha" v-bind:active-layer="myActiveLayer"
                             v-bind:background-color="state.backgroundColor" v-bind:eraser-thickness="state.eraserThickness" v-bind:height="state.height"
-                            outline-image="state.outlineImage" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
+                            v-bind:outline-image="state.outlineImage" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
                             v-bind:stroke-thickness="state.strokeThickness" v-bind:tool="state.tool" v-bind:width="state.width"
                             v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
                     </div>
@@ -35,7 +27,9 @@
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_export">Export image</wc-flat-button>
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomIn"> Zoom in</wc-flat-button>
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomOut"> Zoom out</wc-flat-button>
-                        <wc-flat-button href="" download="" ref="exportMasks" v-wc-ripple:is-dark v-on:click.native="_exportMasks"> Export masks</wc-flat-button>
+                        <a ref="downloader" href="" download="">
+                            <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_exportMasks"> Export masks</wc-flat-button>
+                        </a>
                         <div style="text-align:center; float: right">
                             <label style="border: 1px solid #ccc;
                                     display: inline-block;
@@ -80,7 +74,7 @@
                                 <wc-toggle-button custom-value="eraser" v-model="state.tool" name="Eraser">Eraser</wc-toggle-button>
                                 <wc-toggle-button custom-value="rectangle" v-model="state.tool" name="Rectangle">Rectangle</wc-toggle-button>
                                 <wc-toggle-button custom-value="bucket" v-model="state.tool" name="Bucket">Bucket</wc-toggle-button>
-                                <wc-toggle-button custom-value="bucketBack" v-model="state.tool" name="BackgroundBucket">Background bucket</wc-toggle-button>
+                                <wc-toggle-button custom-value="backgroundBucket" v-model="state.tool" name="backgroundBucket">Background bucket</wc-toggle-button>
                             </wc-toggle>
                         </div>
                     </div>
@@ -91,7 +85,7 @@
 
                             <wc-toggle>
                                 <template v-for="layer in state.layers">
-                                    <wc-toggle-button :custom-value="layer" v-model="state.activeLayer" :name="layer">Layer {{layer}}</wc-toggle-button>
+                                    <wc-toggle-button :custom-value="layer.toString()" v-model="state.activeLayer" :name="layer">Layer {{layer}}</wc-toggle-button>
                                 </template>
 
 
@@ -107,9 +101,9 @@
                         <div class="DemoTable__row">
                             <div class="DemoTable__columnLeft">Brush, Eraser and opacity levels</div>
                             <div class="DemoTable__columnRight">
-                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.strokeThickness"> Brush size </input>
-                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.eraserThickness">Eraser size </input>
-                                <input type="range" min="0.1" max="0.9" value="0.5" step="0.01" v-model="state.alpha">Layer opacity</input>
+                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.strokeThickness" /> Brush size
+                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.eraserThickness" /> Eraser
+                            <input type="range" min="0.1" max="0.9" value="0.5" step="0.01" v-model="state.alpha" /> Layer opacity
                             </div>
                         </div>
 

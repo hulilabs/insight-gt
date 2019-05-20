@@ -26,6 +26,8 @@ require.config({
         "css-loader" : "site/js/lib/vendor/require-css/css",
         "waves" : "site/js/lib/vendor/Waves/dist",
         "jump" : "site/js/lib/vendor/jump.js/dist/jump",
+        "jszip": "site/js/lib/vendor/jszip/dist/jszip",
+        "filesaver": "site/js/lib/vendor/file-saver/dist/FileSaver",
         "zxcvbn" : "site/js/lib/vendor/zxcvbn/dist/zxcvbn",
         "utilities" : "site/js/insight-gt/utilities",
         "colors" : "site/js/insight-gt/utilities/colors",

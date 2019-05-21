@@ -15,6 +15,8 @@
  */
 define([
     'vue',
+    'filesaver',
+    'jszip',
     'image-segmentation/segmentation',
     'web-components/buttons/flat/flat-button_component',
     'components/canvas/canvas_component',
@@ -22,13 +24,26 @@ define([
     'web-components/selection-controls/toggle/toggle_component',
     'web-components/selection-controls/toggle/toggle-button_component',
     'text!pages/canvas/canvas-page_template.html',
-], function(Vue, Segmentation, FlatButton, Canvas, TextField, Toggle, ToggleButton, Template) {
+], function(
+    Vue,
+    Filesaver,
+    JSZip,
+    Segmentation,
+    FlatButton,
+    Canvas,
+    TextField,
+    Toggle,
+    ToggleButton,
+    Template
+) {
     var DEFAULT = {
         // The alpha level of the canvas
         ALPHA: 0.4,
         // The active layer of the canvas
         ACTIVE_LAYER: '1',
         BACKGROUND_COLOR: 'rgba(0, 0, 0, 0.5)',
+        // Default filename for the masks file.
+        FILENAME: 'masks.xml',
         HEIGHT: 720,
 
         /**
@@ -41,55 +56,46 @@ define([
 
         // Indicates if the canvas is drawable
         OUTLINE_IMAGE: true,
-        WIDTH: 1280,
         SUPERPIXEL_SIZE: 40,
-
         // SLIC is the most common superpixels implementation and one of the most effectives.
         SUPERPIXELS_METHOD: 'slic',
-
         // Default color is red
         STROKE_COLOR: '#DB0404',
-
-        // Default filename for the masks file.
-        FILENAME: 'masks.xml',
+        WIDTH: 1280,
     };
 
+    // The max value for a 8 bit color channel
     var MAX_RGB = 255;
+    // The number of channels in a RGBA pixel.
     var PIXEL_SIZE = 4;
 
     return Vue.extend({
         template: Template,
         data: function() {
             return {
-                state: {
+                // The selected frame
+                currentFrame: '1',
+                // Common properties across all the frames
+                common: {
                     alpha: DEFAULT.ALPHA,
                     activeLayer: DEFAULT.ACTIVE_LAYER,
                     backgroundColor: DEFAULT.BACKGROUND_COLOR,
-                    baseImage: '',
                     eraserThickness: 10,
                     height: DEFAULT.HEIGHT,
                     isUndoEnabled: false,
-                    outlineImage: DEFAULT.OUTLINE_IMAGE,
-                    smooth: false,
-                    snapshots: [],
                     layers: DEFAULT.LAYERS,
+                    layoutOpacity: DEFAULT.ALPHA,
+                    smooth: false,
+                    regionSize: DEFAULT.SUPERPIXEL_SIZE,
+                    snapshots: [],
                     strokeColor: DEFAULT.STROKE_COLOR,
                     strokeThickness: 10,
-                    regionSize: DEFAULT.SUPERPIXEL_SIZE,
                     tool: Canvas.TOOL.PEN,
                     width: DEFAULT.WIDTH,
                     zoom: 1,
                 },
-
-                styles: {
-                    width: '',
-                    height: '',
-                    position: 'absolute',
-                    left: '0',
-                    right: '0',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                },
+                // Information of each individual frame
+                states: [],
             };
         },
         computed: {
@@ -97,68 +103,70 @@ define([
              * Detects if the eraser tool is selected
              */
             isEraserSelected: function() {
-                return this.state.tool === Canvas.TOOL.ERASER;
+                return this.common.tool === Canvas.TOOL.ERASER;
             },
             /**
              * Detects if the rectangle tool is selected
              */
             isRectSelected: function() {
-                return this.state.tool === Canvas.TOOL.RECT;
+                return this.common.tool === Canvas.TOOL.RECT;
             },
             /**
              * Detects if the bucket tool is selected
              */
             isBucketSelected: function() {
-                return this.state.tool === Canvas.TOOL.BUCKET;
+                return this.common.tool === Canvas.TOOL.BUCKET;
             },
             /**
              * Detects if the bucket tool is selected
              */
             isBackgroundBucketSelected: function() {
-                return this.state.tool === Canvas.TOOL.BACKGROUNDBUCKET;
+                return this.common.tool === Canvas.TOOL.BACKGROUNDBUCKET;
             },
             /**
              * Get the current width as a pixel units
              */
             myWidthPx: function() {
-                return this.state.width + 'px';
+                return this.common.width + 'px';
             },
 
             /**
              * Get the current height as a pixel units
              */
             myHeightPx: function() {
-                return this.state.height + 'px';
+                return this.common.height + 'px';
             },
             /**
              * Get the integer representation of the width
              */
             myWidth: function() {
-                return parseInt(this.state.width);
+                return parseInt(this.common.width);
             },
             /**
              * Get the integer representation of the heigth
              */
             myHeight: function() {
-                return parseInt(this.state.height);
+                return parseInt(this.common.height);
             },
             /**
              * Returns the current layer index
              */
             myActiveLayer: function() {
-                return parseInt(this.state.activeLayer) - 1;
+                return parseInt(this.common.activeLayer) - 1;
             },
             /**
              * Get the current region size for the calculation of superpixels
              */
             myRegionSize: function() {
-                return parseInt(this.state.regionSize);
+                return parseInt(this.common.regionSize);
             },
             /**
              * Get the zoom level of the canvas
              */
             zoomFactor: function() {
-                return this.state.zoom <= 0 ? 1 / Math.abs(this.state.zoom - 2) : this.state.zoom;
+                return this.common.zoom <= 0
+                    ? 1 / Math.abs(this.common.zoom - 2)
+                    : this.common.zoom;
             },
         },
         mounted: function() {
@@ -170,20 +178,36 @@ define([
              * Add a layer to the layer array
              */
             _addLayer: function() {
-                this.state.layers.push((this.state.layers.length + 1).toString());
+                this.common.layers.push((this.common.layers.length + 1).toString());
             },
             /**
-             * Set the isUndoEnabled property
+             * Add a frame for image processing. Each frame is defined by its state
              */
-            _setCanUndo: function(canUndo) {
-                this.state.isUndoEnabled = canUndo;
+            _addFrame: function() {
+                var currentLength = this.states.length;
+                this.states.push({
+                    baseImage: '0',
+                    outlineImage: DEFAULT.OUTLINE_IMAGE,
+                    canvasId: (currentLength + 1).toString(),
+                    styleWidth: '',
+                    styleHeight: '',
+                    position: 'absolute',
+                    left: '-10000x',
+                    right: '0px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                });
             },
             /**
              * Clear the canvas
              */
             _clear: function() {
-                this.$refs.canvas2.clear();
+                this.$refs['canvas2' + this.currentFrame][0].clear();
             },
+            /**
+             * Detects the superpixels outline mask for a given image
+             * @param {*} imageData
+             */
             _detectBorders: function(imageData) {
                 var xAxis = imageData.height,
                     yAxis = imageData.width,
@@ -244,22 +268,50 @@ define([
              * Store the image in the snapshots array
              */
             _export: function() {
-                var image = this.$refs.canvas2.exportLayer();
-                this.state.snapshots.push(image);
+                var zip = new JSZip();
+                this.common.snapshots.length = 0;
+                // Creates a zip file, storing each layer inside folders named as their respective frame.
+                for (var i = 0; i < this.states.length; i++) {
+                    var imageFolder = zip.folder('frame' + this.states[i].canvasId);
+                    var images = this.$refs['canvas2' + this.states[i].canvasId][0].exportLayers();
+                    for (var index = 0; index < images.length; index++) {
+                        imageFolder.file(
+                            'layer' + index + '.png',
+                            images[index].src.split(',')[1],
+                            {
+                                base64: true,
+                            }
+                        );
+                    }
+                }
+
+                /* eslint-disable no-undef */
+                zip.generateAsync({ type: 'blob' }).then(function(content) {
+                    window.saveAs(content, 'export.zip'); //
+                });
+                /* eslint-enable no-undef */
             },
             /**
              * Export the layers of the canvas as an XmlFile
-             *
              */
             _exportMasks: function() {
-                //Get the masks as an XML file
-                var xmlFile = this.$refs.canvas2.exportMasks(),
-                    downloader = this.$refs.downloader;
+                var xmlDoc = document.implementation.createDocument(null, 'xml'),
+                    body = document.createElementNS(null, 'segmentation');
 
+                var downloader = this.$refs.downloader;
+                for (var index = 0; index < this.states.length; index++) {
+                    var currentFrame = this.$refs['canvas2' + this.states[index].canvasId][0];
+                    //Get the masks as an XML file
+                    var frameMask = currentFrame.exportMasks();
+                    body.appendChild(frameMask);
+                }
+                var layerCount = frameMask.getElementsByTagName('mask').length;
+                body.setAttribute('layerCount', layerCount);
+                xmlDoc.documentElement.append(body);
                 // Creates an URL from the xml file
                 var url = window.URL.createObjectURL(
                     /* eslint-disable no-undef */
-                    new Blob([xmlFile.documentElement.innerHTML], {
+                    new Blob([xmlDoc.documentElement.innerHTML], {
                         type: 'text/plain',
                     })
                     /* eslint-enable no-undef */
@@ -273,13 +325,19 @@ define([
              */
             _getOutlineImage: function() {
                 // The canvas1 reference contains the original background image.
-                this.$refs.canvas1.drawContext.clearRect(0, 0, this.state.width, this.state.height);
-                this.$refs.canvas1._redrawBaseImage();
-                var imageData = this.$refs.canvas1.drawContext.getImageData(
+                var currentBackgroundImage = this.$refs['canvas1' + this.currentFrame][0];
+                currentBackgroundImage.drawContext.clearRect(
+                    0,
+                    0,
+                    this.common.width,
+                    this.common.height
+                );
+                currentBackgroundImage._redrawBaseImage();
+                var imageData = currentBackgroundImage.drawContext.getImageData(
                         0,
                         0,
-                        this.state.width,
-                        this.state.height
+                        this.common.width,
+                        this.common.height
                     ),
                     options = {};
                 //Set the default superpixels method and region size
@@ -288,15 +346,19 @@ define([
 
                 // Creates the superpixels outline image, and sets it as invisible outline image of the drawable canvas
                 var superpixelsImage = Segmentation.create(imageData, options).result;
-                this.$refs.canvas2.outlineImageData = superpixelsImage;
+                var currentForegroundImage = this.$refs['canvas2' + this.currentFrame][0];
+                currentForegroundImage.outlineImageData = superpixelsImage;
 
-                this.$refs.canvas1.maskBorders = new ImageData( // eslint-disable-line no-undef
+                currentBackgroundImage.maskBorders = new ImageData( // eslint-disable-line no-undef
                     this._detectBorders(superpixelsImage),
                     imageData.width,
                     imageData.height
                 );
-                this.$refs.canvas1._redraw();
+                currentBackgroundImage._redraw();
             },
+            /**
+             * Obtains the neighbors for the give pixel coordinates
+             */
             _getPixelNeighbors: function(
                 currentRow,
                 offset,
@@ -354,42 +416,55 @@ define([
                 return neighbors;
             },
             /**
-             * Loads a new image into the canvas1
+             * Load a set of images as frames, creating a new states array
              */
-            _openImage: function(e) {
-                //Reset the canvas page to a default state
-
-                var files = e.target.files || e.dataTransfer.files;
-                if (!files.length) return;
-
-                var file = files[0],
-                    reader = new FileReader(), // eslint-disable-line no-undef
+            _loadImage: function(file, files, frame) {
+                var reader = new FileReader(), // eslint-disable-line no-undef
                     self = this;
-
-                this._resetCanvasState();
-                this.state.width = 0;
-                this.state.height = 0;
-                // Wait for the file to load
+                this.common.width = 0;
+                this.common.height = 0;
                 reader.onload = function() {
                     var image = new Image(); // eslint-disable-line no-undef
                     // Wait for the image to load
                     image.onload = function() {
                         // Reset the state
-                        self.state.width = image.width;
-                        self.state.height = image.height;
-                        self.state.zoom = 1;
+                        self.common.width = image.width;
+                        self.common.height = image.height;
+                        self.common.zoom = 1;
                         self._updateZoom();
-
                         // Update the canvas
                         self._updateStyle();
-
                         //Reset the layers and the base image
-                        self.state.baseImage = reader.result;
-                        self.state.layers = ['1'];
+                        self.states[frame].baseImage = image.src;
+                        if (files.length === 0) {
+                            return;
+                        } else {
+                            var nextFile = files[0][1];
+                            self._loadImage(nextFile, files.slice(1, files.length), frame + 1);
+                        }
                     };
                     image.src = reader.result;
                 };
                 reader.readAsDataURL(file);
+            },
+            /**
+             * Loads a new image into the canvas1
+             */
+            _openImages: function(e) {
+                //Reset the canvas page to a default state
+
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length) return;
+                var fileArray = Object.entries(files);
+                this._resetEnvironment();
+                for (var index = 0; index < files.length; index++) {
+                    this._addFrame();
+                }
+                this._swapFrame(this.currentFrame);
+                var file = fileArray[0][1];
+                this._loadImage(file, fileArray.slice(1, fileArray.length), 0);
+
+                // Wait for the file to load
             },
             /**
              * Open a XML file that contains the enconded masks
@@ -398,65 +473,121 @@ define([
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length) return;
 
-                this._resetCanvasState();
-
                 var xmlFile = files[0],
                     reader = new FileReader(), // eslint-disable-line no-undef
                     self = this,
                     parser = new DOMParser(); // eslint-disable-line no-undef
 
                 reader.onload = function() {
+                    self.common.layers.length = 0;
                     // Send the XML file to the canvas component for processing.
                     var xmlDoc = parser.parseFromString(reader.result, 'text/xml'); //important to use "text/xml"
-                    var body = xmlDoc.getElementsByTagName('masks');
-                    var masks = body[0].getElementsByTagName('mask');
-                    for (var i = 1; i < masks.length; i++) {
-                        self.state.layers.push(i + 1);
+                    var body = xmlDoc.getElementsByTagName('segmentation');
+                    var layerCount = body[0].getAttribute('layerCount'),
+                        frames = body[0].getElementsByTagName('frame');
+
+                    for (var i = 1; i < layerCount; i++) {
+                        self.common.layers.push(i + 1);
                     }
-                    self.$refs.canvas2._loadMasks(masks);
+                    for (var index = 0; index < frames.length; index++) {
+                        var mask = frames[index].getElementsByTagName('mask');
+                        var currentForegroundImage = self.$refs['canvas2' + (index + 1)][0];
+                        currentForegroundImage._loadMasks(mask);
+                    }
                 };
                 reader.readAsText(xmlFile);
             },
-            _updateZoom: function() {
-                this.styles.width = (this.myWidth * this.zoomFactor).toString() + 'px';
-                this.styles.height = (this.myHeight * this.zoomFactor).toString() + 'px';
+            /**
+             * Reset the tool environment to begin anew
+             */
+            _resetEnvironment: function() {
+                this.states.length = 0;
+                this.common.layers = ['1'];
+                this.common.activeLayer = 1;
+                this.common.zoom = 1;
+                this.common.alpha = DEFAULT.ALPHA;
+                this.common.activeLayer = DEFAULT.ACTIVE_LAYER;
+                this.common.backgroundColor = DEFAULT.BACKGROUND_COLOR;
+                this.common.eraserThickness = 10;
+                this.common.height = DEFAULT.HEIGHT;
+                this.common.smooth = false;
+                this.common.strokeColor = DEFAULT.STROKE_COLOR;
+                this.common.strokeThickness = 10;
+                this.common.regionSize = DEFAULT.SUPERPIXEL_SIZE;
+                this.common.tool = Canvas.TOOL.PEN;
+                this.common.width = DEFAULT.WIDTH;
+                this.common.zoom = 1;
+                this.common.layers = DEFAULT.LAYERS;
+                this.common.isUndoEnabled = false;
+                this.currentFrame = '1';
             },
-
-            _resetCanvasState: function() {
-                this.$refs.canvas2._resetCanvas();
-                this.state.activeLayer = DEFAULT.ACTIVE_LAYER;
-                this.state.layers = ['1'];
-                this.state.zoom = 1;
+            /**
+             * Set the isUndoEnabled property
+             */
+            _setCanUndo: function(canUndo) {
+                this.common.isUndoEnabled = canUndo;
+            },
+            /**
+             * Swap the current frame for another
+             */
+            _swapFrame: function() {
+                this.common.zoom = 1;
                 this._updateZoom();
+                this._updateStyle();
+                for (var i = 0; i < this.states.length; i++) {
+                    if (this.states[i].canvasId != this.currentFrame) {
+                        this.states[i].left = '-10000px';
+                    } else {
+                        this.states[i].left = '0px';
+                    }
+                }
             },
             /**
              * Undo the last action
              */
             _undo: function() {
-                if (this.state.isUndoEnabled) {
-                    this.$refs.canvas2.undo();
+                if (this.common.isUndoEnabled) {
+                    this.$refs['canvas2' + this.currentFrame][0].undo();
                 }
             },
             /**
              * Set the styles as pixel values
              */
             _updateStyle: function() {
-                this.styles.width = this.myWidthPx;
-                this.styles.height = this.myHeightPx;
+                this.states.styleWidth = this.myWidthPx;
+                this.states.styleHeight = this.myHeightPx;
+            },
+            /**
+             * Updates the style according to the current zoom level
+             */
+            _updateZoom: function() {
+                this.states[this.currentFrame - 1].styleWidth =
+                    (this.myWidth * this.zoomFactor).toString() + 'px';
+                this.states[this.currentFrame - 1].styleHeight =
+                    (this.myHeight * this.zoomFactor).toString() + 'px';
             },
             /**
              * Increment the zoom by one
              */
             _zoomIn: function() {
-                this.state.zoom = this.state.zoom + 1;
+                this.common.zoom = this.common.zoom + 1;
                 this._updateZoom();
             },
             /**
              * Decrease the zoom by one
              */
             _zoomOut: function() {
-                this.state.zoom = this.state.zoom - 1;
+                this.common.zoom = this.common.zoom - 1;
                 this._updateZoom();
+            },
+        },
+        watch: {
+            /**
+             * On frame changes, set the isUndoEnabled property
+             */
+            currentFrame: function() {
+                this.$refs['canvas2' + this.currentFrame][0]._notifyCanUndo();
+                this._swapFrame(this.currentFrame);
             },
         },
         components: {

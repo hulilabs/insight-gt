@@ -113,7 +113,7 @@ define([
              * Alpha level of the canvas
              */
             alpha: {
-                type: Number,
+                type: [Number, String],
                 default: 0.4,
             },
             /**
@@ -162,6 +162,13 @@ define([
             height: {
                 type: [Number, String],
                 default: 0,
+            },
+            /**
+             * The layout image opacity
+             */
+            layoutOpacity: {
+                type: [Number, String],
+                default: 0.4,
             },
             /**
              * Flag that indicates if a canvas has an outline image
@@ -511,41 +518,46 @@ define([
                 return image;
             },
             /**
-             * Exports the current layer as an image
+             * Exports all the layers as png images
              * @returns {HTMLImageElement}
              */
-            exportLayer: function() {
-                var image = new Image(); // eslint-disable-line no-undef
-
+            exportLayers: function() {
+                var images = [];
                 if (!this.isTainted()) {
                     try {
-                        var layer = this.drawStack[this.state.activeLayer];
-                        image.src = layer[layer.length - 1];
+                        for (var index = 0; index < this.drawStack.length; index++) {
+                            var layer = this.drawStack[index];
+                            var image = new Image(); // eslint-disable-line no-undef
+                            image.src = layer[layer.length - 1];
+                            images.push(image);
+                        }
                     } catch (e) {
                         // Do nothing, avoid log error
                         this._detectTainted(e);
                     }
                 }
-                return image;
+                return images;
             },
             /**
              * Export the canvas layers as a xml file
              * @return {Array}
              */
             exportMasks: function() {
-                var xmlDoc = document.implementation.createDocument(null, 'xml'),
-                    body = document.createElementNS(null, 'masks');
+                var body = document.createElementNS(null, 'frame');
 
                 for (var i = 0; i < this.drawStack.length; i++) {
                     var layer = this.drawStack[i];
 
                     var mask = document.createElementNS(null, 'mask');
-                    mask.setAttribute('source', layer[layer.length - 1].toString());
+                    if (layer.length > 0) {
+                        mask.setAttribute('layer', layer[layer.length - 1].toString());
+                    } else {
+                        mask.setAttribute('layer', 'null');
+                    }
                     mask.setAttribute('color', this.strokeColors[i].toString());
                     body.appendChild(mask);
                 }
-                xmlDoc.documentElement.appendChild(body);
-                return xmlDoc;
+                return body;
             },
 
             getChanges: function() {
@@ -803,13 +815,13 @@ define([
             _loadMasks: function(masks) {
                 //Validate masks file
                 this._resetCanvas();
-                this.drawStack[0][0] = masks[0].getAttribute('source');
+                this.drawStack[0][0] = masks[0].getAttribute('layer');
                 this.strokeColors = [];
                 this.strokeArray = [];
                 this.addColor(masks[0].getAttribute('color'));
                 for (var i = 1; i < masks.length; i++) {
                     this.addLayer();
-                    this.drawStack[i][0] = masks[i].getAttribute('source');
+                    this.drawStack[i][0] = masks[i].getAttribute('layer');
                     this.addColor(masks[i].getAttribute('color'));
                 }
                 this._redraw();
@@ -877,19 +889,12 @@ define([
                 return false;
             },
             /**
-             * Returns a random color from COLORS
+             * Returns a color from COLORS, based on the current layer
              * @returns {*}
              * @private
              */
-            _randomColor: function() {
-                var result;
-                var count = 0;
-                for (var prop in Colors.names) {
-                    if (Math.random() < 1 / ++count) {
-                        result = Colors.names[prop];
-                    }
-                }
-                return result;
+            _nextColor: function(curentLayer) {
+                return Colors[curentLayer];
             },
             /**
              * Main painting cycle
@@ -918,7 +923,10 @@ define([
                         var self = this;
                         /* eslint-disable no-undef */
                         createImageBitmap(this.maskBorders).then(function(imgBitmap) {
+                            var tempAlpha = self.drawContext.globalAlpha;
+                            self.drawContext.globalAlpha = self.layoutOpacity;
                             self.drawContext.drawImage(imgBitmap, 0, 0);
+                            self.drawContext.globalAlpha = tempAlpha;
                         });
                         /* eslint-enable no-undef */
                     }
@@ -1191,10 +1199,11 @@ define([
              */
             _updateLayer: function() {
                 while (this.drawStack.length < this.state.activeLayer + 1) {
+                    this.addColor(this._nextColor(this.drawStack.length));
                     this.addLayer();
-                    this.addColor(this._randomColor());
                     this.lastPoppedImage.push('');
                 }
+
                 this.activeStrokeColor = this.strokeColors[this.state.activeLayer];
             },
             /**
@@ -1260,6 +1269,12 @@ define([
              */
             height: function() {
                 this._resetCanvas();
+            },
+            /**
+             * On layout alpha changes, update the canvas
+             */
+            layoutOpacity: function() {
+                this._updateState();
             },
             /**
              * On outline image changes, load image into canvas

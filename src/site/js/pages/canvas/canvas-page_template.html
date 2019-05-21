@@ -8,21 +8,22 @@
                 <div style="position:relative ; width: 75%; height: 90vh; float: left;">
                     <div style="position:relative ; width: 100%; height: 80%;border:1px solid black;
                                 overflow: auto; background-color: gray; text-align: center; resize: vertical;">
-
-                        <wc-canvas ref="canvas1" cross-origin="anonymous" v-bind:style="[styles]" v-bind:alpha="1" v-bind:background-color="state.backgroundColor"
-                            v-bind:base-image="state.baseImage" v-bind:height="state.height" v-bind:width="state.width" v-bind:tool="state.tool"
-                            v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
-                        <wc-canvas ref="canvas2" cross-origin="anonymous" v-bind:style="[styles]" v-bind:alpha="state.alpha" v-bind:active-layer="myActiveLayer"
-                            v-bind:background-color="state.backgroundColor" v-bind:eraser-thickness="state.eraserThickness" v-bind:height="state.height"
-                            v-bind:outline-image="state.outlineImage" v-bind:smooth="state.smooth" v-bind:stroke-color="state.strokeColor"
-                            v-bind:stroke-thickness="state.strokeThickness" v-bind:tool="state.tool" v-bind:width="state.width"
-                            v-bind:zoom="state.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
+                        <template v-for="state in states">
+                            <wc-canvas v-bind:ref="'canvas1' + state.canvasId" cross-origin="anonymous" v-bind:style="{width: state.styleWidth,height: state.styleHeight,position: state.position,left: state.left,right: state.right,marginLeft: state.marginLeft,marginRight: state.marginRight}" v-bind:alpha="1" v-bind:background-color="common.backgroundColor"
+                                v-bind:base-image="state.baseImage" v-bind:height="common.height" v-bind:width="common.width" v-bind:tool="common.tool" v-bind:layoutOpacity="common.layoutOpacity"
+                                v-bind:zoom="common.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
+                            <wc-canvas v-bind:ref="'canvas2' + state.canvasId" cross-origin="anonymous" v-bind:style="{width: state.styleWidth,height: state.styleHeight,position: state.position,left: state.left,right: state.right,marginLeft: state.marginLeft,marginRight: state.marginRight}" v-bind:alpha="common.alpha" v-bind:active-layer="myActiveLayer"
+                                v-bind:background-color="common.backgroundColor" v-bind:eraser-thickness="common.eraserThickness" v-bind:height="common.height"
+                                v-bind:outline-image="state.outlineImage" v-bind:smooth="common.smooth" v-bind:stroke-color="common.strokeColor"
+                                v-bind:stroke-thickness="common.strokeThickness" v-bind:tool="common.tool" v-bind:width="common.width"
+                                v-bind:zoom="common.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
+                        </template>
                     </div>
 
                     <div style="position:relative; width: 100%; height: 5%; float: left">
 
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_clear">clear</wc-flat-button>
-                        <wc-flat-button v-wc-ripple:is-dark v-bind:disabled="!state.isUndoEnabled" v-on:click.native="_undo">undo</wc-flat-button>
+                        <wc-flat-button v-wc-ripple:is-dark v-bind:disabled="!common.isUndoEnabled" v-on:click.native="_undo">undo</wc-flat-button>
 
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_export">Export image</wc-flat-button>
                         <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomIn"> Zoom in</wc-flat-button>
@@ -36,7 +37,7 @@
                                     padding: 4px 12px;
                                     cursor: pointer;
                                     margin: auto">
-                                <input type='file' name='img' size='40' v-on:change="_openImage" style="display: none" /> Open image
+                                <input type='file' name='img' size='40' v-on:change="_openImages" style="display: none" multiple/> Open image
                             </label>
                             <label style="border: 1px solid #ccc;
                                     display: inline-block;
@@ -48,11 +49,15 @@
                         </div>
 
                     </div>
+                    <!--
+
                     <div style="position:relative; width: 100%; height: 15%; float: left; overflow: auto;  background-color: #c0c0c0; border:1px solid black;">
                         <template v-for="snapshot in state.snapshots">
                             <img v-bind:src="snapshot.src" height="100px" width="100px" />&nbsp;
                         </template>
                     </div>
+
+                    -->
                 </div>
 
                 <div style="position:relative; width: 2.5%; height: 90vh; float: left">
@@ -62,19 +67,19 @@
                     <div class="DemoTable__row">
                         <div class="DemoTable__columnRight">
                             <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_getOutlineImage">Calculate superpixels</wc-flat-button>
-                            <input type="range" min="10" max="200" value="40" step="10" v-model="state.regionSize"> Region size </input>
-                        </div>
+                            <input type="range" min="10" max="200" value="40" step="10" v-model="common.regionSize"/> Region size
+                                    </div>
                     </div>
 
                     <div class="DemoTable__row">
                         <div class="DemoTable__columnLeft">Tools</div>
                         <div class="DemoTable__columnRight">
                             <wc-toggle>
-                                <wc-toggle-button custom-value="pen" v-model="state.tool" name="Pen">Pen</wc-toggle-button>
-                                <wc-toggle-button custom-value="eraser" v-model="state.tool" name="Eraser">Eraser</wc-toggle-button>
-                                <wc-toggle-button custom-value="rectangle" v-model="state.tool" name="Rectangle">Rectangle</wc-toggle-button>
-                                <wc-toggle-button custom-value="bucket" v-model="state.tool" name="Bucket">Bucket</wc-toggle-button>
-                                <wc-toggle-button custom-value="backgroundBucket" v-model="state.tool" name="backgroundBucket">Background bucket</wc-toggle-button>
+                                <wc-toggle-button custom-value="pen" v-model="common.tool" name="Pen">Pen</wc-toggle-button>
+                                <wc-toggle-button custom-value="eraser" v-model="common.tool" name="Eraser">Eraser</wc-toggle-button>
+                                <wc-toggle-button custom-value="rectangle" v-model="common.tool" name="Rectangle">Rectangle</wc-toggle-button>
+                                <wc-toggle-button custom-value="bucket" v-model="common.tool" name="Bucket">Bucket</wc-toggle-button>
+                                <wc-toggle-button custom-value="backgroundBucket" v-model="common.tool" name="backgroundBucket">Background bucket</wc-toggle-button>
                             </wc-toggle>
                         </div>
                     </div>
@@ -84,39 +89,47 @@
                             <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_addLayer">Add layer</wc-flat-button>
 
                             <wc-toggle>
-                                <template v-for="layer in state.layers">
-                                    <wc-toggle-button :custom-value="layer.toString()" v-model="state.activeLayer" :name="layer">Layer {{layer}}</wc-toggle-button>
+                                <template v-for="layer in common.layers">
+                                    <wc-toggle-button :custom-value="layer.toString()" v-model="common.activeLayer" :name="layer">Layer {{layer}}</wc-toggle-button>
                                 </template>
-
-
                             </wc-toggle>
                         </div>
                     </div>
+                    <div class="DemoTable__row">
+                            <div class="DemoTable__columnRight">
+                                <wc-toggle>
+                                    <template v-for="frame in states">
+                                        <wc-toggle-button :custom-value="frame.canvasId.toString()" v-model="currentFrame" :name="frame">Frame {{frame.canvasId}}</wc-toggle-button>
+                                    </template>
+                                </wc-toggle>
+                            </div>
+                        </div>
 
                     <div class="DemoTable__row">
                         <div class="DemoTable__columnLeft">Layer color</div>
                         <div class="DemoTable__columnRight">
-                            <wc-textfield type="color" v-model="state.strokeColor"></wc-textfield>
+                            <wc-textfield type="color" v-model="common.strokeColor"></wc-textfield>
                         </div>
                         <div class="DemoTable__row">
                             <div class="DemoTable__columnLeft">Brush, Eraser and opacity levels</div>
                             <div class="DemoTable__columnRight">
-                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.strokeThickness" /> Brush size
-                                <input type="range" min="1" max="101" value="10" step="5" v-model="state.eraserThickness" /> Eraser
-                            <input type="range" min="0.1" max="0.9" value="0.5" step="0.01" v-model="state.alpha" /> Layer opacity
+                                <input type="range" min="1" max="101" value="10" step="5" v-model="common.strokeThickness" /> Brush size
+                                <input type="range" min="1" max="101" value="10" step="5" v-model="common.eraserThickness" /> Eraser
+                                <input type="range" min="0.01" max="0.9" value="0.5" step="0.01" v-model="common.alpha" /> Color opacity
+                                <input type="range" min="0.01" max="0.99" value="0.5" step="0.01" v-model="common.layoutOpacity" /> Layout opacity
                             </div>
                         </div>
 
                         <div class="DemoTable__row">
                             <div class="DemoTable__columnLeft">Stroke thickness</div>
                             <div class="DemoTable__columnRight">
-                                <wc-textfield type="number" step="1" v-model="state.strokeThickness"></wc-textfield>
+                                <wc-textfield type="number" step="1" v-model="common.strokeThickness"></wc-textfield>
                             </div>
                         </div>
                         <div class="DemoTable__row">
                             <div class="DemoTable__columnLeft">Eraser thickness</div>
                             <div class="DemoTable__columnRight">
-                                <wc-textfield type="number" step="1" v-model="state.eraserThickness"></wc-textfield>
+                                <wc-textfield type="number" step="1" v-model="common.eraserThickness"></wc-textfield>
                             </div>
                         </div>
                     </div>

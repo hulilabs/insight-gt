@@ -894,7 +894,7 @@ define([
              * @private
              */
             _nextColor: function(curentLayer) {
-                return Colors[curentLayer];
+                return Colors[curentLayer % Colors.length];
             },
             /**
              * Main painting cycle

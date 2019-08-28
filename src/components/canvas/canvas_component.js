@@ -893,8 +893,8 @@ define([
              * @returns {*}
              * @private
              */
-            _nextColor: function(curentLayer) {
-                return Colors[curentLayer];
+            _nextColor: function(currentLayer) {
+                return Colors[currentLayer % Colors.length];
             },
             /**
              * Main painting cycle

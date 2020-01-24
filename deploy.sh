@@ -41,6 +41,7 @@ if [ $? -eq 1 ]; then
         --log-opt tag=insight-gt \
         --name insight-gt \
         --network huli \
+        --publish 8092:80 \
         --replicas 2 \
         --reserve-cpu $reserve_cpu \
         --reserve-memory $reserve_memory \

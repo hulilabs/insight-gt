@@ -3,6 +3,10 @@ define(['./image/floodfill'], function(Floodfill) {
         Floodfill(canvasContext, x, y, outlineImageData, alpha);
     }
 
+    function floodFill(canvasContext, x, y, outlineImageData, alpha, pixelCount, imageData) {
+        Floodfill(canvasContext, x, y, outlineImageData, alpha, pixelCount, imageData);
+    }
+
     return {
         floodFill,
     };

@@ -94,8 +94,11 @@ define([
                     width: DEFAULT.WIDTH,
                     zoom: 1,
                 },
-                // Information of each individual frame
+                // Properties of each individual frame
                 states: [],
+
+                // Set of descriptors for each layer.
+                descriptors: [],
             };
         },
         computed: {
@@ -199,6 +202,23 @@ define([
                 });
             },
             /**
+             * Classificates the superpixels of the current frame, using the current layer descriptors
+             */
+            _classifyImage: function() {
+                this._getOutlineImage();
+                var baseCanvas = this.$refs['canvas1' + this.currentFrame][0];
+                var baseImage = baseCanvas.drawContext.getImageData(
+                    0,
+                    0,
+                    baseCanvas.width,
+                    baseCanvas.height
+                );
+                this.$refs['canvas2' + this.currentFrame][0].classifyFrame(
+                    baseImage.data,
+                    this.descriptors[this.myActiveLayer]
+                );
+            },
+            /**
              * Clear the canvas
              */
             _clear: function() {
@@ -218,7 +238,6 @@ define([
                 // Traverse the data that represents the image. Each 4 entries in the array represent a pixel
                 for (var j = 0; j < xAxis * PIXEL_SIZE; j += PIXEL_SIZE) {
                     currentRow = j * yAxis;
-                    //
                     for (var offset = 0; offset < yAxis * PIXEL_SIZE; offset += PIXEL_SIZE) {
                         var currentPixel = data.slice(
                             currentRow + offset,
@@ -318,6 +337,29 @@ define([
                 );
                 downloader.setAttribute('href', url);
                 downloader.setAttribute('download', DEFAULT.FILENAME);
+            },
+            /**
+             * Get the descriptors of the current layer
+             * The algorithm generates a histogram of each frame, for the current layer.
+             */
+            _getLayerDescriptors: function() {
+                // For each frame, get the color histogram of the active layer.
+                this.descriptors[this.myActiveLayer] = [];
+                for (var i = 0; i < this.states.length; i++) {
+                    var baseCanvas = this.$refs['canvas1' + this.states[i].canvasId][0];
+                    var baseImage = baseCanvas.drawContext.getImageData(
+                        0,
+                        0,
+                        baseCanvas.width,
+                        baseCanvas.height
+                    );
+                    var histograms = this.$refs[
+                        'canvas2' + this.states[i].canvasId
+                    ][0].getHistograms(baseImage.data);
+                    if (histograms !== null) {
+                        this.descriptors[this.myActiveLayer].push(histograms);
+                    }
+                }
             },
             /**
              * Generates an invisible outline image that represents the superpixels regions

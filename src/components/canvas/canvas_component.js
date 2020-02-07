@@ -71,6 +71,7 @@ define([
         STROKE_ARRAY: [[219, 4, 4]],
         POPPED_IMAGES_BUFFER: [''],
         ERASER_COLOR: 'rgba(0,0,0,1)',
+        PIXEL_SIZE: 4,
     };
 
     /**
@@ -411,6 +412,138 @@ define([
                 );
             },
             /**
+             * Classify the superpixels image according to the given descriptors.
+             */
+            classifyFrame: function(baseImageData, descriptors) {
+                var xAxis = this.outlineImageData.height,
+                    yAxis = this.outlineImageData.width,
+                    data = this.outlineImageData.data,
+                    currentRow = 0 * xAxis,
+                    defaultPixel = new Uint8ClampedArray(4),
+                    canvas = document.createElement('canvas'),
+                    pixelCount = [];
+
+                var ctx = canvas.getContext('2d');
+                ctx.globalAlpha = 1;
+                canvas.width = yAxis;
+                canvas.height = xAxis;
+
+                var currentRed = 0,
+                    currentGreen = 0,
+                    currentBlue = 1;
+                var image = ctx.getImageData(0, 0, this.width, this.height);
+                var data = image.data;
+                for (var j = 0; j < xAxis * DEFAULT.PIXEL_SIZE; j += DEFAULT.PIXEL_SIZE) {
+                    var currentRow = j * yAxis;
+                    for (
+                        var offset = 0;
+                        offset < yAxis * DEFAULT.PIXEL_SIZE;
+                        offset += DEFAULT.PIXEL_SIZE
+                    ) {
+                        var currentPixel = data.slice(
+                            currentRow + offset,
+                            currentRow + (offset + DEFAULT.PIXEL_SIZE)
+                        );
+                        if (currentBlue >= 256) {
+                            currentBlue = 0;
+                            currentGreen++;
+                        }
+                        if (currentGreen >= 256) {
+                            currentGreen = 0;
+                            currentRed++;
+                        }
+
+                        ctx.strokeStyle =
+                            'rgb(' + currentRed + ', ' + currentGreen + ', ' + currentBlue + ')';
+                        ctx.fillStyle =
+                            'rgb(' + currentRed + ', ' + currentGreen + ', ' + currentBlue + ')';
+
+                        currentBlue++;
+
+                        if (currentBlue == currentGreen && currentGreen == currentRed) {
+                            currentBlue++;
+                        }
+
+                        if (
+                            currentPixel.length === defaultPixel.length &&
+                            currentPixel.every(function(value, index) {
+                                return value === defaultPixel[index];
+                            })
+                        ) {
+                            var xPoint = offset / DEFAULT.PIXEL_SIZE,
+                                yPoint = j / DEFAULT.PIXEL_SIZE;
+                            Utilities.floodFill(
+                                ctx,
+                                xPoint,
+                                yPoint,
+                                this.outlineImageData,
+                                255,
+                                pixelCount,
+                                data
+                            );
+                            var redHistogram = new Array(256).fill(0),
+                                greenHistogram = new Array(256).fill(0),
+                                blueHistogram = new Array(256).fill(0),
+                                normalizationIndex = 0;
+
+                            for (var pixelIndex = 0; pixelIndex < pixelCount.length; pixelIndex++) {
+                                normalizationIndex++;
+                                redHistogram[baseImageData[pixelCount[pixelIndex]]]++;
+                                greenHistogram[baseImageData[pixelCount[pixelIndex] + 1]]++;
+                                blueHistogram[baseImageData[pixelCount[pixelIndex] + 2]]++;
+                            }
+                            pixelCount = [];
+                            // Perform normalization of the color histograms, to get an array with values in the range [0,1]
+                            var redHistogramNormalized = redHistogram.map(function(element) {
+                                    return element / normalizationIndex;
+                                }),
+                                greenHistogramNormalized = greenHistogram.map(function(element) {
+                                    return element / normalizationIndex;
+                                }),
+                                blueHistogramNormalized = blueHistogram.map(function(element) {
+                                    return element / normalizationIndex;
+                                });
+                            var redMinima = 0,
+                                greenMinima = 0,
+                                blueMinima = 0;
+                            for (
+                                var descriptorIndex = 0;
+                                descriptorIndex < descriptors.length;
+                                descriptorIndex++
+                            ) {
+                                for (var index = 0; index < 256; index++) {
+                                    redMinima += Math.min(
+                                        redHistogramNormalized[index],
+                                        descriptors[descriptorIndex][0][index]
+                                    );
+                                    greenMinima += Math.min(
+                                        greenHistogramNormalized[index],
+                                        descriptors[descriptorIndex][1][index]
+                                    );
+                                    blueMinima += Math.min(
+                                        blueHistogramNormalized[index],
+                                        descriptors[descriptorIndex][2][index]
+                                    );
+                                }
+                            }
+                            redMinima /= descriptors.length;
+                            greenMinima /= descriptors.length;
+                            blueMinima /= descriptors.length;
+                            if (redMinima >= 0.5) {
+                                this._fillSuperpixel(xPoint, yPoint, this.currentStrokeColor);
+                            }
+                        }
+                    }
+                }
+                // Create a representation of the floodfill operation
+                this.drawBuffer[this.state.activeLayer].push(null);
+
+                // Commit the changes
+                this.baseImageData = this._commitStroke(this.state.activeLayer);
+                this._notifyCanUndo();
+                this._clearBuffer();
+            },
+            /**
              * Clear all drawn strokes
              * @note this basically flush the stack and buffer and then redraw
              */
@@ -493,31 +626,6 @@ define([
                 });
             },
             /**
-             * Export canvas as image
-             * @notes
-             * - Supports png|jpeg|gif
-             * - BMP not supported
-             * @see {@link http://caniuse.com/#feat=canvas} for browsers exporting support
-             * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image} for tainted canvas
-             * @see {@link https://github.com/hongru/canvas2image/blob/master/canvas2image.js} for exporting mechanics
-             * @param  {string} type
-             * @return {Image}
-             */
-            exportImage: function(type) {
-                var image = new Image(); // eslint-disable-line no-undef
-
-                if (!this.isTainted()) {
-                    try {
-                        image.src = this.$refs.canvas.toDataURL('image/' + type);
-                    } catch (e) {
-                        // Do nothing, avoid log error
-                        this._detectTainted(e);
-                    }
-                }
-
-                return image;
-            },
-            /**
              * Exports all the layers as png images
              * @returns {HTMLImageElement}
              */
@@ -559,16 +667,46 @@ define([
                 }
                 return body;
             },
-
-            getChanges: function() {
-                return this.drawStack[this.state.activeLayer];
-            },
             /**
-             * Detect if the canvas has changes
-             * @return {boolean}
+             * Get the histogram for the active layer
              */
-            hasChanges: function() {
-                return this.drawStack[this.state.activeLayer].length > 0;
+            getHistograms: function(baseImage) {
+                var layer = this.drawStack[this.state.activeLayer];
+                if (layer.length > 0) {
+                    var image = this.drawContext.getImageData(0, 0, this.width, this.height);
+                    var data = image.data;
+                    var redHistogram = new Array(256).fill(0);
+                    var greenHistogram = new Array(256).fill(0);
+                    var blueHistogram = new Array(256).fill(0);
+                    var normalizationIndex = 0;
+                    for (var i = 3; i < data.length; i += 4) {
+                        if (!(data[i - 3] === data[i - 2] && data[i - 2] === data[i - 1])) {
+                            normalizationIndex++;
+                            redHistogram[baseImage[i - 3]]++;
+                            greenHistogram[baseImage[i - 2]]++;
+                            blueHistogram[baseImage[i - 1]]++;
+                        }
+                    }
+
+                    // Perform normalization of the color histograms, to get an array with values in the range [0,1]
+                    var redHistogramNormalized = redHistogram.map(function(element) {
+                            return element / normalizationIndex;
+                        }),
+                        greenHistogramNormalized = greenHistogram.map(function(element) {
+                            return element / normalizationIndex;
+                        }),
+                        blueHistogramNormalized = blueHistogram.map(function(element) {
+                            return element / normalizationIndex;
+                        });
+
+                    return [
+                        redHistogramNormalized,
+                        greenHistogramNormalized,
+                        blueHistogramNormalized,
+                    ];
+                } else {
+                    return null;
+                }
             },
             /**
              * Verify if the canvas was marked as tainted
@@ -648,6 +786,40 @@ define([
                 if (e.code === ERROR_CODE_CANVAS_TAINTED) {
                     this.state.tainted = true;
                 }
+            },
+            /**
+             * Flood the superpixel in the x and y coordinates with the current color.
+             */
+            _fillSuperpixel: function(xCoor, yCoor, strokeColor) {
+                var operation = this.drawContext.globalCompositeOperation;
+                // Eraser stroke is always transparent black color
+                // Eraser thickness is stored as is, no need to verify it
+                strokeColor = this.isEraser
+                    ? DEFAULT.ERASER_COLOR
+                    : this.strokeColors[this.state.activeLayer];
+                if (this.isEraser) {
+                    this.drawContext.globalAlpha = 1;
+                }
+
+                // Optimization: adding shadow is an expensive task
+                if (this.smooth) {
+                    this.drawContext.shadowBlur = 2;
+                    this.drawContext.shadowColor = strokeColor;
+                }
+                // Setup stroke drawing conditions
+
+                this.drawContext.strokeStyle = strokeColor;
+                this.drawContext.fillStyle = strokeColor;
+
+                Utilities.floodFill(
+                    this.drawContext,
+                    xCoor,
+                    yCoor,
+                    this.outlineImageData,
+                    this.alpha * 255
+                );
+                this.drawContext.globalCompositeOperation = operation;
+                this._setAlpha();
             },
             /**
              * Get the current color for the chosen tool
@@ -1045,7 +1217,6 @@ define([
                     this.drawContext.shadowBlur = 2;
                     this.drawContext.shadowColor = strokeColor;
                 }
-
                 // Setup stroke drawing conditions
 
                 this.drawContext.strokeStyle = strokeColor;

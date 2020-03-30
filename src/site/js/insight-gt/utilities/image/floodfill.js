@@ -202,7 +202,7 @@ define([], function() {
         var style = window.getComputedStyle(temp, null).color;
         document.body.removeChild(temp);
 
-        var recol = /([\.\d]+)/g;
+        var recol = /([.\d]+)/g;
         var vals = style.match(recol);
         if (vals && vals.length > 2) {
             //Coerce the string value into an rgba object

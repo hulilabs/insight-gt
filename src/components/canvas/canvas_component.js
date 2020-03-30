@@ -504,8 +504,8 @@ define([
                                     return element / normalizationIndex;
                                 });
                             var redMinima = 0,
-                                greenMinima = 0,
-                                blueMinima = 0;
+                                greenMinima,
+                                blueMinima;
                             for (
                                 var descriptorIndex = 0;
                                 descriptorIndex < descriptors.length;

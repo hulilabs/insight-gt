@@ -406,7 +406,7 @@ define(['./base'], function(BaseSegmentation) {
                     for (n = 0; n < 4; ++n) {
                         x = Math.floor(xvec[0] + dx4[n]);
                         y = Math.floor(yvec[0] + dy4[n]);
-                        if (x >= 0 && x < this.width && (y >= 0 && y < this.height)) {
+                        if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
                             /*jshint ignore: line*/
                             nindex = Math.floor(y * this.width + x);
                             if (nlabels[nindex] >= 0) {
@@ -420,7 +420,7 @@ define(['./base'], function(BaseSegmentation) {
                             /*jshint ignore: line*/
                             x = Math.floor(xvec[c] + dx4[n]);
                             y = Math.floor(yvec[c] + dy4[n]);
-                            if (x >= 0 && x < this.width && (y >= 0 && y < this.height)) {
+                            if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
                                 nindex = Math.floor(y * this.width + x);
                                 if (nlabels[nindex] < 0 && labels[oindex] == labels[nindex]) {
                                     xvec[count] = x;
@@ -507,7 +507,7 @@ define(['./base'], function(BaseSegmentation) {
                 for (var i = 0; i < 8; ++i) {
                     var x = k + dx8[i],
                         y = j + dy8[i];
-                    if (x >= 0 && x < this.width && (y >= 0 && y < this.height)) {
+                    if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
                         var index = y * this.width + x;
                         if (
                             istaken[index] === 0 &&

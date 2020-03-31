@@ -503,9 +503,12 @@ define([
                                 blueHistogramNormalized = blueHistogram.map(function(element) {
                                     return element / normalizationIndex;
                                 });
+
                             var redMinima = 0;
-                            var greenMinima = 0;
-                            var blueMinima = 0;
+                            /*
+                                @todo check this variables since they aren't used 
+                                greenMinima = 0,
+                                blueMinima = 0;*/
                             for (
                                 var descriptorIndex = 0;
                                 descriptorIndex < descriptors.length;
@@ -516,19 +519,19 @@ define([
                                         redHistogramNormalized[index],
                                         descriptors[descriptorIndex][0][index]
                                     );
-                                    greenMinima += Math.min(
+                                    /*greenMinima += Math.min(
                                         greenHistogramNormalized[index],
                                         descriptors[descriptorIndex][1][index]
                                     );
                                     blueMinima += Math.min(
                                         blueHistogramNormalized[index],
                                         descriptors[descriptorIndex][2][index]
-                                    );
+                                    );*/
                                 }
                             }
                             redMinima /= descriptors.length;
-                            greenMinima /= descriptors.length;
-                            blueMinima /= descriptors.length;
+                            /*greenMinima /= descriptors.length;
+                            blueMinima /= descriptors.length;*/
                             if (redMinima >= 0.5) {
                                 this._fillSuperpixel(xPoint, yPoint, this.currentStrokeColor);
                             }

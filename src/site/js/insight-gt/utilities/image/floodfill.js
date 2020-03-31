@@ -4,7 +4,7 @@
  */
 
 define([], function() {
-    function floodfill(data, x, y, mask, fillcolor, tolerance, width) {
+    function floodfill(data, x, y, mask, fillcolor, tolerance, width, pixelCount) {
         var length = data.length;
         var Q = [];
         var i = (x + y * width) * 4;
@@ -22,7 +22,18 @@ define([], function() {
         Q.push(i);
         while (Q.length) {
             i = Q.pop();
-            if (pixelCompareAndSet(i, targetcolor, fillcolor, data, mask, length, tolerance)) {
+            if (
+                pixelCompareAndSet(
+                    i,
+                    targetcolor,
+                    fillcolor,
+                    data,
+                    mask,
+                    length,
+                    tolerance,
+                    pixelCount
+                )
+            ) {
                 e = i;
                 w = i;
                 mw = parseInt(i / w2) * w2 - 1; //left bound
@@ -30,22 +41,58 @@ define([], function() {
                 while (
                     mw < w &&
                     mw < (w -= 4) &&
-                    pixelCompareAndSet(w, targetcolor, fillcolor, data, mask, length, tolerance)
+                    pixelCompareAndSet(
+                        w,
+                        targetcolor,
+                        fillcolor,
+                        data,
+                        mask,
+                        length,
+                        tolerance,
+                        pixelCount
+                    )
                 ); //go left until edge hit
                 while (
                     me > e &&
                     me > (e += 4) &&
-                    pixelCompareAndSet(e, targetcolor, fillcolor, data, mask, length, tolerance)
+                    pixelCompareAndSet(
+                        e,
+                        targetcolor,
+                        fillcolor,
+                        data,
+                        mask,
+                        length,
+                        tolerance,
+                        pixelCount
+                    )
                 ); //go right until edge hit
                 for (var j = w + 4; j < e; j += 4) {
                     if (
                         j - w2 >= 0 &&
-                        pixelCompare(j - w2, targetcolor, fillcolor, data, mask, length, tolerance)
+                        pixelCompare(
+                            j - w2,
+                            targetcolor,
+                            fillcolor,
+                            data,
+                            mask,
+                            length,
+                            tolerance,
+                            pixelCount
+                        )
                     )
                         Q.push(j - w2); //queue y-1
                     if (
                         j + w2 < length &&
-                        pixelCompare(j + w2, targetcolor, fillcolor, data, mask, length, tolerance)
+                        pixelCompare(
+                            j + w2,
+                            targetcolor,
+                            fillcolor,
+                            data,
+                            mask,
+                            length,
+                            tolerance,
+                            pixelCount
+                        )
                     )
                         Q.push(j + w2); //queue y+1
                 }
@@ -85,7 +132,16 @@ define([], function() {
         return false; //no match
     }
 
-    function pixelCompareAndSet(i, targetcolor, fillcolor, data, mask, length, tolerance) {
+    function pixelCompareAndSet(
+        i,
+        targetcolor,
+        fillcolor,
+        data,
+        mask,
+        length,
+        tolerance,
+        pixelCount
+    ) {
         if (pixelCompare(i, targetcolor, fillcolor, data, mask, length, tolerance)) {
             //fill the color
             data[i] = fillcolor.r;
@@ -96,13 +152,13 @@ define([], function() {
             mask[i + 1] = fillcolor.g;
             mask[i + 2] = fillcolor.b;
             mask[i + 3] = fillcolor.a;
-
+            pixelCount.push(i);
             return true;
         }
         return false;
     }
 
-    function fillUint8ClampedArray(data, x, y, mask, color, tolerance, width, height) {
+    function fillUint8ClampedArray(data, x, y, mask, color, tolerance, width, height, pixelCount) {
         if (!(data instanceof Uint8ClampedArray))
             throw new Error('data must be an instance of Uint8ClampedArray');
         if (isNaN(width) || width < 1)
@@ -120,7 +176,7 @@ define([], function() {
         //Maximum tolerance of 254, Default to 0
         tolerance = !isNaN(tolerance) ? Math.min(Math.abs(Math.round(tolerance)), 254) : 0;
 
-        return floodfill(data, xi, yi, mask, color, tolerance, width);
+        return floodfill(data, xi, yi, mask, color, tolerance, width, pixelCount);
     }
 
     function transformMask(data, alphaLevel) {
@@ -146,7 +202,7 @@ define([], function() {
         var style = window.getComputedStyle(temp, null).color;
         document.body.removeChild(temp);
 
-        var recol = /([\.\d]+)/g;
+        var recol = /([.\d]+)/g;
         var vals = style.match(recol);
         if (vals && vals.length > 2) {
             //Coerce the string value into an rgba object
@@ -164,6 +220,8 @@ define([], function() {
         y,
         outlineMask,
         alphaLevel,
+        pixelCount = [],
+        imageData = null,
         tolerance,
         left,
         top,
@@ -186,7 +244,6 @@ define([], function() {
                 : ctx.canvas.height;
 
         var image = ctx.getImageData(left, top, right, bottom);
-        var data = image.data;
         var context = document.createElement('canvas').getContext('2d');
         var mask = context.createImageData(image.width, image.height);
         mask.data.set(outlineMask.data);
@@ -195,9 +252,35 @@ define([], function() {
         var height = image.height;
 
         if (width > 0 && height > 0) {
-            fillUint8ClampedArray(data, x, y, mask, color, tolerance, width, height);
-            transformMask(data, alphaLevel);
-            ctx.putImageData(image, left, top);
+            if (imageData !== null) {
+                fillUint8ClampedArray(
+                    imageData,
+                    x,
+                    y,
+                    mask,
+                    color,
+                    tolerance,
+                    width,
+                    height,
+                    pixelCount
+                );
+                transformMask(imageData, alphaLevel);
+            } else {
+                var data = image.data;
+                fillUint8ClampedArray(
+                    data,
+                    x,
+                    y,
+                    mask,
+                    color,
+                    tolerance,
+                    width,
+                    height,
+                    pixelCount
+                );
+                transformMask(data, alphaLevel);
+                ctx.putImageData(image, left, top);
+            }
         }
     }
     return fillContext;

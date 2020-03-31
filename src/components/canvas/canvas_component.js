@@ -503,9 +503,9 @@ define([
                                 blueHistogramNormalized = blueHistogram.map(function(element) {
                                     return element / normalizationIndex;
                                 });
-                            var redMinima = 0,
-                                greenMinima,
-                                blueMinima;
+                            var redMinima = 0;
+                            var greenMinima = 0;
+                            var blueMinima = 0;
                             for (
                                 var descriptorIndex = 0;
                                 descriptorIndex < descriptors.length;

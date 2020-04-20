@@ -33,7 +33,7 @@ require.config({
         "colors" : "site/js/insight-gt/utilities/colors",
         "image-segmentation" : "site/js/insight-gt/image",
         "morph" : "site/js/insight-gt/image/morph",
-        "web-components" : "site/js/lib/vendor/web-components/src/web-components"
+        "web-components" : "components"
     },
     "waitSeconds" : 30
 });

@@ -1365,11 +1365,11 @@ define([
              */
             _updateColorArray: function() {
                 if (this.hasOutlineImage) {
-                    var encodedColor = this.currentStrokeColor.match(/[a-f0-9]{2}/gi);
+                    var encodedColor = this.activeStrokeColor.match(/[a-f0-9]{2}/gi);
                     this.strokeArray[this.state.activeLayer] = encodedColor.map(function(v) {
                         return parseInt(v, 16);
                     });
-                    this.strokeColors[this.state.activeLayer] = this.currentStrokeColor;
+                    this.strokeColors[this.state.activeLayer] = this.activeStrokeColor;
 
                     this._smoothCanvas();
 

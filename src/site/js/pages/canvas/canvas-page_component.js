@@ -15,11 +15,12 @@
  */
 define([
     'vue',
+    'filesaver',
     'jszip',
     'image-segmentation/segmentation',
     'components/canvas/canvas_component',
     'text!pages/canvas/canvas-page_template.html',
-], function(Vue, JSZip, Segmentation, Canvas, Template) {
+], function(Vue, _Filesaver, JSZip, Segmentation, Canvas, Template) {
     var DEFAULT = {
         // The alpha level of the canvas
         ALPHA: 0.4,

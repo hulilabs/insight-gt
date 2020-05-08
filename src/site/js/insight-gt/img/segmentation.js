@@ -9,10 +9,10 @@
  * Copyright 2015  Kota Yamaguchi
  */
 define([
-    './superpixels/pff',
-    './superpixels/slic',
-    './superpixels/slico',
-    './superpixels/watershed',
+    'img/superpixels/pff',
+    'img/superpixels/slic',
+    'img/superpixels/slico',
+    'img/superpixels/watershed',
 ], function(pff, slic, slico, watershed) {
     var methods = {
         pff: pff,

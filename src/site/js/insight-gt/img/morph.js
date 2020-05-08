@@ -2,7 +2,10 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define(['segmentation/compat', 'morph/max-filter'], function(compat, maxFilter) {
+define([
+    'segmentation/compat', 
+    'morph/max-filter'
+], function(compat, maxFilter) {
     function decodeIndexImage(imageData) {
         var indexImage = {
             width: imageData.width,

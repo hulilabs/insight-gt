@@ -13,11 +13,11 @@
  */
 /*global ImageData*/
 define([
-    './base',
-    './../binary-heap-priority-queue',
-    './../canny',
-    './../compat',
-    './../distance-transform',
+    'img/superpixels/base',
+    'img/superpixels/binary-heap-priority-queue',
+    'img/canny',
+    'img/compat',
+    'img/distance-transform',
 ], function(BaseSegmentation, PriorityQueue, canny, compat, distanceTransform) {
     // Neighbor Map.
     function NeighborMap(width, height, neighbors) {

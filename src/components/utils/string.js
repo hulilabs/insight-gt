@@ -10,7 +10,7 @@
  */
 /**
  * @file StringUtil - String generic helpers
- * @module web-components/utils/string
+ * @module components/utils/string
  */
 define([
 ],

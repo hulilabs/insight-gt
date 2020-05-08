@@ -10,7 +10,7 @@
  */
 /**
  * @file DateUtil - Common functions for date objects
- * @module web-components/utils/date
+ * @module components/utils/date
  */
 define(function() {
     /**

@@ -10,7 +10,7 @@
  */
 /**
  * @file RandomUtil - String processing and generation util
- * @module web-components/utils/random
+ * @module components/utils/random
  */
 define([
 ],

@@ -1,23 +1,22 @@
 {
-  "name": "web-components",
+  "name": "insight-gt",
   "version": "1.0.0",
   "description": "Huli base web components library",
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hulilabs/web-components.git"
+    "url": "git+https://github.com/hulilabs/insight-gt.git"
   },
   "keywords": [
-    "material-design",
     "web-components",
-    "custom-elements"
+    "ground-truth"
   ],
   "author": "huli",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hulilabs/web-components/issues"
+    "url": "https://github.com/hulilabs/insight-gt/issues"
   },
-  "homepage": "https://github.com/hulilabs/web-components#readme",
+  "homepage": "https://github.com/hulilabs/insight-gt#readme",
   "devDependencies": {
     "babel-polyfill": "6",
     "chai": "3",

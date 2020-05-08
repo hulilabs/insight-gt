@@ -10,7 +10,7 @@
  */
 /**
  * @file ClickUtil - Useful click methods that can be used in components
- * @module web-components/utils/click
+ * @module components/utils/click
  */
 define(function() {
 

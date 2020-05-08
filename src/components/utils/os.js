@@ -10,7 +10,7 @@
  */
 /**
  * @file OSUtil - detects operating system using user agent tests
- * @module web-components/utils/os
+ * @module components/utils/os
  */
 define([], function() {
 

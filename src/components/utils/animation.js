@@ -10,7 +10,7 @@
  */
 /**
  * @file AnimationUtil - Animation & transition related generic helpers
- * @module web-components/utils/animation
+ * @module components/utils/animation
  */
 define([
 ],

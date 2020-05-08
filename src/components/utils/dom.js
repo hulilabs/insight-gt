@@ -10,7 +10,7 @@
  */
 /**
  * @file DOM util - apply operations over DOM elements
- * @module web-components/utils/dom
+ * @module components/utils/dom
  */
 define([], function() {
 

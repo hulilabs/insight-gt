@@ -12,7 +12,7 @@
  * @file ComponentLoaderHelper
  * @description Helper for lazy-loading Vue components
  * @requires vue
- * @module web-components/utils/component-loader_helper
+ * @module components/utils/component-loader_helper
  */
 define({
     /**

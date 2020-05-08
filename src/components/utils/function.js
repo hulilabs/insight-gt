@@ -11,7 +11,7 @@
 /**
  * @file FunctionUtil
  * @description helpers to be applied on functions
- * @module web-components/utils/function
+ * @module components/utils/function
  */
 define([
 ],

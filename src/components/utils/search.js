@@ -10,10 +10,10 @@
  */
 /**
  * @file Search
- * @module web-components/utils/search
+ * @module components/utils/search
  */
 define([
-    'web-components/utils/string'
+    'components/utils/string'
 ],
 function(
     StringUtil

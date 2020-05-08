@@ -11,12 +11,12 @@
 /**
  * @file scrollUtil - enhances scroll and page position management
  * @requires jump
- * @requires web-components/utils/scroll/scroll_styles.css
- * @module web-components/utils/scroll/scroll
+ * @requires components/utils/scroll/scroll_styles.css
+ * @module components/utils/scroll/scroll
  */
 define([
     'jump',
-    'css-loader!web-components/utils/scroll/scroll_styles.css'
+    'css-loader!components/utils/scroll/scroll_styles.css'
 ],
 function(
     jump

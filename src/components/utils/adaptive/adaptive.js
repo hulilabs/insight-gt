@@ -10,12 +10,12 @@
  */
 /**
  * @file AdaptiveUtil - detects device using mediaqueries
- * @requires web-components/utils/adaptive/adaptive_styles.css
+ * @requires components/utils/adaptive/adaptive_styles.css
  * @see https://davidwalsh.name/device-state-detection-css-media-queries-javascript
- * @module web-components/utils/adaptive/adaptive
+ * @module components/utils/adaptive/adaptive
  */
 define([
-    'css-loader!web-components/utils/adaptive/adaptive_styles.css'
+    'css-loader!components/utils/adaptive/adaptive_styles.css'
 ],
 function(
 ) {

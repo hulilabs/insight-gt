@@ -10,7 +10,7 @@
  */
 /**
  * @file KeyboardUtil - Keyboard mapping and event management util
- * @module web-components/utils/keyboard
+ * @module components/utils/keyboard
  */
 define([
 ],

@@ -12,47 +12,33 @@
  * @file KeyboardUtil - Keyboard mapping and event management util
  * @module components/utils/keyboard
  */
-define([
-],
-function(
-) {
-
+define([], function() {
     /**
      * Common keyboard key codes
      * @type {Object}
      */
     var CODE = {
-        LEFT : 37,
-        UP : 38,
-        RIGHT : 39,
-        DOWN : 40,
-        ENTER : 13,
-        ESCAPE : 27,
-        SPACE : 32,
-        TAB : 9
+        LEFT: 37,
+        UP: 38,
+        RIGHT: 39,
+        DOWN: 40,
+        ENTER: 13,
+        ESCAPE: 27,
+        SPACE: 32,
+        TAB: 9,
     };
 
     /**
      * Set of navigation keyboard codes
      * @type {Array}
      */
-    var NAVIGATION = [
-        CODE.ENTER,
-        CODE.ESCAPE,
-        CODE.SPACE,
-        CODE.TAB
-    ];
+    var NAVIGATION = [CODE.ENTER, CODE.ESCAPE, CODE.SPACE, CODE.TAB];
 
     /**
      * Set of arrow keyboard codes
      * @type {Array}
      */
-    var ARROWS = [
-        CODE.LEFT,
-        CODE.UP,
-        CODE.RIGHT,
-        CODE.DOWN
-    ];
+    var ARROWS = [CODE.LEFT, CODE.UP, CODE.RIGHT, CODE.DOWN];
 
     /**
      * Utility for keyboard events
@@ -63,14 +49,14 @@ function(
          * Common keyboard key codes
          * @type {Object}
          */
-        CODE : CODE,
+        CODE: CODE,
         /**
          * Common sets of keyboard key codes
          * @type {Object}
          */
-        SETS : {
-            ARROWS : ARROWS,
-            NAVIGATION : NAVIGATION
+        SETS: {
+            ARROWS: ARROWS,
+            NAVIGATION: NAVIGATION,
         },
         /**
          * Detect if a keycode belongs to a common set of keycodes
@@ -78,9 +64,9 @@ function(
          * @param  {Array}   keyCodesSet
          * @return {Boolean}
          */
-        inSet : function(keyCode, keyCodesSet) {
+        inSet: function(keyCode, keyCodesSet) {
             return keyCodesSet.indexOf(keyCode) !== -1;
-        }
+        },
     };
 
     return KeyboardUtil;

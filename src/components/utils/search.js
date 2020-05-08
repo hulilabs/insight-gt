@@ -12,13 +12,7 @@
  * @file Search
  * @module components/utils/search
  */
-define([
-    'components/utils/string'
-],
-function(
-    StringUtil
-) {
-
+define(['components/utils/string'], function(StringUtil) {
     /**
      * Process the option text for setting the strong tag to the match string
      * If the input is 'na', this is the format example: {
@@ -46,8 +40,11 @@ function(
             result += [
                 optionText.substring(optionTextPosition, matchIndex + optionTextPosition),
                 '<strong>',
-                optionText.substring(matchIndex + optionTextPosition, matchIndex + optionTextPosition + buffer.length),
-                '</strong>'
+                optionText.substring(
+                    matchIndex + optionTextPosition,
+                    matchIndex + optionTextPosition + buffer.length
+                ),
+                '</strong>',
             ].join('');
 
             text = text.substring(matchIndex + buffer.length);
@@ -77,7 +74,6 @@ function(
      * @return {Array}
      */
     var filter = function(options, text, optionKey) {
-
         var filteredOptions = [];
 
         optionKey = optionKey || 'text';
@@ -104,6 +100,6 @@ function(
     };
 
     return {
-        filter : filter
+        filter: filter,
     };
 });

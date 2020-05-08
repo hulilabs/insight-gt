@@ -2,9 +2,7 @@
  *
  * Copyright 2015  Kota Yamaguchi
  */
-define([
-    'morph/neighbor-map'
-], function(NeighborMap) {
+define(['morph/neighbor-map'], function(NeighborMap) {
     function findDominantLabel(data, neighbors) {
         var histogram = {},
             i,

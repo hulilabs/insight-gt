@@ -187,7 +187,7 @@ define([
                 });
             },
             /**
-             * 
+             * <Add missing comment>
              */
             _changeColor: function() {},
             /**

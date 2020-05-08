@@ -12,11 +12,7 @@
  * @file AnimationUtil - Animation & transition related generic helpers
  * @module components/utils/animation
  */
-define([
-],
-function(
-) {
-
+define([], function() {
     var AnimationUtil = {
         /**
          * Returns the transition end property that works with the current browser
@@ -26,7 +22,7 @@ function(
          *
          * @return {string}
          */
-        getTransitionEndProperty : function() {
+        getTransitionEndProperty: function() {
             var el = document.createElement('p');
 
             // only supported browser that requires a prefix is Safari
@@ -49,7 +45,7 @@ function(
          *
          * @return {string}
          */
-        getAnimationEndProperty : function() {
+        getAnimationEndProperty: function() {
             var el = document.createElement('p');
 
             // only supported browser that requires a prefix is Safari
@@ -62,7 +58,7 @@ function(
 
             // standard animation end property
             return 'animationend';
-        }
+        },
     };
 
     return AnimationUtil;

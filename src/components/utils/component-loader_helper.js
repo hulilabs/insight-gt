@@ -22,7 +22,7 @@ define({
      * @param {string} module path to the component
      * @return {Function}
      */
-    load : function(module) {
+    load: function(module) {
         return function() {
             return new Promise(function(resolve) {
                 require([module], function(ComponentDefinition) {
@@ -30,5 +30,5 @@ define({
                 });
             });
         };
-    }
+    },
 });

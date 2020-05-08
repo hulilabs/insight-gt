@@ -14,14 +14,7 @@
  * @requires components/utils/scroll/scroll_styles.css
  * @module components/utils/scroll/scroll
  */
-define([
-    'jump',
-    'css-loader!components/utils/scroll/scroll_styles.css'
-],
-function(
-    jump
-) {
-
+define(['jump', 'css-loader!components/utils/scroll/scroll_styles.css'], function(jump) {
     /**
      * Constructor, use this in case you need to lock body position
      * Otherwise you may want to use the static methods
@@ -36,7 +29,7 @@ function(
          * Getter for document.body for easier testing
          * @return {Element} document.body
          */
-        _getBodyElement : function() {
+        _getBodyElement: function() {
             return document.body;
         },
 
@@ -45,7 +38,7 @@ function(
          * Useful for calculating lost pixels on block
          * @return {number}
          */
-        getBlockedOffsetX : function() {
+        getBlockedOffsetX: function() {
             return this.offsetX;
         },
 
@@ -54,7 +47,7 @@ function(
          * Useful for calculating lost pixels on block
          * @return {number}
          */
-        getBlockedOffsetY : function() {
+        getBlockedOffsetY: function() {
             return this.offsetY;
         },
 
@@ -63,7 +56,7 @@ function(
          * @note only y-axis is currently supported
          * @param  {Boolean} shouldLockPosition
          */
-        toggleBodyPositionLock : function(shouldLockPosition) {
+        toggleBodyPositionLock: function(shouldLockPosition) {
             var bodyElement = this._getBodyElement();
 
             if (shouldLockPosition) {
@@ -78,7 +71,7 @@ function(
                 bodyElement.style.top = 'auto';
                 window.scrollTo(this.offsetX, this.offsetY);
             }
-        }
+        },
     };
 
     /**
@@ -100,15 +93,16 @@ function(
      * @param  {Element}        container to scroll instead of the `window`
      */
     ScrollUtil.scrollTo = function(element, animationDuration, offset, container) {
-
         if (animationDuration) {
             var animateScroll = ScrollUtil._getAnimatedScrollHelper();
             animateScroll(element, {
-                duration : ('number' === typeof animationDuration) ? animationDuration : ScrollUtil.DEFAULT_SCROLL_ANIMATION_DURATION,
-                offset : offset,
-                container : container
+                duration:
+                    'number' === typeof animationDuration
+                        ? animationDuration
+                        : ScrollUtil.DEFAULT_SCROLL_ANIMATION_DURATION,
+                offset: offset,
+                container: container,
             });
-
         } else {
             var offsetToAdd = offset ? offset : 0,
                 finalScrollPosition = ScrollUtil.offsetY(element) + offsetToAdd;
@@ -131,9 +125,11 @@ function(
         // - not past 2/3 of the viewport
         // - not before 1/3 of the viewport
         // - not bigger than 1/2 of the viewport
-        return (viewportHeight - offset > (viewportHeight * 0.6)) &&
-               (offset > viewportHeight * 0.3) &&
-               (elementHeight < viewportHeight * 0.5);
+        return (
+            viewportHeight - offset > viewportHeight * 0.6 &&
+            offset > viewportHeight * 0.3 &&
+            elementHeight < viewportHeight * 0.5
+        );
     };
 
     /**

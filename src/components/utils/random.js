@@ -12,11 +12,7 @@
  * @file RandomUtil - String processing and generation util
  * @module components/utils/random
  */
-define([
-],
-function(
-) {
-
+define([], function() {
     var PSEUDO_ID_PREFIX = '__';
 
     var RandomUtil = {
@@ -24,11 +20,15 @@ function(
          * Generates a pseudo id string with this format xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
          * @return {String}
          */
-        getPseudoId : function() {
-            return ((PSEUDO_ID_PREFIX + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx').replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);   // jshint ignore:line
-                return v.toString(16);
-            }));
+        getPseudoId: function() {
+            return (PSEUDO_ID_PREFIX + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx').replace(
+                /[xy]/g,
+                function(c) {
+                    var r = (Math.random() * 16) | 0,
+                        v = c == 'x' ? r : (r & 0x3) | 0x8; // jshint ignore:line
+                    return v.toString(16);
+                }
+            );
         },
 
         /**
@@ -36,10 +36,9 @@ function(
          * @param {String}
          * @return {Boolean}
          */
-        isPseudoId : function(str) {
+        isPseudoId: function(str) {
             return /^__.{8}-.{4}-4.{3}-.{4}-.{12}$/.test(str);
-        }
-
+        },
     };
 
     return RandomUtil;

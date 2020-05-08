@@ -13,16 +13,15 @@
  * @module components/utils/os
  */
 define([], function() {
-
     /**
      * Possible OS options
      * @type {Object}
      */
     var OS = {
-        ANDROID : 'android',
-        IOS : 'ios',
-        UNKNOWN : 'unknown',
-        WINDOWS_PHONE : 'windows-phone'
+        ANDROID: 'android',
+        IOS: 'ios',
+        UNKNOWN: 'unknown',
+        WINDOWS_PHONE: 'windows-phone',
     };
 
     /**
@@ -33,18 +32,18 @@ define([], function() {
     var OS_MATCHES = [
         // Windows Phone must come first because its UA also contains "Android"
         {
-            match : /windows phone/i,
-            name : OS.WINDOWS_PHONE
+            match: /windows phone/i,
+            name: OS.WINDOWS_PHONE,
         },
         {
-            match : /android/i,
-            name : OS.ANDROID
+            match: /android/i,
+            name: OS.ANDROID,
         },
         // iOS detection from: http://stackoverflow.com/a/9039885/177710
         {
-            match : /iPad|iPhone|iPod/,
-            name : OS.IOS
-        }
+            match: /iPad|iPhone|iPod/,
+            name: OS.IOS,
+        },
     ];
 
     var OperatingSystem = function() {
@@ -57,7 +56,7 @@ define([], function() {
          * Detects current user agent and stores the matching OS
          * @return {OperatingSystem} this
          */
-        detect : function() {
+        detect: function() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             for (var s = 0; s < OS_MATCHES.length; s++) {
@@ -74,10 +73,10 @@ define([], function() {
          * Returns true if current OS is Android
          * @return {Boolean}
          */
-        isAndroid : function() {
+        isAndroid: function() {
             return this.os === OS.ANDROID;
-        }
+        },
     };
 
-    return (new OperatingSystem()).detect();
+    return new OperatingSystem().detect();
 });

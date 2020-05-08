@@ -13,14 +13,13 @@
  * @module components/utils/dom
  */
 define([], function() {
-
     var DOMUtil = {
         /**
          * Detect if an element has horizontal scrollable area (x-axis scrollbar)
          * @param  {HTMLElement}  element
          * @return {Boolean}
          */
-        hasHorizontalScroll : function(element) {
+        hasHorizontalScroll: function(element) {
             return element.scrollWidth > element.clientWidth;
         },
         /**
@@ -28,7 +27,7 @@ define([], function() {
          * @param  {HTMLElement}  element
          * @return {Boolean}
          */
-        hasVerticalScroll : function(element) {
+        hasVerticalScroll: function(element) {
             return element.scrollHeight > element.clientHeight;
         },
         /**
@@ -36,7 +35,7 @@ define([], function() {
          * @param  {HTMLElement}  element
          * @return {Integer}
          */
-        getDocumentOffsetLeft : function(element) {
+        getDocumentOffsetLeft: function(element) {
             return this._sumBranchProp('offsetLeft', element);
         },
         /**
@@ -44,7 +43,7 @@ define([], function() {
          * @param  {HTMLElement}  element
          * @return {Integer}
          */
-        getDocumentOffsetTop : function(element) {
+        getDocumentOffsetTop: function(element) {
             return this._sumBranchProp('offsetTop', element);
         },
         /**
@@ -52,7 +51,7 @@ define([], function() {
          * @param  {HTMLElement}  element
          * @return {Integer}
          */
-        getScrollOffsetLeft : function(element) {
+        getScrollOffsetLeft: function(element) {
             return this._sumBranchProp('scrollLeft', element);
         },
         /**
@@ -60,7 +59,7 @@ define([], function() {
          * @param  {HTMLElement}  element
          * @return {Integer}
          */
-        getScrollOffsetTop : function(element) {
+        getScrollOffsetTop: function(element) {
             return this._sumBranchProp('scrollTop', element);
         },
         /**
@@ -70,12 +69,13 @@ define([], function() {
          * @return {Number}
          * @private
          */
-        _sumBranchProp : function(prop, element) {
+        _sumBranchProp: function(prop, element) {
             if (!element) {
                 return 0;
             }
-            return (element[prop] || 0) + (element.offsetParent ? this._sumBranchProp(prop, element.offsetParent) : 0);
-        }
+            var sum = element.offsetParent ? this._sumBranchProp(prop, element.offsetParent) : 0;
+            return (element[prop] || 0) + sum;
+        },
     };
 
     return DOMUtil;

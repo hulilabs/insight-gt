@@ -12,26 +12,22 @@
  * @file StringUtil - String generic helpers
  * @module components/utils/string
  */
-define([
-],
-function(
-) {
-
+define([], function() {
     var StringUtil = {
         /**
          * Escape the special characters that are included in the string
          * @param  {String} text
          * @return {String}
          */
-        escapeSpecialCharacters : function(text) {
-            return text.replace(/[\-\[\]{}()*+?.,\\\^$|#]/gi, '\\$&').trim();
+        escapeSpecialCharacters: function(text) {
+            return text.replace(/[-[\]{}()*+?.,\\^$|#]/gi, '\\$&').trim();
         },
         /**
          * Change the accent characters for its plain ascii representation
          * @param  {String} text
          * @return {String}
          */
-        replaceAccentCharacters : function(text) {
+        replaceAccentCharacters: function(text) {
             text = text.replace(/[ÀÁÂÃÄ]/g, 'A');
             text = text.replace(/[àáâãä]/g, 'a');
             text = text.replace(/[ÈÉÊẼË]/g, 'E');
@@ -44,7 +40,7 @@ function(
             text = text.replace(/[ùúûũü]/g, 'u');
 
             return text;
-        }
+        },
     };
 
     return StringUtil;

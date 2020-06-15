@@ -11,7 +11,7 @@
 /**
  * @file Canvas component
  * @requires vue
- * @requires web-components/utils/dom
+ * @requires components/utils/dom
  * @requires components/canvas/canvas_template.html
  * @requires components/canvas/canvas_styles.css
  * @module components/canvas/canvas_component
@@ -20,13 +20,12 @@
  * @see {@link https://www.html5rocks.com/en/tutorials/canvas/performance/} for canvas performance optimizations
  * @see {@link http://perfectionkills.com/exploring-canvas-drawing-techniques/} for mindblowing drawing techniques
  * @see {@link http://eloquentjavascript.net/16_canvas.html} canvas for gaming
- * @see {@link https://web-components.hulilabs.xyz/components/canvas} for demos and documentation
  */
 define([
     'vue',
     'utilities/utilities',
     'colors',
-    'web-components/utils/dom',
+    'components/utils/dom',
     'text!components/canvas/canvas_template.html',
     'css-loader!components/canvas/canvas_styles.css',
 ], function(Vue, Utilities, Colors, DOMUtil, Template) {
@@ -1365,11 +1364,11 @@ define([
              */
             _updateColorArray: function() {
                 if (this.hasOutlineImage) {
-                    var encodedColor = this.currentStrokeColor.match(/[a-f0-9]{2}/gi);
+                    var encodedColor = this.activeStrokeColor.match(/[a-f0-9]{2}/gi);
                     this.strokeArray[this.state.activeLayer] = encodedColor.map(function(v) {
                         return parseInt(v, 16);
                     });
-                    this.strokeColors[this.state.activeLayer] = this.currentStrokeColor;
+                    this.strokeColors[this.state.activeLayer] = this.activeStrokeColor;
 
                     this._smoothCanvas();
 

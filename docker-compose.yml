@@ -4,7 +4,7 @@ services:
     image: stevevega/compass:latest
     command: watch -c /compass-config/web-components-config.rb --poll
     volumes:
-      - ./src/web-components:/web-components
+      - ./src/components:/components
       - ./src/resource/scss/web-components:/web-components-library
       - ./src/resource/compass-config/web-components-config.rb:/compass-config/web-components-config.rb:ro
 
@@ -23,5 +23,4 @@ services:
       - "80:80"
     volumes:
       - ./nginx/vhost:/etc/nginx/conf.d:ro
-      - ./src:/srv/web-components:ro
     working_dir: /srv

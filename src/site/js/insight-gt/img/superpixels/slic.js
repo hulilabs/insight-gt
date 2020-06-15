@@ -20,7 +20,7 @@
  *
  * Copyright 2014  LongLong Yu.
  */
-define(['./base'], function(BaseSegmentation) {
+define(['img/superpixels/base'], function(BaseSegmentation) {
     // SLIC segmentation.
     function SLIC(imageData, options) {
         BaseSegmentation.call(this, imageData, options);

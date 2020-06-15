@@ -18,24 +18,9 @@ define([
     'filesaver',
     'jszip',
     'image-segmentation/segmentation',
-    'web-components/buttons/flat/flat-button_component',
     'components/canvas/canvas_component',
-    'web-components/inputs/textfield/textfield_component',
-    'web-components/selection-controls/toggle/toggle_component',
-    'web-components/selection-controls/toggle/toggle-button_component',
     'text!pages/canvas/canvas-page_template.html',
-], function(
-    Vue,
-    Filesaver,
-    JSZip,
-    Segmentation,
-    FlatButton,
-    Canvas,
-    TextField,
-    Toggle,
-    ToggleButton,
-    Template
-) {
+], function(Vue, _Filesaver, JSZip, Segmentation, Canvas, Template) {
     var DEFAULT = {
         // The alpha level of the canvas
         ALPHA: 0.4,
@@ -201,6 +186,10 @@ define([
                     marginRight: 'auto',
                 });
             },
+            /**
+             * <Add missing comment>
+             */
+            _changeColor: function() {},
             /**
              * Classificates the superpixels of the current frame, using the current layer descriptors
              */
@@ -634,10 +623,6 @@ define([
         },
         components: {
             'wc-canvas': Canvas,
-            'wc-flat-button': FlatButton,
-            'wc-textfield': TextField,
-            'wc-toggle': Toggle,
-            'wc-toggle-button': ToggleButton,
         },
     });
 });

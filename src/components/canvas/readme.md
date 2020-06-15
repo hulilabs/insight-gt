@@ -109,6 +109,4 @@ Undo the last drawed stroke
 
 ### Issues history
 
-* Improving cross-origin handling, export options and changes manipulation [HULI-3790](https://hulihealth.atlassian.net/browse/HULI-3790)
-* Research done at [HULI-2930](https://hulihealth.atlassian.net/browse/HULI-2930)
-* Created on [HULI-3595](https://hulihealth.atlassian.net/browse/HULI-3595)
+

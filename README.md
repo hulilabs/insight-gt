@@ -19,7 +19,7 @@ The components are based on material design and using the Vue framework
 1. Add this reference to the bower.json:
 
 ```javascript
-"web-components" : "hulilabs/web-components#latest",
+"<awesome_library>" : "<route_to_awesome_library>#latest",
 ```
 
 2. Run the command:
@@ -37,14 +37,12 @@ bower install
 2. Add the library reference
 
 ```javascript
-"web-components" : "PATH_WHERE_IT_WAS_INSTALLED/src/web-components"
+"<awesome_library>" : "<path_where_awesome_library_is_installed>/src/<awesome_library>"
 ```
 
 ## Components naming conventions
 
 ### Name
-
-As we are following material design it makes sense to use the same name material uses. Please validate this with the designer first.
 
 ### Filename
 
@@ -63,7 +61,7 @@ There are categories (material design) when talking about components, for exampl
 So the structure will be:
 
 ```
-web-components/
+components/
 	buttons/
 		button/
 			button_component.js
@@ -87,7 +85,7 @@ It's recommended to use a prefix when importing the components into the app (tem
 
 ```javascript
 define([
-    'web-components/markdown/markdown_component'
+    'components/markdown/markdown_component'
 ], function(
     Markdown
 ) {
@@ -110,16 +108,11 @@ Usage in template
 
 There are three main folders:
 
-- **resource**: multipurpose folder, used to store configuration and SCSS files. **Each SCSS folder follows Huli's standard (ITCSS) and are totally independent between them.**
+- **resource**: multipurpose folder, used to store configuration and SCSS files. **Each SCSS folder follows ITCSS and are totally independent between them.**
   - scss/site : SASS files for the site
-  - scss/web-components : SASS files for the components.
-- **site**: web components documentation site, each web-component should have a page in the site explaining how to use it and some demos.
-- **web-components**: this is the main folder of the repo, where the components live.
-
-## Unit testing
-
-Please read this documentation :
-[Unit testing](https://github.com/hulilabs/huli/blob/master/docs/web-frontend/testing/unit-testing.md)
+  - scss/components : SASS files for the components.
+- **site**: components documentation site, each web-component should have a page in the site explaining how to use it and some demos.
+- **components**: this is the main folder of the repo, where the components live.
 
 ### Running tests
 
@@ -172,34 +165,10 @@ The build process will throw an error if any of the following thresholds isn't m
 - Locally, you need to add the `--coverage` flag, which will output the coverage per file, showing the same statements, branches, functions and lines stats. Example command:
 
 ```
-web-components/src/resource$ node_modules/karma/bin/karma start karma-local.conf.js --browser Chromium --coverage
+components/src/resource$ node_modules/karma/bin/karma start karma-local.conf.js --browser Chromium --coverage
 ```
 
 For more details, please check the [Karma Coverage package](https://github.com/karma-runner/karma-coverage) documentation and the `karma.conf.js`(./src/resource/karma.conf.js) (used for CI) and [`karma-local.conf.js`](./src/resource/karma-local.conf.js) files.
-
-## Generator
-
-Previous sections describe important conventions that should be follow for each component approval. To ease this task, we have created a **local yeoman generator** inside this repository to boilerplate any new component.
-
-Keep in mind it currently only works for **first-level** components, so it works for `raised-button` but not for `buttons/raised-button`. You'll need to move the folders and rename some paths in order to nest it, which is still faster than creating it manually.
-
-After install, run `yo web-components --help` for more details
-
-### Installation
-
-1. Navigate to `src/resource/generator-web-components` folder
-2. Run `npm install -g yo`
-3. Run `npm install`
-4. Do `npm link`
-
-### Usage
-
-This commands must be run **always** from `src/resource/generator-web-components` folder
-
-```
-yo web-components {name} --dry-run    # review the files and folders to be created
-yo web-components {name}
-```
 
 ## Setup
 
@@ -216,11 +185,11 @@ Execute in the terminal these commands:
 There are two Compass images running on docker to compile styles:
 
 - compass_components : compiling the site SCSS.
-- compass_site : compiling the web-components SCSS.
+- compass_site : compiling the components SCSS.
 
 There is also an option to compile the styles locally without docker, using compass, the configuration files are located in 'resource/compass_config' with the suffix -local.
 
-##### Customizing web-components styles.
+##### Customizing components styles.
 
 ###### Compilation set up
 
@@ -232,12 +201,12 @@ Once you have installed and configured the library in the app, execute the follo
 
    ```
    resource/
-   	web-components-config/
+   	components-config/
    		scss/
 
    ```
 
-2. Copy and paste the web-components configuration from this repo _resource/compass-config/web-components-config.rb_ into the app _web-components-config/_
+2. Copy and paste the components configuration from this repo _resource/compass-config/web-components-config.rb_ into the app _web-components-config/_
 
    ```
    resource/
@@ -261,23 +230,6 @@ Once you have installed and configured the library in the app, execute the follo
    additional_import_paths = "resource/web-components-config/scss"
    ```
 
-###### Customizing the library
-
-Now that all is set to compile the library using the new configuration folder, define the variables you want to change, for example, if you want to change the primary-color just do sometime like that:
-
-    ```
-    // import the original variables file
-    @import "js/lib/vendors/web-components/src/resource/scss/web-components/settings/_colors";
-
-    // define the new value
-    $wc-primary-color: red;
-
-    ```
-
-This is a better approach than overriding variables because we can track what variables are we changing and we can update the library easily.
-
 ## References
 
-- [Introduction to web components and guidelines](https://github.com/hulilabs/docs/blob/master/sections/frontend/components.md)
 - [Vue](https://vuejs.org/)
-- [Material Design](https://material.google.com/)

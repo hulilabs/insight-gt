@@ -22,6 +22,9 @@ src/test/selenium/test-cases/compiled
 # webStorm IDE files
 .idea/
 
+# vscode IDE files
+.vscode
+
 #Selenium
 selenium/selenium/target
 

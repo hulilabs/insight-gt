@@ -31,9 +31,9 @@ require.config({
         "zxcvbn" : "site/js/lib/vendor/zxcvbn/dist/zxcvbn",
         "utilities" : "site/js/insight-gt/utilities",
         "colors" : "site/js/insight-gt/utilities/colors",
-        "image-segmentation" : "site/js/insight-gt/image",
-        "morph" : "site/js/insight-gt/image/morph",
-        "web-components" : "site/js/lib/vendor/web-components/src/web-components"
+        "image-segmentation" : "site/js/insight-gt/img",
+        "morph" : "site/js/insight-gt/img/morph",
+        "img" : "site/js/insight-gt/img"
     },
     "waitSeconds" : 30
 });

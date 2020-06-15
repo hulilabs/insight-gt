@@ -34,7 +34,7 @@ module.exports = function(config) {
             'resource/node_modules/babel-polyfill/dist/polyfill.js',
             'test/main.js',
             {
-                pattern : 'web-components/**/*',
+                pattern : 'components/**/*',
                 included : false
             },
             {
@@ -83,8 +83,8 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors : {
-            // enables test coverage report in web-components JS files
-            'web-components/**/*.js' : 'coverage'
+            // enables test coverage report in components JS files
+            'components/**/*.js' : 'coverage'
         },
         coverageReporter : {
             // @see https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md#reporters
@@ -100,18 +100,18 @@ module.exports = function(config) {
                     // branches coverage check to be aded once more research about the measure is done
                     // branches : 80,
                     excludes : [
-                        'web-components/chips/chip/*.js',
-                        'web-components/directives/gestures/*.js',
-                        'web-components/drawers/*.js',
-                        'web-components/lists, *.js',
-                        'web-components/menus/*.js',
-                        'web-components/snackbars/*.js',
-                        'web-components/steppers/*.js',
-                        'web-components/tabs/*.js',
-                        'web-components/text-fields/char-counter/*.js',
-                        'web-components/tooltips/*.js',
-                        'web-components/dialogs/pull-up/*.js',
-                        'web-components/interactive/resize/*.js'
+                        'components/chips/chip/*.js',
+                        'components/directives/gestures/*.js',
+                        'components/drawers/*.js',
+                        'components/lists, *.js',
+                        'components/menus/*.js',
+                        'components/snackbars/*.js',
+                        'components/steppers/*.js',
+                        'components/tabs/*.js',
+                        'components/text-fields/char-counter/*.js',
+                        'components/tooltips/*.js',
+                        'components/dialogs/pull-up/*.js',
+                        'components/interactive/resize/*.js'
                     ]
                 },
 
@@ -121,23 +121,7 @@ module.exports = function(config) {
                     // branches: 80,
                     functions: 80,
                     lines: 80,
-                    excludes : [
-                        'web-components/chips/chip/*.js',
-                        'web-components/directives/gestures/*.js',
-                        'web-components/drawers/*.js',
-                        'web-components/lists/*.js',
-                        'web-components/steppers/*.js',
-                        'web-components/menus/*.js',
-                        'web-components/snackbars/*.js',
-                        'web-components/step-dots/*.js',
-                        'web-components/steppers/*.js',
-                        'web-components/tabs/*.js',
-                        'web-components/text-fields/*.js',
-                        'web-components/text-fields/char-counter/*.js',
-                        'web-components/tooltips/*.js',
-                        'web-components/dialogs/pull-up/*.js',
-                        'web-components/interactive/resize/*.js'
-                    ]
+                    excludes : []
                 }
             }
         },

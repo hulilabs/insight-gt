@@ -1,6 +1,6 @@
 {
   "name": "insight-gt",
-  "description": "Huli base web components library",
+  "description": "Huli Insight GT components library",
   "private": true,
   "dependencies": {
     "requirejs": "2.3.1",
@@ -14,8 +14,7 @@
     "jump.js": "hulilabs/jump.js#1.1.0",
     "zxcvbn": "4.4.2",
     "Stuk/jszip": "3.1.5",
-    "file-saver": "2.0.2",
-    "web-components": "https://github.com/hulilabs/web-components.git#v13.0.0"
+    "file-saver": "2.0.2"
   },
   "moduleType": [
     "amd"

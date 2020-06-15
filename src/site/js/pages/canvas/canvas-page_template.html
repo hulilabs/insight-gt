@@ -1,149 +1,355 @@
-<div style="position: relative">
+<div style="position: relative;">
     <div class="DemoTable">
         <div class="DemoTable__row">
-            <div style="position:relative; width: 100%; height: 3vh; float: left">
-                <br>
+            <div style="position: relative; width: 100%; height: 3vh; float: left;">
+                <br />
             </div>
             <div class="DemoTable__columnRight">
-                <div style="position:relative; width: 2.5%; height: 90vh; float: left">
-                    <br>
+                <div style="position: relative; width: 2.5%; height: 90vh; float: left;">
+                    <br />
                 </div>
-                <div style="position:relative ; width: 75%; height: 90vh; float: left;">
-                    <div style="position:relative ; width: 100%; height: 80%;border:1px solid black;
-                                overflow: auto; background-color: gray; text-align: center; resize: vertical;">
+                <div style="position: relative; width: 75%; height: 90vh; float: left;">
+                    <div
+                        style="
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border: 1px solid black;
+                        overflow: auto;
+                        background-color: gray;
+                        text-align: center;
+                        resize: vertical;
+                        "
+                        >
                         <template v-for="state in states">
-                            <wc-canvas v-bind:ref="'canvas1' + state.canvasId" cross-origin="anonymous" v-bind:style="{width: state.styleWidth,height: state.styleHeight,position: state.position,left: state.left,right: state.right,marginLeft: state.marginLeft,marginRight: state.marginRight}" v-bind:alpha="1" v-bind:background-color="common.backgroundColor"
-                                v-bind:base-image="state.baseImage" v-bind:height="common.height" v-bind:width="common.width" v-bind:tool="common.tool" v-bind:layoutOpacity="common.layoutOpacity"
-                                v-bind:zoom="common.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
-                            <wc-canvas v-bind:ref="'canvas2' + state.canvasId" cross-origin="anonymous" v-bind:style="{width: state.styleWidth,height: state.styleHeight,position: state.position,left: state.left,right: state.right,marginLeft: state.marginLeft,marginRight: state.marginRight}" v-bind:alpha="common.alpha" v-bind:active-layer="myActiveLayer"
-                                v-bind:background-color="common.backgroundColor" v-bind:eraser-thickness="common.eraserThickness" v-bind:height="common.height"
-                                v-bind:outline-image="state.outlineImage" v-bind:smooth="common.smooth" v-bind:stroke-color="common.strokeColor"
-                                v-bind:stroke-thickness="common.strokeThickness" v-bind:tool="common.tool" v-bind:width="common.width"
-                                v-bind:zoom="common.zoom" v-on:can-undo="_setCanUndo"></wc-canvas>
+                            <wc-canvas
+                                v-bind:ref="'canvas1' + state.canvasId"
+                                cross-origin="anonymous"
+                                v-bind:style="{width: state.styleWidth,height: state.styleHeight,position: state.position,left: state.left,right: state.right,marginLeft: state.marginLeft,marginRight: state.marginRight}"
+                                v-bind:alpha="1"
+                                v-bind:background-color="common.backgroundColor"
+                                v-bind:base-image="state.baseImage"
+                                v-bind:height="common.height"
+                                v-bind:width="common.width"
+                                v-bind:tool="common.tool"
+                                v-bind:layoutOpacity="common.layoutOpacity"
+                                v-bind:zoom="common.zoom"
+                                v-on:can-undo="_setCanUndo"
+                                ></wc-canvas>
+                            <wc-canvas
+                                v-bind:ref="'canvas2' + state.canvasId"
+                                cross-origin="anonymous"
+                                v-bind:style="{width: state.styleWidth,height: state.styleHeight,position: state.position,left: state.left,right: state.right,marginLeft: state.marginLeft,marginRight: state.marginRight}"
+                                v-bind:alpha="common.alpha"
+                                v-bind:active-layer="myActiveLayer"
+                                v-bind:background-color="common.backgroundColor"
+                                v-bind:eraser-thickness="common.eraserThickness"
+                                v-bind:height="common.height"
+                                v-bind:outline-image="state.outlineImage"
+                                v-bind:smooth="common.smooth"
+                                v-bind:stroke-color="common.strokeColor"
+                                v-bind:stroke-thickness="common.strokeThickness"
+                                v-bind:tool="common.tool"
+                                v-bind:width="common.width"
+                                v-bind:zoom="common.zoom"
+                                v-on:can-undo="_setCanUndo"
+                                ></wc-canvas>
                         </template>
                     </div>
-
-                    <div style="position:relative; width: 100%; height: 5%; float: left">
-
-                        <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_clear">clear</wc-flat-button>
-                        <wc-flat-button v-wc-ripple:is-dark v-bind:disabled="!common.isUndoEnabled" v-on:click.native="_undo">undo</wc-flat-button>
-
-                        <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_export">Export image</wc-flat-button>
-                        <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomIn"> Zoom in</wc-flat-button>
-                        <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_zoomOut"> Zoom out</wc-flat-button>
+                    <div style="position: relative; width: 100%; height: 5%; float: left;">
+                        <input type="button" v-on:click="_clear" value="Clear" />
+                        <input
+                            type="button"
+                            v-bind:disabled="!common.isUndoEnabled"
+                            v-on:click="_undo"
+                            value="Undo"
+                            />
+                        <input type="button" v-on:click="_export" value="Export image" />
+                        <input type="button" v-on:click="_zoomIn" value="Zoom in" />
+                        <input type="button" v-on:click="_zoomOut" value="Zoom out" />
                         <a ref="downloader" href="" download="">
-                            <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_exportMasks"> Export masks</wc-flat-button>
-                        </a>         
-                        <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_getLayerDescriptors"> Get Layer Descriptors</wc-flat-button>
-                        <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_classifyImage"> Classify Frame</wc-flat-button>
-                        
-                        <div style="text-align:center; float: right">
-                            <label style="border: 1px solid #ccc;
-                                    display: inline-block;
-                                    padding: 4px 12px;
-                                    cursor: pointer;
-                                    margin: auto">
-                                <input type='file' name='img' size='40' v-on:change="_openImages" style="display: none" multiple/> Open image
+                        <input type="button" v-on:click="_exportMasks" value="Export masks" />
+                        </a>
+                        <input
+                            type="button"
+                            v-on:click="_getLayerDescriptors"
+                            value="Get Layer Descriptors"
+                            />
+                        <input type="button" v-on:click="_classifyImage" value="Classify Frame" />
+                        <div style="text-align: center; float: right;">
+                            <label
+                                style="
+                                border: 1px solid #ccc;
+                                display: inline-block;
+                                padding: 4px 12px;
+                                cursor: pointer;
+                                margin: auto;
+                                "
+                                >
+                            <input
+                                type="file"
+                                name="imgs"
+                                size="40"
+                                v-on:change="_openImages"
+                                style="display: none;"
+                                multiple
+                                />
+                            Open image
                             </label>
-                            <label style="border: 1px solid #ccc;
-                                    display: inline-block;
-                                    padding: 4px 12px;
-                                    cursor: pointer;
-                                    margin: auto">
-                                <input type='file' name='img' size='40' v-on:change="_openMasks" style="display: none" /> Open masks
+                            <label
+                                style="
+                                border: 1px solid #ccc;
+                                display: inline-block;
+                                padding: 4px 12px;
+                                cursor: pointer;
+                                margin: auto;
+                                "
+                                >
+                            <input
+                                type="file"
+                                name="masks"
+                                size="40"
+                                v-on:change="_openMasks"
+                                style="display: none;"
+                                />
+                            Open masks
                             </label>
                         </div>
-
                     </div>
                     <!--
-
-                    <div style="position:relative; width: 100%; height: 15%; float: left; overflow: auto;  background-color: #c0c0c0; border:1px solid black;">
-                        <template v-for="snapshot in state.snapshots">
-                            <img v-bind:src="snapshot.src" height="100px" width="100px" />&nbsp;
-                        </template>
-                    </div>
-
-                    -->
+                        <div style="position:relative; width: 100%; height: 15%; float: left; overflow: auto;  background-color: #c0c0c0; border:1px solid black;">
+                            <template v-for="snapshot in state.snapshots">
+                                <img v-bind:src="snapshot.src" height="100px" width="100px" />&nbsp;
+                            </template>
+                        </div>
+                        
+                        -->
                 </div>
-
-                <div style="position:relative; width: 2.5%; height: 90vh; float: left">
-                    <br>
+                <div style="position: relative; width: 2.5%; height: 90vh; float: left;">
+                    <br />
                 </div>
-                <div style="width: 20%; float:right; padding-right: 40px">
+                <div style="width: 20%; float: right; padding-right: 2%;">
                     <div class="DemoTable__row">
-                        <div class="DemoTable__columnRight">
-                            <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_getOutlineImage">Calculate superpixels</wc-flat-button>
-                            <input type="range" min="10" max="200" value="40" step="10" v-model="common.regionSize"/> Region size
-                                    </div>
-                    </div>
-
-                    <div class="DemoTable__row">
-                        <div class="DemoTable__columnLeft">Tools</div>
-                        <div class="DemoTable__columnRight">
-                            <wc-toggle>
-                                <wc-toggle-button custom-value="pen" v-model="common.tool" name="Pen">Pen</wc-toggle-button>
-                                <wc-toggle-button custom-value="eraser" v-model="common.tool" name="Eraser">Eraser</wc-toggle-button>
-                                <wc-toggle-button custom-value="rectangle" v-model="common.tool" name="Rectangle">Rectangle</wc-toggle-button>
-                                <wc-toggle-button custom-value="bucket" v-model="common.tool" name="Bucket">Bucket</wc-toggle-button>
-                                <wc-toggle-button custom-value="backgroundBucket" v-model="common.tool" name="backgroundBucket">Background bucket</wc-toggle-button>
-                            </wc-toggle>
+                        <div style="text-align: center;">
+                            <input
+                                type="range"
+                                min="10"
+                                max="200"
+                                value="40"
+                                step="10"
+                                style="text-align: center;"
+                                v-model="common.regionSize"
+                                
+                                id="regionSize"
+                                />
+                            <label for="regionSize">Region Size</label>
+                            <input
+                                type="button"
+                                v-on:click="_getOutlineImage"
+                                value="Calculate superpixels "
+                                style="width: 100%"
+                                />
                         </div>
                     </div>
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                    <div>
+                        <label for="cars">Select a Tool:</label>
+                        <select  v-model="common.tool">
+                            <option value="pen">Pen Tool</option>
+                            <option value="eraser">Eraser Tool</option>
+                            <option value="rectangle">Rectangle Tool</option>
+                            <option value="bucket">Flood Superpixels Tool</option>
+                            <option value="backgroundBucket">Clear Superpixels Tool</option>
+                        </select>
 
-                    <div class="DemoTable__row">
-                        <div class="DemoTable__columnRight">
-                            <wc-flat-button v-wc-ripple:is-dark v-on:click.native="_addLayer">Add layer</wc-flat-button>
-
-                            <wc-toggle>
-                                <template v-for="layer in common.layers">
-                                    <wc-toggle-button :custom-value="layer.toString()" v-model="common.activeLayer" :name="layer">Layer {{layer}}</wc-toggle-button>
-                                </template>
-                            </wc-toggle>
-                        </div>
-                    </div>
-                    <div class="DemoTable__row">
+                        <div class="DemoTable__row">
                             <div class="DemoTable__columnRight">
-                                <wc-toggle>
-                                    <template v-for="frame in states">
-                                        <wc-toggle-button :custom-value="frame.canvasId.toString()" v-model="currentFrame" :name="frame">Frame {{frame.canvasId}}</wc-toggle-button>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="101"
+                                    value="10"
+                                    step="1"
+                                    v-model="common.strokeThickness"
+                                    id="penThickness"
+                                    />
+                                <label for="penThickness">Pen Thickness</label>
+                                <input
+                                type="number"
+                                step="1"
+                                name="penThickness"
+                                v-model="common.strokeThickness"
+                                style="width: 20%; float: right;"
+                                /><br />
+                            </div>
+                            <div class="DemoTable__columnRight">
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="101"
+                                    value="10"
+                                    step="1"
+                                    v-model="common.eraserThickness"
+                                    id="eraserThickness"
+                                    />
+                                    <label for="eraserThickness">Eraser Thickness</label>
+                                <input
+                                type="number"
+                                step="1"
+                                name="eraserThickness"
+                                v-model="common.eraserThickness"
+                                style="width: 20%; float: right;"
+                                />
+                            </div>
+                            <div class="DemoTable__columnRight">
+                                <input
+                                    type="range"
+                                    min="0.01"
+                                    max="0.9"
+                                    value="0.5"
+                                    step="0.01"
+                                    v-model="common.alpha"
+                                    id="alphaLevel"
+                                    />
+                                    <label for="alphaLevel">Segmentation Mask Opacity</label>
+                            </div>
+                            <div class="DemoTable__columnRight">
+                                <input
+                                    type="range"
+                                    min="0.01"
+                                    max="0.99"
+                                    value="0.5"
+                                    step="0.01"
+                                    v-model="common.layoutOpacity"
+                                    id="layoutOpacity"
+                                    />
+                                    <label for="layoutOpacity">Segmentation Layout Opacity</label>
+                            </div>
+                        </div>
+                        <!--<div
+                            style="
+                                position: relative;
+                                width: 100%;
+                                text-align: center;
+                            "
+                            >
+                            <fieldset>
+                                <label
+                                    ><input
+                                        type="radio"
+                                        style="width: 100%;text-align: left;"
+                                        name="Pen"
+                                        value="pen"
+                                        v-model="common.tool"
+                                    />Pen</label
+                                >
+                                <label
+                                    ><input
+                                        type="radio"
+                                        style="width: 100%;text-align: left;"
+                                        name="Eraser"
+                                        value="eraser"
+                                        v-model="common.tool"
+                                    />Eraser</label
+                                >
+                                <label
+                                    ><input
+                                        type="radio"
+                                        style="width: 100%;text-align: left;"
+                                        name="Rectangle"
+                                        value="rectangle"
+                                        v-model="common.tool"
+                                    />Rectangle</label
+                                >
+                                <label
+                                    ><input
+                                        type="radio"
+                                        style="width: 100%;text-align: left;"
+                                        name="Bucket"
+                                        value="bucket"
+                                        v-model="common.tool"
+                                    />Bucket</label
+                                >
+                                <label
+                                    ><input
+                                        type="radio"
+                                        style="width: 100%;text-align: left;"
+                                        name="backgroundBucket"
+                                        value="backgroundBucket"
+                                        v-model="common.tool"
+                                    />Background bucket</label
+                                >
+                            </fieldset>
+                            </div>-->
+                    </div>
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                        <div class="DemoTable__columnRight">
+                            Annotation Layers
+                           
+                            <input type="button" v-on:click="_addLayer" value="Add layer" style="width: 100%;"/>
+                         
+                            <div
+                                style="
+                                position: relative;
+                                width: 100%;
+                                height: 200px;
+                                overflow: scroll;
+                                text-align: left;
+                                "
+                                >
+                                
+                                
+                                <fieldset>
+                                    <template v-for="layer in common.layers">
+                                        <label
+                                            ><input
+                                            type="radio"
+                                            style="width: 25%"
+                                            name="Pen"
+                                            :value="layer.toString()"
+                                            v-model="common.activeLayer"
+                                            :name="layer"
+                                            />Layer {{layer}}</label
+                                            >
                                     </template>
-                                </wc-toggle>
+                                </fieldset>
+                                
                             </div>
-                        </div>
-
-                    <div class="DemoTable__row">
-                        <div class="DemoTable__columnLeft">Layer color</div>
-                        <div class="DemoTable__columnRight">
-                            <wc-textfield type="color" v-model="common.strokeColor"></wc-textfield>
-                        </div>
-                        <div class="DemoTable__row ">
-                            <div class="DemoTable__columnLeft">Brush, Eraser and opacity levels</div>
-                                <div class="DemoTable__columnRight">
-                                    <input type="range" min="1" max="101" value="10" step="5" v-model="common.strokeThickness" /> Brush size
-                                </div>        
-                                <div class="DemoTable__columnRight">
-                                    <input type="range" min="1" max="101" value="10" step="5" v-model="common.eraserThickness" /> Eraser
-                                </div>
-                                <div class="DemoTable__columnRight">
-                                    <input type="range" min="0.01" max="0.9" value="0.5" step="0.01" v-model="common.alpha" /> Color opacity  
-                                </div>
-                                <div class="DemoTable__columnRight">
-                                    <input type="range" min="0.01" max="0.99" value="0.5" step="0.01" v-model="common.layoutOpacity" /> Layout opacity  
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="DemoTable__row">
-                            <div class="DemoTable__columnLeft">Stroke thickness</div>
-                            <div class="DemoTable__columnRight">
-                                <wc-textfield type="number" step="1" v-model="common.strokeThickness"></wc-textfield>
-                            </div>
-                        </div>
-                        <div class="DemoTable__row">
-                            <div class="DemoTable__columnLeft">Eraser thickness</div>
-                            <div class="DemoTable__columnRight">
-                                <wc-textfield type="number" step="1" v-model="common.eraserThickness"></wc-textfield>
-                            </div>
+                            <input
+                            type="color"
+                            id="html5colorpicker"
+                            v-model="common.strokeColor"
+                            style="width: 50%;"
+                            />
+                            <label for="html5colorpicker">Layer Color</label>
+                    </div>
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                    <div class="DemoTable__columnRight">
+                        Frames
+                        <div
+                            style="
+                            position: relative;
+                            width: 100%;
+                            height: 200px;
+                            overflow: scroll;
+                            text-align: left;
+                            "
+                            >
+                            
+                            <fieldset>
+                                <template v-for="frame in states">
+                                    <label
+                                        ><input
+                                        type="radio"
+                                        name="Pen"
+                                        style="width: 25%"
+                                        :value="frame.canvasId.toString()"
+                                        v-model="currentFrame"
+                                        :name="frame"
+                                        />Frame {{frame.canvasId}}</label
+                                        >
+                                </template>
+                            </fieldset>
                         </div>
                     </div>
                 </div>

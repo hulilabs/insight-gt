@@ -34,3 +34,6 @@ codeship-deploy-staging.env
 
 # Karma & test-related
 src/coverage
+
+# Deprecated vendor
+src/site/js/lib/vendor/web-components
